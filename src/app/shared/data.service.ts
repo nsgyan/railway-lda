@@ -63,7 +63,10 @@ private office:Office[]=[
 ]
 BeneficiaryChange= new EventEmitter<Beneficiary[]>()
 private Beneficiary: Beneficiary[]=[
-  new Beneficiary('07/04/2022','kuldeep','1334gh',0.187,14250000,'2664750','018259','12/02/2022','26710')
+  new Beneficiary('07/04/2022','kuldeep','1334gh',0.187,14250000,'2664750','018259','12/02/2022','26710'),
+  new Beneficiary('07/04/2022','Mayawati','1118gh',0.007,6375000,'19125','018261','12/02/2022','450'),
+  new Beneficiary('07/04/2022','shambhu sharan','1183gh',0.0372,6375000,'19125','018262','12/02/2022','2440'),
+  new Beneficiary('07/04/2022','Gopali','1086gh',0.057,6375000,'0','018263','12/02/2022','3700')
 ]
 
 designationChange= new EventEmitter<Designation[]>()
