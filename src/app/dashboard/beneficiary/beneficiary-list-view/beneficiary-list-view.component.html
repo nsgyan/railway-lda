@@ -66,7 +66,7 @@
                   <table class="table bg-white">
                     <thead>
                       <tr role="row">
-                        <th class="text-center"><input type="checkbox" ></th>
+                        <th class="text-center">#</th>
                         <th> Date</th>
                         <th>Beneficiary</th>
                         <th>Gata No.</th>
@@ -80,13 +80,10 @@
                       </tr>
                     </thead>
                     <tbody >
-                      <tr *ngFor="let item of beneficiary ">
+                      <tr *ngFor="let item of beneficiary ;let i=
+                      index">
                         <td class="text-center">
-                          <div>
-                            <label>
-                              <input type="checkbox">
-                            </label>
-                          </div>
+                        {{i+1}}
                         </td>
                         <td><span class="font-bold text-theme">{{item.date}}</span></td>
                         <td>
