@@ -78,7 +78,7 @@ body {
     font-weight: 500;
 }
 .table tbody tr:nth-of-type(even) {
-    background-color: #21629f26;
+    background-color: #c45a111c;
 }
 .table thead tr:first-child th:first-child {
     border-radius: 10px 0px 0px 0px;
