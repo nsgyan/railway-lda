@@ -235,3 +235,41 @@ export class Vendor {
     }
 
 }
+
+export class Beneficiary {
+    date:string  
+    beneficiaryName:string
+    gataNumber:string
+    rakba:number
+    pratifalRate:number
+    beneficaryShare:string
+    chequeNumber:string
+    chequeDate:string
+    registrationAmount:string
+    totalPratifal:number
+   
+    constructor(
+        date:string,
+    beneficiaryName:string,
+    gataNumber:string,
+    rakba:number,
+    pratifalRate:number,
+    beneficaryShare:string,
+    chequeNumber:string,
+    chequeDate:string,
+    registrationAmount:string,
+    ) {
+        this.date=date;
+        this.beneficiaryName=beneficiaryName
+        this.gataNumber=gataNumber
+        this.rakba=rakba
+        this.pratifalRate=pratifalRate
+        this.beneficaryShare=beneficaryShare
+        this.chequeNumber=chequeNumber
+        this.chequeDate=chequeDate
+        this.registrationAmount=registrationAmount
+        this.totalPratifal=rakba*pratifalRate;
+       
+    }
+
+}

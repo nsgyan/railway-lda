@@ -14,12 +14,10 @@ import { VendorTypeComponent } from './system-configuration/vendor-type/vendor-t
 
 const routes: Routes = [
   { path: '', component: DashboardPageComponent },
-  { path: 'system-configuration', 
-  loadChildren: () => import('./system-configuration/system-configuration-routing.module').then(m => m.SystemConfigurationRoutingModule) 
+  { path: 'beneficiary', 
+  loadChildren: () => import('./beneficiary/beneficiary.module').then(m => m.BeneficiaryModule) 
 },
-{ path: 'navigation', 
-  loadChildren: () => import('./navigation/navigation.module').then(m => m.NavigationModule) 
-},
+ 
  
 ];
 

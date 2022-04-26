@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Agency, Bank, Designation, Office, Officer, Scheme, SchemeLimitSetting, Vendor, VendorService, VendorType } from './data.model';
+import { Agency, Bank, Beneficiary, Designation, Office, Officer, Scheme, SchemeLimitSetting, Vendor, VendorService, VendorType } from './data.model';
 
 
 @Injectable({
@@ -53,6 +53,7 @@ private office:Office[]=[
   ]
   officerChange = new EventEmitter<Officer[]>()
   private officer: Officer[] = [
+
     new Officer('Mr. Aakav Joshi', '03/02/1967', 'Male', 'Shri Vivek Chandra Joshi', 911645623009, 'ABCTY1234D', 9090909090, 'test@gmail.com'),
     new Officer('Shri  Aakesh  Yadav ', '03/15/1987', 'Male', 'Shri Satyaprakash Yadav', 911745623010, 'BCDXA2133S', 8181818181, 'test1@gmail.com'),
     new Officer('Mr.Aarav Gupta', '04/25/1989', 'Male', 'Shri Om Anand Gupta', 911845623011, 'ABCTY1234e', 6056239841, 'test2@gmail.com'),
@@ -60,6 +61,11 @@ private office:Office[]=[
     new Officer('Dr. Chaitanya Singh', '06/19/1978', 'Male', 'Shri Monu Singh', 912045623013, 'ABCTY5634D', 8632597410, 't1@gmail.com')
 
 ]
+BeneficiaryChange= new EventEmitter<Beneficiary[]>()
+private Beneficiary: Beneficiary[]=[
+  new Beneficiary('07/04/2022','kuldeep','1334gh',0.187,14250000,'2664750','018259','12/02/2022','26710')
+]
+
 designationChange= new EventEmitter<Designation[]>()
 private designation:Designation[]=[
   new Designation('Managing Director', 'Shri Rampal Singh'),
@@ -161,6 +167,13 @@ private designation:Designation[]=[
   addnewOfficer(officer: Officer[]) {
     this.officer = officer.concat(this.officer)
     this.officerChange.emit(this.officer.slice());
+  }
+  getBeneficiary(){
+    return this.Beneficiary.slice();
+  }
+ addBeneficiary(beneficiary:Beneficiary[]){
+   this.Beneficiary= beneficiary.concat(this.Beneficiary)
+    return this.Beneficiary.slice();
   }
 
 
