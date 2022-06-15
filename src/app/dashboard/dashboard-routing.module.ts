@@ -14,11 +14,14 @@ import { VendorTypeComponent } from './system-configuration/vendor-type/vendor-t
 
 const routes: Routes = [
   { path: '', component: DashboardPageComponent },
-  { path: 'beneficiary', 
-  loadChildren: () => import('./beneficiary/beneficiary.module').then(m => m.BeneficiaryModule) 
+  { path: 'beneficiary',
+  loadChildren: () => import('./beneficiary/beneficiary.module').then(m => m.BeneficiaryModule)
 },
- 
- 
+{ path: 'project',
+loadChildren: () => import('./project/project.module').then(m => m.ProjectModule)
+},
+
+
 ];
 
 @NgModule({

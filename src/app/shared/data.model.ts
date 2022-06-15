@@ -1,3 +1,19 @@
+export class Project {
+  projectCode: string
+  projectID: string
+  projectName: string
+  projectDescription: string
+  selectDistrict:Number
+    constructor(projectCode: string, projectID: string,projectName: string, projectDescription: string,selectDistrict:Number) {
+        this.projectCode = projectCode;
+        this.projectID = projectID;
+        this.projectName = projectName;
+        this.projectDescription = projectDescription
+        this.selectDistrict=selectDistrict
+    }
+
+}
+
 export class Office {
     public officeType: string ;
     public officeName: string ;
@@ -237,7 +253,7 @@ export class Vendor {
 }
 
 export class Beneficiary {
-    date:string  
+    date:string
     beneficiaryName:string
     gataNumber:string
     rakba:number
@@ -247,7 +263,7 @@ export class Beneficiary {
     chequeDate:string
     registrationAmount:string
     totalPratifal:number
-   
+
     constructor(
         date:string,
     beneficiaryName:string,
@@ -269,7 +285,7 @@ export class Beneficiary {
         this.chequeDate=chequeDate
         this.registrationAmount=registrationAmount
         this.totalPratifal=rakba*pratifalRate;
-       
+
     }
 
 }
