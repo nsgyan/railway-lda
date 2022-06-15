@@ -1,12 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ciifaceproject": {
+    "srlm": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ciifaceproject",
+            "outputPath": "dist/srlm",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,8 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -40,8 +36,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -72,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ciifaceproject:build:production"
+              "browserTarget": "srlm:build:production"
             },
             "development": {
-              "browserTarget": "ciifaceproject:build:development"
+              "browserTarget": "srlm:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ciifaceproject:build"
+            "browserTarget": "srlm:build"
           }
         },
         "test": {
@@ -106,5 +102,5 @@
       }
     }
   },
-  "defaultProject": "ciifaceproject"
+  "defaultProject": "srlm"
 }
