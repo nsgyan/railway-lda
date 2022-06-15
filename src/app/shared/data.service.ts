@@ -10,7 +10,7 @@ export class DataService {
 private office:Office[]=[
   new Office(
     'SMMU',
-  'UPSRLM HO',
+  'UPrailwaylda HO',
   'Head Office'
   ,9889783846,
   'Shri  Aakesh  Yadav',
@@ -24,7 +24,7 @@ private office:Office[]=[
   'test1@gmail.com'),
   new Office(
     'DMMU',
-  'UPSRLM DO',
+  'UPrailwaylda DO',
   'Varanasi District Office '
   ,9869824698,
   'Mr. Chandran Singh ',
@@ -38,7 +38,7 @@ private office:Office[]=[
   't1@gmail.com'),
   new Office(
     'BMMU',
-  'UPSRLM BO',
+  'UPrailwaylda BO',
   'Varanasi Block Office'
   ,7863249965,
   'Mr. Chandran Singh ',
