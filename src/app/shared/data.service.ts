@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Agency, Bank, Beneficiary, Designation, Office, Officer, Project, Scheme, SchemeLimitSetting, Vendor, VendorService, VendorType } from './data.model';
+import { Agency, Bank, Beneficiary, Designation, Office, Officer, Scheme, SchemeLimitSetting, Vendor, VendorService, VendorType } from './data.model';
 
 
 @Injectable({
@@ -10,7 +10,7 @@ export class DataService {
 private office:Office[]=[
   new Office(
     'SMMU',
-  'UPrailwaylda HO',
+  'UPSRLM HO',
   'Head Office'
   ,9889783846,
   'Shri  Aakesh  Yadav',
@@ -24,7 +24,7 @@ private office:Office[]=[
   'test1@gmail.com'),
   new Office(
     'DMMU',
-  'UPrailwaylda DO',
+  'UPSRLM DO',
   'Varanasi District Office '
   ,9869824698,
   'Mr. Chandran Singh ',
@@ -38,7 +38,7 @@ private office:Office[]=[
   't1@gmail.com'),
   new Office(
     'BMMU',
-  'UPrailwaylda BO',
+  'UPSRLM BO',
   'Varanasi Block Office'
   ,7863249965,
   'Mr. Chandran Singh ',
@@ -145,41 +145,23 @@ private designation:Designation[]=[
     new Scheme('A1.1', 'NRETP', 'Multi-state Trainings, Consultations, Workshops etc and other Demand driven TA [UP]', 'Workshop / Training', 'Resource Person'),
     new Scheme('A1.2', 'NRETP', 'abNational Resource Organization [UP]', 'Workshop / Training', 'Cadre Payment'),
   ]
-  projectChange= new EventEmitter<Project[]>()
-  private project : Project[]=[
-    new Project('SDFFSCXX','546546464','Agneepath Yojana','Defense Minister Rajnath Singh has announced the Mission Agneepath scheme of the Modi government. Under this scheme, soldiers will be recruited in the army for 4 years. Rajnath Singh said that under the Agneepath scheme, Indian youth will be provided an opportunity to serve in the Armed Forces as Agniveer',65),
-    new Project('SDFFSCXX','546546464','PM Kisan Yojana','The Pradhan Mantri Kisan Samman Nidhi Yojana (PM-Kisan Yojana) is a government scheme through which, all small and marginal farmers will get up to Rs 6,000 per year as minimum income support.',15),
-    new Project('SDFFSCXX','546546464','PMSYM Yojana','Pradhan Mantri Shram Yogi Maandhan is a voluntary and contributory Pension Scheme for Unorganized Workers for entry age of 18 to 40 years with monthly income of Rs. 15000 or less.',25),
-    new Project('SDFFSCXX','546546464','PM Awas Yojana','Pradhan Mantri Awas Yojana (PMAY) is an initiative by the Government of India in which affordable housing will be provided to the urban poor with a target of building 2 crore (20 million) affordable houses by 31 March 2022.',35),
-    new Project('SDFFSCXX','546546464','PM Laghu Vyapari Mandhan Yojana','The Modi government has already made arrangements for that. But such business owners suffer from financial hardships at an old age. With the implementation of PM Laghu Vyapari Mandhan Pension Yojana,',15),
 
-    new Project('SDFFSCXX','546546464','Pradhan Mantri Rashtriya Swasthya Suraksha Mission (PMRSSM)','Pradhan Mantri Suraksha Bima Yojana (PMSBY, translation: Prime Ministers Safety Insurance Scheme) is a government-backed accident insurance scheme in India. It was originally mentioned in the 2015 Budget speech by Finance Minister Late Arun Jaitley in February 2015',55)
-  ]
 
   constructor() { }
-
-  getProject(){
-    return this.project.slice();
-  }
-  addProject(project:Project[]){
-    this.project = project.concat(this.project)
-    console.log(this.project);
-    this.projectChange.emit(this.project.slice());
-  }
   getdesignation(){
     return this.designation.slice();
   }
   addnewdesignation(designation:Designation[]){
 
     this.designation = designation.concat(this.designation)
-    console.log(this.designation);
+    console.log(this.designation); 
     this.designationChange.emit(this.designation.slice());
   }
   getoffice(){
     return this.office.slice();
   }
   addnewOffice(office:Office[]){
-    this.office = office.concat(this.office)
+    this.office = office.concat(this.office) 
     this.officeChange.emit(this.office.slice());
   }
   getofficer() {
