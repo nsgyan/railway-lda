@@ -50,7 +50,7 @@ if(this.block.valid){
     block:this.block.value.blockName,
     blockType:this.block.value.blockType,
   }).subscribe(data=>{
-    console.log(data);
+
     this.router.navigate(['/dashboard/masters/blockList'])
   },(err=>{
     this.toster.error('fdsssssss')
