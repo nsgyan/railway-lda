@@ -31,6 +31,12 @@ export class HttpsService {
   blocksList() {
     return this.httpService.get(Globals.route.blocksList);
   }
+  districtList() {
+    return this.httpService.get(Globals.route.districtList);
+  }
+  village() {
+    return this.httpService.get(Globals.route.village);
+  }
   getState() {
     return this.httpService.get(Globals.route.getState);
   }
