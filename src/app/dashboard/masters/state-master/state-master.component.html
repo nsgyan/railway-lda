@@ -27,6 +27,10 @@
                                   <option  value="state">State</option>
                                   <option  value="ut">UT</option>
                                  </select>
+                                 <p *ngIf="state.get('stateUT')?.hasError('required')&&(submitted||state.get('stateUT')?.dirty||state.get('stateUT')?.touched )" style="color: red;">
+                                  State/UT <strong>required</strong>
+                                </p>
+
                               </div>
                           </div>
                           <div class="col-md-6">
@@ -37,15 +41,30 @@
                                     <option  value="Hilly">Hilly</option>
                                     <option  value="dessert">Dessert</option>
                                    </select>
-                                  <input formControlName="statetype" type="text" class="form-control" name="">
+                                   <p *ngIf="state.get('statetype')?.hasError('required')&&(submitted||state.get('statetype')?.dirty||state.get('statetype')?.touched )" style="color: red;">
+                                    State  Type <strong>required</strong>
+                                  </p>
+
                               </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label font-weight-600">State Name </label>
                                 <input type="text" formControlName="stateName" class="form-control">
+                                <p *ngIf="state.get('stateName')?.hasError('required')&&(submitted||state.get('stateName')?.dirty||state.get('stateName')?.touched )" style="color: red;">
+                                  State Name <strong>required</strong>
+                                </p>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label class="control-label font-weight-600">Census Code .</label>
+                              <input formControlName="censusCode" type="text" class="form-control" name="">
+                              <p *ngIf="state.get('censusCode')?.hasError('required')&&(submitted||state.get('censusCode')?.dirty||state.get('censusCode')?.touched )" style="color: red;">
+                                Census Code <strong>required</strong>
+                              </p>
+                          </div>
+                      </div>
 
 
                       </div>
@@ -58,8 +77,8 @@
                       <hr/>
                       <div class="row">
                           <div class="col-md-12">
-                              <a class="btn m-b-xs btn-md btn-success"  (click)="onSubmit()">Save</a>
-                              <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a>
+                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Save</a>
+                              <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
                               <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
                           </div>
                       </div>

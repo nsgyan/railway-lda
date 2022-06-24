@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { DataService } from 'src/app/shared/data.service';
+import { HttpsService } from 'src/app/shared/https.service';
 import { ToasterService } from 'src/app/shared/toaster.service';
 
 @Component({
@@ -12,9 +13,10 @@ import { ToasterService } from 'src/app/shared/toaster.service';
 })
 export class StateMasterComponent implements OnInit {
   state!:FormGroup;
-
+  submitted=false
 
   constructor( private fb:FormBuilder,
+    private httpService:HttpsService,
     private router: Router,
     private data: DataService,
     private toster: ToasterService){
@@ -22,46 +24,35 @@ export class StateMasterComponent implements OnInit {
         stateUT:['',Validators.required],
         statetype:['',Validators.required],
         stateName:['',Validators.required],
+        censusCode:['',Validators.required],
+
+
       })
     }
 
   ngOnInit(): void {
-    this.addselectDistrict()
+
   }
 
   onSubmit() {console.log(this.state);
+if(this.state.valid){
+  this.httpService.AddState({
+    stateUT:this.state.value.stateUT,
+    statetype:this.state.value.statetype,
+    stateName:this.state.value.stateName,
+    censusCode:this.state.value.censusCode,
+  }).subscribe(data=>{
+    console.log(data);
 
+  })
+}
+else{
+  this.submitted = true;
+}
 
 
   }
-  SelectDistrict(): FormArray {
-    return this.state.get("selectDistrict") as FormArray
-  }
-  inputType(): FormArray {
-    return this.state.get("inputType") as FormArray
-  }
- get selectDistrict(): FormArray {
-    return this.state.get("selectDistrict") as FormArray
-  }
 
-  newSelectDistrict(): FormGroup {
-    return this.fb.group({
-      district: ['',Validators.required],
-      area:['',Validators.required],
-      location: ['',Validators.required],
-      Remark:['',Validators.required],
-    })
-  }
-
-
-  addselectDistrict() {
-    this.SelectDistrict().push(this.newSelectDistrict());
-  }
-
-
-  removeSelectDistrict(quesIndex:number) {
-    this.SelectDistrict().removeAt(quesIndex);
-  }
 
 
   cancel() {
