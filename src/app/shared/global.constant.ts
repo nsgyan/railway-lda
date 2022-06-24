@@ -9,6 +9,7 @@ export class Globals {
         'getState': Globals.server + 'master/state',
         'getDistrict': Globals.server + 'master/district',
         'getBlock': Globals.server + 'master/block',
+        'blocksList': Globals.server + 'master/blockList',
 
     };
 }

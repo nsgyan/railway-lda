@@ -66,14 +66,17 @@ else{
 
     this.httpService.getDistrict(this.block.value.state).subscribe((data:any)=>{
       this.district=data?.district
+      this.router.navigate(['/dashboard/masters/blockList'])
+            },(error=>{
+              this.toster.error('Please Login again');
 
-            })
+            }))
   }
 
 
 
   cancel() {
-    this.router.navigate(['/dashboard/block/beneficiariesList'])
+    this.router.navigate(['/dashboard/masters/blockList'])
 
 }
 }

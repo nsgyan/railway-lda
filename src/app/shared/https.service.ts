@@ -28,7 +28,9 @@ export class HttpsService {
   }
 
 
-
+  blocksList() {
+    return this.httpService.get(Globals.route.blocksList);
+  }
   getState() {
     return this.httpService.get(Globals.route.getState);
   }

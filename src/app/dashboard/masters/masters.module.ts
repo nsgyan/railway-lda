@@ -7,6 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DistictMasterComponent } from './distict-master/distict-master.component';
 import { BlockMasterComponent } from './block-master/block-master.component';
 import { VillageMasterComponent } from './village-master/village-master.component';
+import { BlockMasterListComponent } from './block-master-list/block-master-list.component';
+import { VillageMasterListComponent } from './village-master-list/village-master-list.component';
+import { StateMasterListComponent } from './state-master-list/state-master-list.component';
+import { DistrictMasterListComponent } from './district-master-list/district-master-list.component';
 
 
 @NgModule({
@@ -14,7 +18,11 @@ import { VillageMasterComponent } from './village-master/village-master.componen
     StateMasterComponent,
     DistictMasterComponent,
     BlockMasterComponent,
-    VillageMasterComponent
+    VillageMasterComponent,
+    BlockMasterListComponent,
+    VillageMasterListComponent,
+    StateMasterListComponent,
+    DistrictMasterListComponent
   ],
   imports: [
     CommonModule,
