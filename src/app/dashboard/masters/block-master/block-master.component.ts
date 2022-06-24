@@ -51,8 +51,10 @@ if(this.block.valid){
     blockType:this.block.value.blockType,
   }).subscribe(data=>{
     console.log(data);
-
-  })
+    this.router.navigate(['/dashboard/masters/blockList'])
+  },(err=>{
+    this.toster.error('fdsssssss')
+  }))
 }
 else{
   this.submitted = true;
@@ -66,17 +68,14 @@ else{
 
     this.httpService.getDistrict(this.block.value.state).subscribe((data:any)=>{
       this.district=data?.district
-      this.router.navigate(['/dashboard/masters/blockList'])
-            },(error=>{
-              this.toster.error('Please Login again');
 
-            }))
+            },)
   }
 
 
 
   cancel() {
-    this.router.navigate(['/dashboard/masters/blockList'])
+
 
 }
 }
