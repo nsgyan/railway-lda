@@ -20,10 +20,32 @@ export class HttpsService {
   AddDistrict(formData: any) {
     return this.httpService.post(Globals.route.AddDistrict, formData);
   }
+  AddBlock(formData: any) {
+    return this.httpService.post(Globals.route.AddBlock, formData);
+  }
+  addVillage(formData: any) {
+    return this.httpService.post(Globals.route.addVillage, formData);
+  }
+
 
 
   getState() {
     return this.httpService.get(Globals.route.getState);
   }
 
+  getDistrict(state:any) {
+    let queryParams= new HttpParams();
+    queryParams=queryParams.append("state",state)
+    return this.httpService.get(Globals.route.getDistrict,{
+      params:queryParams
+    });
+  }
+  getBlock(state:any,district:any) {
+    let queryParams= new HttpParams();
+    queryParams=queryParams.append("state",state)
+    queryParams=queryParams.append("district",district)
+    return this.httpService.get(Globals.route.getBlock,{
+      params:queryParams
+    });
+  }
 }

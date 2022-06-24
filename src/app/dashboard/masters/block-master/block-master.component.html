@@ -1,0 +1,94 @@
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body ">
+      <div class="bg-red lter b-b wrapper-md">
+          <div class="row">
+              <div class="col-sm-6 col-xs-12">
+                  <h3 class="m-n font-thin text-white">Add New Block</h3>
+              </div>
+          </div>
+      </div>
+
+      <div class="wrapper-md">
+          <div class="panel b-a">
+              <div class="panel-body">
+                  <form role="form" [formGroup]="block" autocomplete="off">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <legend>
+                                  <span class="font-weight-600">Create New Block</span>
+                              </legend>
+                          </div>
+
+
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label class="control-label font-weight-600">State </label>
+                                  <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                                    <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
+
+                                   </select>
+                                 <p *ngIf="block.get('state')?.hasError('required')&&(submitted||block.get('state')?.dirty||block.get('state')?.touched )" style="color: red;">
+                                  State <strong>required</strong>
+                                </p>
+
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label font-weight-600">District</label>
+                                <select class="form-control" formControlName="district">
+                                  <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
+
+                                 </select>
+                               <p *ngIf="block.get('district')?.hasError('required')&&(submitted||block.get('district')?.dirty||block.get('district')?.touched )" style="color: red;">
+                                District <strong>required</strong>
+                              </p>
+
+                            </div>
+                        </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label class="control-label font-weight-600">Block  Type.</label>
+                                  <select class="form-control" formControlName="blockType">
+                                    <option  value="Desert">Desert</option>
+                                    <option  value="Tribal">Tribal</option>
+                                   </select>
+                                   <p *ngIf="block.get('blocktype')?.hasError('required')&&(submitted||block.get('blocktype')?.dirty||block.get('blocktype')?.touched )" style="color: red;">
+                                    Block  Type <strong>required</strong>
+                                  </p>
+
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label font-weight-600">Block Name </label>
+                                <input type="text" formControlName="blockName" class="form-control">
+                                <p *ngIf="block.get('blockName')?.hasError('required')&&(submitted||block.get('blockName')?.dirty||block.get('blockName')?.touched )" style="color: red;">
+                                  Block Name <strong>required</strong>
+                                </p>
+                            </div>
+                        </div>
+
+
+
+                      </div>
+
+                      <div class="clearfix"></div>
+
+
+
+                      <div class="clearfix"></div>
+                      <hr/>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Save</a>
+                              <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
+                              <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
