@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
-import { ToasterService } from 'src/app/shared/toaster.service';
 
 @Component({
   selector: 'app-distict-master',
@@ -18,7 +18,7 @@ state:any
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,
-    private toster: ToasterService){
+    private toast: ToastrService) {
       this.httpService.getState().subscribe((data:any)=>{
 this.state=data?.state
 
@@ -41,9 +41,13 @@ if(this.district.valid){
     district:this.district.value.district,
     state:this.district.value.state,
 
-  }).subscribe(data=>{
-    console.log(data);
+  }).subscribe((data: any) => {
+    this.toast.success(data?.message)
+    // this.toast.showSuccess('State Successfully Added')
+    this.router.navigate(['/dashboard/masters/districtList'])
 
+  }, err => {
+    this.toast.error(err.error.message);
   })
 }
 else{
@@ -57,7 +61,7 @@ else{
 
 
   cancel() {
-    this.router.navigate(['/dashboard/district/beneficiariesList'])
+    this.router.navigate(['/dashboard/district/districtList'])
 
 }
 }

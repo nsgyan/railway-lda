@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
@@ -19,7 +20,7 @@ export class StateMasterComponent implements OnInit {
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,
-    private toster: ToasterService){
+    private toast: ToastrService,) {
       this.state=this.fb.group({
         stateUT:['',Validators.required],
         statetype:['',Validators.required],
@@ -41,13 +42,19 @@ if(this.state.valid){
     statetype:this.state.value.statetype,
     stateName:this.state.value.stateName,
     censusCode:this.state.value.censusCode,
-  }).subscribe(data=>{
-    console.log(data);
+  }).subscribe((data: any) => {
+    // console.log(data);
+    this.toast.success(data?.message)
+    // this.toast.showSuccess('State Successfully Added')
+    this.router.navigate(['/dashboard/masters/stateList'])
+  }, err => {
+    console.log(err.error);
 
+    this.toast.error(err.error);
   })
 }
 else{
-  this.submitted = true;
+  this.submitted = true;  // this.toast.showSuccess('State Successfully Added')
 }
 
 
@@ -56,7 +63,7 @@ else{
 
 
   cancel() {
-    this.router.navigate(['/dashboard/state/beneficiariesList'])
+    this.router.navigate(['/dashboard/masters/stateList'])
 
 }
 }

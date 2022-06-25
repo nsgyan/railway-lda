@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
 import { ToasterService } from 'src/app/shared/toaster.service';
@@ -21,7 +22,7 @@ export class BlockMasterComponent implements OnInit {
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,
-    private toster: ToasterService){
+    private toast: ToastrService,) {
       this.httpService.getState().subscribe((data:any)=>{
         this.state=data?.state
 
@@ -49,11 +50,11 @@ if(this.block.valid){
     district:this.block.value.district,
     block:this.block.value.blockName,
     blockType:this.block.value.blockType,
-  }).subscribe(data=>{
-
+  }).subscribe((data: any) => {
+    this.toast.success(data?.message)
     this.router.navigate(['/dashboard/masters/blockList'])
   },(err=>{
-    this.toster.error('fdsssssss')
+    this.toast.error(err.error.message);
   }))
 }
 else{
@@ -63,11 +64,12 @@ else{
 
   }
   getDistrict(state:any){
-    console.log(state);
-    console.log(this.block.value.state);
+
 
     this.httpService.getDistrict(this.block.value.state).subscribe((data:any)=>{
       this.district=data?.district
+      console.log(this.district);
+
             },)
   }
 

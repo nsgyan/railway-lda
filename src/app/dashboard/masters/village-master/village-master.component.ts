@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
 import { ToasterService } from 'src/app/shared/toaster.service';
@@ -21,7 +22,7 @@ export class VillageMasterComponent implements OnInit {
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,
-    private toster: ToasterService){
+    private toast: ToastrService,) {
       this.httpService.getState().subscribe((data:any)=>{
         this.state=data?.state
 
@@ -47,12 +48,14 @@ if(this.village.valid){
   this.httpService.addVillage({
     state:this.village.value.state,
     district:this.village.value.district,
-    village:this.village.value.villageName,
+    village: this.village.value.village,
     block:this.village.value.block,
-  }).subscribe(data=>{
-    console.log(data);
-
-  })
+  }).subscribe((data: any) => {
+    this.toast.success(data?.message)
+    this.router.navigate(['/dashboard/masters/villageList'])
+  }, (err => {
+    this.toast.error(err.error.message);
+  }))
 }
 else{
   this.submitted = true;
@@ -83,7 +86,7 @@ else{
 
 
   cancel() {
-    this.router.navigate(['/dashboard/village/beneficiariesList'])
+    this.router.navigate(['/dashboard/masters/villageList'])
 
 }
 }
