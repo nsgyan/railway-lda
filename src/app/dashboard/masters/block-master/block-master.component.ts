@@ -68,7 +68,6 @@ else{
 
     this.httpService.getDistrict(this.block.value.state).subscribe((data:any)=>{
       this.district=data?.district
-
             },)
   }
 
