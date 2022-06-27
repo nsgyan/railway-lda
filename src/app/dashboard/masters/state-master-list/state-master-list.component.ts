@@ -44,8 +44,8 @@ export class StateMasterListComponent implements OnInit {
   }
 
 
-  addDistrict(){
-    this.router.navigate(['/dashboard/masters/district'])
+  addState(){
+    this.router.navigate(['/dashboard/masters/state'])
   }
 
 
