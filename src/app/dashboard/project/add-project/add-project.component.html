@@ -54,31 +54,59 @@
                           <h4 style="padding:0px 20px">Select District</h4>
 
       <div >
-        <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addselectDistrict()" type="button"><i aria-hidden="true"
+        <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addselectState()" type="button"><i aria-hidden="true"
             class="fas fa-plus"></i> Add District</button>
       </div>
-                          <table class="table" formArrayName="selectDistrict">
+                          <table class="table" formArrayName="selectState">
                               <thead>
                                   <tr>
                                   <th>#</th>
+                                  <th>State</th>
                                   <th>District</th>
-                                  <th>Area In</th>
-                                  <th>Location</th>
+                                  <th>Block</th>
+                                  <th>Village</th>
+                                  <th>Area</th>
+                                  <th>Sanctioned Amount</th>
                                   <th>Remark</th>
                                   <th></th>
 
                                   </tr>
 
                               </thead>
-                              <tbody *ngFor="let opt of selectDistrict.controls; let i = index">
+                              <tbody *ngFor="let opt of selectState.controls; let i = index">
                                   <tr [formGroupName]="i">
                                       <td>{{i+1}}</td>
+                                      <td>   <div class="form-group">
+                                        <label class="control-label font-weight-600">State </label>
+                                        <select class="form-control" formControlName="state" (change)="getDistrict($event,i)">
+                                          <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
+
+                                         </select>
+                                       <!-- <p *ngIf="village.get('state')?.hasError('required')&&(submitted||village.get('state')?.dirty||village.get('state')?.touched )" style="color: red;">
+                                        State <strong>required</strong>
+                                      </p> -->
+
+                                    </div></td>
+                                      <td> <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label font-weight-600">District</label>
+                                            <select class="form-control" formControlName="district" (change)="getblock($event)">
+                                              <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
+
+                                             </select>
+                                           <!-- <p *ngIf="village.get('district')?.hasError('required')&&(submitted||village.get('district')?.dirty||village.get('district')?.touched )" style="color: red;">
+                                            District <strong>required</strong>
+                                          </p> -->
+
+                                        </div>
+                                    </div></td>
+                                      <td><input type="text" formControlName="location" class="form-control" name=""></td>
+                                      <td><input type="text" formControlName="Remark" class="form-control" name=""></td>
                                       <td><input type="text" formControlName="district" class="form-control" name=""></td>
                                       <td><input type="text" formControlName="area" class="form-control" name=""></td>
                                       <td><input type="text" formControlName="location" class="form-control" name=""></td>
-                                      <td><input type="text" formControlName="Remark" class="form-control" name=""></td>
 
-                                      <td> <a  (click)="removeSelectDistrict(i)"> <i class="fa fa-close"></i></a></td>
+                                      <td> <a  (click)="removeselectState(i)"> <i class="fa fa-close"></i></a></td>
                                   </tr>
 
 

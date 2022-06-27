@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Beneficiary, Project } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
+import { HttpsService } from 'src/app/shared/https.service';
 import { ToasterService } from 'src/app/shared/toaster.service';
 
 @Component({
@@ -13,69 +14,100 @@ import { ToasterService } from 'src/app/shared/toaster.service';
 export class AddProjectComponent implements OnInit {
 
   project!:FormGroup;
+  state: any;
+  district: any;
 
 
   constructor( private fb:FormBuilder,
     private router: Router,
     private data: DataService,
-    private toster: ToasterService){
+    private toster: ToasterService,
+    private httpService:HttpsService,){
+      this.httpService.getState().subscribe((data:any)=>{
+
+        this.state=data?.state
+
+              })
       this.project=this.fb.group({
         projectCode:[''],
         projectID:[''],
         projectName:[''],
         projectDescription:[''],
-        selectDistrict : this.fb.array([]) ,
+        selectState : this.fb.array([]) ,
 
 
       })
     }
 
   ngOnInit(): void {
-    this.addselectDistrict()
+    this.addselectState()
   }
 
   onSubmit() {console.log(this.project);
 
-    const project=[new Project(
-      this.project.value.projectCode,
-      this.project.value.projectID,
-       this.project.value.projectName,
-        this.project.value.projectDescription,
-        this.project.value.selectDistrict.length,)]
+    // const project=[new Project(
+    //   this.project.value.projectCode,
+    //   this.project.value.projectID,
+    //    this.project.value.projectName,
+    //     this.project.value.projectDescription,
+    //     this.project.value.selectState.length,)]
 
 
 
-         this.data.addProject(project)
-         this.router.navigate(['/dashboard/project'])
+    //      this.data.addProject(project)
+    //      this.router.navigate(['/dashboard/project'])
 
   }
-  SelectDistrict(): FormArray {
-    return this.project.get("selectDistrict") as FormArray
+  selectStates(): FormArray {
+    return this.project.get("selectState") as FormArray
   }
   inputType(): FormArray {
     return this.project.get("inputType") as FormArray
   }
- get selectDistrict(): FormArray {
-    return this.project.get("selectDistrict") as FormArray
+ get selectState(): FormArray {
+    return this.project.get("selectState") as FormArray
   }
 
-  newSelectDistrict(): FormGroup {
+  newselectState(): FormGroup {
     return this.fb.group({
+      state: ['',Validators.required],
       district: ['',Validators.required],
       area:['',Validators.required],
-      location: ['',Validators.required],
+      village: ['',Validators.required],
+      sanctionedAmount:['',Validators.required],
+      block: ['',Validators.required],
       Remark:['',Validators.required],
     })
   }
 
 
-  addselectDistrict() {
-    this.SelectDistrict().push(this.newSelectDistrict());
+  addselectState() {
+    this.selectStates().push(this.newselectState());
   }
 
+  getblock(state:any){
+    // console.log(state);
+    // console.log(this.village.value.state);
 
-  removeSelectDistrict(quesIndex:number) {
-    this.SelectDistrict().removeAt(quesIndex);
+    // this.httpService.getBlock(this.village.value.state,this.village.value.district).subscribe((data:any)=>{
+    //   this.block=data?.blocks
+
+    //         })
+  }
+
+  removeselectState(quesIndex:number) {
+    this.selectStates().removeAt(quesIndex);
+  }
+
+  getDistrict(state:any,i:any){
+    const control =this.project.get("selectState") as FormArray
+    // console.log(state);
+    console.log(control.at(i).value.state);
+
+    this.httpService.getDistrict(control.at(i).value.state).subscribe((data:any)=>{
+      this.district=data?.district
+
+            })
   }
 
 
