@@ -1,0 +1,90 @@
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body ">
+      <div class="bg-red lter b-b wrapper-md">
+          <div class="row">
+              <div class="col-sm-6 col-xs-12">
+                  <h3 class="m-n font-thin text-white">Edit State</h3>
+              </div>
+          </div>
+      </div>
+
+      <div class="wrapper-md">
+          <div class="panel b-a">
+              <div class="panel-body">
+                  <form role="form" [formGroup]="state" autocomplete="off">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <legend>
+                                  <span class="font-weight-600">Edit state</span>
+                              </legend>
+                          </div>
+
+
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label class="control-label font-weight-600">State/UT*</label>
+                                 <select class="form-control" formControlName="stateUT">
+                                  <option  value="state">State</option>
+                                  <option  value="ut">UT</option>
+                                 </select>
+                                 <p *ngIf="state.get('stateUT')?.hasError('required')&&(submitted||state.get('stateUT')?.dirty||state.get('stateUT')?.touched )" style="color: red;">
+                                  State/UT <strong>required</strong>
+                                </p>
+
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label class="control-label font-weight-600">State  Type*</label>
+                                  <select class="form-control" formControlName="statetype">
+                                    <option  value="Regular">Regular</option>
+                                    <option  value="Hilly">Hilly</option>
+                                    <option  value="dessert">Dessert</option>
+                                   </select>
+                                   <p *ngIf="state.get('statetype')?.hasError('required')&&(submitted||state.get('statetype')?.dirty||state.get('statetype')?.touched )" style="color: red;">
+                                    State  Type <strong>required</strong>
+                                  </p>
+
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label font-weight-600">State Name* </label>
+                                <input type="text" formControlName="stateName" class="form-control">
+                                <p *ngIf="state.get('stateName')?.hasError('required')&&(submitted||state.get('stateName')?.dirty||state.get('stateName')?.touched )" style="color: red;">
+                                  State Name <strong>required</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label class="control-label font-weight-600">Census Code*</label>
+                              <input formControlName="censusCode" type="text" class="form-control" name="">
+                              <p *ngIf="state.get('censusCode')?.hasError('required')&&(submitted||state.get('censusCode')?.dirty||state.get('censusCode')?.touched )" style="color: red;">
+                                Census Code <strong>required</strong>
+                              </p>
+                          </div>
+                      </div>
+
+
+                      </div>
+
+                      <div class="clearfix"></div>
+
+
+
+                      <div class="clearfix"></div>
+                      <hr/>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Update</a>
+                              <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
+                              <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

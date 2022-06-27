@@ -26,6 +26,9 @@ export class HttpsService {
   addVillage(formData: any) {
     return this.httpService.post(Globals.route.addVillage, formData);
   }
+  updateState(formData: any) {
+    return this.httpService.patch(Globals.route.updateState, formData);
+  }
 
 
   blocksList() {
@@ -61,5 +64,8 @@ export class HttpsService {
     return this.httpService.get(Globals.route.getBlock,{
       params:queryParams
     });
+  }
+  getstateByID(id:any){
+    return this.httpService.get(`${Globals.route.getstateByID}/${id}`)
   }
 }

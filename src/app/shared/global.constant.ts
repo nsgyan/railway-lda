@@ -13,6 +13,8 @@ export class Globals {
         'districtList': Globals.server + 'master/districtList',
         'village': Globals.server + 'master/village',
         'getVillageByBlock': Globals.server + 'master/getVillageByBlock',
+        'getstateByID': Globals.server + 'master/getstateByID',
+        'updateState': Globals.server + 'master/updateState',
 
     };
 }

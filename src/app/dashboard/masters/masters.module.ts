@@ -11,6 +11,10 @@ import { BlockMasterListComponent } from './block-master-list/block-master-list.
 import { VillageMasterListComponent } from './village-master-list/village-master-list.component';
 import { StateMasterListComponent } from './state-master-list/state-master-list.component';
 import { DistrictMasterListComponent } from './district-master-list/district-master-list.component';
+import { BlockMasterEditComponent } from './block-master-edit/block-master-edit.component';
+import { StateMasterEditComponent } from './state-master-edit/state-master-edit.component';
+import { DistricMasterEditComponent } from './distric-master-edit/distric-master-edit.component';
+import { VillageMasterEditComponent } from './village-master-edit/village-master-edit.component';
 
 
 @NgModule({
@@ -22,7 +26,11 @@ import { DistrictMasterListComponent } from './district-master-list/district-mas
     BlockMasterListComponent,
     VillageMasterListComponent,
     StateMasterListComponent,
-    DistrictMasterListComponent
+    DistrictMasterListComponent,
+    BlockMasterEditComponent,
+    StateMasterEditComponent,
+    DistricMasterEditComponent,
+    VillageMasterEditComponent
   ],
   imports: [
     CommonModule,

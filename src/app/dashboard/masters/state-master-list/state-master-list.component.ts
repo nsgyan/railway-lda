@@ -47,6 +47,10 @@ export class StateMasterListComponent implements OnInit {
   addState(){
     this.router.navigate(['/dashboard/masters/state'])
   }
+  edit(id:any){
+    let url: string = "/dashboard/masters/stateEdit/" + id
+    this.router.navigateByUrl(url);
+  }
 
 
 }
