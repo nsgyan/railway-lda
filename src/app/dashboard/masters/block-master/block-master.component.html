@@ -22,7 +22,7 @@
 
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">State </label>
+                                  <label class="control-label font-weight-600">State*</label>
                                   <select class="form-control" formControlName="state" (change)="getDistrict($event)">
                                     <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
 
@@ -35,7 +35,7 @@
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label font-weight-600">District</label>
+                                <label class="control-label font-weight-600">District*</label>
                                 <select class="form-control" formControlName="district">
                                   <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
 
@@ -48,7 +48,7 @@
                         </div>
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">Block  Type.</label>
+                                  <label class="control-label font-weight-600">Block  Type*</label>
                                   <select class="form-control" formControlName="blockType">
                                     <option  value="Desert">Desert</option>
                                     <option  value="Tribal">Tribal</option>
@@ -61,7 +61,7 @@
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label font-weight-600">Block Name </label>
+                                <label class="control-label font-weight-600">Block Name*</label>
                                 <input type="text" formControlName="blockName" class="form-control">
                                 <p *ngIf="block.get('blockName')?.hasError('required')&&(submitted||block.get('blockName')?.dirty||block.get('blockName')?.touched )" style="color: red;">
                                   Block Name <strong>required</strong>

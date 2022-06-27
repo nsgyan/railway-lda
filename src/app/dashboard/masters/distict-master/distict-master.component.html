@@ -22,7 +22,7 @@
 
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">State</label>
+                                  <label class="control-label font-weight-600">State*</label>
                                  <select class="form-control" formControlName="state">
                                   <option *ngFor="let item of state"  value="{{item.stateName}}">{{item.stateName}}</option>
 
@@ -36,7 +36,7 @@
 
                         <div class="col-md-6">
                           <div class="form-group">
-                              <label class="control-label font-weight-600">District Name .</label>
+                              <label class="control-label font-weight-600">District Name*</label>
                               <input formControlName="district" type="text" class="form-control" name="">
                               <p *ngIf="district.get('district')?.hasError('required')&&(submitted||district.get('district')?.dirty||district.get('district')?.touched )" style="color: red;">
                                 District Name <strong>required</strong>

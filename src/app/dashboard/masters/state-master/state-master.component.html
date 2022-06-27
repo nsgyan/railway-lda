@@ -22,7 +22,7 @@
 
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">State/UT </label>
+                                  <label class="control-label font-weight-600">State/UT*</label>
                                  <select class="form-control" formControlName="stateUT">
                                   <option  value="state">State</option>
                                   <option  value="ut">UT</option>
@@ -35,7 +35,7 @@
                           </div>
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">State  Type.</label>
+                                  <label class="control-label font-weight-600">State  Type*</label>
                                   <select class="form-control" formControlName="statetype">
                                     <option  value="Regular">Regular</option>
                                     <option  value="Hilly">Hilly</option>
@@ -49,7 +49,7 @@
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label font-weight-600">State Name </label>
+                                <label class="control-label font-weight-600">State Name* </label>
                                 <input type="text" formControlName="stateName" class="form-control">
                                 <p *ngIf="state.get('stateName')?.hasError('required')&&(submitted||state.get('stateName')?.dirty||state.get('stateName')?.touched )" style="color: red;">
                                   State Name <strong>required</strong>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                              <label class="control-label font-weight-600">Census Code .</label>
+                              <label class="control-label font-weight-600">Census Code*</label>
                               <input formControlName="censusCode" type="text" class="form-control" name="">
                               <p *ngIf="state.get('censusCode')?.hasError('required')&&(submitted||state.get('censusCode')?.dirty||state.get('censusCode')?.touched )" style="color: red;">
                                 Census Code <strong>required</strong>
