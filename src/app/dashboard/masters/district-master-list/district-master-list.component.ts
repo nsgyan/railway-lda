@@ -45,6 +45,10 @@ this.getblock()
   addDistrict(){
     this.router.navigate(['/dashboard/masters/district'])
   }
+  edit(id:any){
+    let url: string = "/dashboard/masters/districtEdit/" + id
+    this.router.navigateByUrl(url);
+  }
 
 
 }

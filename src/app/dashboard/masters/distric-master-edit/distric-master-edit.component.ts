@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
@@ -14,21 +14,34 @@ export class DistricMasterEditComponent implements OnInit {
   district!:FormGroup;
   submitted=false
 state:any
+  id: any;
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,
-    private toast: ToastrService) {
+    private toast: ToastrService,
+    private route: ActivatedRoute,) {
       this.httpService.getState().subscribe((data:any)=>{
-this.state=data?.state
+        this.state=data?.state
+
+              })
+              this.district=this.fb.group({
+                state:['',Validators.required],
+                  district:['',Validators.required],
+
+
+                })
+      this.id = this.route.snapshot.paramMap.get('id')
+      this.httpService.getDistrictById(this.id).subscribe((data:any)=>{
+// this.state=data?.state
+this.district.get('state')?.setValue(data.district?.state)
+this.district.get('state')?.updateValueAndValidity
+this.district.get('district')?.setValue(data.district?.district)
+this.district.get('district')?.updateValueAndValidity
+
 
       })
-      this.district=this.fb.group({
-      state:['',Validators.required],
-        district:['',Validators.required],
 
-
-      })
     }
 
   ngOnInit(): void {
@@ -37,7 +50,8 @@ this.state=data?.state
 
   onSubmit() {console.log(this.district);
 if(this.district.valid){
-  this.httpService.AddDistrict({
+  this.httpService.updatedistrict({
+    id:this.id,
     district:this.district.value.district,
     state:this.district.value.state,
 

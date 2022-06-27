@@ -15,6 +15,8 @@ export class Globals {
         'getVillageByBlock': Globals.server + 'master/getVillageByBlock',
         'getstateByID': Globals.server + 'master/getstateByID',
         'updateState': Globals.server + 'master/updateState',
+        'getDistrictById': Globals.server + 'master/getDistrictById',
+        'updatedistrict': Globals.server + 'master/updatedistrict',
 
     };
 }

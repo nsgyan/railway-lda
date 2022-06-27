@@ -43,18 +43,11 @@ id:any
           this.state.get('stateUT')?.setValue(data.state?.stateUT)
           this.state.get('stateUT')?.updateValueAndValidity
         }
-
        this.stateData=data
-
       })
-
     }
-
   ngOnInit(): void {
     console.log(this.stateData);
-
-
-
   }
 
   onSubmit() {console.log(this.state);

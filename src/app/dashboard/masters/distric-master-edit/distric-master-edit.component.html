@@ -3,7 +3,7 @@
       <div class="bg-red lter b-b wrapper-md">
           <div class="row">
               <div class="col-sm-6 col-xs-12">
-                  <h3 class="m-n font-thin text-white">Add New district</h3>
+                  <h3 class="m-n font-thin text-white">Edit District</h3>
               </div>
           </div>
       </div>
@@ -14,19 +14,17 @@
                   <form role="form" [formGroup]="district" autocomplete="off">
                       <div class="row">
                           <div class="col-md-12">
-                              <legend>
+                              <!-- <legend>
                                   <span class="font-weight-600">Create New district</span>
-                              </legend>
+                              </legend> -->
                           </div>
 
 
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">State*</label>
-                                 <select class="form-control" formControlName="state">
-                                  <option *ngFor="let item of state"  value="{{item.stateName}}">{{item.stateName}}</option>
+                                  <input formControlName="state" type="text" class="form-control" readonly>
 
-                                 </select>
                                  <p *ngIf="district.get('state')?.hasError('required')&&(submitted||district.get('state')?.dirty||district.get('state')?.touched )" style="color: red;">
                                    please Select  <strong>State</strong>
                                 </p>
@@ -55,7 +53,7 @@
                       <hr/>
                       <div class="row">
                           <div class="col-md-12">
-                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Save</a>
+                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Update</a>
                               <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
                               <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
                           </div>
