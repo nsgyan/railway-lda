@@ -24,6 +24,7 @@
                               <div class="form-group">
                                   <label class="control-label font-weight-600">State* </label>
                                   <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+
                                     <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
 
                                    </select>
