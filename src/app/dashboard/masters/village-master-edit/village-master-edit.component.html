@@ -23,39 +23,24 @@
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">State* </label>
-                                  <select class="form-control" formControlName="state" (change)="getDistrict($event)">
-                                    <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
+                                  <input type="text" formControlName="state" class="form-control" readonly>
 
-                                   </select>
-                                 <p *ngIf="village.get('state')?.hasError('required')&&(submitted||village.get('state')?.dirty||village.get('state')?.touched )" style="color: red;">
-                                  State <strong>required</strong>
-                                </p>
 
                               </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label font-weight-600">District*</label>
-                                <select class="form-control" formControlName="district" (change)="getblock($event)">
-                                  <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
+                                <input type="text" formControlName="district" class="form-control" readonly>
 
-                                 </select>
-                               <p *ngIf="village.get('district')?.hasError('required')&&(submitted||village.get('district')?.dirty||village.get('district')?.touched )" style="color: red;">
-                                District <strong>required</strong>
-                              </p>
 
                             </div>
                         </div>
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Block*</label>
-                                  <select class="form-control" formControlName="block">
-                                    <option *ngFor="let item of block"  value="{{item.block}}" >{{item.block}}</option>
+                                  <input type="text" formControlName="block" class="form-control" readonly>
 
-                                   </select>
-                                   <p *ngIf="village.get('block')?.hasError('required')&&(submitted||village.get('block')?.dirty||village.get('block')?.touched )" style="color: red;">
-                                    block <strong>required</strong>
-                                  </p>
 
                               </div>
                           </div>
@@ -81,7 +66,7 @@
                       <hr/>
                       <div class="row">
                           <div class="col-md-12">
-                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Save</a>
+                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Update</a>
                               <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
                               <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
                           </div>

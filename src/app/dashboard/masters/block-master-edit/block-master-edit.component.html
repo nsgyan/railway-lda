@@ -3,7 +3,7 @@
       <div class="bg-red lter b-b wrapper-md">
           <div class="row">
               <div class="col-sm-6 col-xs-12">
-                  <h3 class="m-n font-thin text-white">Add New Block</h3>
+                  <h3 class="m-n font-thin text-white">Edit Block</h3>
               </div>
           </div>
       </div>
@@ -14,35 +14,24 @@
                   <form role="form" [formGroup]="block" autocomplete="off">
                       <div class="row">
                           <div class="col-md-12">
-                              <legend>
+                              <!-- <legend>
                                   <span class="font-weight-600">Create New Block</span>
-                              </legend>
+                              </legend> -->
                           </div>
 
 
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">State*</label>
-                                  <select class="form-control" formControlName="state" (change)="getDistrict($event)">
-                                    <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
+                                  <input class="form-control" type="text" formControlName="state"  name="" id="" readonly>
 
-                                   </select>
-                                 <p *ngIf="block.get('state')?.hasError('required')&&(submitted||block.get('state')?.dirty||block.get('state')?.touched )" style="color: red;">
-                                  State <strong>required</strong>
-                                </p>
 
                               </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label font-weight-600">District*</label>
-                                <select class="form-control" formControlName="district">
-                                  <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
-
-                                 </select>
-                               <p *ngIf="block.get('district')?.hasError('required')&&(submitted||block.get('district')?.dirty||block.get('district')?.touched )" style="color: red;">
-                                District <strong>required</strong>
-                              </p>
+                              <input class="form-control" type="text"  formControlName="district" readonly>
 
                             </div>
                         </div>

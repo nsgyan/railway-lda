@@ -61,7 +61,7 @@
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label font-weight-600">village Name* </label>
+                                <label class="control-label font-weight-600">Village Name* </label>
                                 <input type="text" formControlName="village" class="form-control">
                                 <p *ngIf="village.get('village')?.hasError('required')&&(submitted||village.get('village')?.dirty||village.get('village')?.touched )" style="color: red;">
                                   village Name <strong>required</strong>

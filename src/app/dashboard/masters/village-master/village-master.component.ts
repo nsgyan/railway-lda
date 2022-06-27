@@ -64,8 +64,10 @@ else{
 
   }
   getDistrict(state:any){
-    console.log(state);
-    console.log(this.village.value.state);
+    this.village.get('district')?.reset()
+    this.village.get('district')?.updateValueAndValidity()
+    this.village.get('block')?.reset()
+    this.village.get('block')?.updateValueAndValidity()
 
     this.httpService.getDistrict(this.village.value.state).subscribe((data:any)=>{
       this.district=data?.district
@@ -73,8 +75,8 @@ else{
             })
   }
   getblock(state:any){
-    console.log(state);
-    console.log(this.village.value.state);
+    this.village.get('block')?.reset()
+    this.village.get('block')?.updateValueAndValidity()
 
     this.httpService.getBlock(this.village.value.state,this.village.value.district).subscribe((data:any)=>{
       this.block=data?.blocks

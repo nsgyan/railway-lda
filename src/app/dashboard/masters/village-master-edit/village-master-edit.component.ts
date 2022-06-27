@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
@@ -16,12 +16,13 @@ export class VillageMasterEditComponent implements OnInit {
   state: any;
   district: any;
   block: any;
-
+  id:any
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,
-    private toast: ToastrService,) {
+    private toast: ToastrService,
+    private route: ActivatedRoute,) {
       this.httpService.getState().subscribe((data:any)=>{
         this.state=data?.state
 
@@ -34,6 +35,19 @@ export class VillageMasterEditComponent implements OnInit {
 
 
       })
+      this.id = this.route.snapshot.paramMap.get('id')
+      console.log(this.id,'id');
+
+      this.httpService.getVillageByID(this.id).subscribe((data:any)=>{
+        this.village.get('state')?.setValue(data.village?.state)
+        this.village.get('state')?.updateValueAndValidity
+        this.village.get('district')?.setValue(data.village?.district)
+        this.village.get('district')?.updateValueAndValidity
+        this.village.get('block')?.setValue(data.village?.block)
+        this.village.get('block')?.updateValueAndValidity
+        this.village.get('village')?.setValue(data.village?.village)
+        this.village.get('village')?.updateValueAndValidity
+              })
     }
 
   ngOnInit(): void {
@@ -44,7 +58,8 @@ export class VillageMasterEditComponent implements OnInit {
 
 
 if(this.village.valid){
-  this.httpService.addVillage({
+  this.httpService.updateVillage({
+  id:this.id,
     state:this.village.value.state,
     district:this.village.value.district,
     village: this.village.value.village,

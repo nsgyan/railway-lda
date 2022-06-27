@@ -64,7 +64,8 @@ else{
 
   }
   getDistrict(state:any){
-
+this.block.get('district')?.reset()
+this.block.get('district')?.updateValueAndValidity()
 
     this.httpService.getDistrict(this.block.value.state).subscribe((data:any)=>{
       this.district=data?.district

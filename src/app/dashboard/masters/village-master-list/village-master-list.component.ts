@@ -40,4 +40,9 @@ export class VillageMasterListComponent implements OnInit {
   }
 
 
+  edit(id:any){
+    let url: string = "/dashboard/masters/villageEdit/" + id
+    this.router.navigateByUrl(url);
+  }
+
 }
