@@ -17,6 +17,9 @@ export class HttpsService {
     AddState(formData: any) {
     return this.httpService.post(Globals.route.AddState, formData);
   }
+  addProject(formData: any) {
+    return this.httpService.post(Globals.route.addProject, formData);
+  }
   AddDistrict(formData: any) {
     return this.httpService.post(Globals.route.AddDistrict, formData);
   }
@@ -52,6 +55,9 @@ export class HttpsService {
   }
   getState() {
     return this.httpService.get(Globals.route.getState);
+  }
+  getProject() {
+    return this.httpService.get(Globals.route.getProject);
   }
   getVillageByBlock(block:any) {
     let queryParams= new HttpParams();

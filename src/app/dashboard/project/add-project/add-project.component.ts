@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Beneficiary, Project } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
@@ -12,7 +13,7 @@ import { ToasterService } from 'src/app/shared/toaster.service';
   styleUrls: ['./add-project.component.css']
 })
 export class AddProjectComponent implements OnInit {
-
+  submitted=false
   project!:FormGroup;
   state: any;
   district: any;
@@ -23,7 +24,7 @@ export class AddProjectComponent implements OnInit {
   constructor( private fb:FormBuilder,
     private router: Router,
     private data: DataService,
-    private toster: ToasterService,
+    private toast: ToastrService,
     private httpService:HttpsService,){
       this.httpService.getState().subscribe((data:any)=>{
 
@@ -31,10 +32,9 @@ export class AddProjectComponent implements OnInit {
 
               })
       this.project=this.fb.group({
-        projectCode:[''],
-        projectID:[''],
-        projectName:[''],
-        projectDescription:[''],
+        projectID:['',Validators.required],
+        projectName:['',Validators.required],
+        projectDescription:['',Validators.required],
         selectState : this.fb.array([]) ,
 
 
@@ -46,7 +46,19 @@ export class AddProjectComponent implements OnInit {
   }
 
   onSubmit() {console.log(this.project);
-
+if(this.project.valid){
+  this.httpService.addProject({
+    projectID:this.project.value.projectID,
+    projectName:this.project.value.projectName,
+    projectDescription:this.project.value.projectDescription,
+    projectDetails : this.project.value.selectState ,
+  }).subscribe((data:any)=>{
+    this.toast.success(data?.message)
+    this.router.navigate(['/dashboard/project'])
+  },(err=>{
+    this.toast.error(err.error.message);
+  }))
+}
     // const project=[new Project(
     //   this.project.value.projectCode,
     //   this.project.value.projectID,
@@ -78,7 +90,7 @@ export class AddProjectComponent implements OnInit {
       village: ['',Validators.required],
       sanctionedAmount:['',Validators.required],
       block: ['',Validators.required],
-      Remark:['',Validators.required],
+      remark:['',Validators.required],
     })
   }
 

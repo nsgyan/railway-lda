@@ -21,5 +21,7 @@ export class Globals {
         'updateblock': Globals.server + 'master/updateblock',
         'getVillageByID': Globals.server + 'master/getVillageByID',
         'updateVillage': Globals.server + 'master/updateVillage',
+        'addProject': Globals.server + 'project/add',
+        'getProject': Globals.server + 'project',
     };
 }
