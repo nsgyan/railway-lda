@@ -40,7 +40,13 @@ export class HttpsService {
   getState() {
     return this.httpService.get(Globals.route.getState);
   }
-
+  getVillageByBlock(block:any) {
+    let queryParams= new HttpParams();
+    queryParams=queryParams.append("block",block)
+    return this.httpService.get(Globals.route.getVillageByBlock,{
+      params:queryParams
+    });
+  }
   getDistrict(state:any) {
     let queryParams= new HttpParams();
     queryParams=queryParams.append("state",state)

@@ -61,7 +61,7 @@
                               <thead>
                                   <tr>
                                   <th>#</th>
-                                  <th>State</th>
+
                                   <th>District</th>
                                   <th>Block</th>
                                   <th>Village</th>
@@ -87,10 +87,11 @@
                                       </p> -->
 
                                     </div></td>
-                                      <td> <div class="col-md-6">
+                                      <td>
+                                         <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label font-weight-600">District</label>
-                                            <select class="form-control" formControlName="district" (change)="getblock($event)">
+                                            <select class="form-control" formControlName="district" (change)="getblock($event,i)">
                                               <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
 
                                              </select>
@@ -100,11 +101,31 @@
 
                                         </div>
                                     </div></td>
-                                      <td><input type="text" formControlName="location" class="form-control" name=""></td>
-                                      <td><input type="text" formControlName="Remark" class="form-control" name=""></td>
-                                      <td><input type="text" formControlName="district" class="form-control" name=""></td>
+                                      <td>         <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label font-weight-600">Block*</label>
+                                            <select class="form-control" formControlName="block" (change)="getVillage($event,i)">
+                                              <option *ngFor="let item of block"  value="{{item.block}}" >{{item.block}}</option>
+
+                                             </select>
+
+
+                                        </div>
+                                    </div></td>
+                                      <td>   <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label font-weight-600">village*</label>
+                                            <select class="form-control" formControlName="village" (change)="getVillage($event,i)">
+                                              <option *ngFor="let item of village"  value="{{item.village}}" >{{item.village}}</option>
+
+                                             </select>
+
+
+                                        </div>
+                                    </div></td>
                                       <td><input type="text" formControlName="area" class="form-control" name=""></td>
-                                      <td><input type="text" formControlName="location" class="form-control" name=""></td>
+                                      <td><input type="text" formControlName="sanctionedAmount" class="form-control" name=""></td>
+                                      <td><input type="text" formControlName="Remark" class="form-control" name=""></td>
 
                                       <td> <a  (click)="removeselectState(i)"> <i class="fa fa-close"></i></a></td>
                                   </tr>
