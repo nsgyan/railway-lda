@@ -59,6 +59,10 @@ if(this.project.valid){
     this.toast.error(err.error.message);
   }))
 }
+else{
+  this.submitted=true
+  this.toast.error('Please Fill Required Field');
+}
     // const project=[new Project(
     //   this.project.value.projectCode,
     //   this.project.value.projectID,

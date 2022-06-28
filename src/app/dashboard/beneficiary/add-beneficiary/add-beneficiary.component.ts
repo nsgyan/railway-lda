@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Beneficiary } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
@@ -18,10 +19,12 @@ district:any=[]
 block:any=[]
 village:any=[]
   project:any
+  submitted:boolean=false
   constructor( private fb:FormBuilder,
     private router: Router,
     private data: DataService,
-    private httpService:HttpsService,) {
+    private httpService:HttpsService,
+    private toast: ToastrService,) {
       this.httpService.getProject().subscribe((data:any)=>{
         this.project=data.projects
         this.project.map((item:any)=>{
@@ -185,11 +188,17 @@ this.district=[]
       district:this.beneficiary.value.district,
       beneficiary:this.beneficiary.value.beneficiary ,
 
-    }).subscribe(data=>{
-      console.log(data);
+    }).subscribe((data:any)=>{
+      this.toast.success(data?.message)
+      this.router.navigate(['/dashboard/beneficiariesList'])
+    },(err=>{
+      this.toast.error(err.error.message);
+    }))
 
-    })
-
+  }
+  else{
+    this.submitted=true
+    this.toast.error('Please Fill Required Field');
   }
 
 
