@@ -107,15 +107,13 @@ else{
     // console.log(this.village.value.state);
     const control =this.project.get("selectState") as FormArray
     this.httpService.getBlock(control.at(i).value.state,control.at(i).value.district).subscribe((data:any)=>{
-      this.block.splice(i, 0, data?.block);
+
+      this.block.splice(i, 0, data?.blocks);
             })
   }
 
   removeselectState(quesIndex:number) {
     this.selectStates().removeAt(quesIndex);
-    this.village.splice(quesIndex,1)
-    this.district.splice(quesIndex,1)
-    this.block.splice(quesIndex,1)
   }
 
   getDistrict(state:any,i:any){
