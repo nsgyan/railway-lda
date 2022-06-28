@@ -173,7 +173,7 @@
                         Sanctioned Amount <strong>Required</strong>
                       </p>
                     </td>
-                    <td style="width:10%"><input type="text" formControlName="remark" class="form-control" name="">
+                    <td style="width:10%"><input class="" type="text" formControlName="remark" class="form-control text-remark" name="">
                       <p *ngIf="opt.get('remark')?.hasError('required')&&(submitted||opt.get('remark')?.dirty||opt.get('remark')?.touched )"
                         style="color: red;">
                         Remark <strong>Required</strong>
