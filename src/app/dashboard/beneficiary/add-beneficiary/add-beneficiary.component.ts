@@ -15,6 +15,8 @@ export class AddBeneficiaryComponent implements OnInit {
   beneficiary:FormGroup;
 state:any=[]
 district:any=[]
+block:any=[]
+village:any=[]
   project:any
   constructor( private fb:FormBuilder,
     private router: Router,
@@ -36,11 +38,11 @@ district:any=[]
 
       })
       this.beneficiary=this.fb.group({
-        projectName:[''],
-        projectID:[''],
-        date:[''],
-        state:[''],
-        district:[''],
+        projectName:['',Validators.required],
+        projectID:['',Validators.required],
+        date:['',Validators.required],
+        state:['',Validators.required],
+        district:['',Validators.required],
         beneficiary:this.fb.array([]) ,
 
       })
@@ -66,13 +68,12 @@ district:any=[]
     return this.fb.group({
       block:['',Validators.required],
       village: ['',Validators.required],
-      beneficiary:[''],
-      beneficiaryName:[''],
-      fatherOrHusbandName:[''],
-      gataNumber:[''],
-      rakba:[''],
-      pratifalRate:[''],
-      beneficaryShare:[''],
+      beneficiaryName:['',Validators.required],
+      fatherOrHusbandName:['',Validators.required],
+      gataNumber:['',Validators.required],
+      rakba:['',Validators.required],
+      pratifalRate:['',Validators.required],
+      beneficaryShare:['',Validators.required],
       // chequeNumber:[''],
       // chequeDate:[''],
       // registrationAmount:[''],
@@ -111,6 +112,7 @@ this.project.map((item:any)=>{
 
   getDistrict(event:any){
 this.district=[]
+
     this.project.map((item:any)=>{
       if(item.projectName===this.beneficiary.value.projectName){
       item.projectDetails.map((projectData:any)=>{
@@ -122,10 +124,46 @@ this.district=[]
           this.district.push(projectData.district);
         }
       })}
-
-
-
     })
+
+
+  }
+  getBlock(event:any){
+    this.block=[]
+    this.project.map((item:any)=>{
+      if(item.projectName===this.beneficiary.value.projectName){
+      item.projectDetails.map((projectData:any)=>{
+        if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district) {
+          if(!this.block.includes(projectData.block)){
+        // ✅ only runs if value not in array
+          this.block.push(projectData.block);}
+        }
+      })}
+    })
+  }
+
+  getVillage(event:any,index:any){
+    let newArray: any[]=[]
+    const control= this.beneficiary.get("beneficiary") as FormArray
+    this.village.splice(index,1)
+    console.log(this.beneficiary)
+    this.project.map((item:any)=>{
+      if(item.projectName===this.beneficiary.value.projectName){
+      item.projectDetails.map((projectData:any)=>{
+        if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district&&projectData.block===control.at(index).value.block) {
+          if(!newArray.includes(projectData.village)){
+            console.log('hello');
+  newArray.push(projectData.village);}
+  // console.log(newArray);
+
+        this.village.splice(index, 0, newArray);
+
+
+        }
+      })}
+    })
+    console.log(this.village);
+
 
 
   }

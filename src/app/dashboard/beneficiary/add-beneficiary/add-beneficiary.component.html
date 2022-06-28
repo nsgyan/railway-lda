@@ -54,7 +54,7 @@
                           <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label font-weight-600">District</label>
-                                <select class="form-control" formControlName="district" name="">
+                                <select class="form-control" formControlName="district" (change)="getBlock($event)">
                                   <option hidden>Select District</option>
                                   <option *ngFor="let item of district" value="{{item}}">{{item}}</option>
 
@@ -65,9 +65,11 @@
 
 
                         <div class="clearfix"></div>
+
                         <div class="borderFormBox">
-                            <h4 style="padding:0px 20px">Beneficiary </h4>
-                            <table class="table">
+                            <h4 style="padding:0px 20px">Beneficiary </h4> <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addbeneficiary()"
+                            type="button"><i class="fa fa-plus" aria-hidden="true"></i>Add New Beneficiary</button>
+                            <table class="table" formArrayName="beneficiary">
                                 <thead>
                                     <tr>
                                     <th>#</th>
@@ -88,16 +90,17 @@
                                     </tr>
 
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
+                                <tbody *ngFor="let opt of beneficiaryControl.controls; let i = index">
+                                    <tr [formGroupName]="i">
+                                        <td>{{i+1}}</td>
                                         <td><input type="text" formControlName="beneficiaryName" class="form-control" name=""></td>
-                                        <td><input type="number" formControlName="pratifalRate" class="form-control" name=""></td>
+                                        <td><input type="number" formControlName="fatherOrHusbandName" class="form-control" name=""></td>
                                         <td>  <div class="">
                                           <div class="form-group">
 
-                                            <select class="form-control" formControlName="block" >
+                                            <select class="form-control" formControlName="block" (change)="getVillage($event,i)" >
                                                 <option hidden>Select Block</option>
+                                                <option *ngFor="let item of block" value="{{item}}">{{item}}</option>
 
                                             </select>
                                             <!-- <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
@@ -113,7 +116,7 @@
 
                                             <select class="form-control" formControlName="village">
                                                 <option hidden>Select Village</option>
-                                              <option value="m.village}}">item.village}}</option>
+                                              <option *ngFor="let item of village[i]" value="{{item}}">{{item}}</option>
 
                                             </select>
                                             <!-- <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
@@ -124,11 +127,11 @@
 
                                           </div>
                                         </div></td>
-                                        <td><input type="number" formControlName="pratifalRate" class="form-control" name=""></td>
-                                        <td><input type="text"  formControlName="beneficaryShare"  class="form-control" name=""></td>
-                                        <td><input type="text"  formControlName="chequeNumber" class="form-control" name=""></td>
-                                        <td><input type="date"  formControlName="chequeDate" class="form-control" name=""></td>
-                                        <td><input type="text"  formControlName="registrationAmount" class="form-control" name=""></td>
+                                        <td><input type="number" formControlName="gataNumber" class="form-control" name=""></td>
+                                        <td><input type="text"  formControlName="rakba"  class="form-control" name=""></td>
+                                        <td><input type="text"  formControlName="pratifalRate" class="form-control" name=""></td>
+                                        <td><input type="date"  formControlName="beneficaryShare" class="form-control" name=""></td>
+                                        <!-- <td><input type="text"  formControlName="registrationAmount" class="form-control" name=""></td> -->
 
 
                                     </tr>
@@ -155,9 +158,9 @@
                         <div class="borderFormBox">
                             <h5 style="padding:0px 20px">Remark</h5>
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <textarea formControlName="remark" class="form-control" style="width: 100%;"></textarea>
-                                </div>
+                                </div> -->
                             </div>
                         <div class="clearfix"></div>
                         </div>
