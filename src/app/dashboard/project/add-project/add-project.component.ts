@@ -16,10 +16,9 @@ export class AddProjectComponent implements OnInit {
   submitted=false
   project!:FormGroup;
   state: any;
-  district: any;
-  block: any;
-  village: any;
-
+  district:any[]= [];
+  block:any[]= [];
+  village:any[]=[] ;
 
   constructor( private fb:FormBuilder,
     private router: Router,
@@ -108,13 +107,15 @@ else{
     // console.log(this.village.value.state);
     const control =this.project.get("selectState") as FormArray
     this.httpService.getBlock(control.at(i).value.state,control.at(i).value.district).subscribe((data:any)=>{
-      this.block=data?.blocks
-
+      this.block.splice(i, 0, data?.block);
             })
   }
 
   removeselectState(quesIndex:number) {
     this.selectStates().removeAt(quesIndex);
+    this.village.splice(quesIndex,1)
+    this.district.splice(quesIndex,1)
+    this.block.splice(quesIndex,1)
   }
 
   getDistrict(state:any,i:any){
@@ -123,7 +124,7 @@ else{
     console.log(control.at(i).value.state);
 
     this.httpService.getDistrict(control.at(i).value.state).subscribe((data:any)=>{
-      this.district=data?.district
+      this.district.splice(i, 0, data?.district);
 
             })
   }
@@ -132,7 +133,8 @@ else{
     // console.log(this.village.value.state);
     const control =this.project.get("selectState") as FormArray
     this.httpService.getVillageByBlock(control.at(i).value.block).subscribe((data:any)=>{
-      this.village=data?.village
+
+      this.village.splice(i, 0, data?.village);
 
             })
   }

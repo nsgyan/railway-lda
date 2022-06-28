@@ -111,7 +111,7 @@
 
                           <select class="form-control" formControlName="district" (change)="getblock($event,i)">
                               <option hidden>Select District</option>
-                            <option *ngFor="let item of district" value="{{item.district}}">{{item.district}}</option>
+                            <option *ngFor="let item of district[i]" value="{{item.district}}">{{item.district}}</option>
 
                           </select>
                           <p *ngIf="opt.get('district')?.hasError('required')&&(submitted||opt.get('district')?.dirty||opt.get('district')?.touched )"
@@ -131,7 +131,7 @@
 
                           <select class="form-control" formControlName="block" (change)="getVillage($event,i)">
                               <option hidden>Select Block</option>
-                            <option *ngFor="let item of block" value="{{item.block}}">{{item.block}}</option>
+                            <option *ngFor="let item of block[i]" value="{{item.block}}">{{item.block}}</option>
 
                           </select>
                           <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
@@ -149,7 +149,7 @@
 
                           <select class="form-control" formControlName="village" (change)="getVillage($event,i)">
                               <option hidden>Select Village</option>
-                            <option *ngFor="let item of village" value="{{item.village}}">{{item.village}}</option>
+                            <option *ngFor="let item of village[i]" value="{{item.village}}">{{item.village}}</option>
 
                           </select>
                           <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
