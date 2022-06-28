@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Beneficiary } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
@@ -41,16 +41,8 @@ district:any=[]
         date:[''],
         state:[''],
         district:[''],
-        beneficiary:[''],
-        beneficiaryName:[''],
-        gataNumber:[''],
-        rakba:[''],
-        pratifalRate:[''],
-        beneficaryShare:[''],
-        chequeNumber:[''],
-        chequeDate:[''],
-        registrationAmount:[''],
-        remark:['']
+        beneficiary:this.fb.array([]) ,
+
       })
 
 
@@ -58,6 +50,41 @@ district:any=[]
 
   ngOnInit(): void {
   }
+
+
+  beneficiarys(): FormArray {
+    return this.beneficiary.get("beneficiary") as FormArray
+  }
+  inputType(): FormArray {
+    return this.beneficiary.get("inputType") as FormArray
+  }
+ get beneficiaryControl(): FormArray {
+    return this.beneficiary.get("beneficiary") as FormArray
+  }
+
+  newbeneficiary(): FormGroup {
+    return this.fb.group({
+      block:['',Validators.required],
+      village: ['',Validators.required],
+      beneficiary:[''],
+      beneficiaryName:[''],
+      fatherOrHusbandName:[''],
+      gataNumber:[''],
+      rakba:[''],
+      pratifalRate:[''],
+      beneficaryShare:[''],
+      // chequeNumber:[''],
+      // chequeDate:[''],
+      // registrationAmount:[''],
+      // remark:['']
+    })
+  }
+
+
+  addbeneficiary() {
+    this.beneficiarys().push(this.newbeneficiary());
+  }
+
 
   getPriject(event:any){
 

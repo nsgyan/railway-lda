@@ -66,21 +66,24 @@
 
                         <div class="clearfix"></div>
                         <div class="borderFormBox">
-                            <h4 style="padding:0px 20px">Beneficiary (Bainama)</h4>
+                            <h4 style="padding:0px 20px">Beneficiary </h4>
                             <table class="table">
                                 <thead>
                                     <tr>
                                     <th>#</th>
                                     <th>Beneficiary Name</th>
+                                    <th>Father / Husband Name</th>
+                                    <th>Block</th>
+                                    <th>Village</th>
                                     <th>Gata Number</th>
                                     <th>Rakba</th>
                                     <th>Pratifal Rate</th>
                                     <th>Beneficary Share</th>
-                                    <th>Cheque Number</th>
+                                    <!-- <th>Cheque Number</th>
                                     <th>Cheque Date</th>
                                     <th>Registration Amount</th>
-                                    <th>Doc Upload</th>
-                                    <th><i class="fa fa-upload"></i></th>
+                                    <th>Doc Upload</th> -->
+                                    <!-- <th><i class="fa fa-upload"></i></th> -->
                                     <th><i class="fa fa-trash"></i></th>
                                     </tr>
 
@@ -89,16 +92,46 @@
                                     <tr>
                                         <td></td>
                                         <td><input type="text" formControlName="beneficiaryName" class="form-control" name=""></td>
-                                        <td><input type="text" formControlName="gataNumber" class="form-control" name=""></td>
-                                        <td><input type="number" formControlName="rakba" class="form-control" name=""></td>
+                                        <td><input type="number" formControlName="pratifalRate" class="form-control" name=""></td>
+                                        <td>  <div class="">
+                                          <div class="form-group">
+
+                                            <select class="form-control" formControlName="block" >
+                                                <option hidden>Select Block</option>
+                                              <option  value="{{item.bloc">{{item.blo</option>
+
+                                            </select>
+                                            <!-- <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
+                                              style="color: red;">
+                                              Block <strong>Required</strong>
+                                            </p> -->
+
+
+                                          </div>
+                                        </div></td>
+                                        <td>   <div class="">
+                                          <div class="form-group">
+
+                                            <select class="form-control" formControlName="village">
+                                                <option hidden>Select Village</option>
+                                              <option value="m.village}}">item.village}}</option>
+
+                                            </select>
+                                            <!-- <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
+                                              style="color: red;">
+                                              village <strong>Required</strong>
+                                            </p> -->
+
+
+                                          </div>
+                                        </div></td>
                                         <td><input type="number" formControlName="pratifalRate" class="form-control" name=""></td>
                                         <td><input type="text"  formControlName="beneficaryShare"  class="form-control" name=""></td>
                                         <td><input type="text"  formControlName="chequeNumber" class="form-control" name=""></td>
                                         <td><input type="date"  formControlName="chequeDate" class="form-control" name=""></td>
                                         <td><input type="text"  formControlName="registrationAmount" class="form-control" name=""></td>
-                                        <td><input type="file"  class="form-control" name=""></td>
-                                        <td><i class="fa fa-file-pdf-o text-danger"></i></td>
-                                        <td><i class="fa fa-close"></i></td>
+
+
                                     </tr>
 
 
