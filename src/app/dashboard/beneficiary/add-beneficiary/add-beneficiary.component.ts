@@ -51,6 +51,7 @@ village:any=[]
     }
 
   ngOnInit(): void {
+    this.addbeneficiary()
   }
 
 
@@ -84,6 +85,10 @@ village:any=[]
 
   addbeneficiary() {
     this.beneficiarys().push(this.newbeneficiary());
+  }
+  removebeneficiary(quesIndex:number) {
+    this.beneficiarys().removeAt(quesIndex);
+    this.village.splice(quesIndex,1)
   }
 
 
@@ -170,21 +175,23 @@ this.district=[]
 
   onSubmit() {
     // let date=this.beneficiary.value.data.toString()
-    const beneficiary=[new Beneficiary(
-      this.beneficiary.value.date,
-      this.beneficiary.value.beneficiaryName,
-       this.beneficiary.value.gataNumber,
-        this.beneficiary.value.rakba,
-        this.beneficiary.value.pratifalRate,
-        this.beneficiary.value.beneficaryShare,
-         this.beneficiary.value.chequeNumber,
-         this.beneficiary.value.chequeDate,
-         this.beneficiary.value.registrationAmount)]
+  console.log(this.beneficiary);
+  if(this.beneficiary.valid){
+    this.httpService.addBeneficiary({
+      projectName:this.beneficiary.value.projectName,
+      projectID:this.beneficiary.value.projectID,
+      date:this.beneficiary.value.date,
+      state:this.beneficiary.value.state,
+      district:this.beneficiary.value.district,
+      beneficiary:this.beneficiary.value.beneficiary ,
 
+    }).subscribe(data=>{
+      console.log(data);
 
+    })
 
-         this.data.addBeneficiary(beneficiary)
-         this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
+  }
+
 
   }
 
