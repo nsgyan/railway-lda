@@ -7,7 +7,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="wrapper-md">
             <div class="panel b-a">
                 <div class="panel-body">
@@ -18,47 +18,52 @@
                                     <span class="font-weight-600">Create New Payment Demand Request</span>
                                 </legend>
                             </div>
-                            
-                            
+
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="control-label font-weight-600">Date </label>
-                                    <input type="date" formControlName="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label font-weight-600">Reference No.</label>
-                                    <input formControlName="referenceNo" type="text" class="form-control" name="">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label font-weight-600">User</label>
-                                    <select class="form-control" formControlName="user" name="">
-                                        <option value=''>Select User</option>
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                            <option value="">3</option>
+                                    <label class="control-label font-weight-600">Project Name </label>
+                                    <select type="date" formControlName="projectName" class="form-control" (change)="getPriject($event)" >
+                                      <option hidden>Select Project</option>
+                                      <option *ngFor="let item of project" value="{{item.projectName}}">{{item.projectName}}</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                   
-                        <div class="clearfix"></div>
-                        <div class="grayFormBox wrapper-md">
-                                <div class="pull-left">
-                                <i class="fa fa-user fa-3x"></i>
-                                </div>
-                            <div class="pull-right" style="width: 97%;">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <input formControlName="beneficiary" type="text" class="form-control" name="">
+                                    <label class="control-label font-weight-600">Project ID</label>
+                                    <input formControlName="projectID" type="text" class="form-control" name="" readonly>
                                 </div>
                             </div>
-                            <a class="adBtnInputField">Add New Beneficiary</a>
-                            
-                        <div class="clearfix"></div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">Date</label>
+                                    <input formControlName="date" type="date" class="form-control" name="" >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label class="control-label font-weight-600">State</label>
+                                  <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                                    <option hidden>Select State</option>
+                                    <option *ngFor="let item of state" value="{{item}}">{{item}}</option>
+
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label font-weight-600">District</label>
+                                <select class="form-control" formControlName="district" name="">
+                                  <option hidden>Select District</option>
+                                  <option *ngFor="let item of district" value="{{item}}">{{item}}</option>
+
+                                </select>
+                            </div>
                         </div>
+                        </div>
+
+
                         <div class="clearfix"></div>
                         <div class="borderFormBox">
                             <h4 style="padding:0px 20px">Beneficiary (Bainama)</h4>
@@ -95,15 +100,15 @@
                                         <td><i class="fa fa-file-pdf-o text-danger"></i></td>
                                         <td><i class="fa fa-close"></i></td>
                                     </tr>
-                                   
-                                  
+
+
                                 </tbody>
-                               
+
                             </table>
                         </div>
-                        <div class="clearfix"></div> 
+                        <div class="clearfix"></div>
                         <div class="grayFormBox wrapper-md">
-                            
+
                         <div class="pull-right" style="width:100%;">
                             <div>
                                 <!-- <label class="control-label font-weight-600">Attach</label> -->
@@ -111,7 +116,7 @@
                             </div>
                         </div>
                         <a class="adBtnInputField"><i class="fa fa-link"></i> Attach Document</a>
-                        
+
                         <div class="clearfix"></div>
                     </div>
                         <div class="clearfix"></div>
@@ -124,7 +129,7 @@
                             </div>
                         <div class="clearfix"></div>
                         </div>
-                        
+
                         <div class="clearfix"></div>
                         <hr/>
                         <div class="row">
