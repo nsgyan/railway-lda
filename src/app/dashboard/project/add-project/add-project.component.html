@@ -84,6 +84,7 @@
                                       <td>   <div class="form-group">
 
                                         <select class="form-control" formControlName="state" (change)="getDistrict($event,i)">
+                                          <option hidden>Select State</option>
                                           <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
 
                                          </select>
@@ -100,6 +101,7 @@
                                         <div class="form-group">
 
                                             <select class="form-control" formControlName="district" (change)="getblock($event,i)">
+                                              <option hidden>Select District</option>
                                               <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
 
                                              </select>
@@ -116,6 +118,7 @@
                                         <div class="form-group">
 
                                             <select class="form-control" formControlName="block" (change)="getVillage($event,i)">
+                                              <option hidden>Select Block</option>
                                               <option *ngFor="let item of block"  value="{{item.block}}" >{{item.block}}</option>
 
                                              </select>
@@ -130,6 +133,7 @@
                                         <div class="form-group">
 
                                             <select class="form-control" formControlName="village" (change)="getVillage($event,i)">
+                                              <option hidden>Select Village</option>
                                               <option *ngFor="let item of village"  value="{{item.village}}" >{{item.village}}</option>
 
                                              </select>
