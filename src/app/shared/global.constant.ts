@@ -2,14 +2,14 @@ import { environment } from "../../environments/environment.prod";
 export class Globals {
     public static readonly server = environment.serverUrl;
     public static readonly route = {
-        'AddState': Globals.server + 'master/add/state',
-        'AddDistrict': Globals.server + 'master/add/district',
-        'AddBlock': Globals.server + 'master/add/block',
-        'addLandCategory': Globals.server + 'master/add/landCategory',
-        'addlandNature': Globals.server + 'master/add/landNature',
-        'addlandType': Globals.server + 'master/add/landType',
-        'addobjectionType': Globals.server + 'master/add/objectionType',
-        'addVillage': Globals.server + 'master/add/village',
+        'AddState': Globals.server + 'master/state',
+        'AddDistrict': Globals.server + 'master/district',
+        'AddBlock': Globals.server + 'master/block',
+        'addLandCategory': Globals.server + 'master/landCategory',
+        'addlandNature': Globals.server + 'master/landNature',
+        'addlandType': Globals.server + 'master/landType',
+        'addobjectionType': Globals.server + 'master/objectionType',
+        'addVillage': Globals.server + 'master/village',
         'getState': Globals.server + 'master/state',
         'bank': Globals.server + 'master/bank',
         'getlandCategory': Globals.server + 'master/landCategory',

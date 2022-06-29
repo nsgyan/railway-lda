@@ -14,6 +14,8 @@ export class LandTypeComponent implements OnInit {
 
   landType!:FormGroup;
   submitted=false
+  isExist=false
+  id:any
   stateData:any
   landTypeData: any;
   constructor( private fb:FormBuilder,
@@ -33,6 +35,29 @@ export class LandTypeComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  update() {console.log(this.landType);
+    if(this.landType.valid){
+      this.httpService.addlandType({
+        landType:this.landType.value.landType,
+
+      }).subscribe((data: any) => {
+        // console.log(data);
+        this.landType.reset()
+        this.toast.success(data?.message)
+        // this.toast.showSuccess('State Successfully Added')
+        window.location.reload()
+      }, err => {
+        console.log(err.error);
+
+        this.toast.error(err.error);
+      })
+    }
+    else{
+      this.submitted = true;  // this.toast.showSuccess('State Successfully Added')
+    }
+
+
+      }
 
   onSubmit() {console.log(this.landType);
 if(this.landType.valid){
@@ -61,9 +86,11 @@ else{
   // addState(){
   //   this.router.navigate(['/dashboard/masters/state'])
   // }
-  edit(id:any){
-    let url: string = "/dashboard/masters/stateEdit/" + id
-    this.router.navigateByUrl(url);
+  edit(landData:any){
+  this.id= landData._id
+  this.isExist= true
+  this.landType.get('landType')?.setValue(landData.landType)
+
   }
 
 
