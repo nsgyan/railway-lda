@@ -31,7 +31,7 @@ export class AddProjectComponent implements OnInit {
 
               })
       this.project=this.fb.group({
-        projectID:['',Validators.required],
+        projectNumber:['',Validators.required],
         projectName:['',Validators.required],
         projectDescription:['',Validators.required],
         selectState : this.fb.array([]) ,
@@ -47,10 +47,10 @@ export class AddProjectComponent implements OnInit {
   onSubmit() {console.log(this.project);
 if(this.project.valid){
   this.httpService.addProject({
-    projectID:this.project.value.projectID,
+    projectNumber:this.project.value.projectNumber,
     projectName:this.project.value.projectName,
     projectDescription:this.project.value.projectDescription,
-    projectDetails : this.project.value.selectState ,
+    acquisitionDetails : this.project.value.selectState ,
   }).subscribe((data:any)=>{
     this.toast.success(data?.message)
     this.router.navigate(['/dashboard/project'])
@@ -64,7 +64,7 @@ else{
 }
     // const project=[new Project(
     //   this.project.value.projectCode,
-    //   this.project.value.projectID,
+    //   this.project.value.projectNumber,
     //    this.project.value.projectName,
     //     this.project.value.projectDescription,
     //     this.project.value.selectState.length,)]

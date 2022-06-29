@@ -42,7 +42,7 @@ village:any=[]
       })
       this.beneficiary=this.fb.group({
         projectName:['',Validators.required],
-        projectID:['',Validators.required],
+        projectNumber:['',Validators.required],
         date:['',Validators.required],
         state:['',Validators.required],
         district:['',Validators.required],
@@ -100,8 +100,8 @@ village:any=[]
 this.state=[]
 this.project.map((item:any)=>{
   if(item.projectName===event.target.value){
-    this.beneficiary.get('projectID')?.setValue(item.projectID)
-    this.beneficiary.get('projectID')?.updateValueAndValidity
+    this.beneficiary.get('projectNumber')?.setValue(item.projectNumber)
+    this.beneficiary.get('projectNumber')?.updateValueAndValidity
   item.projectDetails.map((projectData:any)=>{
     if (!this.state.includes(projectData.state)) {
       // ✅ only runs if value not in array
@@ -182,7 +182,7 @@ this.district=[]
   if(this.beneficiary.valid){
     this.httpService.addBeneficiary({
       projectName:this.beneficiary.value.projectName,
-      projectID:this.beneficiary.value.projectID,
+      projectNumber:this.beneficiary.value.projectNumber,
       date:this.beneficiary.value.date,
       state:this.beneficiary.value.state,
       district:this.beneficiary.value.district,

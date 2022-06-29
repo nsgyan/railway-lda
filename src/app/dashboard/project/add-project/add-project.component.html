@@ -24,8 +24,8 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label font-weight-600">Project ID*</label>
-                  <input formControlName="projectID" type="text" class="form-control" name="">
-                  <p *ngIf="project.get('projectID')?.hasError('required')&&(submitted||project.get('projectID')?.dirty||project.get('projectID')?.touched )"
+                  <input formControlName="projectNumber" type="text" class="form-control" name="">
+                  <p *ngIf="project.get('projectNumber')?.hasError('required')&&(submitted||project.get('projectNumber')?.dirty||project.get('projectNumber')?.touched )"
                     style="color: red;">
                     Project ID <strong>Required</strong>
                   </p>
@@ -43,7 +43,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label font-weight-600">Project Description*</label>
+                  <label class="control-label font-weight-600">Project Description/Remark *</label>
                   <input formControlName="projectDescription" type="text" class="form-control" name="">
                   <p *ngIf="project.get('projectDescription')?.hasError('required')&&(submitted||project.get('projectDescription')?.dirty||project.get('projectDescription')?.touched )"
                     style="color: red;">
@@ -59,11 +59,11 @@
             <div class="clearfix"></div>
             <div class="borderFormBox">
               <div class="top-head">
-              <h4 style="padding:0px 20px">Project Details</h4>
+              <h4 style="padding:0px 20px">Acquisition  Details</h4>
 
               <div class="add-del-btn">
                 <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addselectState()"
-                  type="button"><i class="fa fa-plus" aria-hidden="true"></i> Project Details</button>
+                  type="button"><i class="fa fa-plus" aria-hidden="true"></i> Acquisition  Details</button>
               </div>
               </div>
               <div style="overflow-x:auto;">
