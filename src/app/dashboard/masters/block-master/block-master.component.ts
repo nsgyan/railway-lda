@@ -92,6 +92,7 @@ this.block.get('district')?.updateValueAndValidity()
   }
 
   cancel() {
+    this.block.reset()
     this.router.navigate(['/dashboard/masters/block'])
   }
 }

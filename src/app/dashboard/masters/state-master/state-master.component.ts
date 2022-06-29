@@ -48,6 +48,7 @@ if(this.state.valid){
     censusCode:this.state.value.censusCode,
   }).subscribe((data: any) => {
     // console.log(data);
+    this.state.reset()
     this.toast.success(data?.message)
     // this.toast.showSuccess('State Successfully Added')
     this.router.navigate(['/dashboard/masters/state'])
@@ -78,6 +79,7 @@ else{
 
 
   cancel() {
+    this.state.reset()
     this.router.navigate(['/dashboard/masters/state'])
 
 }
