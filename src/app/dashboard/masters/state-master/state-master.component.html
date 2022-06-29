@@ -24,8 +24,8 @@
                               <div class="form-group">
                                   <label class="control-label font-weight-600">State/UT*</label>
                                  <select class="form-control" formControlName="stateUT">
-                                  <option  value="state">State</option>
-                                  <option  value="ut">UT</option>
+                                  <option  value="STATE">STATE</option>
+                                  <option  value="UT">UT</option>
                                  </select>
                                  <p *ngIf="state.get('stateUT')?.hasError('required')&&(submitted||state.get('stateUT')?.dirty||state.get('stateUT')?.touched )" style="color: red;">
                                   State/UT <strong>required</strong>

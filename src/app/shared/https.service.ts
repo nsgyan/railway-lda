@@ -24,6 +24,12 @@ export class HttpsService {
   AddDistrict(formData: any) {
     return this.httpService.post(Globals.route.AddDistrict, formData);
   }
+  addLandCategory(formData: any) {
+    return this.httpService.post(Globals.route.addLandCategory, formData);
+  }
+  addlandNature(formData: any) {
+    return this.httpService.post(Globals.route.addlandNature, formData);
+  }
 
   addBeneficiary(formData: any) {
     return this.httpService.post(Globals.route.addBeneficiary, formData);
@@ -61,9 +67,16 @@ export class HttpsService {
   getState() {
     return this.httpService.get(Globals.route.getState);
   }
+  getlandNature() {
+    return this.httpService.get(Globals.route.getlandNature);
+  }
+  getlandCategory() {
+    return this.httpService.get(Globals.route.getlandCategory);
+  }
   getProject() {
     return this.httpService.get(Globals.route.getProject);
   }
+
   getVillageByBlock(block:any) {
     let queryParams= new HttpParams();
     queryParams=queryParams.append("block",block)
@@ -71,6 +84,7 @@ export class HttpsService {
       params:queryParams
     });
   }
+
   getDistrict(state:any) {
     let queryParams= new HttpParams();
     queryParams=queryParams.append("state",state)
@@ -78,6 +92,7 @@ export class HttpsService {
       params:queryParams
     });
   }
+
   getBlock(state:any,district:any) {
     let queryParams= new HttpParams();
     queryParams=queryParams.append("state",state)
@@ -86,15 +101,19 @@ export class HttpsService {
       params:queryParams
     });
   }
+
   getstateByID(id:any){
     return this.httpService.get(`${Globals.route.getstateByID}/${id}`)
   }
+
   getDistrictById(id:any){
     return this.httpService.get(`${Globals.route.getDistrictById}/${id}`)
   }
+
   getBlockById(id:any){
     return this.httpService.get(`${Globals.route.getBlockById}/${id}`)
   }
+
   getVillageByID(id:any){
     return this.httpService.get(`${Globals.route.getVillageByID}/${id}`)
   }
