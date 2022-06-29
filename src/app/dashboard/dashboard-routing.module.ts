@@ -13,7 +13,7 @@ import { VendorServiceComponent } from './system-configuration/vendor-service/ve
 import { VendorTypeComponent } from './system-configuration/vendor-type/vendor-type.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardPageComponent },
+  { path: 'page', component: DashboardPageComponent },
   { path: 'beneficiary',
   loadChildren: () => import('./beneficiary/beneficiary.module').then(m => m.BeneficiaryModule)
 },

@@ -8,7 +8,7 @@
                         <span>NAVIGATIONS</span>
                     </li>
                     <li>
-                        <a href="/dashboard" class="active" >
+                        <a  [routerLink]="['/dashboard/page']" routerLinkActive="active" >
                             <i class="glyphicon glyphicon-th-large"></i>
                             <span>Dashboard</span>
                         </a>
@@ -18,29 +18,29 @@
                         <span>PROJECTS</span>
                     </li>
                     <li>
-                        <a href="/dashboard/project">
+                        <a  [routerLink]="['/dashboard/project/page']" routerLinkActive="active">
                             <i class="fa fa-calculator"></i>
                             <span>Project List</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/dashboard/project/add">
+                        <a  [routerLink]="['/dashboard/project/add']" routerLinkActive="active" >
                             <i class="fa fa-id-badge"></i>
                             <span>New Project</span>
                         </a>
                     </li>
                     <li class="line dk"></li>
-                    <li class="hidden-folded padder m-t m-b-sm text-10">
+                    <li class="hidden-folded padder m-t m-b-sm text-10" >
                         <span>BENEFICIARIES</span>
                     </li>
                     <li>
-                        <a href="dashboard/beneficiary/beneficiariesList">
+                        <a  [routerLink]="['/dashboard/beneficiary/beneficiariesList']" routerLinkActive="active" >
                             <i class="fa fa-plus-square"></i>
                             <span>Beneficiary List</span>
                         </a>
                     </li>
                     <li>
-                        <a href="dashboard/beneficiary/addBeneficiaries">
+                        <a  [routerLink]="['/dashboard/beneficiary/addBeneficiaries']" routerLinkActive="active" >
                             <i class="fa fa-users"></i>
                             <span>Add New Beneficiary</span>
                         </a>
@@ -50,7 +50,7 @@
                       <span>Master</span>
                   </li>
                   <li>
-                      <a href="/dashboard/masters/state"  >
+                      <a  [routerLink]="['/dashboard/masters/state']"  routerLinkActive="active"  >
                           <i class="glyphicon glyphicon-th-large"></i>
                           <span>State</span>
                       </a>
@@ -62,7 +62,7 @@
                     </a>
                 </li> -->
                   <li>
-                    <a href="/dashboard/masters/district"  >
+                    <a  [routerLink]="['/dashboard/masters/district']" routerLinkActive="active"  >
                         <i class="glyphicon glyphicon-th-large"></i>
                         <span>District</span>
                     </a>
@@ -74,7 +74,7 @@
                   </a>
               </li> -->
                 <li>
-                  <a href="/dashboard/masters/block"  >
+                  <a  [routerLink]="['/dashboard/masters/block']" routerLinkActive="active"  >
                       <i class="glyphicon glyphicon-th-large"></i>
                       <span>Block</span>
                   </a>
@@ -86,11 +86,36 @@
                 </a>
             </li> -->
               <li>
-                <a href="/dashboard/masters/village"  >
+                <a  [routerLink]="['/dashboard/masters/bank']" routerLinkActive="active"  >
                     <i class="glyphicon glyphicon-th-large"></i>
-                    <span>Village</span>
+                    <span>Bank</span>
                 </a>
             </li>
+            <li >
+              <a  [routerLink]="['/dashboard/masters/landType']" routerLinkActive="active"  >
+                  <i class="glyphicon glyphicon-th-large"></i>
+                  <span>Land Type</span>
+              </a>
+          </li>
+          <li>
+            <a  [routerLink]="['/dashboard/masters/landNature']" routerLinkActive="active"  >
+                <i class="glyphicon glyphicon-th-large"></i>
+                <span>Land Nature</span>
+            </a>
+        </li>
+        <li>
+          <a  [routerLink]="['/dashboard/masters/landCategory']" routerLinkActive="active"  >
+              <i class="glyphicon glyphicon-th-large"></i>
+              <span>Land Category</span>
+          </a>
+      </li>
+      <li>
+        <a  [routerLink]="['/dashboard/masters/objectionType']" routerLinkActive="active"  >
+            <i class="glyphicon glyphicon-th-large"></i>
+            <span>Objection Type</span>
+        </a>
+    </li>
+
             <!-- <li>
               <a href="/dashboard/masters/villageList"  >
                   <i class="glyphicon glyphicon-th-large"></i>

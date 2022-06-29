@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: ActivatedRoute) { }
   logout(){
     localStorage.removeItem('user')
     localStorage.removeItem('username')

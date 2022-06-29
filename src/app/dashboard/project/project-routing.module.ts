@@ -4,7 +4,7 @@ import { AddProjectComponent } from './add-project/add-project.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 
 const routes: Routes = [
-  {path:'',component:ProjectListComponent},
+  {path:'page',component:ProjectListComponent},
   {path:'add',component:AddProjectComponent}
 ];
 
