@@ -59,12 +59,12 @@
             <div class="clearfix"></div>
             <div class="borderFormBox">
               <div class="top-head">
-              <h4 style="padding:0px 20px">Acquisition  Details</h4>
+                <h4 style="padding:0px 20px">Acquisition Details</h4>
 
-              <div class="add-del-btn">
-                <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addselectState()"
-                  type="button"><i class="fa fa-plus" aria-hidden="true"></i> Acquisition  Details</button>
-              </div>
+                <div class="add-del-btn">
+                  <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addselectState()"
+                    type="button"><i class="fa fa-plus" aria-hidden="true"></i> Acquisition Details</button>
+                </div>
               </div>
               <div style="overflow-x:auto;">
                 <table class="table" formArrayName="selectState">
@@ -111,14 +111,15 @@
 
                             <select class="form-control" formControlName="district" (change)="getblock($event,i)">
                               <option hidden>Select District</option>
-                            <option *ngFor="let item of district[i]" value="{{item.district}}">{{item.district}}</option>
+                              <option *ngFor="let item of district[i]" value="{{item.district}}">{{item.district}}
+                              </option>
 
-                          </select>
-                          <p *ngIf="opt.get('district')?.hasError('required')&&(submitted||opt.get('district')?.dirty||opt.get('district')?.touched )"
-                            style="color: red;">
-                            District <strong>Required</strong>
-                          </p>
-                          <!-- <p *ngIf="village.get('district')?.hasError('required')&&(submitted||village.get('district')?.dirty||village.get('district')?.touched )" style="color: red;">
+                            </select>
+                            <p *ngIf="opt.get('district')?.hasError('required')&&(submitted||opt.get('district')?.dirty||opt.get('district')?.touched )"
+                              style="color: red;">
+                              District <strong>Required</strong>
+                            </p>
+                            <!-- <p *ngIf="village.get('district')?.hasError('required')&&(submitted||village.get('district')?.dirty||village.get('district')?.touched )" style="color: red;">
                                             District <strong>required</strong>
                                           </p> -->
 
@@ -131,7 +132,7 @@
 
                             <select class="form-control" formControlName="block" (change)="getVillage($event,i)">
                               <option hidden>Select Block</option>
-                            <option *ngFor="let item of block[i]" value="{{item.block}}">{{item.block}}</option>
+                              <option *ngFor="let item of block[i]" value="{{item.block}}">{{item.block}}</option>
 
                             </select>
                             <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
@@ -149,7 +150,7 @@
 
                             <select class="form-control" formControlName="village" (change)="getVillage($event,i)">
                               <option hidden>Select Village</option>
-                            <option *ngFor="let item of village[i]" value="{{item.village}}">{{item.village}}</option>
+                              <option *ngFor="let item of village[i]" value="{{item.village}}">{{item.village}}</option>
 
                             </select>
                             <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
