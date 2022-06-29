@@ -16,10 +16,9 @@ export class AddProjectComponent implements OnInit {
   submitted=false
   project!:FormGroup;
   state: any;
-  district: any;
-  block: any;
-  village: any;
-
+  district:any[]= [];
+  block:any[]= [];
+  village:any[]=[] ;
 
   constructor( private fb:FormBuilder,
     private router: Router,
@@ -32,7 +31,7 @@ export class AddProjectComponent implements OnInit {
 
               })
       this.project=this.fb.group({
-        projectID:['',Validators.required],
+        projectNumber:['',Validators.required],
         projectName:['',Validators.required],
         projectDescription:['',Validators.required],
         selectState : this.fb.array([]) ,
@@ -48,10 +47,10 @@ export class AddProjectComponent implements OnInit {
   onSubmit() {console.log(this.project);
 if(this.project.valid){
   this.httpService.addProject({
-    projectID:this.project.value.projectID,
+    projectNumber:this.project.value.projectNumber,
     projectName:this.project.value.projectName,
     projectDescription:this.project.value.projectDescription,
-    projectDetails : this.project.value.selectState ,
+    acquisitionDetails : this.project.value.selectState ,
   }).subscribe((data:any)=>{
     this.toast.success(data?.message)
     this.router.navigate(['/dashboard/project'])
@@ -59,9 +58,13 @@ if(this.project.valid){
     this.toast.error(err.error.message);
   }))
 }
+else{
+  this.submitted=true
+  this.toast.error('Please Fill Required Field');
+}
     // const project=[new Project(
     //   this.project.value.projectCode,
-    //   this.project.value.projectID,
+    //   this.project.value.projectNumber,
     //    this.project.value.projectName,
     //     this.project.value.projectDescription,
     //     this.project.value.selectState.length,)]
@@ -104,8 +107,8 @@ if(this.project.valid){
     // console.log(this.village.value.state);
     const control =this.project.get("selectState") as FormArray
     this.httpService.getBlock(control.at(i).value.state,control.at(i).value.district).subscribe((data:any)=>{
-      this.block=data?.blocks
 
+      this.block.splice(i, 0, data?.blocks);
             })
   }
 
@@ -119,7 +122,7 @@ if(this.project.valid){
     console.log(control.at(i).value.state);
 
     this.httpService.getDistrict(control.at(i).value.state).subscribe((data:any)=>{
-      this.district=data?.district
+      this.district.splice(i, 0, data?.district);
 
             })
   }
@@ -128,7 +131,8 @@ if(this.project.valid){
     // console.log(this.village.value.state);
     const control =this.project.get("selectState") as FormArray
     this.httpService.getVillageByBlock(control.at(i).value.block).subscribe((data:any)=>{
-      this.village=data?.village
+
+      this.village.splice(i, 0, data?.village);
 
             })
   }

@@ -20,8 +20,13 @@ export class HttpsService {
   addProject(formData: any) {
     return this.httpService.post(Globals.route.addProject, formData);
   }
+
   AddDistrict(formData: any) {
     return this.httpService.post(Globals.route.AddDistrict, formData);
+  }
+
+  addBeneficiary(formData: any) {
+    return this.httpService.post(Globals.route.addBeneficiary, formData);
   }
   AddBlock(formData: any) {
     return this.httpService.post(Globals.route.AddBlock, formData);

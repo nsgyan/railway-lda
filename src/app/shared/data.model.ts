@@ -1,12 +1,12 @@
 export class Project {
   projectCode: string
-  projectID: string
+  projectNumber: string
   projectName: string
   projectDescription: string
   selectDistrict:Number
-    constructor(projectCode: string, projectID: string,projectName: string, projectDescription: string,selectDistrict:Number) {
+    constructor(projectCode: string, projectNumber: string,projectName: string, projectDescription: string,selectDistrict:Number) {
         this.projectCode = projectCode;
-        this.projectID = projectID;
+        this.projectNumber = projectNumber;
         this.projectName = projectName;
         this.projectDescription = projectDescription
         this.selectDistrict=selectDistrict
