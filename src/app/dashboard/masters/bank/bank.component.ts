@@ -12,8 +12,10 @@ import { HttpsService } from 'src/app/shared/https.service';
 })
 export class BankComponent implements OnInit {
   bank!:FormGroup;
+  isEdit=false
   submitted=false
   stateData:any
+  id:any;
   bankData: any;
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
@@ -49,6 +51,29 @@ export class BankComponent implements OnInit {
     }
 
   }
+  update(){
+    if(this.bank.valid){
+      this.httpService.updateBank({
+        id:this.id,
+        bankName:this.bank.value.bankName,
+
+      }).subscribe((data: any) => {
+        // console.log(data);
+        this.bank.reset()
+        this.toast.success(data?.message)
+        // this.toast.showSuccess('State Successfully Added')
+        window.location.reload()
+      }, err => {
+        console.log(err.error);
+
+        this.toast.error(err.error);
+      })
+    }
+    else{
+      this.submitted = true;  // this.toast.showSuccess('State Successfully Added')
+    }
+
+  }
   onSubmit() {console.log(this.bank);
 if(this.bank.valid){
   this.httpService.addBank({
@@ -76,9 +101,12 @@ else{
   // addState(){
   //   this.router.navigate(['/dashboard/masters/state'])
   // }
-  edit(id:any){
-    let url: string = "/dashboard/masters/stateEdit/" + id
-    this.router.navigateByUrl(url);
+  edit(bankData:any){
+    this.isEdit= true
+this.id=bankData._id
+this.bank.get('bankName')?.setValue(bankData.bankName)
+this.bank.get('bankName')?.updateValueAndValidity()
+
   }
 
 

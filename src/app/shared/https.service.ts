@@ -23,6 +23,9 @@ export class HttpsService {
   getBank() {
     return this.httpService.get(Globals.route.bank);
   }
+  updateBank(formData:any) {
+    return this.httpService.patch(Globals.route.bank,formData);
+  }
   addProject(formData: any) {
     return this.httpService.post(Globals.route.addProject, formData);
   }
