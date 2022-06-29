@@ -17,6 +17,12 @@ export class HttpsService {
     AddState(formData: any) {
     return this.httpService.post(Globals.route.AddState, formData);
   }
+  addBank(formData: any) {
+    return this.httpService.post(Globals.route.bank, formData);
+  }
+  getBank() {
+    return this.httpService.get(Globals.route.bank);
+  }
   addProject(formData: any) {
     return this.httpService.post(Globals.route.addProject, formData);
   }

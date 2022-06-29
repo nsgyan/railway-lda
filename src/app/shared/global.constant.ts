@@ -11,6 +11,7 @@ export class Globals {
         'addobjectionType': Globals.server + 'master/add/objectionType',
         'addVillage': Globals.server + 'master/add/village',
         'getState': Globals.server + 'master/state',
+        'bank': Globals.server + 'master/bank',
         'getlandCategory': Globals.server + 'master/landCategory',
         'getlandNature': Globals.server + 'master/landNature',
         'getlandType': Globals.server + 'master/landType',
