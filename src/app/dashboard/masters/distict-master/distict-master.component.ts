@@ -46,6 +46,7 @@ if(this.district.valid){
   }).subscribe((data: any) => {
     this.toast.success(data?.message)
     this.district.reset()
+    window.location.reload()
     // this.toast.showSuccess('State Successfully Added')
     this.router.navigate(['/dashboard/masters/district'])
 
@@ -73,8 +74,8 @@ else{
 
 
   cancel() {
-    this.district.reset()
-    this.router.navigate(['/dashboard/masters/district'])
+    window.location.reload()
+
 
 }
 edit(id:any){

@@ -51,7 +51,7 @@ if(this.state.valid){
     this.state.reset()
     this.toast.success(data?.message)
     // this.toast.showSuccess('State Successfully Added')
-    this.router.navigate(['/dashboard/masters/state'])
+    window.location.reload()
   }, err => {
     console.log(err.error);
 
@@ -79,8 +79,7 @@ else{
 
 
   cancel() {
-    this.state.reset()
-    this.router.navigate(['/dashboard/masters/state'])
+    window.location.reload()
 
 }
 }

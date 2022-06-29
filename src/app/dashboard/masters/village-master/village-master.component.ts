@@ -58,7 +58,7 @@ if(this.village.valid){
   }).subscribe((data: any) => {
     this.toast.success(data?.message)
     this.village.reset()
-    this.router.navigate(['/dashboard/masters/village'])
+    window.location.reload()
   }, (err => {
     this.toast.error(err.error.message);
   }))
@@ -94,9 +94,7 @@ else{
 
 
   cancel() {
-    this.village.reset()
-    this.router.navigate(['/dashboard/masters/village'])
-
+    window.location.reload()
 }
 
 

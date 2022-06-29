@@ -52,8 +52,9 @@ if(this.block.valid){
     blockType:this.block.value.blockType,
   }).subscribe((data: any) => {
     this.toast.success(data?.message)
-    this.router.navigate(['/dashboard/masters/block'])
+    // this.router.navigate(['/dashboard/masters/block'])
     this.block.reset()
+    window.location.reload()
   },(err=>{
     this.toast.error(err.error.message);
   }))
@@ -93,6 +94,7 @@ this.block.get('district')?.updateValueAndValidity()
 
   cancel() {
     this.block.reset()
-    this.router.navigate(['/dashboard/masters/block'])
+    window.location.reload()
+    // this.router.navigate(['/dashboard/masters/block'])
   }
 }
