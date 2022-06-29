@@ -17,7 +17,7 @@ export class BlockMasterComponent implements OnInit {
   submitted=false
   state: any;
   district: any;
-
+  blockData:any
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
@@ -38,7 +38,7 @@ export class BlockMasterComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
+this.getblock()
   }
 
   onSubmit() {console.log(this.block);
@@ -52,7 +52,8 @@ if(this.block.valid){
     blockType:this.block.value.blockType,
   }).subscribe((data: any) => {
     this.toast.success(data?.message)
-    this.router.navigate(['/dashboard/masters/blockList'])
+    this.router.navigate(['/dashboard/masters/block'])
+    this.block.reset()
   },(err=>{
     this.toast.error(err.error.message);
   }))
@@ -75,9 +76,14 @@ this.block.get('district')?.updateValueAndValidity()
   }
 
 
+  getblock(){
 
-  cancel() {
 
+    this.httpService.blocksList().subscribe((data:any)=>{
+      this.blockData=data?.blocks
 
-}
+            })
+  }
+
+  cancel() {}
 }
