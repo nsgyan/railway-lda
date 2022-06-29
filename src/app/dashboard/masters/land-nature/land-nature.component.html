@@ -25,10 +25,10 @@
 
                         <div class="col-md-6">
                           <div class="form-group">
-                              <label class="control-label font-weight-600">Land Category*</label>
+                              <label class="control-label font-weight-600">Land Nature*</label>
                               <input formControlName="landNature" type="text" class="form-control" name="">
                               <p *ngIf="landNature.get('landNature')?.hasError('required')&&(submitted||landNature.get('landNature')?.dirty||landNature.get('landNature')?.touched )" style="color: red;">
-                                Land Category <strong>required</strong>
+                                Land Nature <strong>required</strong>
                               </p>
                           </div>
                       </div>

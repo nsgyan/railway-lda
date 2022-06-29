@@ -27,6 +27,12 @@ export class HttpsService {
   addLandCategory(formData: any) {
     return this.httpService.post(Globals.route.addLandCategory, formData);
   }
+  addlandType(formData: any) {
+    return this.httpService.post(Globals.route.addlandType, formData);
+  }
+  addobjectionType(formData: any) {
+    return this.httpService.post(Globals.route.addobjectionType, formData);
+  }
   addlandNature(formData: any) {
     return this.httpService.post(Globals.route.addlandNature, formData);
   }
@@ -69,6 +75,12 @@ export class HttpsService {
   }
   getlandNature() {
     return this.httpService.get(Globals.route.getlandNature);
+  }
+  getlandType() {
+    return this.httpService.get(Globals.route.getlandType);
+  }
+  getobjectionType() {
+    return this.httpService.get(Globals.route.getobjectionType);
   }
   getlandCategory() {
     return this.httpService.get(Globals.route.getlandCategory);
