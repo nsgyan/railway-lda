@@ -66,7 +66,7 @@ if(this.village.valid){
     block:this.village.value.block,
   }).subscribe((data: any) => {
     this.toast.success(data?.message)
-    this.router.navigate(['/dashboard/masters/villageList'])
+    this.router.navigate(['/dashboard/masters/village'])
   }, (err => {
     this.toast.error(err.error.message);
   }))
@@ -100,7 +100,7 @@ else{
 
 
   cancel() {
-    this.router.navigate(['/dashboard/masters/villageList'])
+    this.router.navigate(['/dashboard/masters/village'])
 
 }
 }

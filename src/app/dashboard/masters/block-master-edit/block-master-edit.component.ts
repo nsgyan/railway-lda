@@ -66,7 +66,7 @@ if(this.block.valid){
     blockType:this.block.value.blockType,
   }).subscribe((data: any) => {
     this.toast.success(data?.message)
-    this.router.navigate(['/dashboard/masters/blockList'])
+    this.router.navigate(['/dashboard/masters/block'])
   },(err=>{
     this.toast.error(err.error.message);
   }))
@@ -90,7 +90,7 @@ else{
 
 
   cancel() {
-
+    this.router.navigate(['/dashboard/masters/block'])
 
 }
 }

@@ -62,7 +62,7 @@ if(this.state.valid){
     // console.log(data);
     this.toast.success(data?.message)
     // this.toast.showSuccess('State Successfully Added')
-    this.router.navigate(['/dashboard/masters/stateList'])
+    this.router.navigate(['/dashboard/masters/state'])
   }, err => {
     console.log(err.error);
 
@@ -79,7 +79,7 @@ else{
 
 
   cancel() {
-    this.router.navigate(['/dashboard/masters/stateList'])
+    this.router.navigate(['/dashboard/masters/state'])
 
 }
 }

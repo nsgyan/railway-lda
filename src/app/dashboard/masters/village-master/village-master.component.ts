@@ -17,12 +17,17 @@ export class VillageMasterComponent implements OnInit {
   state: any;
   district: any;
   block: any;
+  villageData: any;
 
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,
     private toast: ToastrService,) {
+      this.httpService.village().subscribe((data:any)=>{
+        this.villageData=data?.village
+
+              })
       this.httpService.getState().subscribe((data:any)=>{
         this.state=data?.state
 
@@ -52,7 +57,7 @@ if(this.village.valid){
     block:this.village.value.block,
   }).subscribe((data: any) => {
     this.toast.success(data?.message)
-    this.router.navigate(['/dashboard/masters/villageList'])
+    this.router.navigate(['/dashboard/masters/village'])
   }, (err => {
     this.toast.error(err.error.message);
   }))
@@ -88,7 +93,18 @@ else{
 
 
   cancel() {
-    this.router.navigate(['/dashboard/masters/villageList'])
+    this.router.navigate(['/dashboard/masters/village'])
 
+}
+
+
+// addvillage(){
+//   this.router.navigate(['/dashboard/masters/village'])
+// }
+
+
+edit(id:any){
+  let url: string = "/dashboard/masters/villageEdit/" + id
+  this.router.navigateByUrl(url);
 }
 }

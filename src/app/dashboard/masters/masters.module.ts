@@ -15,6 +15,11 @@ import { BlockMasterEditComponent } from './block-master-edit/block-master-edit.
 import { StateMasterEditComponent } from './state-master-edit/state-master-edit.component';
 import { DistricMasterEditComponent } from './distric-master-edit/distric-master-edit.component';
 import { VillageMasterEditComponent } from './village-master-edit/village-master-edit.component';
+import { LandTypeComponent } from './land-type/land-type.component';
+import { LandNatureComponent } from './land-nature/land-nature.component';
+import { LandCategoryComponent } from './land-category/land-category.component';
+import { BankComponent } from './bank/bank.component';
+import { ObjectionComponent } from './objection/objection.component';
 
 
 @NgModule({
@@ -30,7 +35,12 @@ import { VillageMasterEditComponent } from './village-master-edit/village-master
     BlockMasterEditComponent,
     StateMasterEditComponent,
     DistricMasterEditComponent,
-    VillageMasterEditComponent
+    VillageMasterEditComponent,
+    LandTypeComponent,
+    LandNatureComponent,
+    LandCategoryComponent,
+    BankComponent,
+    ObjectionComponent
   ],
   imports: [
     CommonModule,

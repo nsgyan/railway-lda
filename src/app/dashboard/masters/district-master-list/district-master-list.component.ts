@@ -17,6 +17,7 @@ export class DistrictMasterListComponent implements OnInit {
   state: any;
   district: any;
   block: any;
+  districtData: any;
 
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
@@ -36,7 +37,7 @@ this.getblock()
 
 
     this.httpService.districtList().subscribe((data:any)=>{
-      this.district=data?.district
+      this.districtData=data?.district
 
             })
   }

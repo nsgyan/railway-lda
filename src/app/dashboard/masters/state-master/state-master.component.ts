@@ -15,12 +15,16 @@ import { ToasterService } from 'src/app/shared/toaster.service';
 export class StateMasterComponent implements OnInit {
   state!:FormGroup;
   submitted=false
-
+  stateData:any
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,
     private toast: ToastrService,) {
+      this.httpService.getState().subscribe((data:any)=>{
+        this.stateData=data?.state
+
+              })
       this.state=this.fb.group({
         stateUT:['',Validators.required],
         statetype:['',Validators.required],
@@ -46,7 +50,7 @@ if(this.state.valid){
     // console.log(data);
     this.toast.success(data?.message)
     // this.toast.showSuccess('State Successfully Added')
-    this.router.navigate(['/dashboard/masters/stateList'])
+    this.router.navigate(['/dashboard/masters/state'])
   }, err => {
     console.log(err.error);
 
@@ -60,10 +64,21 @@ else{
 
   }
 
+  // addState(){
+  //   this.router.navigate(['/dashboard/masters/state'])
+  // }
+  edit(id:any){
+    let url: string = "/dashboard/masters/stateEdit/" + id
+    this.router.navigateByUrl(url);
+  }
+
+
+
+
 
 
   cancel() {
-    this.router.navigate(['/dashboard/masters/stateList'])
+    this.router.navigate(['/dashboard/masters/state'])
 
 }
 }

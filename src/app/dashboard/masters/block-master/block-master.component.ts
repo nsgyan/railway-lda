@@ -85,5 +85,13 @@ this.block.get('district')?.updateValueAndValidity()
             })
   }
 
-  cancel() {}
+
+  edit(id:any){
+    let url: string = "/dashboard/masters/blockEdit/" + id
+    this.router.navigateByUrl(url);
+  }
+
+  cancel() {
+    this.router.navigate(['/dashboard/masters/block'])
+  }
 }

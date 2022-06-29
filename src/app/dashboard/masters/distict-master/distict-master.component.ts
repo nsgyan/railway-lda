@@ -14,6 +14,7 @@ export class DistictMasterComponent implements OnInit {
   district!:FormGroup;
   submitted=false
 state:any
+  districtData: any;
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
@@ -32,6 +33,7 @@ this.state=data?.state
     }
 
   ngOnInit(): void {
+    this.getDistrict()
 
   }
 
@@ -44,7 +46,7 @@ if(this.district.valid){
   }).subscribe((data: any) => {
     this.toast.success(data?.message)
     // this.toast.showSuccess('State Successfully Added')
-    this.router.navigate(['/dashboard/masters/districtList'])
+    this.router.navigate(['/dashboard/masters/district'])
 
   }, err => {
     this.toast.error(err.error.message);
@@ -59,9 +61,23 @@ else{
 
 
 
+  getDistrict(){
+
+
+    this.httpService.districtList().subscribe((data:any)=>{
+      this.districtData=data?.district
+
+            })
+  }
+
 
   cancel() {
-    this.router.navigate(['/dashboard/district/districtList'])
+    this.router.navigate(['/dashboard/masters/district'])
 
 }
+edit(id:any){
+  let url: string = "/dashboard/masters/districtEdit/" + id
+  this.router.navigateByUrl(url);
+}
+
 }
