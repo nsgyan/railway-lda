@@ -59,147 +59,149 @@
             <div class="clearfix"></div>
             <div class="borderFormBox">
               <div class="top-head">
-              <h4 style="padding:0px 20px">Project Details</h4>
+                <h4 style="padding:0px 20px">Project Details</h4>
 
-              <div class="add-del-btn">
-                <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addselectState()"
-                  type="button"><i class="fa fa-plus" aria-hidden="true"></i> Project Details</button>
-              </div>
+                <div class="add-del-btn">
+                  <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addselectState()"
+                    type="button"><i class="fa fa-plus" aria-hidden="true"></i> Project Details</button>
+                </div>
               </div>
               <div style="overflow-x:auto;">
-              <table class="table" formArrayName="selectState">
-                <thead>
-                  <tr>
-                    <th>#</th>
+                <table class="table" formArrayName="selectState">
+                  <thead>
+                    <tr>
+                      <th>#</th>
 
-                    <th>State*</th>
-                    <th>District*</th>
-                    <th>Block*</th>
-                    <th>Village*</th>
-                    <th>Area</th>
-                    <th>Sanctioned Amount*</th>
-                    <th>Remark*</th>
-                    <th> Remove</th>
+                      <th>State*</th>
+                      <th>District*</th>
+                      <th>Block*</th>
+                      <th>Village*</th>
+                      <th>Area</th>
+                      <th>Sanctioned Amount*</th>
+                      <th>Remark*</th>
+                      <th> Remove</th>
 
-                  </tr>
+                    </tr>
 
-                </thead>
-                <tbody *ngFor="let opt of selectState.controls; let i = index">
-                  <tr [formGroupName]="i">
-                    <td>{{i+1}}</td>
-                    <td style="width:15%">
-                      <div class="form-group">
+                  </thead>
+                  <tbody *ngFor="let opt of selectState.controls; let i = index">
+                    <tr [formGroupName]="i">
+                      <td>{{i+1}}</td>
+                      <td style="width:15%">
+                        <div class="form-group">
 
-                        <select class="form-control" formControlName="state" (change)="getDistrict($event,i)">
+                          <select class="form-control" formControlName="state" (change)="getDistrict($event,i)">
                             <option hidden>Select State</option>
-                          <option *ngFor="let item of state" value="{{item.stateName}}">{{item.stateName}}</option>
+                            <option *ngFor="let item of state" value="{{item.stateName}}">{{item.stateName}}</option>
 
-                        </select>
-                        <p *ngIf="opt.get('state')?.hasError('required')&&(submitted||opt.get('state')?.dirty||opt.get('state')?.touched )"
-                          style="color: red;">
-                          State <strong>Required</strong>
-                        </p>
-                        <!-- <p *ngIf="village.get('state')?.hasError('required')&&(submitted||village.get('state')?.dirty||village.get('state')?.touched )" style="color: red;">
+                          </select>
+                          <p *ngIf="opt.get('state')?.hasError('required')&&(submitted||opt.get('state')?.dirty||opt.get('state')?.touched )"
+                            style="color: red;">
+                            State <strong>Required</strong>
+                          </p>
+                          <!-- <p *ngIf="village.get('state')?.hasError('required')&&(submitted||village.get('state')?.dirty||village.get('state')?.touched )" style="color: red;">
                                         State <strong>required</strong>
                                       </p> -->
 
-                      </div>
-                    </td>
-                    <td style="width:15%">
-                      <div class="">
-                        <div class="form-group">
+                        </div>
+                      </td>
+                      <td style="width:15%">
+                        <div class="">
+                          <div class="form-group">
 
-                          <select class="form-control" formControlName="district" (change)="getblock($event,i)">
+                            <select class="form-control" formControlName="district" (change)="getblock($event,i)">
                               <option hidden>Select District</option>
-                            <option *ngFor="let item of district" value="{{item.district}}">{{item.district}}</option>
+                              <option *ngFor="let item of district" value="{{item.district}}">{{item.district}}</option>
 
-                          </select>
-                          <p *ngIf="opt.get('district')?.hasError('required')&&(submitted||opt.get('district')?.dirty||opt.get('district')?.touched )"
-                            style="color: red;">
-                            District <strong>Required</strong>
-                          </p>
-                          <!-- <p *ngIf="village.get('district')?.hasError('required')&&(submitted||village.get('district')?.dirty||village.get('district')?.touched )" style="color: red;">
+                            </select>
+                            <p *ngIf="opt.get('district')?.hasError('required')&&(submitted||opt.get('district')?.dirty||opt.get('district')?.touched )"
+                              style="color: red;">
+                              District <strong>Required</strong>
+                            </p>
+                            <!-- <p *ngIf="village.get('district')?.hasError('required')&&(submitted||village.get('district')?.dirty||village.get('district')?.touched )" style="color: red;">
                                             District <strong>required</strong>
                                           </p> -->
 
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td style="width:15%">
-                      <div class="">
-                        <div class="form-group">
+                      </td>
+                      <td style="width:15%">
+                        <div class="">
+                          <div class="form-group">
 
-                          <select class="form-control" formControlName="block" (change)="getVillage($event,i)">
+                            <select class="form-control" formControlName="block" (change)="getVillage($event,i)">
                               <option hidden>Select Block</option>
-                            <option *ngFor="let item of block" value="{{item.block}}">{{item.block}}</option>
+                              <option *ngFor="let item of block" value="{{item.block}}">{{item.block}}</option>
 
-                          </select>
-                          <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
-                            style="color: red;">
-                            Block <strong>Required</strong>
-                          </p>
+                            </select>
+                            <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
+                              style="color: red;">
+                              Block <strong>Required</strong>
+                            </p>
 
 
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td style="width:15%">
-                      <div class="">
-                        <div class="form-group">
+                      </td>
+                      <td style="width:15%">
+                        <div class="">
+                          <div class="form-group">
 
-                          <select class="form-control" formControlName="village" (change)="getVillage($event,i)">
+                            <select class="form-control" formControlName="village" (change)="getVillage($event,i)">
                               <option hidden>Select Village</option>
-                            <option *ngFor="let item of village" value="{{item.village}}">{{item.village}}</option>
+                              <option *ngFor="let item of village" value="{{item.village}}">{{item.village}}</option>
 
-                          </select>
-                          <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
-                            style="color: red;">
-                            village <strong>Required</strong>
-                          </p>
+                            </select>
+                            <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
+                              style="color: red;">
+                              village <strong>Required</strong>
+                            </p>
 
 
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td style="width:15%"><input type="text" formControlName="area" class="form-control" name="">
-                      <p *ngIf="opt.get('area')?.hasError('required')&&(submitted||opt.get('area')?.dirty||opt.get('area')?.touched )"
-                        style="color: red;">
-                        Area <strong>Required</strong>
-                      </p>
-                    </td>
-                    <td style="width:15%"><input type="text" formControlName="sanctionedAmount" class="form-control" name="">
-                      <p *ngIf="opt.get('sanctionedAmount')?.hasError('required')&&(submitted||opt.get('sanctionedAmount')?.dirty||opt.get('sanctionedAmount')?.touched )"
-                        style="color: red;">
-                        Sanctioned Amount <strong>Required</strong>
-                      </p>
-                    </td>
-                    <td style="width:10%"><input class="" type="text" formControlName="remark" class="form-control text-remark" name="">
-                      <p *ngIf="opt.get('remark')?.hasError('required')&&(submitted||opt.get('remark')?.dirty||opt.get('remark')?.touched )"
-                        style="color: red;">
-                        Remark <strong>Required</strong>
-                      </p>
-                    </td>
+                      </td>
+                      <td style="width:15%"><input type="text" formControlName="area" class="form-control" name="">
+                        <p *ngIf="opt.get('area')?.hasError('required')&&(submitted||opt.get('area')?.dirty||opt.get('area')?.touched )"
+                          style="color: red;">
+                          Area <strong>Required</strong>
+                        </p>
+                      </td>
+                      <td style="width:15%"><input type="text" formControlName="sanctionedAmount" class="form-control"
+                          name="">
+                        <p *ngIf="opt.get('sanctionedAmount')?.hasError('required')&&(submitted||opt.get('sanctionedAmount')?.dirty||opt.get('sanctionedAmount')?.touched )"
+                          style="color: red;">
+                          Sanctioned Amount <strong>Required</strong>
+                        </p>
+                      </td>
+                      <td style="width:10%"><textarea class="" type="text" formControlName="remark"
+                          class="form-control text-remark" name=""></textarea>
+                        <p *ngIf="opt.get('remark')?.hasError('required')&&(submitted||opt.get('remark')?.dirty||opt.get('remark')?.touched )"
+                          style="color: red;">
+                          Remark <strong>Required</strong>
+                        </p>
+                      </td>
 
-                    <td> <a *ngIf="i!==0" (click)="removeselectState(i)"> <i class="fa fa-close"></i></a></td>
-                  </tr>
+                      <td> <a *ngIf="i!==0" (click)="removeselectState(i)"> <i class="fa fa-close"></i></a></td>
+                    </tr>
 
 
-                </tbody>
+                  </tbody>
 
-              </table>
+                </table>
               </div>
             </div>
 
             <div class="clearfix"></div>
             <hr />
             <div class="button-right">
-            <div class="row">
-              <div class="col-md-12">
-                <a class="btn m-b-xs btn-md btn-success" (click)="onSubmit()">Save</a>
-                <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a>
-                <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
+              <div class="row">
+                <div class="col-md-12">
+                  <a class="btn m-b-xs btn-md btn-success" (click)="onSubmit()">Save</a>
+                  <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a>
+                  <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
+                </div>
               </div>
-            </div>
             </div>
           </form>
         </div>

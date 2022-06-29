@@ -54,7 +54,12 @@
 }
 .table .form-control{
     width: 170px;
+    height: 43px;
 }
 .text-remark{
     width: 305px !important;
+}
+.table textarea{
+    padding: 0rem;
+
 }

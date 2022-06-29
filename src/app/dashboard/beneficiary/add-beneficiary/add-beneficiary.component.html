@@ -23,112 +23,127 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Project Name </label>
-                                    <select type="date" formControlName="projectName" class="form-control" (change)="getPriject($event)" >
-                                      <option hidden>Select Project</option>
-                                      <option *ngFor="let item of project" value="{{item.projectName}}">{{item.projectName}}</option>
+                                    <select type="date" formControlName="projectName" class="form-control"
+                                        (change)="getPriject($event)">
+                                        <option hidden>Select Project</option>
+                                        <option *ngFor="let item of project" value="{{item.projectName}}">
+                                            {{item.projectName}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Project ID</label>
-                                    <input formControlName="projectID" type="text" class="form-control" name="" readonly>
+                                    <input formControlName="projectID" type="text" class="form-control" name=""
+                                        readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Date</label>
-                                    <input formControlName="date" type="date" class="form-control" name="" >
+                                    <input formControlName="date" type="date" class="form-control" name="">
                                 </div>
                             </div>
                             <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">State</label>
-                                  <select class="form-control" formControlName="state" (change)="getDistrict($event)">
-                                    <option hidden>Select State</option>
-                                    <option *ngFor="let item of state" value="{{item}}">{{item}}</option>
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">State</label>
+                                    <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                                        <option hidden>Select State</option>
+                                        <option *ngFor="let item of state" value="{{item}}">{{item}}</option>
 
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label font-weight-600">District</label>
-                                <select class="form-control" formControlName="district" name="">
-                                  <option hidden>Select District</option>
-                                  <option *ngFor="let item of district" value="{{item}}">{{item}}</option>
-
-                                </select>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">District</label>
+                                    <select class="form-control" formControlName="district" name="">
+                                        <option hidden>Select District</option>
+                                        <option *ngFor="let item of district" value="{{item}}">{{item}}</option>
+
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
 
                         <div class="clearfix"></div>
                         <div class="borderFormBox">
                             <h4 style="padding:0px 20px">Beneficiary </h4>
+                            <div style="overflow-x:auto;">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                    <th>#</th>
-                                    <th>Beneficiary Name</th>
-                                    <th>Father / Husband Name</th>
-                                    <th>Block</th>
-                                    <th>Village</th>
-                                    <th>Gata Number</th>
-                                    <th>Rakba</th>
-                                    <th>Pratifal Rate</th>
-                                    <th>Beneficary Share</th>
-                                    <!-- <th>Cheque Number</th>
+                                        <th>#</th>
+                                        <th>Beneficiary Name</th>
+                                        <th>Father / Husband Name</th>
+                                        <th>Block</th>
+                                        <th>Village</th>
+                                        <th>Gata Number</th>
+                                        <th>Rakba</th>
+                                        <th>Pratifal Rate</th>
+                                        <th>Beneficary Share</th>
+                                        <!-- <th>Cheque Number</th>
                                     <th>Cheque Date</th>
                                     <th>Registration Amount</th>
                                     <th>Doc Upload</th> -->
-                                    <!-- <th><i class="fa fa-upload"></i></th> -->
-                                    <th><i class="fa fa-trash"></i></th>
+                                        <!-- <th><i class="fa fa-upload"></i></th> -->
+                                        <th><i class="fa fa-trash"></i></th>
                                     </tr>
 
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td></td>
-                                        <td><input type="text" formControlName="beneficiaryName" class="form-control" name=""></td>
-                                        <td><input type="number" formControlName="pratifalRate" class="form-control" name=""></td>
-                                        <td>  <div class="">
-                                          <div class="form-group">
+                                        <td><input type="text" formControlName="beneficiaryName" class="form-control"
+                                                name=""></td>
+                                        <td><input type="number" formControlName="pratifalRate" class="form-control"
+                                                name=""></td>
+                                        <td>
+                                            <div class="">
+                                                <div class="form-group">
 
-                                            <select class="form-control" formControlName="block" >
-                                                <option hidden>Select Block</option>
+                                                    <select class="form-control" formControlName="block">
+                                                        <option hidden>Select Block</option>
 
-                                            </select>
-                                            <!-- <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
+                                                    </select>
+                                                    <!-- <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
                                               style="color: red;">
                                               Block <strong>Required</strong>
                                             </p> -->
 
 
-                                          </div>
-                                        </div></td>
-                                        <td>   <div class="">
-                                          <div class="form-group">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <div class="form-group">
 
-                                            <select class="form-control" formControlName="village">
-                                                <option hidden>Select Village</option>
-                                              <option value="m.village}}">item.village}}</option>
+                                                    <select class="form-control" formControlName="village">
+                                                        <option hidden>Select Village</option>
+                                                        <option value="m.village}}">item.village}}</option>
 
-                                            </select>
-                                            <!-- <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
+                                                    </select>
+                                                    <!-- <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
                                               style="color: red;">
                                               village <strong>Required</strong>
                                             </p> -->
 
 
-                                          </div>
-                                        </div></td>
-                                        <td><input type="number" formControlName="pratifalRate" class="form-control" name=""></td>
-                                        <td><input type="text"  formControlName="beneficaryShare"  class="form-control" name=""></td>
-                                        <td><input type="text"  formControlName="chequeNumber" class="form-control" name=""></td>
-                                        <td><input type="date"  formControlName="chequeDate" class="form-control" name=""></td>
-                                        <td><input type="text"  formControlName="registrationAmount" class="form-control" name=""></td>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><input type="number" formControlName="pratifalRate" class="form-control"
+                                                name=""></td>
+                                        <td><input type="text" formControlName="beneficaryShare" class="form-control"
+                                                name=""></td>
+                                        <td><input type="text" formControlName="chequeNumber" class="form-control"
+                                                name=""></td>
+                                        <td><input type="date" formControlName="chequeDate" class="form-control"
+                                                name=""></td>
+                                        <td><input type="text" formControlName="registrationAmount" class="form-control"
+                                                name=""></td>
 
 
                                     </tr>
@@ -137,43 +152,47 @@
                                 </tbody>
 
                             </table>
+                            </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="grayFormBox wrapper-md">
 
-                        <div class="pull-right" style="width:100%;">
-                            <div>
-                                <!-- <label class="control-label font-weight-600">Attach</label> -->
-                                <input type="file" class="form-control" name="">
+                            <div class="pull-right" style="width:100%;">
+                                <div>
+                                    <!-- <label class="control-label font-weight-600">Attach</label> -->
+                                    <input type="file" class="form-control" name="">
+                                </div>
                             </div>
-                        </div>
-                        <a class="adBtnInputField"><i class="fa fa-link"></i> Attach Document</a>
+                            <a class="adBtnInputField"><i class="fa fa-link"></i> Attach Document</a>
 
-                        <div class="clearfix"></div>
-                    </div>
+                            <div class="clearfix"></div>
+                        </div>
                         <div class="clearfix"></div>
                         <div class="borderFormBox">
                             <h5 style="padding:0px 20px">Remark</h5>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea formControlName="remark" class="form-control" style="width: 100%;"></textarea>
+                                    <textarea formControlName="remark" class="form-control"
+                                        style="width: 100%;"></textarea>
                                 </div>
                             </div>
-                        <div class="clearfix"></div>
+                            <div class="clearfix"></div>
                         </div>
 
                         <div class="clearfix"></div>
-                        <hr/>
+                        <hr />
+                        <div class="button-right">
                         <div class="row">
                             <div class="col-md-12">
-                                <a class="btn m-b-xs btn-md btn-success"  (click)="onSubmit()">Save</a>
+                                <a class="btn m-b-xs btn-md btn-success" (click)="onSubmit()">Save</a>
                                 <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a>
-                                <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
+                                <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
                             </div>
+                        </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-  </div>
+</div>
