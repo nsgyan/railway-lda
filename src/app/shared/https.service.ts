@@ -39,12 +39,22 @@ export class HttpsService {
   addlandType(formData: any) {
     return this.httpService.post(Globals.route.addlandType, formData);
   }
+  updatelandType(formData: any) {
+    return this.httpService.patch(Globals.route.addlandType, formData);
+  }
   addobjectionType(formData: any) {
     return this.httpService.post(Globals.route.addobjectionType, formData);
+  }
+  updateobjectionType(formData: any) {
+    return this.httpService.patch(Globals.route.addobjectionType, formData);
   }
   addlandNature(formData: any) {
     return this.httpService.post(Globals.route.addlandNature, formData);
   }
+  updatelandNature(formData: any) {
+    return this.httpService.patch(Globals.route.addlandNature, formData);
+  }
+
 
   addBeneficiary(formData: any) {
     return this.httpService.post(Globals.route.addBeneficiary, formData);

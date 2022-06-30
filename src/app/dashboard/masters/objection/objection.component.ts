@@ -11,11 +11,12 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./objection.component.css']
 })
 export class ObjectionComponent implements OnInit {
-
+  isEdit=false
   objectionType!:FormGroup;
   submitted=false
   stateData:any
   objectionTypeData: any;
+  id: any;
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
@@ -33,6 +34,30 @@ export class ObjectionComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  onUpdate() {console.log(this.objectionType);
+    if(this.objectionType.valid){
+      this.httpService.updateobjectionType({
+        id:this.id,
+        objectionType:this.objectionType.value.objectionType,
+
+      }).subscribe((data: any) => {
+        // console.log(data);
+        this.objectionType.reset()
+        this.toast.success(data?.message)
+        // this.toast.showSuccess('State Successfully Added')
+        window.location.reload()
+      }, err => {
+        console.log(err.error);
+
+        this.toast.error(err.error);
+      })
+    }
+    else{
+      this.submitted = true;  // this.toast.showSuccess('State Successfully Added')
+    }
+
+
+      }
 
   onSubmit() {console.log(this.objectionType);
 if(this.objectionType.valid){
@@ -61,11 +86,14 @@ else{
   // addState(){
   //   this.router.navigate(['/dashboard/masters/state'])
   // }
-  edit(id:any){
-    let url: string = "/dashboard/masters/stateEdit/" + id
-    this.router.navigateByUrl(url);
+  edit(landData:any){
+    this.id=landData._id
+    this.isEdit= true
+    this.objectionType.get('objectionType')?.setValue(landData.objectionType)
+    this.objectionType.get('objectionType')?.updateValueAndValidity()
+    // let url: string = "/dashboard/masters/stateEdit/" + id
+    // this.router.navigateByUrl(url);
   }
-
 
 
 

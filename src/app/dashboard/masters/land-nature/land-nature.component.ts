@@ -14,6 +14,8 @@ export class LandNatureComponent implements OnInit {
 
   landNature!:FormGroup;
   submitted=false
+  isEdit=false
+  id:any;
   stateData:any
   landNatureData: any;
   constructor( private fb:FormBuilder,
@@ -34,6 +36,31 @@ export class LandNatureComponent implements OnInit {
 
   }
 
+
+  onUpdate() {console.log(this.landNature);
+    if(this.landNature.valid){
+      this.httpService.updatelandNature({
+        id:this.id,
+        landNature:this.landNature.value.landNature,
+
+      }).subscribe((data: any) => {
+        // console.log(data);
+        this.landNature.reset()
+        this.toast.success(data?.message)
+        // this.toast.showSuccess('State Successfully Added')
+        window.location.reload()
+      }, err => {
+        console.log(err.error);
+
+        this.toast.error(err.error);
+      })
+    }
+    else{
+      this.submitted = true;  // this.toast.showSuccess('State Successfully Added')
+    }
+
+
+      }
   onSubmit() {console.log(this.landNature);
 if(this.landNature.valid){
   this.httpService.addlandNature({
@@ -61,9 +88,13 @@ else{
   // addState(){
   //   this.router.navigate(['/dashboard/masters/state'])
   // }
-  edit(id:any){
-    let url: string = "/dashboard/masters/stateEdit/" + id
-    this.router.navigateByUrl(url);
+  edit(landData:any){
+    this.id=landData._id
+    this.isEdit= true
+    this.landNature.get('landNature')?.setValue(landData.landNature)
+    this.landNature.get('landNature')?.updateValueAndValidity()
+    // let url: string = "/dashboard/masters/stateEdit/" + id
+    // this.router.navigateByUrl(url);
   }
 
 

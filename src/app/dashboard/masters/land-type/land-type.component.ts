@@ -37,7 +37,8 @@ export class LandTypeComponent implements OnInit {
   }
   update() {console.log(this.landType);
     if(this.landType.valid){
-      this.httpService.addlandType({
+      this.httpService.updatelandType({
+        id:this.id,
         landType:this.landType.value.landType,
 
       }).subscribe((data: any) => {
