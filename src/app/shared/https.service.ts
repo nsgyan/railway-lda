@@ -36,6 +36,9 @@ export class HttpsService {
   addLandCategory(formData: any) {
     return this.httpService.post(Globals.route.addLandCategory, formData);
   }
+  updateLandCategory(formData: any) {
+    return this.httpService.patch(Globals.route.addLandCategory, formData);
+  }
   addlandType(formData: any) {
     return this.httpService.post(Globals.route.addlandType, formData);
   }

@@ -14,7 +14,9 @@ export class LandCategoryComponent implements OnInit {
   landCategory!:FormGroup;
   submitted=false
   stateData:any
+  isExist=false
   landCategoryData: any;
+  id: any;
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
@@ -32,6 +34,31 @@ export class LandCategoryComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  onUpdate() {console.log(this.landCategory);
+    if(this.landCategory.valid){
+      this.httpService.updateLandCategory({
+        id:this.id,
+        landCategory:this.landCategory.value.landCategory,
+
+      }).subscribe((data: any) => {
+        // console.log(data);
+        this.landCategory.reset()
+        this.toast.success(data?.message)
+        // this.toast.showSuccess('State Successfully Added')
+        window.location.reload()
+      }, err => {
+        console.log(err.error);
+
+        this.toast.error(err.error);
+      })
+    }
+    else{
+      this.submitted = true;  // this.toast.showSuccess('State Successfully Added')
+    }
+
+
+      }
 
   onSubmit() {console.log(this.landCategory);
 if(this.landCategory.valid){
@@ -60,10 +87,13 @@ else{
   // addState(){
   //   this.router.navigate(['/dashboard/masters/state'])
   // }
-  edit(id:any){
-    let url: string = "/dashboard/masters/stateEdit/" + id
-    this.router.navigateByUrl(url);
-  }
+  edit(landData:any){
+    this.id= landData._id
+    this.isExist= true
+    this.landCategory.get('landCategory')?.setValue(landData.landCategory)
+
+    }
+
 
 
 
