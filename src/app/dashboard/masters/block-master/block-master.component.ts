@@ -15,9 +15,11 @@ export class BlockMasterComponent implements OnInit {
 
   block!:FormGroup;
   submitted=false
+  isEdit=false
   state: any;
   district: any;
   blockData:any
+  id: any;
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
@@ -40,6 +42,28 @@ export class BlockMasterComponent implements OnInit {
   ngOnInit(): void {
 this.getblock()
   }
+  onUpdate() {
+    if(this.block.valid){
+      this.httpService.updateblock({
+        id:this.id,
+        state:this.block.value.state,
+        district:this.block.value.district,
+        block:this.block.value.blockName,
+        blockType:this.block.value.blockType,
+      }).subscribe((data: any) => {
+        this.toast.success(data?.message)
+        this.router.navigate(['/dashboard/masters/block'])
+      },(err=>{
+        this.toast.error(err.error.message);
+      }))
+    }
+    else{
+      this.submitted = true;
+    }
+
+
+      }
+
 
   onSubmit() {console.log(this.block);
 
@@ -87,10 +111,22 @@ this.block.get('district')?.updateValueAndValidity()
   }
 
 
-  edit(id:any){
-    let url: string = "/dashboard/masters/blockEdit/" + id
-    this.router.navigateByUrl(url);
+  edit(blockData:any){
+    this.id=blockData._id
+    this.isEdit= true
+
+    this.block.get('state')?.setValue(blockData.state)
+    this.block.get('state')?.updateValueAndValidity()
+    this.block.get('blocktype')?.setValue(blockData.blocktype)
+    this.block.get('blocktype')?.updateValueAndValidity()
+    this.block.get('blockName')?.setValue(blockData.block)
+    this.block.get('blockName')?.updateValueAndValidity()
+    this.block.get('district')?.setValue(blockData.district)
+    this.block.get('district')?.updateValueAndValidity()
+    // let url: string = "/dashboard/masters/blockEdit/" + id
+    // this.router.navigateByUrl(url);
   }
+
 
   cancel() {
     this.block.reset()
