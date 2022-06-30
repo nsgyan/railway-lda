@@ -15,7 +15,9 @@ import { ToasterService } from 'src/app/shared/toaster.service';
 export class StateMasterComponent implements OnInit {
   state!:FormGroup;
   submitted=false
+  isEdit= false
   stateData:any
+  id: any;
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
@@ -38,6 +40,32 @@ export class StateMasterComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  onUpdate() {console.log(this.state);
+    if(this.state.valid){
+      this.httpService.updateState({
+        id:this.id,
+        stateUT:this.state.value.stateUT,
+        statetype:this.state.value.statetype,
+        stateName:this.state.value.stateName,
+        censusCode:this.state.value.censusCode,
+      }).subscribe((data: any) => {
+        // console.log(data);
+        this.toast.success(data?.message)
+        window.location.reload()
+        // this.toast.showSuccess('State Successfully Added')
+        this.router.navigate(['/dashboard/masters/state'])
+      }, err => {
+        console.log(err.error);
+
+        this.toast.error(err.error);
+      })
+    }
+    else{
+      this.submitted = true;  // this.toast.showSuccess('State Successfully Added')
+    }
+
+
+      }
 
   onSubmit() {console.log(this.state);
 if(this.state.valid){
@@ -68,9 +96,20 @@ else{
   // addState(){
   //   this.router.navigate(['/dashboard/masters/state'])
   // }
-  edit(id:any){
-    let url: string = "/dashboard/masters/stateEdit/" + id
-    this.router.navigateByUrl(url);
+  edit(stateData:any){
+    this.id=stateData._id
+    this.isEdit= true
+
+    this.state.get('stateUT')?.setValue(stateData.stateUT)
+    this.state.get('stateUT')?.updateValueAndValidity()
+    this.state.get('statetype')?.setValue(stateData.statetype)
+    this.state.get('statetype')?.updateValueAndValidity()
+    this.state.get('stateName')?.setValue(stateData.stateName)
+    this.state.get('stateName')?.updateValueAndValidity()
+    this.state.get('censusCode')?.setValue(stateData.censusCode)
+    this.state.get('censusCode')?.updateValueAndValidity()
+    // let url: string = "/dashboard/masters/stateEdit/" + id
+    // this.router.navigateByUrl(url);
   }
 
 

@@ -77,7 +77,8 @@
                       <hr/>
                       <div class="row">
                           <div class="col-md-12">
-                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Save</a>
+                              <a class="btn m-b-xs btn-md btn-success"  *ngIf="!isEdit" (click)="onSubmit()">Save</a>
+                              <a class="btn m-b-xs btn-md btn-success"  *ngIf="isEdit" (click)="onUpdate()">Update</a>
                               <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
                               <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
                           </div>
@@ -174,7 +175,7 @@
                                   class="fa fa-caret-down"></i></span></button>
                             <ul class="dropdown-menu">
                               <li>
-                                <a  (click)="edit(item._id)"><i class="fa fa-edit"></i> Edit </a>
+                                <a  (click)="edit(item)"><i class="fa fa-edit"></i> Edit </a>
                               </li>
                             </ul>
                           </div>
