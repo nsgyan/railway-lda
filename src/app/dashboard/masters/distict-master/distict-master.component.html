@@ -23,7 +23,8 @@
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">State*</label>
-                                 <select class="form-control" formControlName="state">
+                                  <input formControlName="state" *ngIf="isEdit" type="text" class="form-control" readonly>
+                                 <select class="form-control" *ngIf="!isEdit" formControlName="state">
                                   <option *ngFor="let item of state"  value="{{item.stateName}}">{{item.stateName}}</option>
 
                                  </select>
