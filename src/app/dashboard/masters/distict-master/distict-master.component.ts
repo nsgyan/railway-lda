@@ -15,6 +15,8 @@ export class DistictMasterComponent implements OnInit {
   submitted=false
 state:any
   districtData: any;
+  id: any;
+  isEdit: boolean = false;
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
     private router: Router,
@@ -62,6 +64,31 @@ else{
   }
 
 
+  onUpdate() {
+    console.log(this.district);
+    if (this.district.valid) {
+      this.httpService.updatedistrict({
+        id: this.id,
+        district: this.district.value.district,
+        state: this.district.value.state,
+
+      }).subscribe((data: any) => {
+        this.toast.success(data?.message)
+        window.location.reload()
+        // this.toast.showSuccess('State Successfully Added')
+        this.router.navigate(['/dashboard/masters/district'])
+
+      }, err => {
+        this.toast.error(err.error.message);
+      })
+    }
+    else {
+      this.submitted = true;
+    }
+
+
+  }
+
 
   getDistrict(){
 
@@ -78,9 +105,21 @@ else{
 
 
 }
-edit(id:any){
-  let url: string = "/dashboard/masters/districtEdit/" + id
-  this.router.navigateByUrl(url);
+  edit(stateData: any) {
+    this.id = stateData._id
+    this.isEdit = true
+
+    // id:this.id,
+    // district:this.district.value.district,
+    // state:this.district.value.state,
+    this.district.get('district')?.setValue(stateData.district)
+    this.district.get('district')?.updateValueAndValidity()
+    this.district.get('state')?.setValue(stateData.state)
+    this.district.get('state')?.updateValueAndValidity()
+
+  // let url: string = "/dashboard/masters/stateEdit/" + id
+  // this.router.navigateByUrl(url);
 }
+
 
 }
