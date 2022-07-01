@@ -23,7 +23,8 @@
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">State*</label>
-                                  <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                                  <input *ngIf="isEdit"  class="form-control" type="text" formControlName="state"  name="" id="" readonly>
+                                  <select  *ngIf="!isEdit" class="form-control" formControlName="state" (change)="getDistrict($event)">
                                     <option hidden>Select State</option>
                                     <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
 
@@ -37,7 +38,8 @@
                           <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label font-weight-600">District*</label>
-                                <select class="form-control" formControlName="district">
+                                <input class="form-control" *ngIf="isEdit" type="text"  formControlName="district" readonly>
+                                <select  *ngIf="!isEdit" class="form-control" formControlName="district">
                                   <option hidden>Select District</option>
                                   <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
 
