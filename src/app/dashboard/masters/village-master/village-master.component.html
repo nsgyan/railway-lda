@@ -23,7 +23,8 @@
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">State* </label>
-                                  <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                                  <input type="text" *ngIf="isEdit" formControlName="state" class="form-control" readonly>
+                                  <select class="form-control" *ngIf="!isEdit" formControlName="state" (change)="getDistrict($event)">
                                     <option hidden>Select State</option>
                                     <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
 
@@ -37,7 +38,8 @@
                           <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label font-weight-600">District*</label>
-                                <select class="form-control" formControlName="district" (change)="getblock($event)">
+                                <input type="text" *ngIf="isEdit" formControlName="district" class="form-control" readonly>
+                                <select class="form-control" *ngIf="!isEdit" formControlName="district" (change)="getblock($event)">
                                   <option hidden>Select District</option>
                                   <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
 
@@ -51,7 +53,8 @@
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Block*</label>
-                                  <select class="form-control" formControlName="block">
+                                  <input type="text" *ngIf="isEdit" formControlName="block" class="form-control" readonly>
+                                  <select class="form-control" *ngIf="!isEdit" formControlName="block">
                                     <option hidden>Select Block</option>
                                     <option *ngFor="let item of block"  value="{{item.block}}" >{{item.block}}</option>
 
@@ -84,7 +87,8 @@
                       <hr/>
                       <div class="row">
                           <div class="col-md-12">
-                              <a class="btn m-b-xs btn-md btn-success"   (click)="onSubmit()">Save</a>
+                              <a class="btn m-b-xs btn-md btn-success"  *ngIf="!isEdit" (click)="onSubmit()">Save</a>
+                              <a class="btn m-b-xs btn-md btn-success"  *ngIf="isEdit" (click)="onUpdate()">Update</a>
                               <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
                               <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
                           </div>
@@ -178,7 +182,7 @@
                                   class="fa fa-caret-down"></i></span></button>
                             <ul class="dropdown-menu">
                               <li>
-                                <!-- <a  (click)="edit(item._id)" ><i class="fa fa-edit"></i> Edit </a> -->
+                                <a  (click)="edit(item)" ><i class="fa fa-edit"></i> Edit </a>
                               </li>
                             </ul>
                           </div>

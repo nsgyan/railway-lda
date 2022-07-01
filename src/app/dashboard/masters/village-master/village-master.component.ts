@@ -18,6 +18,8 @@ export class VillageMasterComponent implements OnInit {
   district: any;
   block: any;
   villageData: any;
+  id: any
+  isEdit = false
 
   constructor( private fb:FormBuilder,
     private httpService:HttpsService,
@@ -69,6 +71,33 @@ else{
 
 
   }
+
+  onUpdate() {
+    console.log(this.village);
+
+
+    if (this.village.valid) {
+      this.httpService.updateVillage({
+        id: this.id,
+        state: this.village.value.state,
+        district: this.village.value.district,
+        village: this.village.value.village,
+        block: this.village.value.block,
+      }).subscribe((data: any) => {
+        this.toast.success(data?.message)
+        window.location.reload()
+        this.router.navigate(['/dashboard/masters/village'])
+      }, (err => {
+        this.toast.error(err.error.message);
+      }))
+    }
+    else {
+      this.submitted = true;
+    }
+
+
+  }
+
   getDistrict(state:any){
     this.village.get('district')?.reset()
     this.village.get('district')?.updateValueAndValidity()
@@ -103,8 +132,22 @@ else{
 // }
 
 
-edit(id:any){
-  let url: string = "/dashboard/masters/villageEdit/" + id
-  this.router.navigateByUrl(url);
+  edit(villageData: any) {
+    this.id = villageData._id
+    this.isEdit = true
+
+
+    this.village.get('state')?.setValue(villageData.state)
+    this.village.get('state')?.updateValueAndValidity()
+    this.village.get('village')?.setValue(villageData.village)
+    this.village.get('village')?.updateValueAndValidity()
+    this.village.get('block')?.setValue(villageData.block)
+    this.village.get('block')?.updateValueAndValidity()
+    this.village.get('district')?.setValue(villageData.district)
+    this.village.get('district')?.updateValueAndValidity()
+  // let url: string = "/dashboard/masters/villageEdit/" + id
+  // this.router.navigateByUrl(url);
 }
+
+
 }
