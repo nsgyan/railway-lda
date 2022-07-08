@@ -147,7 +147,7 @@
                         <div class="">
                           <div class="form-group">
 
-                            <select class="form-control" formControlName="village" (change)="getVillage($event,i)">
+                            <select class="form-control" formControlName="village" >
                               <option hidden>Select Village</option>
                               <option *ngFor="let item of village[i]" value="{{item.village}}">{{item.village}}</option>
 
