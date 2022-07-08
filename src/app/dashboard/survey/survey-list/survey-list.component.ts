@@ -4,12 +4,11 @@ import { Beneficiary } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
 
 @Component({
-  selector: 'app-serway-list',
-  templateUrl: './serway-list.component.html',
-  styleUrls: ['./serway-list.component.css']
+  selector: 'app-survey-list',
+  templateUrl: './survey-list.component.html',
+  styleUrls: ['./survey-list.component.css']
 })
-export class SerwayListComponent implements OnInit {
-
+export class SurveyListComponent implements OnInit {
   beneficiary: any
   constructor(private data: DataService,
     private router: Router) { }

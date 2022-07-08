@@ -14,8 +14,8 @@ import { VendorTypeComponent } from './system-configuration/vendor-type/vendor-t
 
 const routes: Routes = [
   { path: 'page', component: DashboardPageComponent },
-  { path: 'serway',
-  loadChildren: () => import('./serway/serway.module').then(m =>m.SerwayModule)
+  { path: 'survey',
+  loadChildren: () => import('./survey/survey.module').then(m =>m.surveyModule)
 },
 { path: 'project',
 loadChildren: () => import('./project/project.module').then(m => m.ProjectModule)

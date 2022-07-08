@@ -6,11 +6,11 @@ import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
 
 @Component({
-  selector: 'app-addserway',
-  templateUrl: './addserway.component.html',
-  styleUrls: ['./addserway.component.css']
+  selector: 'app-add-survey',
+  templateUrl: './add-survey.component.html',
+  styleUrls: ['./add-survey.component.css']
 })
-export class AddserwayComponent implements OnInit {
+export class AddSurveyComponent implements OnInit {
 
   beneficiary:FormGroup;
   state:any=[]
@@ -208,3 +208,4 @@ export class AddserwayComponent implements OnInit {
 
   }
   }
+
