@@ -12,7 +12,7 @@ import { HttpsService } from 'src/app/shared/https.service';
 })
 export class AddSurveyComponent implements OnInit {
 
-  beneficiary:FormGroup;
+  survey:FormGroup;
   state:any=[]
   district:any=[]
   block:any=[]
@@ -27,7 +27,7 @@ export class AddSurveyComponent implements OnInit {
         this.httpService.getProject().subscribe((data:any)=>{
           this.project=data.projects
           this.project.map((item:any)=>{
-            item.projectDetails.map((projectData:any)=>{
+            item.acquisitionDetails?.map((projectData:any)=>{
               if (!this.state.includes(projectData.state)) {
                 // ✅ only runs if value not in array
                 this.state.push(projectData.state);
@@ -39,13 +39,13 @@ export class AddSurveyComponent implements OnInit {
           })
 
         })
-        this.beneficiary=this.fb.group({
+        this.survey=this.fb.group({
           projectName:['',Validators.required],
           projectNumber:['',Validators.required],
           date:['',Validators.required],
           state:['',Validators.required],
           district:['',Validators.required],
-          beneficiary:this.fb.array([]) ,
+          surveyDetails:fb.array([]) ,
 
         })
 
@@ -53,25 +53,25 @@ export class AddSurveyComponent implements OnInit {
       }
 
     ngOnInit(): void {
-      this.addbeneficiary()
+      this.addsurvey()
     }
 
 
-    beneficiarys(): FormArray {
-      return this.beneficiary.get("beneficiary") as FormArray
+    surveys(): FormArray {
+      return this.survey.get("surveyDetails") as FormArray
     }
     inputType(): FormArray {
-      return this.beneficiary.get("inputType") as FormArray
+      return this.survey.get("inputType") as FormArray
     }
-   get beneficiaryControl(): FormArray {
-      return this.beneficiary.get("beneficiary") as FormArray
+   get surveyControl(): FormArray {
+      return this.survey.get("surveyDetails") as FormArray
     }
 
-    newbeneficiary(): FormGroup {
+    newsurvey(): FormGroup {
       return this.fb.group({
         block:['',Validators.required],
         village: ['',Validators.required],
-        beneficiaryName:['',Validators.required],
+        surveyName:['',Validators.required],
         fatherOrHusbandName:['',Validators.required],
         gataNumber:['',Validators.required],
         rakba:['',Validators.required],
@@ -85,11 +85,11 @@ export class AddSurveyComponent implements OnInit {
     }
 
 
-    addbeneficiary() {
-      this.beneficiarys().push(this.newbeneficiary());
+    addsurvey() {
+      this.surveys().push(this.newsurvey());
     }
-    removebeneficiary(quesIndex:number) {
-      this.beneficiarys().removeAt(quesIndex);
+    removesurvey(quesIndex:number) {
+      this.surveys().removeAt(quesIndex);
       this.village.splice(quesIndex,1)
     }
 
@@ -99,16 +99,16 @@ export class AddSurveyComponent implements OnInit {
   this.state=[]
   this.project.map((item:any)=>{
     if(item.projectName===event.target.value){
-      this.beneficiary.get('projectNumber')?.setValue(item.projectNumber)
-      this.beneficiary.get('projectNumber')?.updateValueAndValidity
-    item.projectDetails.map((projectData:any)=>{
+      this.survey.get('projectNumber')?.setValue(item.projectNumber)
+      this.survey.get('projectNumber')?.updateValueAndValidity
+    item.acquisitionDetails?.map((projectData:any)=>{
       if (!this.state.includes(projectData.state)) {
         // ✅ only runs if value not in array
         this.state.push(projectData.state);
       }
     })}
-    this.beneficiary.get('state')?.reset()
-    this.beneficiary.get('state')?.updateValueAndValidity
+    this.survey.get('state')?.reset()
+    this.survey.get('state')?.updateValueAndValidity
 
 
 
@@ -121,8 +121,8 @@ export class AddSurveyComponent implements OnInit {
   this.district=[]
 
       this.project.map((item:any)=>{
-        if(item.projectName===this.beneficiary.value.projectName){
-        item.projectDetails.map((projectData:any)=>{
+        if(item.projectName===this.survey.value.projectName){
+        item.acquisitionDetails?.map((projectData:any)=>{
           if (projectData.state===event.target.value) {
             if(!this.district.includes(projectData.district))
 
@@ -138,9 +138,9 @@ export class AddSurveyComponent implements OnInit {
     getBlock(event:any){
       this.block=[]
       this.project.map((item:any)=>{
-        if(item.projectName===this.beneficiary.value.projectName){
-        item.projectDetails.map((projectData:any)=>{
-          if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district) {
+        if(item.projectName===this.survey.value.projectName){
+        item.acquisitionDetails?.map((projectData:any)=>{
+          if (projectData.state===this.survey.value.state&&projectData.district===this.survey.value.district) {
             if(!this.block.includes(projectData.block)){
           // ✅ only runs if value not in array
             this.block.push(projectData.block);}
@@ -151,13 +151,13 @@ export class AddSurveyComponent implements OnInit {
 
     getVillage(event:any,index:any){
       let newArray: any[]=[]
-      const control= this.beneficiary.get("beneficiary") as FormArray
+      const control= this.survey.get("survey") as FormArray
       this.village.splice(index,1)
-      console.log(this.beneficiary)
+      console.log(this.survey)
       this.project.map((item:any)=>{
-        if(item.projectName===this.beneficiary.value.projectName){
-        item.projectDetails.map((projectData:any)=>{
-          if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district&&projectData.block===control.at(index).value.block) {
+        if(item.projectName===this.survey.value.projectName){
+        item.acquisitionDetails?.map((projectData:any)=>{
+          if (projectData.state===this.survey.value.state&&projectData.district===this.survey.value.district&&projectData.block===control.at(index).value.block) {
             if(!newArray.includes(projectData.village)){
               console.log('hello');
     newArray.push(projectData.village);}
@@ -176,16 +176,16 @@ export class AddSurveyComponent implements OnInit {
     }
 
     onSubmit() {
-      // let date=this.beneficiary.value.data.toString()
-    console.log(this.beneficiary);
-    if(this.beneficiary.valid){
+      // let date=this.survey.value.data.toString()
+    console.log(this.survey);
+    if(this.survey.valid){
       this.httpService.addBeneficiary({
-        projectName:this.beneficiary.value.projectName,
-        projectNumber:this.beneficiary.value.projectNumber,
-        date:this.beneficiary.value.date,
-        state:this.beneficiary.value.state,
-        district:this.beneficiary.value.district,
-        beneficiary:this.beneficiary.value.beneficiary ,
+        projectName:this.survey.value.projectName,
+        projectNumber:this.survey.value.projectNumber,
+        date:this.survey.value.date,
+        state:this.survey.value.state,
+        district:this.survey.value.district,
+        survey:this.survey.value.survey ,
 
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
@@ -204,7 +204,7 @@ export class AddSurveyComponent implements OnInit {
     }
 
     cancel() {
-      this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
+      this.router.navigate(['/dashboard/survey/beneficiariesList'])
 
   }
   }
