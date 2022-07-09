@@ -53,7 +53,7 @@ if(this.project.valid){
     acquisitionDetails : this.project.value.selectState ,
   }).subscribe((data:any)=>{
     this.toast.success(data?.message)
-    this.router.navigate(['/dashboard/project'])
+    this.router.navigate(['/dashboard/project/page'])
   },(err=>{
     this.toast.error(err.error.message);
   }))

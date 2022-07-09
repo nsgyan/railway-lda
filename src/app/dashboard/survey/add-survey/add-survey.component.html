@@ -84,30 +84,37 @@
                               </div>
                           </div>
                       </div>
-                  </form>
+
 
                   <div class="clearfix"></div>
 
                   <div class="borderFormBox">
                       <div class="top-head">
-                          <h4 style="padding: 0px 20px">Beneficiary</h4>
+                          <h4 style="padding: 0px 20px">Survey</h4>
                           <button class="save-btn mt-3 mb-3 d-flex justify-content-end" (click)="addsurvey()"
                               type="button">
-                              <i class="fa fa-plus" aria-hidden="true"></i>Add New Beneficiary
+                              <i class="fa fa-plus" aria-hidden="true"></i>Add New Survey
                           </button>
                       </div>
                       <div style="overflow-x:auto;">
-                          <table class="table" >
+                          <table class="table" formArrayName="surveyDetail">
                               <thead>
                                   <tr>
                                       <th>#</th>
-                                      <th>Beneficiary Name</th>
+                                      <th>Survey </th>
+                                      <th>Survey Name</th>
+                                       <th>Beneficary Name</th>
                                       <th>Father / Husband Name</th>
                                       <th>Block</th>
                                       <th>Village</th>
                                       <th>Gata Number</th>
                                       <th>Rakba</th>
                                       <th>Pratifal Rate</th>
+                                      <th>Land Type</th>
+                                      <th>Land Nature</th>
+                                      <th>Land Category</th>
+                                      <th>Objecton</th>
+                                      <th>Objection Type</th>
                                       <th>Beneficary Share</th>
                                       <!-- <th>Cheque Number</th>
                                   <th>Cheque Date</th>
@@ -117,102 +124,168 @@
                                       <th><i class="fa fa-trash"></i></th>
                                   </tr>
                               </thead>
-                              <tbody *ngFor="let opt of surveyControl.controls; let i = index"   [formGroupName]="i">
-                                <tr >
-                                  <td>{{ i + 1 }}</td>
-                                  <td>
-                                      <input type="text" formControlName="surveyName" class="form-control"
-                                          name="" />
-                                      <p *ngIf="opt.get('surveyName')?.hasError('required')&&(submitted||opt.get('surveyName')?.dirty||opt.get('surveyName')?.touched )"
-                                          style="color: red;">
-                                          Beneficiary Name <strong>Required</strong>
-                                      </p>
-                                  </td>
-                                  <td>
-                                      <input type="text" formControlName="fatherOrHusbandName"
-                                          class="form-control" name="" />
-                                      <p *ngIf="opt.get('fatherOrHusbandName')?.hasError('required')&&(submitted||opt.get('fatherOrHusbandName')?.dirty||opt.get('fatherOrHusbandName')?.touched )"
-                                          style="color: red;">
-                                          Father / Husband Name <strong>Required</strong>
-                                      </p>
-                                  </td>
-                                  <td>
-                                      <div class="">
-                                          <div class="form-group">
-                                              <select class="form-control" formControlName="block"
-                                                  (change)="getVillage($event, i)">
-                                                  <option hidden>Select Block</option>
-                                                  <option *ngFor="let item of block" value="{{ item }}">
-                                                      {{ item }}
-                                                  </option>
-                                              </select>
-                                              <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
-                                                  style="color: red;">
-                                                  Please Select <strong>Block</strong>
-                                              </p>
-                                              <!-- <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
-                                        style="color: red;">
-                                        Block <strong>Required</strong>
-                                      </p> -->
+                              <tbody *ngFor="let opt of surveyControl.controls; let i = index">
+                                  <tr [formGroupName]="i">
+                                      <td>{{ i + 1 }}</td>
+                                      <td>
+                                        <input type="text" formControlName="survey" class="form-control">
+                                        <p *ngIf="opt.get('survey')?.hasError('required')&&(submitted||opt.get('survey')?.dirty||opt.get('survey')?.touched )"
+                                              style="color: red;">
+                                              Survey  <strong>Required</strong>
+                                          </p>
+                                      </td>
+                                      <td>
+                                          <input type="text" formControlName="surveyName" class="form-control"
+                                              name="" />
+                                          <p *ngIf="opt.get('surveyName')?.hasError('required')&&(submitted||opt.get('surveyName')?.dirty||opt.get('surveyName')?.touched )"
+                                              style="color: red;">
+                                              Survey Name <strong>Required</strong>
+                                          </p>
+                                      </td>
+                                      <td>
+                                        <input type="text" formControlName="beneficaryName" class="form-control"
+                                            name="" />
+                                        <p *ngIf="opt.get('beneficaryName')?.hasError('required')&&(submitted||opt.get('beneficaryName')?.dirty||opt.get('beneficaryName')?.touched )"
+                                            style="color: red;">
+                                            Beneficary Name <strong>Required</strong>
+                                        </p>
+                                    </td>
+                                      <td>
+                                          <input type="text" formControlName="fatherOrHusbandName"
+                                              class="form-control" name="" />
+                                          <p *ngIf="opt.get('fatherOrHusbandName')?.hasError('required')&&(submitted||opt.get('fatherOrHusbandName')?.dirty||opt.get('fatherOrHusbandName')?.touched )"
+                                              style="color: red;">
+                                              Father / Husband Name <strong>Required</strong>
+                                          </p>
+                                      </td>
+                                      <td>
+                                          <div class="">
+                                              <div class="form-group">
+                                                  <select class="form-control" formControlName="block"
+                                                      (change)="getVillage($event, i)">
+                                                      <option hidden>Select Block</option>
+                                                      <option *ngFor="let item of block" value="{{ item }}">
+                                                          {{ item }}
+                                                      </option>
+                                                  </select>
+                                                  <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
+                                                      style="color: red;">
+                                                      Please Select <strong>Block</strong>
+                                                  </p>
+                                                  <!-- <p *ngIf="opt.get('block')?.hasError('required')&&(submitted||opt.get('block')?.dirty||opt.get('block')?.touched )"
+                                            style="color: red;">
+                                            Block <strong>Required</strong>
+                                          </p> -->
+                                              </div>
                                           </div>
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <div class="">
-                                          <div class="form-group">
-                                              <select class="form-control" formControlName="village">
-                                                  <option hidden>Select Village</option>
-                                                  <option *ngFor="let item of village[i]" value="{{ item }}">
-                                                      {{ item }}
-                                                  </option>
-                                              </select>
-                                              <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
-                                                  style="color: red;">
-                                                  Please Select <strong>Village</strong>
-                                              </p>
-                                              <!-- <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
-                                        style="color: red;">
-                                        village <strong>Required</strong>
-                                      </p> -->
+                                      </td>
+                                      <td>
+                                          <div class="">
+                                              <div class="form-group">
+                                                  <select class="form-control" formControlName="village">
+                                                      <option hidden>Select Village</option>
+                                                      <option *ngFor="let item of village[i]" value="{{ item }}">
+                                                          {{ item }}
+                                                      </option>
+                                                  </select>
+                                                  <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
+                                                      style="color: red;">
+                                                      Please Select <strong>Village</strong>
+                                                  </p>
+                                                  <!-- <p *ngIf="opt.get('village')?.hasError('required')&&(submitted||opt.get('village')?.dirty||opt.get('village')?.touched )"
+                                            style="color: red;">
+                                            village <strong>Required</strong>
+                                          </p> -->
+                                              </div>
                                           </div>
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <input type="number" formControlName="gataNumber" class="form-control"
-                                          name="" />
-                                      <p *ngIf="opt.get('gataNumber')?.hasError('required')&&(submitted||opt.get('gataNumber')?.dirty||opt.get('gataNumber')?.touched )"
+                                      </td>
+                                      <td>
+                                          <input type="number" formControlName="gataNumber" class="form-control"
+                                              name="" />
+                                          <p *ngIf="opt.get('gataNumber')?.hasError('required')&&(submitted||opt.get('gataNumber')?.dirty||opt.get('gataNumber')?.touched )"
+                                              style="color: red;">
+                                              Gata Number <strong>Required</strong>
+                                          </p>
+                                      </td>
+                                      <td>
+                                          <input type="text" formControlName="rakba" class="form-control" name="" />
+                                          <p *ngIf="opt.get('rakba')?.hasError('required')&&(submitted||opt.get('rakba')?.dirty||opt.get('rakba')?.touched )"
+                                              style="color: red;">
+                                              Rakba <strong>Required</strong>
+                                          </p>
+                                      </td>
+                                      <td>
+                                          <input type="text" formControlName="pratifalRate" class="form-control"
+                                              name="" />
+                                          <p *ngIf="opt.get('pratifalRate')?.hasError('required')&&(submitted||opt.get('pratifalRate')?.dirty||opt.get('pratifalRate')?.touched )"
+                                              style="color: red;">
+                                              Pratifal Rate<strong>Required</strong>
+                                          </p>
+                                      </td>
+                                      <td>
+                                        <select  formControlName="landType"   class="form-control">
+                                          <option  *ngFor="let lantitem of landType" value="{{lantitem?.landType}}">{{lantitem?.landType}}</option>
+                                        </select>
+
+                                          <p *ngIf="opt.get('landType')?.hasError('required')&&(submitted||opt.get('landType')?.dirty||opt.get('landType')?.touched )"
+                                              style="color: red;">
+                                              Land Type <strong>Required</strong>
+                                          </p>
+                                      </td>
+                                      <td>
+                                        <select  formControlName="landNature"   class="form-control">
+                                          <option  *ngFor="let lantitem of landNature" value="{{lantitem?.landNature}}">{{lantitem?.landNature}}</option>
+                                        </select>
+
+                                        <p *ngIf="opt.get('landNature')?.hasError('required')&&(submitted||opt.get('landNature')?.dirty||opt.get('landNature')?.touched )"
+                                            style="color: red;">
+                                            Land Nature Share <strong>Required</strong>
+                                        </p>
+                                    </td>
+                                    <td>
+                                      <select  formControlName="landCategory"   class="form-control">
+                                        <option  *ngFor="let lantitem of landCategory" value="{{lantitem?.landCategory}}">{{lantitem?.landCategory}}</option>
+                                      </select>
+
+                                      <p *ngIf="opt.get('landCategory')?.hasError('required')&&(submitted||opt.get('landCategory')?.dirty||opt.get('landCategory')?.touched )"
                                           style="color: red;">
-                                          Gata Number <strong>Required</strong>
+                                          Land Category  <strong>Required</strong>
                                       </p>
                                   </td>
                                   <td>
-                                      <input type="text" formControlName="rakba" class="form-control" name="" />
-                                      <p *ngIf="opt.get('rakba')?.hasError('required')&&(submitted||opt.get('rakba')?.dirty||opt.get('rakba')?.touched )"
-                                          style="color: red;">
-                                          Rakba <strong>Required</strong>
-                                      </p>
-                                  </td>
-                                  <td>
-                                      <input type="text" formControlName="pratifalRate" class="form-control"
-                                          name="" />
-                                      <p *ngIf="opt.get('pratifalRate')?.hasError('required')&&(submitted||opt.get('pratifalRate')?.dirty||opt.get('pratifalRate')?.touched )"
-                                          style="color: red;">
-                                          Pratifal Rate<strong>Required</strong>
-                                      </p>
-                                  </td>
-                                  <td>
-                                      <input type="text" formControlName="beneficaryShare" class="form-control"
-                                          name="" />
-                                      <p *ngIf="opt.get('beneficaryShare')?.hasError('required')&&(submitted||opt.get('beneficaryShare')?.dirty||opt.get('beneficaryShare')?.touched )"
-                                          style="color: red;">
-                                          Beneficary Share <strong>Required</strong>
-                                      </p>
-                                  </td>
-                                  <td>
-                                      <!-- <a *ngIf="i !== 0" (click)="removebeneficiary(i)">
-                                          <i class="fa fa-close"></i></a> -->
-                                  </td>
-                              </tr>
+                                    <select  formControlName="objecton"   class="form-control"    (change)="getobjecton($event)">
+                                      <option   value="Yes">Yes</option>
+                                      <option   value="No">No</option>
+                                    </select>
+
+                                    <p *ngIf="opt.get('objecton')?.hasError('objecton')&&(submitted||opt.get('objecton')?.dirty||opt.get('objecton')?.touched )"
+                                        style="color: red;">
+                                        Objecton  <strong>Required</strong>
+                                    </p>
+                                </td>
+                                <td>
+                                  <select  formControlName="objectionType"   class="form-control"   >
+                                    <option *ngFor="let item of objectionType"   value="{{item.objectionType}}">{{item.objectionType}}</option>
+                                  </select>
+
+                                  <p *ngIf="opt.get('objectionType')?.hasError('required')&&(submitted||opt.get('objectionType')?.dirty||opt.get('objectionType')?.touched )"
+                                      style="color: red;">
+                                      Objection Type <strong>Required</strong>
+                                  </p>
+                              </td>
+                              <td>
+                                <input type="text" formControlName="beneficaryShare" class="form-control"
+                                    name="" />
+                                <p *ngIf="opt.get('beneficaryShare')?.hasError('required')&&(submitted||opt.get('beneficaryShare')?.dirty||opt.get('beneficaryShare')?.touched )"
+                                    style="color: red;">
+                                    Beneficary Share <strong>Required</strong>
+                                </p>
+                            </td>
+                                      <td>
+                                          <a *ngIf="i !== 0" (click)="removesurvey(i)">
+                                              <i class="fa fa-close"></i></a>
+                                      </td>
+                                  </tr>
                               </tbody>
                           </table>
                       </div>
@@ -232,6 +305,7 @@
                           </div>
                       </div>
                   </div>
+                </form>
               </div>
           </div>
       </div>

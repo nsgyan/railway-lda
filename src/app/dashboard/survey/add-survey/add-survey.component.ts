@@ -11,12 +11,15 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./add-survey.component.css']
 })
 export class AddSurveyComponent implements OnInit {
-
   survey:FormGroup;
   state:any=[]
   district:any=[]
   block:any=[]
   village:any=[]
+  landType:any=[]
+  landNature:any=[]
+  landCategory:any=[]
+  objectionType:any=[]
     project:any
     submitted:boolean=false
     constructor( private fb:FormBuilder,
@@ -24,13 +27,25 @@ export class AddSurveyComponent implements OnInit {
       private data: DataService,
       private httpService:HttpsService,
       private toast: ToastrService,) {
+        this.httpService.getlandNature().subscribe((data:any)=>{
+          this.landNature=data?.landNature
+
+                })
+        this.httpService.getlandCategory().subscribe((data:any)=>{
+          this.landCategory=data?.LandCategory
+
+                })
+                this.httpService.getlandType().subscribe((data:any)=>{
+                  this.landType=data?.landType
+
+                        })
         this.httpService.getProject().subscribe((data:any)=>{
           this.project=data.projects
           this.project.map((item:any)=>{
             item.acquisitionDetails?.map((projectData:any)=>{
               if (!this.state.includes(projectData.state)) {
                 // ✅ only runs if value not in array
-                this.state.push(projectData.state);
+                this.state?.push(projectData.state);
               }
             })
 
@@ -45,7 +60,7 @@ export class AddSurveyComponent implements OnInit {
           date:['',Validators.required],
           state:['',Validators.required],
           district:['',Validators.required],
-          surveyDetails:fb.array([]) ,
+          surveyDetail:this.fb.array([]) ,
 
         })
 
@@ -58,25 +73,36 @@ export class AddSurveyComponent implements OnInit {
 
 
     surveys(): FormArray {
-      return this.survey.get("surveyDetails") as FormArray
+      return this.survey.get("surveyDetail") as FormArray
     }
     inputType(): FormArray {
       return this.survey.get("inputType") as FormArray
     }
    get surveyControl(): FormArray {
-      return this.survey.get("surveyDetails") as FormArray
+      return this.survey.get("surveyDetail") as FormArray
     }
 
     newsurvey(): FormGroup {
       return this.fb.group({
+        survey:['',Validators.required],
+         surveyName:['',Validators.required],
+         beneficaryName:['',Validators.required],
+
+         fatherOrHusbandName:['',Validators.required],
         block:['',Validators.required],
         village: ['',Validators.required],
-        surveyName:['',Validators.required],
-        fatherOrHusbandName:['',Validators.required],
         gataNumber:['',Validators.required],
         rakba:['',Validators.required],
         pratifalRate:['',Validators.required],
+
+        landType:['',Validators.required],
+        landNature:['',Validators.required],
+        landCategory:['',Validators.required],
+
+        objecton:['',Validators.required],
+        objectionType:[''],
         beneficaryShare:['',Validators.required],
+
         // chequeNumber:[''],
         // chequeDate:[''],
         // registrationAmount:[''],
@@ -99,12 +125,16 @@ export class AddSurveyComponent implements OnInit {
   this.state=[]
   this.project.map((item:any)=>{
     if(item.projectName===event.target.value){
+      console.log(item.projectName);
+
       this.survey.get('projectNumber')?.setValue(item.projectNumber)
       this.survey.get('projectNumber')?.updateValueAndValidity
+      console.log(this.survey);
+
     item.acquisitionDetails?.map((projectData:any)=>{
       if (!this.state.includes(projectData.state)) {
         // ✅ only runs if value not in array
-        this.state.push(projectData.state);
+        this.state?.push(projectData.state);
       }
     })}
     this.survey.get('state')?.reset()
@@ -116,6 +146,25 @@ export class AddSurveyComponent implements OnInit {
 
 
     }
+    getobjecton(event:any){
+      const control= this.survey.get("surveyDetail") as FormArray
+      if(event.target.value==='Yes'){
+        this.httpService.getobjectionType().subscribe((data:any)=>{
+          this.objectionType=data?.objectionType
+
+                })
+                control.get('objectionType')?.setValidators(Validators.required)
+                control.get('objectionType')?.updateValueAndValidity
+      }
+      else{
+        control.get('objectionType')?.clearValidators
+                control.get('objectionType')?.updateValueAndValidity
+        this.objectionType=[]
+      }
+
+
+    }
+
 
     getDistrict(event:any){
   this.district=[]
@@ -128,7 +177,7 @@ export class AddSurveyComponent implements OnInit {
 
 
             // ✅ only runs if value not in array
-            this.district.push(projectData.district);
+            this.district?.push(projectData.district);
           }
         })}
       })
@@ -143,7 +192,7 @@ export class AddSurveyComponent implements OnInit {
           if (projectData.state===this.survey.value.state&&projectData.district===this.survey.value.district) {
             if(!this.block.includes(projectData.block)){
           // ✅ only runs if value not in array
-            this.block.push(projectData.block);}
+            this.block?.push(projectData.block);}
           }
         })}
       })
@@ -151,7 +200,7 @@ export class AddSurveyComponent implements OnInit {
 
     getVillage(event:any,index:any){
       let newArray: any[]=[]
-      const control= this.survey.get("survey") as FormArray
+      const control= this.survey.get("surveyDetail") as FormArray
       this.village.splice(index,1)
       console.log(this.survey)
       this.project.map((item:any)=>{
@@ -160,7 +209,7 @@ export class AddSurveyComponent implements OnInit {
           if (projectData.state===this.survey.value.state&&projectData.district===this.survey.value.district&&projectData.block===control.at(index).value.block) {
             if(!newArray.includes(projectData.village)){
               console.log('hello');
-    newArray.push(projectData.village);}
+    newArray?.push(projectData.village);}
     // console.log(newArray);
 
           this.village.splice(index, 0, newArray);
@@ -185,7 +234,7 @@ export class AddSurveyComponent implements OnInit {
         date:this.survey.value.date,
         state:this.survey.value.state,
         district:this.survey.value.district,
-        survey:this.survey.value.survey ,
+        surveyDetail:this.survey.value.surveyDetail ,
 
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
@@ -208,4 +257,3 @@ export class AddSurveyComponent implements OnInit {
 
   }
   }
-
