@@ -26,7 +26,7 @@
               <div class="food-img-bg">
                   <div class="top-logo">
                       <!-- <img src="./assets/img/troology-logo.png" alt="" class="">  -->
-                      <img src="./assets/img/railway-logo.png" alt=""  class="UPSRLM"> 
+                      <img src="./assets/img/railway-logo.png" alt=""  class="UPSRLM">
                   </div>
                   <div class="main-bg-con">
                       <div class="row g-0">
@@ -41,7 +41,7 @@
                                       <p>Railway Land Acquisition - Beneficiary & Budget Management System (BBMS) is a web-based online software application. BBMS is being rolled out with the objective of tracking the beneficiaries and funds released to beneficiaries under the acquisition of the land and ensuring real-time reporting.</p>
                                       <p>PBBMS has established an interface with the ICICI CIB Banking System (CIB) to provide the one window dashboard for the Department.</p>
 
-                                     
+
                                   <div class="footerSec">
                                       <div class="copyrightline">
                                           <p>© 2021-22 | All Right Reserved | Version 1.0.1 | Last Update 26 April 2022</p>
@@ -60,24 +60,38 @@
                                   <h2>Login</h2>
                                   <p>Login to  system portal</p>
                                   <div class="login-sec-con">
-                                      <form method="post" formControlName="myForm">
+                                      <form  [formGroup]="login">
                                           <div class="">
                                               <div class="form-group">
                                                   <input type="text" class="form-control user-bg" id="uername"
                                                       placeholder="Email" formControlName="email">
+                                                      <div *ngIf="submited||login.controls['email'].invalid &&  login.controls['email'].touched">
+                                                        <span *ngIf="login.get('email')?.hasError('required')" style="color: red;">
+                                                            Email <strong>required</strong>
+                                                        </span>
+                                                        <span *ngIf="login.get('email')?.hasError('email') && !login.get('email')?.hasError('required')" style="color: red;">
+                                                       Invalid    <strong>Email</strong>
+                                                      </span>
+                                                </div>
                                               </div>
                                           </div>
                                           <div class="">
                                               <div class="form-group">
                                                   <input type="password" class="form-control user-password" id=""
                                                       placeholder="Password" formControlName="password">
+                                                      <div *ngIf="submited||login.controls['password'].invalid &&  login.controls['password'].touched">
+                                                        <span *ngIf="login.get('password')?.hasError('required')" style="color: red;">
+                                                          Password <strong>required</strong>
+                                                        </span>
+
+                                                </div>
                                               </div>
                                           </div>
                                           <div class="col-md-12">
-                                              <div class="form-group">
-                  <re-captcha siteKey="6LcZYWYeAAAAAFFzV_pFdZBksDadFNggfpxTZMfS"></re-captcha>
+                                              <div class="form-group" >
+                  <re-captcha  (resolved)="resolved($event)" siteKey="6LcZYWYeAAAAAFFzV_pFdZBksDadFNggfpxTZMfS"></re-captcha>
                 </div>
-                
+
                                           </div>
                                           <!-- <span class="msg-error error text-danger">hello</span> -->
 
@@ -85,7 +99,7 @@
                                               <!-- <button type="button"
                                                   class="btn btn-primary btn-lg btn-block login_btn"
                                                   id="btn-validate">Login</button> -->
-                                                  <a href="dashboard" class="btn btn-primary btn-lg login_btn" style="width: 100%; text-decoration: none;">Login</a>
+                                                  <a (click)="userLogin()" class="btn btn-primary btn-lg login_btn" style="width: 100%; text-decoration: none;">Login</a>
                                           </div>
 
                                           <!-- <div>
@@ -116,4 +130,4 @@
           </div>
       </div>
   </div>
-</section> 
+</section>

@@ -33,5 +33,6 @@ export class Globals {
         'addProject': Globals.server + 'project/add',
         'getProject': Globals.server + 'project',
         'addBeneficiary': Globals.server + 'beneficiary/add',
+        "login":Globals.server+'user/login'
     };
 }

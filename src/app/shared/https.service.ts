@@ -13,6 +13,9 @@ import { LocalstorageService } from "./localstorage.service";
 export class HttpsService {
   constructor(private httpService: HttpClient,
     private localStroage: LocalstorageService) { }
+    login(formData:any){
+      return this.httpService.post(Globals.route.login,formData)
+    }
 
     AddState(formData: any) {
     return this.httpService.post(Globals.route.AddState, formData);
