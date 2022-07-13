@@ -58,8 +58,6 @@ export class AddSurveyComponent implements OnInit {
           projectName:['',Validators.required],
           projectNumber:['',Validators.required],
           date:['',Validators.required],
-          state:['',Validators.required],
-          district:['',Validators.required],
           surveyDetail:this.fb.array([]) ,
 
         })
@@ -84,24 +82,20 @@ export class AddSurveyComponent implements OnInit {
 
     newsurvey(): FormGroup {
       return this.fb.group({
-        survey:['',Validators.required],
-         surveyName:['',Validators.required],
-         beneficaryName:['',Validators.required],
-
-         fatherOrHusbandName:['',Validators.required],
+        surveyNumber:['',Validators.required],
+         state:['',Validators.required],
+         district:['',Validators.required],
         block:['',Validators.required],
         village: ['',Validators.required],
-        gataNumber:['',Validators.required],
-        rakba:['',Validators.required],
-        pratifalRate:['',Validators.required],
-
+        area:['',Validators.required],
+        totalArea:['',Validators.required],
+        surveyParty:['',Validators.required],
         landType:['',Validators.required],
         landNature:['',Validators.required],
         landCategory:['',Validators.required],
-
         objecton:['',Validators.required],
         objectionType:[''],
-        beneficaryShare:['',Validators.required],
+        document:['',Validators.required],
 
         // chequeNumber:[''],
         // chequeDate:[''],

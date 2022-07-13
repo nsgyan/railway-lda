@@ -53,36 +53,8 @@
                                   </p>
                               </div>
                           </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">State</label>
-                                  <select class="form-control" formControlName="state" (change)="getDistrict($event)">
-                                      <option hidden>Select State</option>
-                                      <option *ngFor="let item of state" value="{{ item }}">
-                                          {{ item }}
-                                      </option>
-                                  </select>
-                                  <p *ngIf="survey.get('state')?.hasError('required')&&(submitted||survey.get('state')?.dirty||survey.get('state')?.touched )"
-                                      style="color: red;">
-                                      state <strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">District</label>
-                                  <select class="form-control" formControlName="district" (change)="getBlock($event)">
-                                      <option hidden>Select District</option>
-                                      <option *ngFor="let item of district" value="{{ item }}">
-                                          {{ item }}
-                                      </option>
-                                  </select>
-                                  <p *ngIf="survey.get('district')?.hasError('required')&&(submitted||survey.get('district')?.dirty||survey.get('district')?.touched )"
-                                      style="color: red;">
-                                      District <strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>
+
+
                       </div>
 
 
@@ -101,21 +73,21 @@
                               <thead>
                                   <tr>
                                       <th>#</th>
-                                      <th>Survey </th>
-                                      <th>Survey Name</th>
-                                       <th>Beneficary Name</th>
-                                      <th>Father / Husband Name</th>
+
+                                      <th>Survey Number</th>
+                                       <th>State</th>
+                                      <th>District</th>
                                       <th>Block</th>
                                       <th>Village</th>
-                                      <th>Gata Number</th>
-                                      <th>Rakba</th>
-                                      <th>Pratifal Rate</th>
+                                      <th>Area</th>
+                                      <th>Total Area</th>
+                                      <th>Survey Party</th>
                                       <th>Land Type</th>
                                       <th>Land Nature</th>
                                       <th>Land Category</th>
                                       <th>Objecton</th>
                                       <th>Objection Type</th>
-                                      <th>Beneficary Share</th>
+                                      <th>Documnet</th>
                                       <!-- <th>Cheque Number</th>
                                   <th>Cheque Date</th>
                                   <th>Registration Amount</th>
@@ -127,36 +99,48 @@
                               <tbody *ngFor="let opt of surveyControl.controls; let i = index">
                                   <tr [formGroupName]="i">
                                       <td>{{ i + 1 }}</td>
+
                                       <td>
-                                        <input type="text" formControlName="survey" class="form-control">
-                                        <p *ngIf="opt.get('survey')?.hasError('required')&&(submitted||opt.get('survey')?.dirty||opt.get('survey')?.touched )"
-                                              style="color: red;">
-                                              Survey  <strong>Required</strong>
-                                          </p>
-                                      </td>
-                                      <td>
-                                          <input type="text" formControlName="surveyName" class="form-control"
+                                          <input type="text" formControlName="surveyNumber" class="form-control"
                                               name="" />
-                                          <p *ngIf="opt.get('surveyName')?.hasError('required')&&(submitted||opt.get('surveyName')?.dirty||opt.get('surveyName')?.touched )"
+                                          <p *ngIf="opt.get('surveyNumber')?.hasError('required')&&(submitted||opt.get('surveyNumber')?.dirty||opt.get('surveyNumber')?.touched )"
                                               style="color: red;">
-                                              Survey Name <strong>Required</strong>
+                                              Survey Number <strong>Required</strong>
                                           </p>
                                       </td>
                                       <td>
-                                        <input type="text" formControlName="beneficaryName" class="form-control"
-                                            name="" />
-                                        <p *ngIf="opt.get('beneficaryName')?.hasError('required')&&(submitted||opt.get('beneficaryName')?.dirty||opt.get('beneficaryName')?.touched )"
-                                            style="color: red;">
-                                            Beneficary Name <strong>Required</strong>
-                                        </p>
+                                        <div class="col-md-4">
+                                          <div class="form-group">
+
+                                              <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                                                  <option hidden>Select State</option>
+                                                  <option *ngFor="let item of state" value="{{ item }}">
+                                                      {{ item }}
+                                                  </option>
+                                              </select>
+                                              <p *ngIf="survey.get('state')?.hasError('required')&&(submitted||survey.get('state')?.dirty||survey.get('state')?.touched )"
+                                                  style="color: red;">
+                                                  state <strong>Required</strong>
+                                              </p>
+                                          </div>
+                                      </div>
                                     </td>
                                       <td>
-                                          <input type="text" formControlName="fatherOrHusbandName"
-                                              class="form-control" name="" />
-                                          <p *ngIf="opt.get('fatherOrHusbandName')?.hasError('required')&&(submitted||opt.get('fatherOrHusbandName')?.dirty||opt.get('fatherOrHusbandName')?.touched )"
-                                              style="color: red;">
-                                              Father / Husband Name <strong>Required</strong>
-                                          </p>
+                                        <div class="">
+                                          <div class="form-group">
+
+                                              <select class="form-control" formControlName="district" (change)="getBlock($event)">
+                                                  <option hidden>Select District</option>
+                                                  <option *ngFor="let item of district" value="{{ item }}">
+                                                      {{ item }}
+                                                  </option>
+                                              </select>
+                                              <p *ngIf="survey.get('district')?.hasError('required')&&(submitted||survey.get('district')?.dirty||survey.get('district')?.touched )"
+                                                  style="color: red;">
+                                                  District <strong>Required</strong>
+                                              </p>
+                                          </div>
+                                      </div>
                                       </td>
                                       <td>
                                           <div class="">
@@ -200,26 +184,26 @@
                                           </div>
                                       </td>
                                       <td>
-                                          <input type="number" formControlName="gataNumber" class="form-control"
+                                          <input type="number" formControlName="area" class="form-control"
                                               name="" />
-                                          <p *ngIf="opt.get('gataNumber')?.hasError('required')&&(submitted||opt.get('gataNumber')?.dirty||opt.get('gataNumber')?.touched )"
+                                          <p *ngIf="opt.get('area')?.hasError('required')&&(submitted||opt.get('area')?.dirty||opt.get('area')?.touched )"
                                               style="color: red;">
-                                              Gata Number <strong>Required</strong>
+                                              Area <strong>Required</strong>
                                           </p>
                                       </td>
                                       <td>
-                                          <input type="text" formControlName="rakba" class="form-control" name="" />
-                                          <p *ngIf="opt.get('rakba')?.hasError('required')&&(submitted||opt.get('rakba')?.dirty||opt.get('rakba')?.touched )"
+                                          <input type="text" formControlName="totalArea" class="form-control" name="" />
+                                          <p *ngIf="opt.get('totalArea')?.hasError('required')&&(submitted||opt.get('totalArea')?.dirty||opt.get('totalArea')?.touched )"
                                               style="color: red;">
-                                              Rakba <strong>Required</strong>
+                                              Total Area <strong>Required</strong>
                                           </p>
                                       </td>
                                       <td>
-                                          <input type="text" formControlName="pratifalRate" class="form-control"
+                                          <input type="text" formControlName="surveyParty" class="form-control"
                                               name="" />
-                                          <p *ngIf="opt.get('pratifalRate')?.hasError('required')&&(submitted||opt.get('pratifalRate')?.dirty||opt.get('pratifalRate')?.touched )"
+                                          <p *ngIf="opt.get('surveyParty')?.hasError('required')&&(submitted||opt.get('surveyParty')?.dirty||opt.get('surveyParty')?.touched )"
                                               style="color: red;">
-                                              Pratifal Rate<strong>Required</strong>
+                                              Survey Party<strong>Required</strong>
                                           </p>
                                       </td>
                                       <td>
@@ -274,11 +258,11 @@
                                   </p>
                               </td>
                               <td>
-                                <input type="text" formControlName="beneficaryShare" class="form-control"
+                                <input type="text" formControlName="doccumnet" class="form-control"
                                     name="" />
-                                <p *ngIf="opt.get('beneficaryShare')?.hasError('required')&&(submitted||opt.get('beneficaryShare')?.dirty||opt.get('beneficaryShare')?.touched )"
+                                <p *ngIf="opt.get('doccumnet')?.hasError('required')&&(submitted||opt.get('doccumnet')?.dirty||opt.get('doccumnet')?.touched )"
                                     style="color: red;">
-                                    Beneficary Share <strong>Required</strong>
+                                    Please Upload <strong>Doccumnet</strong>
                                 </p>
                             </td>
                                       <td>

@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 if(this.login.valid){
 this.httpService.login({email:this.login.value.email,password:this.login.value.password}).subscribe((data:any)=>{
   this.localStorage.set('token',data.refresh_token)
-  this.routes.navigate(['dashboard'])
+  this.routes.navigate(['dashboard/page'])
 
 },err=>{
   this.toast.error('User Not Found');
