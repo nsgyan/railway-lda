@@ -106,6 +106,9 @@ export class HttpsService {
   updateVillage(formData: any) {
     return this.httpService.patch(Globals.route.updateVillage, formData);
   }
+  updatesurvey(formData: any,id:any) {
+    return this.httpService.patch(`${Globals.route.updatesurvey}/${id}`, formData);
+  }
 
 
 
@@ -145,11 +148,8 @@ export class HttpsService {
     });
   }
   getSurveyByID(id:any){
-    let queryParams= new HttpParams();
-    queryParams=queryParams.append('id',id)
-    return this.httpService.get(Globals.route.getSurveyByID,{
-      params:queryParams
-    })
+
+    return this.httpService.get(`${Globals.route.getSurveyByID}/${id}`)
   }
 
   getDistrict(state:any) {

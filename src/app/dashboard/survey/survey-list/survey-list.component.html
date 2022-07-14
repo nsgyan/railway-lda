@@ -90,7 +90,7 @@
                       <td><span class="font-bold text-theme">{{item.projectName}}</span></td>
                       <td><span class="font-bold text-theme">{{item.projectNumber}}</span></td>
 
-                      <td><a class="ml-2" href="{{item?.documents}}" target="blank" *ngIf='item?.documents'>Sub Category Document</a></td>
+                      <td><a class="ml-2" href="{{item?.documents}}" target="blank" *ngIf='item?.documents'>Document</a></td>
 
                       <td class="text-center">
                         <div class="btn-group dropdown">
@@ -98,7 +98,7 @@
                             aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
                                 class="fa fa-caret-down"></i></span></button>
                           <ul class="dropdown-menu">
-                            <li><a (click)="navigateTo('/dashboard/survey/editSurvey')"><i class="fa fa-edit"></i> Edit </a></li>
+                            <li><a (click)="navigateTo('/dashboard/survey/editSurvey',item)"><i class="fa fa-edit"></i> Edit </a></li>
                             <li><a href="#"><i class="fa fa-trash-o"></i> Delete </a></li>
                             <li><a href="#"><i class="fa fa-lock"></i> Lock </a> </li>
                           </ul>

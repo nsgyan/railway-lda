@@ -279,7 +279,7 @@ console.log(this.state);
 
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
-        this.router.navigate(['/dashboard/beneficiariesList'])
+        this.router.navigate(['/dashboard/survey/surveyList'])
       },(err=>{
         this.toast.error(err.error.message);
       }))
@@ -294,7 +294,7 @@ console.log(this.state);
     }
 
     cancel() {
-      this.router.navigate(['/dashboard/survey/beneficiariesList'])
+      this.router.navigate(['/dashboard/survey/surveyList'])
 
   }
   }

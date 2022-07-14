@@ -29,7 +29,7 @@ export class ApiHandlerInterceptor implements HttpInterceptor {
 
         }
         // console.log(errorMessage);
-        alert('No Internet Connectivity found.')
+        // alert('No Internet Connectivity found.')
         if(this.localStorage.get('type')==='admin'){
           window.location.href="/login/admin"
           return throwError(errorMessage);

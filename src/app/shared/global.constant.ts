@@ -31,12 +31,13 @@ export class Globals {
         'getVillageByID': Globals.server + 'master/getVillageByID',
         'updateVillage': Globals.server + 'master/updateVillage',
         'addProject': Globals.server + 'project/add',
-        'getProject': Globals.server + 'project',
+        'getProject': Globals.server + 'project/',
         'addBeneficiary': Globals.server + 'beneficiary/add',
         "login":Globals.server+'user/login',
         'upload': Globals.server + 'upload',
         'survey':Globals.server+ 'survey/addsurvey',
         'getSurvey':Globals.server+ 'survey/getsurvey',
-        'getSurveyByID':Globals.server+ 'survey/getSurveyByID'
+        'getSurveyByID': Globals.server + 'survey/getSurveyById',
+        'updatesurvey': Globals.server + 'survey/updatesurvey'
     };
 }

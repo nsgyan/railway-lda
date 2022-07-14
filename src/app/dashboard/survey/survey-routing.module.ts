@@ -7,7 +7,7 @@ import { SurveyListComponent } from './survey-list/survey-list.component';
 const routes: Routes = [
   {path:'addsurvey',component:AddSurveyComponent},
   {path:'surveyList',component:SurveyListComponent},
-  {path:'editSurvey',component:SurveyEditComponent}
+  {path:'editSurvey/:id',component:SurveyEditComponent}
 ];
 
 @NgModule({

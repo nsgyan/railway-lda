@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
@@ -12,11 +12,16 @@ import { environment } from 'src/environments/environment.prod';
   styleUrls: ['./survey-edit.component.css']
 })
 export class SurveyEditComponent implements OnInit {
-  survey:FormGroup;
+  survey!: FormGroup;
   state:any=[]
+  id: any
   district:any=[]
   block:any=[]
   village:any=[]
+  event: any = {
+    target: { value: '' }
+  }
+  surveyData: any
   landType:any=[]
   landNature:any=[]
   landCategory:any=[]
@@ -26,10 +31,18 @@ export class SurveyEditComponent implements OnInit {
   filename: any;
     constructor( private fb:FormBuilder,
       private router: Router,
+      private route: ActivatedRoute,
       private data: DataService,
       private httpService:HttpsService,
       private toast: ToastrService,) {
-        this.httpService.getlandNature().subscribe((data:any)=>{
+      this.survey = this.fb.group({
+        projectName: ['', Validators.required],
+        projectNumber: ['', Validators.required],
+        date: ['', Validators.required],
+        surveyDetail: this.fb.array([]),
+        document: ['', Validators.required]
+      })
+      this.httpService.getlandNature().subscribe((data: any) => {
           this.landNature=data?.landNature
 
                 })
@@ -46,20 +59,65 @@ export class SurveyEditComponent implements OnInit {
 
 
         })
-        this.survey=this.fb.group({
-          projectName:['',Validators.required],
-          projectNumber:['',Validators.required],
-          date:['',Validators.required],
-          surveyDetail:this.fb.array([]) ,
-          document:['',Validators.required]
+      this.id = this.route.snapshot.paramMap.get('id')
+      this.httpService.getSurveyByID(this.id).subscribe((data: any) => {
+        this.surveyData = data.data
+        console.log(this.surveyData);
 
+        this.survey.get('projectName')?.setValue(this.surveyData?.projectName)
+        this.survey.get('projectName')?.updateValueAndValidity()
+        this.survey.get('projectNumber')?.setValue(this.surveyData?.projectNumber)
+        this.survey.get('projectNumber')?.updateValueAndValidity()
+        this.survey.get('date')?.setValue(this.surveyData?.date)
+        this.survey.get('date')?.updateValueAndValidity()
+        this.survey.get('document')?.setValue(this.surveyData?.documents)
+        this.survey.get('document')?.updateValueAndValidity()
+        this.getEditPriject(this.survey.value.projectName)
+        const control = this.survey.get("surveyDetail") as FormArray
+        let i = 0
+        this.surveyData.surveyDetails.map((item: any) => {
+          control.push(
+            this.fb.group({
+              surveyNumber: [item.surveyNumber, Validators.required],
+              state: [item.state, Validators.required],
+              district: [item.district, Validators.required],
+              block: [item.block, Validators.required],
+              village: [item.village, Validators.required],
+              area: [item.area, Validators.required],
+              totalArea: [item.totalArea, Validators.required],
+              surveyParty: [item.surveyParty, Validators.required],
+              landType: [item.landType, Validators.required],
+              landNature: [item.landNature, Validators.required],
+              landCategory: [item.landCategory, Validators.required],
+              objecton: [item.objecton, Validators.required],
+              objectionType: [item.objectionType],
+              document: [item.document, Validators.required],
+            }))
+          this.event.target.value = item.state
+          this.getDistrict(this.event, i)
+          this.event.target.value = item.district
+          this.getBlock(this.event, i)
+          this.event.target.value = item.block
+          this.getVillage(this.event, i)
+          console.log(this.block);
+
+          this.event.target.value = item.objecton
+          this.getobjecton(this.event, i)
+          console.log(this.objectionType, 'objen');
+
+          i++
         })
+
+      })
+
+
 
 
       }
 
     ngOnInit(): void {
-      this.addsurvey()
+
+
       this.state=[]
     }
 
@@ -128,7 +186,7 @@ export class SurveyEditComponent implements OnInit {
         const date = 'Wed Feb 20 2019 00:00:00 GMT-0400 (Atlantic Standard Time)';
         const time = '7:00 AM';
         this.httpService.upload(file[0]).subscribe((data: any) => {
-          // console.log(data?.body,'rtet');
+
           this.filename=data?.body
           if(type==='inside'){
           const control= this.survey.get("surveyDetail") as FormArray
@@ -149,19 +207,50 @@ export class SurveyEditComponent implements OnInit {
       }
     }
 
+  getEditPriject(value: any) {
+
+    this.state = []
+    this.project.map((item: any) => {
+      if (item.projectName === value) {
+
+        // this.state=item
+
+
+        this.survey.get('projectNumber')?.setValue(item.projectNumber)
+        this.survey.get('projectNumber')?.updateValueAndValidity
+
+
+        item.acquisitionDetails?.map((projectData: any) => {
+          if (!this.state.includes(projectData.state)) {
+            // ✅ only runs if value not in array
+            this.state?.push(projectData.state);
+          }
+        })
+      }
+
+      this.survey.get('surveyDetail')?.reset()
+      this.survey.get('surveyDetail')?.updateValueAndValidity
+
+
+
+
+    })
+
+
+  }
 
     getPriject(event:any){
 
   this.state=[]
   this.project.map((item:any)=>{
     if(item.projectName===event.target.value){
-      console.log(item.projectName);
+
       // this.state=item
-      // console.log(this.state);
+
 
       this.survey.get('projectNumber')?.setValue(item.projectNumber)
       this.survey.get('projectNumber')?.updateValueAndValidity
-      console.log(this.survey);
+
 
     item.acquisitionDetails?.map((projectData:any)=>{
       if (!this.state.includes(projectData.state)) {
@@ -173,27 +262,38 @@ export class SurveyEditComponent implements OnInit {
     this.survey.get('surveyDetail')?.reset()
     this.survey.get('surveyDetail')?.updateValueAndValidity
 
-console.log(this.state);
+
 
 
   })
 
 
     }
-    getobjecton(event:any){
+
+
+  getobjecton(event: any, index: any) {
+
+    let newobjectionType: any = []
       const control= this.survey.get("surveyDetail") as FormArray
       if(event.target.value==='Yes'){
         this.httpService.getobjectionType().subscribe((data:any)=>{
-          this.objectionType=data?.objectionType
+          data?.objectionType.map((item: any) => {
+            // newObjecton.push(item.objectionType)
+            newobjectionType.push(item.objectionType);
+          })
+          this.objectionType.splice(index, 0, newobjectionType);
+
 
                 })
                 control.get('objectionType')?.setValidators(Validators.required)
                 control.get('objectionType')?.updateValueAndValidity
+        // this.objectionType.splice(index, 0, newObjecton);
+
       }
       else{
         control.get('objectionType')?.clearValidators
                 control.get('objectionType')?.updateValueAndValidity
-        this.objectionType=[]
+        this.objectionType[index] = []
       }
 
 
@@ -201,6 +301,8 @@ console.log(this.state);
 
 
     getDistrict(event:any,index:any){
+      console.log(event.target.value);
+
  let newdistrict:any =[]
 
       this.project.map((item:any)=>{
@@ -216,7 +318,7 @@ console.log(this.state);
         })}
       })
       this.district.splice(index, 0, newdistrict);
-      console.log(this.district);
+
 
 
     }
@@ -230,14 +332,14 @@ console.log(this.state);
 
             if(!newblock.includes(projectData.block)){
           // ✅ only runs if value not in array
-          console.log(item);
+
 
           newblock.push(projectData.block);}
           }
         })}
       })
       this.block.splice(index, 0, newblock);
-      console.log(this.block);
+
 
     }
 
@@ -245,15 +347,15 @@ console.log(this.state);
       let newArray: any[]=[]
       const control= this.survey.get("surveyDetail") as FormArray
       this.village.splice(index,1)
-      console.log(this.survey)
+
       this.project.map((item:any)=>{
         if(item.projectName===this.survey.value.projectName){
         item.acquisitionDetails?.map((projectData:any)=>{
           if (projectData.block===control.at(index).value.block) {
             if(!newArray.includes(projectData.village)){
-              console.log('hello');
+
     newArray?.push(projectData.village);}
-    // console.log(newArray);
+
 
           this.village.splice(index, 0, newArray);
 
@@ -261,7 +363,7 @@ console.log(this.state);
           }
         })}
       })
-      console.log(this.village);
+
 
 
 
@@ -269,18 +371,18 @@ console.log(this.state);
 
     onSubmit() {
       // let date=this.survey.value.data.toString()
-    // console.log(this.survey);
+
     if(this.survey.valid){
-      this.httpService.addSurvey({
+      this.httpService.updatesurvey({
         projectName:this.survey.value.projectName,
         projectNumber:this.survey.value.projectNumber,
         date:this.survey.value.date,
-        document:this.survey.value.document,
+        documents: this.survey.value.document,
         surveyDetails:this.survey.value.surveyDetail ,
 
-      }).subscribe((data:any)=>{
+      }, this.id).subscribe((data: any) => {
         this.toast.success(data?.message)
-        this.router.navigate(['/dashboard/beneficiariesList'])
+        this.router.navigate(['/dashboard/survey/surveyList'])
       },(err=>{
         this.toast.error(err.error.message);
       }))

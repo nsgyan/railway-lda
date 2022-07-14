@@ -3,7 +3,7 @@
       <div class="bg-red lter b-b wrapper-md">
           <div class="row">
               <div class="col-sm-6 col-xs-12">
-                  <h3 class="m-n font-thin text-white"> ADD Survey</h3>
+                  <h3 class="m-n font-thin text-white"> Edit Survey</h3>
               </div>
           </div>
       </div>
@@ -11,11 +11,11 @@
       <div class="wrapper-md">
           <div class="panel b-a">
               <div class="panel-body">
-                  <form role="form" [formGroup]="survey" autocomplete="off">
+                  <form role="form" [formGroup]="survey" >
                       <div class="row">
                           <div class="col-md-12">
                               <legend>
-                                  <span class="font-weight-600">Create New Survey</span>
+                                  <span class="font-weight-600">Update  Survey</span>
                               </legend>
                           </div>
 
@@ -25,7 +25,6 @@
                                   </label>
                                   <select type="date" formControlName="projectName" class="form-control"
                                       (change)="getPriject($event)">
-                                      <option hidden>Select Project</option>
                                       <option *ngFor="let item of project" value="{{ item.projectName }}">
                                           {{ item.projectName }}
                                       </option>
@@ -248,7 +247,7 @@
                                       </p>
                                   </td>
                                   <td>
-                                    <select  formControlName="objecton"   class="form-control"    (change)="getobjecton($event)">
+                                    <select  formControlName="objecton"   class="form-control"    (change)="getobjecton($event,i)">
                                       <option   value="Yes">Yes</option>
                                       <option   value="No">No</option>
                                     </select>
@@ -260,7 +259,7 @@
                                 </td>
                                 <td>
                                   <select  formControlName="objectionType"   class="form-control"   >
-                                    <option *ngFor="let item of objectionType"   value="{{item.objectionType}}">{{item.objectionType}}</option>
+                                    <option *ngFor="let item of objectionType[i]"   value="{{item}}">{{item}}</option>
                                   </select>
 
                                   <p *ngIf="opt.get('objectionType')?.hasError('required')&&(submitted||opt.get('objectionType')?.dirty||opt.get('objectionType')?.touched )"

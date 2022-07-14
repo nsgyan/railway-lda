@@ -18,7 +18,7 @@ export class SurveyListComponent implements OnInit {
     private toast: ToastrService,
     private httpService:HttpsService,) {
       this.httpService.getSurvey().subscribe((data:any)=>{
-      console.log(data);
+
       data.surveydata.map((item:any)=>{
         item.documents= environment.download + item.documents
       })
@@ -34,8 +34,15 @@ this.survey=data.surveydata
   addsurvey() {
     this.router.navigate(['/dashboard/survey/addsurvey'])
   }
-  navigateTo(path:any){
+  navigateTo(path: any, item: any) {
+
+    // if (item._id) {
+    path = path + '/' + item._id
+
+    console.log(path);
+
     this.router.navigate([path])
+    // }
   }
 
 }
