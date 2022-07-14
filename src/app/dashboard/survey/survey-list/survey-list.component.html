@@ -4,10 +4,10 @@
     <div class="bg-blue lter b-b wrapper-md">
       <div class="row">
         <div class="col-sm-6 col-xs-12">
-          <h3 class="m-n font-thin text-white"> Beneficiary  List View</h3>
+          <h3 class="m-n font-thin text-white"> Survey  List View</h3>
         </div>
         <div class="col-sm-6 text-right poppins hidden-xs">
-          <button class="btn btn-sm text-10 btn-addNew m-r-xs report_csv_triger" (click)="addsurvey()"><i class="fa fa-plus"></i> Create New  Beneficiary </button>
+          <button class="btn btn-sm text-10 btn-addNew m-r-xs report_csv_triger" (click)="addsurvey()"><i class="fa fa-plus"></i> Create New  Survey </button>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
                       <!-- <th>Rakba</th>
                       <th>Pratifal Rate</th>
                       <th>Total Pratifal</th>
-                      <th>Share of Beneficiary</th>
+                      <th>Share of Survey</th>
                       <th>Cheque</th> -->
                       <th>Documents</th>
                       <th class="text-center">Actions</th>
@@ -98,7 +98,7 @@
                             aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
                                 class="fa fa-caret-down"></i></span></button>
                           <ul class="dropdown-menu">
-                            <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
+                            <li><a (click)="navigateTo('/dashboard/survey/editSurvey')"><i class="fa fa-edit"></i> Edit </a></li>
                             <li><a href="#"><i class="fa fa-trash-o"></i> Delete </a></li>
                             <li><a href="#"><i class="fa fa-lock"></i> Lock </a> </li>
                           </ul>

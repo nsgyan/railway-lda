@@ -34,5 +34,8 @@ this.survey=data.surveydata
   addsurvey() {
     this.router.navigate(['/dashboard/survey/addsurvey'])
   }
+  navigateTo(path:any){
+    this.router.navigate([path])
+  }
 
 }
