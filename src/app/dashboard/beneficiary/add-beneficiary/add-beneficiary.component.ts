@@ -25,28 +25,30 @@ village:any=[]
     private data: DataService,
     private httpService:HttpsService,
     private toast: ToastrService,) {
-      this.httpService.getProject().subscribe((data:any)=>{
-        this.project=data.projects
-        this.project.map((item:any)=>{
-          item.projectDetails.map((projectData:any)=>{
-            if (!this.state.includes(projectData.state)) {
-              // ✅ only runs if value not in array
-              this.state.push(projectData.state);
-            }
-          })
-
-
-
-        })
-
+    this.httpService.getState().subscribe((data: any) => {
+      data?.state.map((item: any) => {
+        this.state.push(item.stateName)
       })
+
+    })
+
+    console.log(this.state, 'dgfhgjh');
+
       this.beneficiary=this.fb.group({
-        projectName:['',Validators.required],
-        projectNumber:['',Validators.required],
-        date:['',Validators.required],
+        partyName: ['', Validators.required],
+        address: ['', Validators.required],
         state:['',Validators.required],
         district:['',Validators.required],
-        beneficiary:this.fb.array([]) ,
+        pincode: ['', Validators.required],
+        email: ['', Validators.required],
+        modile: ['', Validators.required],
+        partyType: ['', Validators.required],
+        bank: ['', Validators.required],
+        ifscCode: ['', Validators.required],
+        accountNumber: ['', Validators.required],
+
+
+
 
       })
 
@@ -54,45 +56,12 @@ village:any=[]
     }
 
   ngOnInit(): void {
-    this.addbeneficiary()
+
   }
 
 
-  beneficiarys(): FormArray {
-    return this.beneficiary.get("beneficiary") as FormArray
-  }
-  inputType(): FormArray {
-    return this.beneficiary.get("inputType") as FormArray
-  }
- get beneficiaryControl(): FormArray {
-    return this.beneficiary.get("beneficiary") as FormArray
-  }
-
-  newbeneficiary(): FormGroup {
-    return this.fb.group({
-      block:['',Validators.required],
-      village: ['',Validators.required],
-      beneficiaryName:['',Validators.required],
-      fatherOrHusbandName:['',Validators.required],
-      gataNumber:['',Validators.required],
-      rakba:['',Validators.required],
-      pratifalRate:['',Validators.required],
-      beneficaryShare:['',Validators.required],
-      // chequeNumber:[''],
-      // chequeDate:[''],
-      // registrationAmount:[''],
-      // remark:['']
-    })
-  }
 
 
-  addbeneficiary() {
-    this.beneficiarys().push(this.newbeneficiary());
-  }
-  removebeneficiary(quesIndex:number) {
-    this.beneficiarys().removeAt(quesIndex);
-    this.village.splice(quesIndex,1)
-  }
 
 
   getPriject(event:any){
@@ -118,79 +87,76 @@ this.project.map((item:any)=>{
 
   }
 
-  getDistrict(event:any){
-this.district=[]
+  getDistrict(state: any) {
+    this.beneficiary.get('district')?.reset()
+    this.beneficiary.get('district')?.updateValueAndValidity()
 
-    this.project.map((item:any)=>{
-      if(item.projectName===this.beneficiary.value.projectName){
-      item.projectDetails.map((projectData:any)=>{
-        if (projectData.state===event.target.value) {
-          if(!this.district.includes(projectData.district))
+    this.httpService.getDistrict(this.beneficiary.value.state).subscribe((data: any) => {
+      this.district = data?.district
 
 
-          // ✅ only runs if value not in array
-          this.district.push(projectData.district);
-        }
-      })}
-    })
-
-
-  }
-  getBlock(event:any){
-    this.block=[]
-    this.project.map((item:any)=>{
-      if(item.projectName===this.beneficiary.value.projectName){
-      item.projectDetails.map((projectData:any)=>{
-        if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district) {
-          if(!this.block.includes(projectData.block)){
-        // ✅ only runs if value not in array
-          this.block.push(projectData.block);}
-        }
-      })}
     })
   }
+  // getBlock(event:any){
+  //   this.block=[]
+  //   this.project.map((item:any)=>{
+  //     if(item.projectName===this.beneficiary.value.projectName){
+  //     item.projectDetails.map((projectData:any)=>{
+  //       if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district) {
+  //         if(!this.block.includes(projectData.block)){
+  //       // ✅ only runs if value not in array
+  //         this.block.push(projectData.block);}
+  //       }
+  //     })}
+  //   })
+  // }
 
-  getVillage(event:any,index:any){
-    let newArray: any[]=[]
-    const control= this.beneficiary.get("beneficiary") as FormArray
-    this.village.splice(index,1)
-    console.log(this.beneficiary)
-    this.project.map((item:any)=>{
-      if(item.projectName===this.beneficiary.value.projectName){
-      item.projectDetails.map((projectData:any)=>{
-        if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district&&projectData.block===control.at(index).value.block) {
-          if(!newArray.includes(projectData.village)){
-            console.log('hello');
-  newArray.push(projectData.village);}
-  // console.log(newArray);
+  // getVillage(event:any,index:any){
+  //   let newArray: any[]=[]
+  //   const control= this.beneficiary.get("beneficiary") as FormArray
+  //   this.village.splice(index,1)
+  //   console.log(this.beneficiary)
+  //   this.project.map((item:any)=>{
+  //     if(item.projectName===this.beneficiary.value.projectName){
+  //     item.projectDetails.map((projectData:any)=>{
+  //       if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district&&projectData.block===control.at(index).value.block) {
+  //         if(!newArray.includes(projectData.village)){
+  //           console.log('hello');
+  // newArray.push(projectData.village);}
+  // // console.log(newArray);
 
-        this.village.splice(index, 0, newArray);
-
-
-        }
-      })}
-    })
-    console.log(this.village);
+  //       this.village.splice(index, 0, newArray);
 
 
+  //       }
+  //     })}
+  //   })
+  //   console.log(this.village);
 
-  }
+
+
+  // }
 
   onSubmit() {
     // let date=this.beneficiary.value.data.toString()
   console.log(this.beneficiary);
   if(this.beneficiary.valid){
     this.httpService.addBeneficiary({
-      projectName:this.beneficiary.value.projectName,
-      projectNumber:this.beneficiary.value.projectNumber,
-      date:this.beneficiary.value.date,
+      partyName: this.beneficiary.value.partyName,
+      address: this.beneficiary.value.address,
       state:this.beneficiary.value.state,
       district:this.beneficiary.value.district,
-      beneficiary:this.beneficiary.value.beneficiary ,
+      pincode: this.beneficiary.value.pincode,
+      email: this.beneficiary.value.email,
+      modile: this.beneficiary.value.modile,
+      partyType: this.beneficiary.value.partyType,
+      bank: this.beneficiary.value.bank,
+      ifscCode: this.beneficiary.value.ifscCode,
+      accountNumber: this.beneficiary.value.accountNumber,
 
     }).subscribe((data:any)=>{
       this.toast.success(data?.message)
-      this.router.navigate(['/dashboard/beneficiariesList'])
+      this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
     },(err=>{
       this.toast.error(err.error.message);
     }))

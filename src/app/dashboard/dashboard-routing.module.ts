@@ -23,6 +23,9 @@ loadChildren: () => import('./project/project.module').then(m => m.ProjectModule
 { path: 'masters',
 loadChildren: () => import('./masters/masters.module').then(m => m.MastersModule)
 },
+{ path: 'beneficiary',
+loadChildren: () => import('./beneficiary/beneficiary.module').then(m => m.BeneficiaryModule)
+},
 
 
 ];
