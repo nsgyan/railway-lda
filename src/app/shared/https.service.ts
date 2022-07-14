@@ -33,6 +33,9 @@ export class HttpsService {
   getBeneficiary(){
     return this.httpService.get(Globals.route.getBeneficiary)
   }
+  getBeneficiaryByID(id:any){
+    return this.httpService.get(`${Globals.route.getBeneficiary}/${id}`)
+  }
   getSurvey(){
     return this.httpService.get(Globals.route.getSurvey)
   }

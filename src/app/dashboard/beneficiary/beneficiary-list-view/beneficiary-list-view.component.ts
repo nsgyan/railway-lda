@@ -41,6 +41,10 @@ export class BeneficiaryListViewComponent implements OnInit {
       this.toast.error('Internal server error')
     })
   }
+  edit(id: any) {
+    let url = '/dashboard/beneficiary/edit/' + id
+    this.router.navigate([url])
+  }
 
 
 }
