@@ -36,6 +36,7 @@ export class Globals {
         "login":Globals.server+'user/login',
         'upload': Globals.server + 'upload',
         'survey':Globals.server+ 'survey/addsurvey',
-        'getSurvey':Globals.server+ 'survey/getsurvey'
+        'getSurvey':Globals.server+ 'survey/getsurvey',
+        'getSurveyByID':Globals.server+ 'survey/getSurveyByID'
     };
 }

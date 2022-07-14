@@ -144,6 +144,13 @@ export class HttpsService {
       params:queryParams
     });
   }
+  getSurveyByID(id:any){
+    let queryParams= new HttpParams();
+    queryParams=queryParams.append('id',id)
+    return this.httpService.get(Globals.route.getSurveyByID,{
+      params:queryParams
+    })
+  }
 
   getDistrict(state:any) {
     let queryParams= new HttpParams();
