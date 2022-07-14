@@ -35,6 +35,7 @@ export class Globals {
         'addBeneficiary': Globals.server + 'beneficiary/add',
         "login":Globals.server+'user/login',
         'upload': Globals.server + 'upload',
-        'survey':Globals.server+ 'survey/addsurvey'
+        'survey':Globals.server+ 'survey/addsurvey',
+        'getSurvey':Globals.server+ 'survey/getsurvey'
     };
 }

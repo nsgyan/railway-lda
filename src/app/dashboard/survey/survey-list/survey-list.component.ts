@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Beneficiary } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
+import { HttpsService } from 'src/app/shared/https.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-survey-list',
@@ -9,21 +12,27 @@ import { DataService } from 'src/app/shared/data.service';
   styleUrls: ['./survey-list.component.css']
 })
 export class SurveyListComponent implements OnInit {
-  beneficiary: any
-  constructor(private data: DataService,
-    private router: Router) { }
+  survey: any
+  constructor(   private router: Router,
+    private data: DataService,
+    private toast: ToastrService,
+    private httpService:HttpsService,) {
+      this.httpService.getSurvey().subscribe((data:any)=>{
+      console.log(data);
+      data.surveydata.map((item:any)=>{
+        item.documents= environment.download + item.documents
+      })
+
+this.survey=data.surveydata
+
+      })
+    }
 
   ngOnInit(): void {
-    this.beneficiary = this.data.getBeneficiary()
-    console.log(this.beneficiary);
-    this.data.BeneficiaryChange.subscribe((beneficiary: Beneficiary[]) => {
-      this.beneficiary = beneficiary
-      console.log(beneficiary);
 
-    })
   }
-  addbeneficiary() {
-    this.router.navigate(['/dashboard/beneficiary/addBeneficiaries'])
+  addsurvey() {
+    this.router.navigate(['/dashboard/survey/addsurvey'])
   }
 
 }

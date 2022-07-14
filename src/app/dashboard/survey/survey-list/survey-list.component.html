@@ -7,7 +7,7 @@
           <h3 class="m-n font-thin text-white"> Beneficiary  List View</h3>
         </div>
         <div class="col-sm-6 text-right poppins hidden-xs">
-          <button class="btn btn-sm text-10 btn-addNew m-r-xs report_csv_triger" (click)="addbeneficiary()"><i class="fa fa-plus"></i> Create New  Beneficiary </button>
+          <button class="btn btn-sm text-10 btn-addNew m-r-xs report_csv_triger" (click)="addsurvey()"><i class="fa fa-plus"></i> Create New  Beneficiary </button>
         </div>
       </div>
     </div>
@@ -68,41 +68,29 @@
                     <tr role="row">
                       <th class="text-center">#</th>
                       <th> Date</th>
-                      <th>Beneficiary</th>
-                      <th>Gata No.</th>
-                      <th>Rakba</th>
+                      <th>Project Name</th>
+                      <th>Project Number</th>
+                      <!-- <th>Rakba</th>
                       <th>Pratifal Rate</th>
                       <th>Total Pratifal</th>
                       <th>Share of Beneficiary</th>
-                      <th>Cheque</th>
-                      <th>Registration Amount</th>
+                      <th>Cheque</th> -->
+                      <th>Documents</th>
                       <th class="text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody >
-                    <tr *ngFor="let item of beneficiary ;let i=
+                    <tr *ngFor="let item of survey ;let i=
                     index">
                       <td class="text-center">
                       {{i+1}}
                       </td>
                       <td><span class="font-bold text-theme">{{item.date}}</span></td>
-                      <td>
-                          <ul class="list-unstyled text-xs">
-                            <li><span class="font-bold text-theme">Beneficiary Name: </span> {{item.beneficiaryName}}</li>
-                            <li><span class="font-bold text-theme"> Father's / Husband's Name: </span>  </li>
-                          </ul>
-                      </td>
-                      <td><span class="font-bold text-theme">{{item.gataNumber}}</span></td>
-                      <td><span class="font-bold text-theme">{{item.rakba}}</span></td>
-                      <td><span class="font-bold text-theme">{{item.pratifalRate}}</span></td>
 
-                      <td><span class="font-bold text-theme">{{item.totalPratifal}}</span></td>
-                      <td><span class="font-bold text-theme">{{item.beneficaryShare}}</span></td>
-                      <ul class="list-unstyled text-xs">
-                          <li><span class="font-bold text-theme">Cheque Numbe: </span> {{item.chequeNumber}}</li>
-                          <li><span class="font-bold text-theme"> Cheque Date: </span> {{item.chequeDate}}  </li>
-                        </ul>
-                      <td><span class="font-bold text-theme">{{item.registrationAmount}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.projectName}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.projectNumber}}</span></td>
+
+                      <td><a class="ml-2" href="{{item?.documents}}" target="blank" *ngIf='item?.documents'>Sub Category Document</a></td>
 
                       <td class="text-center">
                         <div class="btn-group dropdown">
