@@ -30,6 +30,9 @@ export class HttpsService {
 
     return this.httpService.request(request);
   }
+  getBeneficiary(){
+    return this.httpService.get(Globals.route.getBeneficiary)
+  }
   getSurvey(){
     return this.httpService.get(Globals.route.getSurvey)
   }
@@ -111,6 +114,9 @@ export class HttpsService {
   }
   delsurvey(id: any) {
     return this.httpService.delete(`${Globals.route.delsurvey}/${id}`);
+  }
+  delBeneficiary(id: any) {
+    return this.httpService.delete(`${Globals.route.delBeneficiary}/${id}`);
   }
 
 

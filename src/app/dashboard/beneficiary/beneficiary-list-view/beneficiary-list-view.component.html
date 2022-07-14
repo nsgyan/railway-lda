@@ -67,9 +67,9 @@
                     <thead>
                       <tr role="row">
                         <th class="text-center">#</th>
-                        <th> Date</th>
+                      
                         <th>Beneficiary Name</th>
-                        <th>Beneficiary <Address></Address></th>
+                        <th>Beneficiary  Address<Address></Address></th>
                         <th>State</th>
                         <th>District</th>
                         <th>Mobile Number</th>
@@ -85,24 +85,16 @@
                         <td class="text-center">
                         {{i+1}}
                         </td>
-                        <td><span class="font-bold text-theme">{{item.date}}</span></td>
-                        <td>
-                            <ul class="list-unstyled text-xs">
-                              <li><span class="font-bold text-theme">Beneficiary Name: </span> {{item.beneficiaryName}}</li>
-                              <li><span class="font-bold text-theme"> Father's / Husband's Name: </span>  </li>
-                            </ul>
-                        </td>
-                        <td><span class="font-bold text-theme">{{item.gataNumber}}</span></td>
-                        <td><span class="font-bold text-theme">{{item.rakba}}</span></td>
-                        <td><span class="font-bold text-theme">{{item.pratifalRate}}</span></td>
+                        <td><span class="font-bold text-theme">{{item.partyName}}</span></td>
+                        <td><span class="font-bold text-theme">{{item.address}}</span></td>
+                        <td><span class="font-bold text-theme">{{item.state}}</span></td>
+                        <td><span class="font-bold text-theme">{{item.district}}</span></td>
+                        <td><span class="font-bold text-theme">{{item.modile}}</span></td>
                         
-                        <td><span class="font-bold text-theme">{{item.totalPratifal}}</span></td>
-                        <td><span class="font-bold text-theme">{{item.beneficaryShare}}</span></td>
-                        <ul class="list-unstyled text-xs">
-                            <li><span class="font-bold text-theme">Cheque Numbe: </span> {{item.chequeNumber}}</li>
-                            <li><span class="font-bold text-theme"> Cheque Date: </span> {{item.chequeDate}}  </li>
-                          </ul>
-                        <td><span class="font-bold text-theme">{{item.registrationAmount}}</span></td>
+                        <td><span class="font-bold text-theme">{{item.email}}</span></td>
+                        <td><span class="font-bold text-theme">{{item.partyType}}</span></td>
+                   
+                        
 
                         <td class="text-center">
                           <div class="btn-group dropdown">
@@ -111,7 +103,7 @@
                                   class="fa fa-caret-down"></i></span></button>
                             <ul class="dropdown-menu">
                               <li><a href=""><i class="fa fa-edit"></i> Edit </a></li>
-                              <li><a href="#"><i class="fa fa-trash-o"></i> Delete </a></li>
+                              <li><a (click)="delete(item._id)"><i class="fa fa-trash-o"></i> Delete </a></li>
                               <li><a href="#"><i class="fa fa-lock"></i> Lock </a> </li>
                             </ul>
                           </div>

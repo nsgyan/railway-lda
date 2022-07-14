@@ -33,6 +33,8 @@ export class Globals {
         'addProject': Globals.server + 'project/add',
         'getProject': Globals.server + 'project/',
         'addBeneficiary': Globals.server + 'beneficiary/add',
+        'getBeneficiary': Globals.server + 'beneficiary/get',
+        'delBeneficiary': Globals.server + 'beneficiary/del',
         "login":Globals.server+'user/login',
         'upload': Globals.server + 'upload',
         'survey':Globals.server+ 'survey/addsurvey',
