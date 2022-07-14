@@ -38,6 +38,7 @@ export class Globals {
         'survey':Globals.server+ 'survey/addsurvey',
         'getSurvey':Globals.server+ 'survey/getsurvey',
         'getSurveyByID': Globals.server + 'survey/getSurveyById',
-        'updatesurvey': Globals.server + 'survey/updatesurvey'
+        'updatesurvey': Globals.server + 'survey/updatesurvey',
+        'delsurvey': Globals.server + 'survey/delsurvey'
     };
 }

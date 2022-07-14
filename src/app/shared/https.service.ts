@@ -109,6 +109,9 @@ export class HttpsService {
   updatesurvey(formData: any,id:any) {
     return this.httpService.patch(`${Globals.route.updatesurvey}/${id}`, formData);
   }
+  delsurvey(id: any) {
+    return this.httpService.delete(`${Globals.route.delsurvey}/${id}`);
+  }
 
 
 

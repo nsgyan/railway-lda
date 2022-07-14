@@ -44,5 +44,12 @@ this.survey=data.surveydata
     this.router.navigate([path])
     // }
   }
+  delete(id: any) {
+    this.httpService.delsurvey(id).subscribe(res => {
+      this.toast.success('deleted survey successfully')
+    }, err => {
+      this.toast.success('Internal server error')
+    })
+  }
 
 }
