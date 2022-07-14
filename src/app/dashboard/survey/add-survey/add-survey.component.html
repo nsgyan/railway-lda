@@ -53,6 +53,17 @@
                                   </p>
                               </div>
                           </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label font-weight-600">Document</label>
+                                <input type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
+                                (change)="changeListener($event,0,'outside')" />
+                                <p *ngIf="survey.get('document')?.hasError('required')&&(submitted||survey.get('document')?.dirty||survey.get('document')?.touched )"
+                                    style="color: red;">
+                                    Please Upload <strong>Doccumnet</strong>
+                                </p>
+                            </div>
+                        </div>
 
 
                       </div>
@@ -112,7 +123,7 @@
                                         <div class="col-md-4">
                                           <div class="form-group">
 
-                                              <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                                              <select class="form-control" formControlName="state" (change)="getDistrict($event,i)">
                                                   <option hidden>Select State</option>
                                                   <option *ngFor="let item of state" value="{{ item }}">
                                                       {{ item }}
@@ -129,9 +140,9 @@
                                         <div class="">
                                           <div class="form-group">
 
-                                              <select class="form-control" formControlName="district" (change)="getBlock($event)">
+                                              <select class="form-control" formControlName="district" (change)="getBlock($event,i)">
                                                   <option hidden>Select District</option>
-                                                  <option *ngFor="let item of district" value="{{ item }}">
+                                                  <option *ngFor="let item of district[i]" value="{{ item }}">
                                                       {{ item }}
                                                   </option>
                                               </select>
@@ -148,7 +159,7 @@
                                                   <select class="form-control" formControlName="block"
                                                       (change)="getVillage($event, i)">
                                                       <option hidden>Select Block</option>
-                                                      <option *ngFor="let item of block" value="{{ item }}">
+                                                      <option *ngFor="let item of block[i]" value="{{ item }}">
                                                           {{ item }}
                                                       </option>
                                                   </select>
@@ -258,9 +269,9 @@
                                   </p>
                               </td>
                               <td>
-                                <input type="text" formControlName="doccumnet" class="form-control"
-                                    name="" />
-                                <p *ngIf="opt.get('doccumnet')?.hasError('required')&&(submitted||opt.get('doccumnet')?.dirty||opt.get('doccumnet')?.touched )"
+                                <input type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
+                                (change)="changeListener($event,i,'inside')" />
+                                <p *ngIf="opt.get('document')?.hasError('required')&&(submitted||opt.get('document')?.dirty||opt.get('document')?.touched )"
                                     style="color: red;">
                                     Please Upload <strong>Doccumnet</strong>
                                 </p>

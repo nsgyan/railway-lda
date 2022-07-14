@@ -13,6 +13,26 @@ import { LocalstorageService } from "./localstorage.service";
 export class HttpsService {
   constructor(private httpService: HttpClient,
     private localStroage: LocalstorageService) { }
+
+
+  upload(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    const request = new HttpRequest(
+      'POST',
+      Globals.route.upload,
+      formData,
+      {
+        reportProgress: false,
+        responseType: 'text',
+      }
+    );
+
+    return this.httpService.request(request);
+  }
+  addSurvey(formData:any){
+    return this.httpService.post(Globals.route.survey,formData)
+  }
     login(formData:any){
       return this.httpService.post(Globals.route.login,formData)
     }
