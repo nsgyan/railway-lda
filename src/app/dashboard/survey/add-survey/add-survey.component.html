@@ -46,11 +46,12 @@
                           <div class="col-md-4">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Date</label>
-                                  <input formControlName="date" type="date" class="form-control" name="" />
-                                  <p *ngIf="survey.get('date')?.hasError('required')&&(submitted||survey.get('date')?.dirty||survey.get('date')?.touched )"
-                                      style="color: red;">
-                                      Date <strong>Required</strong>
-                                  </p>
+                                  <input type="text" formControlName="surveyNumber" class="form-control"
+                                  name="" />
+                              <p *ngIf="survey.get('surveyNumber')?.hasError('required')&&(submitted||survey.get('surveyNumber')?.dirty||survey.get('surveyNumber')?.touched )"
+                                  style="color: red;">
+                                  Survey Number <strong>Required</strong>
+                              </p>
                               </div>
                           </div>
                           <div class="col-md-4">
@@ -85,7 +86,6 @@
                                   <tr>
                                       <th>#</th>
 
-                                      <th>Survey Number</th>
                                        <th>State</th>
                                       <th>District</th>
                                       <th>Block</th>
@@ -111,14 +111,7 @@
                                   <tr [formGroupName]="i">
                                       <td>{{ i + 1 }}</td>
 
-                                      <td>
-                                          <input type="text" formControlName="surveyNumber" class="form-control"
-                                              name="" />
-                                          <p *ngIf="opt.get('surveyNumber')?.hasError('required')&&(submitted||opt.get('surveyNumber')?.dirty||opt.get('surveyNumber')?.touched )"
-                                              style="color: red;">
-                                              Survey Number <strong>Required</strong>
-                                          </p>
-                                      </td>
+
                                       <td>
                                         <div class="col-md-4">
                                           <div class="form-group">

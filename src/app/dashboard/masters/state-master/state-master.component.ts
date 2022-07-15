@@ -31,7 +31,7 @@ export class StateMasterComponent implements OnInit {
         stateUT:['',Validators.required],
         statetype:['',Validators.required],
         stateName:['',Validators.required],
-        censusCode:['',Validators.required],
+        censusCode:[''],
 
 
       })

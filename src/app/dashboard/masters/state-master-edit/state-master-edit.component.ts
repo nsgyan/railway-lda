@@ -27,7 +27,7 @@ id:any
     stateUT:['',Validators.required],
     statetype:['fd',Validators.required],
     stateName:['fddddddd',Validators.required],
-    censusCode:['fddddddddd',Validators.required],
+    censusCode:['fddddddddd',],
   })
       this.httpService.getstateByID(this.id).subscribe((data:any)=>{
         console.log(data.state);
