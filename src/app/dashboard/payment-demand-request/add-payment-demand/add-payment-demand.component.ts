@@ -32,11 +32,11 @@ export class AddPaymentDemandComponent implements OnInit {
                 this.state.push(projectData.state);
               }
             })
-  
-  
-  
+
+
+
           })
-  
+
         })
         this.beneficiary=this.fb.group({
           projectName:['',Validators.required],
@@ -45,17 +45,17 @@ export class AddPaymentDemandComponent implements OnInit {
           state:['',Validators.required],
           district:['',Validators.required],
           beneficiary:this.fb.array([]) ,
-  
+
         })
-  
-  
+
+
       }
-  
+
     ngOnInit(): void {
       this.addbeneficiary()
     }
-  
-  
+
+
     beneficiarys(): FormArray {
       return this.beneficiary.get("beneficiary") as FormArray
     }
@@ -65,7 +65,7 @@ export class AddPaymentDemandComponent implements OnInit {
    get beneficiaryControl(): FormArray {
       return this.beneficiary.get("beneficiary") as FormArray
     }
-  
+
     newbeneficiary(): FormGroup {
       return this.fb.group({
         block:['',Validators.required],
@@ -82,8 +82,8 @@ export class AddPaymentDemandComponent implements OnInit {
         // remark:['']
       })
     }
-  
-  
+
+
     addbeneficiary() {
       this.beneficiarys().push(this.newbeneficiary());
     }
@@ -91,15 +91,16 @@ export class AddPaymentDemandComponent implements OnInit {
       this.beneficiarys().removeAt(quesIndex);
       this.village.splice(quesIndex,1)
     }
-  
-  
+
+
     getPriject(event:any){
-  
+
   this.state=[]
   this.project.map((item:any)=>{
     if(item.projectName===event.target.value){
       this.beneficiary.get('projectNumber')?.setValue(item.projectNumber)
       this.beneficiary.get('projectNumber')?.updateValueAndValidity
+      this.getSurvey(item.projectNumber)
     item.projectDetails.map((projectData:any)=>{
       if (!this.state.includes(projectData.state)) {
         // ✅ only runs if value not in array
@@ -108,31 +109,37 @@ export class AddPaymentDemandComponent implements OnInit {
     })}
     this.beneficiary.get('state')?.reset()
     this.beneficiary.get('state')?.updateValueAndValidity
-  
-  
-  
+
+
+
   })
-  
-  
+
+
     }
-  
+    getSurvey(projectNumber:any){
+this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe(Data=>{
+
+})
+    }
+
+
     getDistrict(event:any){
   this.district=[]
-  
+
       this.project.map((item:any)=>{
         if(item.projectName===this.beneficiary.value.projectName){
         item.projectDetails.map((projectData:any)=>{
           if (projectData.state===event.target.value) {
             if(!this.district.includes(projectData.district))
-  
-  
+
+
             // ✅ only runs if value not in array
             this.district.push(projectData.district);
           }
         })}
       })
-  
-  
+
+
     }
     getBlock(event:any){
       this.block=[]
@@ -147,7 +154,7 @@ export class AddPaymentDemandComponent implements OnInit {
         })}
       })
     }
-  
+
     getVillage(event:any,index:any){
       let newArray: any[]=[]
       const control= this.beneficiary.get("beneficiary") as FormArray
@@ -161,19 +168,19 @@ export class AddPaymentDemandComponent implements OnInit {
               console.log('hello');
     newArray.push(projectData.village);}
     // console.log(newArray);
-  
+
           this.village.splice(index, 0, newArray);
-  
-  
+
+
           }
         })}
       })
       console.log(this.village);
-  
-  
-  
+
+
+
     }
-  
+
     onSubmit() {
       // let date=this.beneficiary.value.data.toString()
     console.log(this.beneficiary);
@@ -185,26 +192,25 @@ export class AddPaymentDemandComponent implements OnInit {
         state:this.beneficiary.value.state,
         district:this.beneficiary.value.district,
         beneficiary:this.beneficiary.value.beneficiary ,
-  
+
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
         this.router.navigate(['/dashboard/beneficiariesList'])
       },(err=>{
         this.toast.error(err.error.message);
       }))
-  
+
     }
     else{
       this.submitted=true
       this.toast.error('Please Fill Required Field');
     }
-  
-  
+
+
     }
-  
+
     cancel() {
       this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
-  
+
   }
   }
-  
