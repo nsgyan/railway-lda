@@ -13,8 +13,8 @@
 }
 
 .main-bg {
-    /* background: url(../../assets/img/bg.jpg) center center no-repeat;
-    background-size: cover; */
+  background: url(../../assets/img/bg.jpg) center center no-repeat;
+  background-size: cover;
     /* background-color: #f4f4f4; */
     /* background: linear-gradient(to right, #c45a11 , #93430b ); */
     height: 100vh;
@@ -26,7 +26,7 @@
 }
 
 .main-bg-con {
-    background-color: #fff;
+    background-color: #ffffffbf;
     border-radius: 10px;
     border: 1.5px solid #838181;
 }
