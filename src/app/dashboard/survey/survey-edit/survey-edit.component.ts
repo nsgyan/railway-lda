@@ -36,11 +36,14 @@ export class SurveyEditComponent implements OnInit {
       private httpService:HttpsService,
       private toast: ToastrService,) {
       this.survey = this.fb.group({
-        projectName: ['', Validators.required],
-        projectNumber: ['', Validators.required],
-        date: ['', Validators.required],
-        surveyDetail: this.fb.array([]),
-        document: ['', Validators.required]
+        projectName:['',Validators.required],
+        projectNumber:['',Validators.required],
+        date:['',Validators.required],
+        surveyNumber:['',Validators.required],
+        surveyDetail:this.fb.array([]) ,
+        document:['',Validators.required],
+       state:['',Validators.required],
+       district:['',Validators.required],
       })
       this.httpService.getlandNature().subscribe((data: any) => {
           this.landNature=data?.landNature
@@ -72,38 +75,47 @@ export class SurveyEditComponent implements OnInit {
         this.survey.get('date')?.updateValueAndValidity()
         this.survey.get('document')?.setValue(this.surveyData?.documents)
         this.survey.get('document')?.updateValueAndValidity()
+        this.survey.get('surveyNumber')?.setValue(this.surveyData?.surveyNumber)
+        this.survey.get('surveyNumber')?.updateValueAndValidity()
+        this.survey.get('state')?.setValue(this.surveyData?.state)
+        this.survey.get('state')?.updateValueAndValidity()
+        this.survey.get('district')?.setValue(this.surveyData?.district)
+        this.survey.get('district')?.updateValueAndValidity()
         this.getEditPriject(this.survey.value.projectName)
         const control = this.survey.get("surveyDetail") as FormArray
         let i = 0
+        this.event.target.value =   this.surveyData.state
+        this.getDistrict(this.event)
+        this.event.target.value =   this.surveyData.district
+        this.getBlock(this.event)
         this.surveyData.surveyDetails.map((item: any) => {
           control.push(
             this.fb.group({
-              surveyNumber: [item.surveyNumber, Validators.required],
-              state: [item.state, Validators.required],
-              district: [item.district, Validators.required],
-              block: [item.block, Validators.required],
-              village: [item.village, Validators.required],
-              area: [item.area, Validators.required],
-              totalArea: [item.totalArea, Validators.required],
-              surveyParty: [item.surveyParty, Validators.required],
-              landType: [item.landType, Validators.required],
-              landNature: [item.landNature, Validators.required],
-              landCategory: [item.landCategory, Validators.required],
-              objecton: [item.objecton, Validators.required],
-              objectionType: [item.objectionType],
-              document: [item.document, Validators.required],
+              block:[item.block,Validators.required],
+              village: [item.village,Validators.required],
+              area:[item.area,Validators.required],
+              totalArea:[item.totalArea,Validators.required],
+              amount:[item.amount,Validators.required],
+              beneficiaryCount:[item.beneficiaryCount,Validators.required],
+              landType:[item.landType,Validators.required],
+              landNature:[item.landNature,Validators.required],
+              landCategory:[item.landCategory,Validators.required],
+              objecton:[item.objecton,Validators.required],
+              objectionType:[item.objectionType],
+              document:[item.document,Validators.required],
+
+
             }))
-          this.event.target.value = item.state
-          this.getDistrict(this.event, i)
-          this.event.target.value = item.district
-          this.getBlock(this.event, i)
+
+          // console.log();
+
           this.event.target.value = item.block
           this.getVillage(this.event, i)
-          console.log(this.block);
+          console.log(this.block,'dfg');
 
           this.event.target.value = item.objecton
           this.getobjecton(this.event, i)
-          console.log(this.objectionType, 'objen');
+          // console.log(this.objectionType, 'objen');
 
           i++
         })
@@ -134,20 +146,19 @@ export class SurveyEditComponent implements OnInit {
 
     newsurvey(): FormGroup {
       return this.fb.group({
-        surveyNumber:['',Validators.required],
-         state:['',Validators.required],
-         district:['',Validators.required],
         block:['',Validators.required],
         village: ['',Validators.required],
         area:['',Validators.required],
         totalArea:['',Validators.required],
-        surveyParty:['',Validators.required],
+        amount:['',Validators.required],
+        beneficiaryCount:['',Validators.required],
         landType:['',Validators.required],
         landNature:['',Validators.required],
         landCategory:['',Validators.required],
         objecton:['',Validators.required],
         objectionType:[''],
         document:['',Validators.required],
+
 
         // chequeNumber:[''],
         // chequeDate:[''],
@@ -299,8 +310,22 @@ export class SurveyEditComponent implements OnInit {
 
     }
 
+    getBeneficiaryCount(event:any,index:any){
+      const control= this.survey.get("surveyDetail") as FormArray
+ this.httpService.getCountBeneficiary({state:this.survey.value.state,
+   district:this.survey.value.district,
+   block:control.at(index).value.block,
+   village:control.at(index).value.village
+ }).subscribe((data:any)=>{
+   console.log(data);
+   control.at(index).get('beneficiaryCount')?.setValue(data.count)
+   control.at(index).get('beneficiaryCount')?.updateValueAndValidity()
 
-    getDistrict(event:any,index:any){
+ })
+     }
+
+
+    getDistrict(event:any){
       console.log(event.target.value);
 
  let newdistrict:any =[]
@@ -309,36 +334,36 @@ export class SurveyEditComponent implements OnInit {
         if(item.projectName===this.survey.value.projectName){
         item.acquisitionDetails?.map((projectData:any)=>{
           if (projectData.state===event.target.value) {
-            if(!newdistrict.includes(projectData.district))
+            if(!this.district.includes(projectData.district))
 
 
             // ✅ only runs if value not in array
-            newdistrict.push(projectData.district);
+            this.district.push(projectData.district);
           }
         })}
       })
-      this.district.splice(index, 0, newdistrict);
+      // this.district.splice(index, 0, newdistrict);
 
 
 
     }
 
-    getBlock(event:any,index:any){
+    getBlock(event:any){
      let newblock:any=[]
       this.project.map((item:any)=>{
         if(item.projectName===this.survey.value.projectName){
         item.acquisitionDetails?.map((projectData:any)=>{
           if (projectData.district===event.target.value) {
 
-            if(!newblock.includes(projectData.block)){
+            if(!  this.block.includes(projectData.block)){
           // ✅ only runs if value not in array
 
 
-          newblock.push(projectData.block);}
+          this.block.push(projectData.block);}
           }
         })}
       })
-      this.block.splice(index, 0, newblock);
+      // this.block.splice(index, 0, newblock);
 
 
     }
