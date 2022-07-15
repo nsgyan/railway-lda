@@ -21,10 +21,10 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="control-label font-weight-600">Project Name
+                                    <label class="control-label font-weight-600">Party Name
                                     </label>
                                     <input type="text" formControlName="partyName" class="form-control">
-                                
+
                                     <p *ngIf="beneficiary.get('partyName')?.hasError('required')&&(submitted||beneficiary.get('partyName')?.dirty||beneficiary.get('partyName')?.touched )"
                                         style="color: red;">
                                         Party Name <strong>Required</strong>
@@ -42,7 +42,7 @@
                                      </p>
                                 </div>
                             </div>
-                          
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">State</label>
@@ -64,7 +64,7 @@
                                     <select   class="form-control" formControlName="district">
                                         <option hidden>Select District</option>
                                         <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
-      
+
                                        </select>
                                     <p *ngIf="beneficiary.get('district')?.hasError('required')&&(submitted||beneficiary.get('district')?.dirty||beneficiary.get('district')?.touched )"
                                         style="color: red;">
@@ -148,7 +148,7 @@
                     <div class="clearfix"></div>
 
                     <div class="borderFormBox">
-                  
+
                         <div class="clearfix"></div>
 
                         <div class="clearfix"></div>

@@ -1,196 +1,124 @@
-beneficiary:FormGroup;
-state:any=[]
-district:any=[]
-block:any=[]
-village:any=[]
-  project:any
-  submitted:boolean=false
-  constructor( private fb:FormBuilder,
-    private router: Router,
-    private data: DataService,
-    private httpService:HttpsService,
-    private toast: ToastrService,) {
-      this.httpService.getProject().subscribe((data:any)=>{
-        this.project=data.projects
-        this.project.map((item:any)=>{
-          item.projectDetails.map((projectData:any)=>{
-            if (!this.state.includes(projectData.state)) {
-              // ✅ only runs if value not in array
-              this.state.push(projectData.state);
-            }
-          })
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body ">
+    <!-- main header -->
+    <div class="bg-blue lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h3 class="m-n font-thin text-white"> Beneficiary  List View</h3>
+        </div>
+        <div class="col-sm-6 text-right poppins hidden-xs">
+          <button class="btn btn-sm text-10 btn-addNew m-r-xs report_csv_triger" (click)="addbeneficiary()"><i class="fa fa-plus"></i> Create New  Beneficiary </button>
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card no-shadow">
+          <div class="tab-content bg-seashell">
+            <div role="tabpanel" class="tab-pane active g-py-0">
+              <div class="row row-xs">
+                <div class="row" style="margin-top: 1rem; margin-bottom: .5rem;">
+                  <div>
+                    <div class="col-md-3">
+                      <label class="font-bold"><span>0</span> Selected: </label>
+                      <div class="btn-group g-px-12 dropdown">
+                        <button class="btn btn-default btn-sm btn-bg dropdown-toggle r-2x" data-toggle="dropdown"> <span
+                            class="dropdown-label g-px-5">Bulk
+                            actions</span> <span class="caret"></span> </button>
+                        <ul class="dropdown-menu text-left text-sm">
+                          <li><a class="in-stock-open"><i class="fa fa-check"></i> Approve </a></li>
+                          <li><a class="in-transit-open"><i class="fa fa-close"></i> Reject </a></li>
+                          <li><a class="in-hold-open"><i class="fa fa-lock"></i> Lock </a> </li>
+                          <li><a class="in-location-open"><i class="fa fa-trash-o"></i> Delete</a></li>
+                        </ul>
+                        <button type="submit" class="btn btn-default btn-sm custom_search"> Apply</button>
+                      </div>
+                      <div class="btn-group dropdown"></div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm " placeholder="Search.......">
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-default btn-sm "> <i class="fa fa-search"></i></button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="dropzone dropzone-previews dz-clickable" id="my-awesome-dropzone">
+                        <div class="dz-default dz-message"><span>Upload Files</span> </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2 text-xs-right">
+                      <label>
+                        <select class="form-control input-sm">
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                          <option value="500">500</option>
+                          <option value="50000">All</option>
+                        </select>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <table class="table bg-white">
+                  <thead>
+                    <tr role="row">
+                      <th class="text-center">#</th>
+
+                      <th>Beneficiary Name</th>
+                      <th>Beneficiary  Address</th>
+                      <th>State</th>
+                      <th>District</th>
+                      <th>Mobile Number</th>
+                      <th>Email</th>
+                      <th>partyType</th>
+
+                      <th class="text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let item of beneficiary ;let i=
+                    index">
+                      <td class="text-center">
+                      {{i+1}}
+                      </td>
+                      <td><span class="font-bold text-theme">{{item.partyName}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.address}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.state}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.district}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.modile}}</span></td>
+
+                      <td><span class="font-bold text-theme">{{item.email}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.partyType}}</span></td>
 
 
 
-        })
+                      <td class="text-center">
+                        <div class="btn-group dropdown">
+                          <button class="btn btn-default w-xxs btn-sm r-2x" data-toggle="dropdown"
+                            aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
+                                class="fa fa-caret-down"></i></span></button>
+                          <ul class="dropdown-menu">
+                            <!-- <li><a (click)="edit(item._id)"><i class="fa fa-edit"></i> Edit </a></li>
+                            <li><a (click)="delete(item._id)"><i class="fa fa-trash-o"></i> Delete </a></li> -->
+                            <li><a href="#"><i class="fa fa-lock"></i> Lock </a> </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      })
-      this.beneficiary=this.fb.group({
-        projectName:['',Validators.required],
-        projectNumber:['',Validators.required],
-        date:['',Validators.required],
-        state:['',Validators.required],
-        district:['',Validators.required],
-        beneficiary:this.fb.array([]) ,
-
-      })
-
-
-    }
-
-  ngOnInit(): void {
-    this.addbeneficiary()
-  }
-
-
-  beneficiarys(): FormArray {
-    return this.beneficiary.get("beneficiary") as FormArray
-  }
-  inputType(): FormArray {
-    return this.beneficiary.get("inputType") as FormArray
-  }
- get beneficiaryControl(): FormArray {
-    return this.beneficiary.get("beneficiary") as FormArray
-  }
-
-  newbeneficiary(): FormGroup {
-    return this.fb.group({
-      block:['',Validators.required],
-      village: ['',Validators.required],
-      beneficiaryName:['',Validators.required],
-      fatherOrHusbandName:['',Validators.required],
-      gataNumber:['',Validators.required],
-      rakba:['',Validators.required],
-      pratifalRate:['',Validators.required],
-      beneficaryShare:['',Validators.required],
-      // chequeNumber:[''],
-      // chequeDate:[''],
-      // registrationAmount:[''],
-      // remark:['']
-    })
-  }
+  </div>
 
 
-  addbeneficiary() {
-    this.beneficiarys().push(this.newbeneficiary());
-  }
-  removebeneficiary(quesIndex:number) {
-    this.beneficiarys().removeAt(quesIndex);
-    this.village.splice(quesIndex,1)
-  }
-
-
-  getPriject(event:any){
-
-this.state=[]
-this.project.map((item:any)=>{
-  if(item.projectName===event.target.value){
-    this.beneficiary.get('projectNumber')?.setValue(item.projectNumber)
-    this.beneficiary.get('projectNumber')?.updateValueAndValidity
-  item.projectDetails.map((projectData:any)=>{
-    if (!this.state.includes(projectData.state)) {
-      // ✅ only runs if value not in array
-      this.state.push(projectData.state);
-    }
-  })}
-  this.beneficiary.get('state')?.reset()
-  this.beneficiary.get('state')?.updateValueAndValidity
-
-
-
-})
-
-
-  }
-
-  getDistrict(event:any){
-this.district=[]
-
-    this.project.map((item:any)=>{
-      if(item.projectName===this.beneficiary.value.projectName){
-      item.projectDetails.map((projectData:any)=>{
-        if (projectData.state===event.target.value) {
-          if(!this.district.includes(projectData.district))
-
-
-          // ✅ only runs if value not in array
-          this.district.push(projectData.district);
-        }
-      })}
-    })
-
-
-  }
-  getBlock(event:any){
-    this.block=[]
-    this.project.map((item:any)=>{
-      if(item.projectName===this.beneficiary.value.projectName){
-      item.projectDetails.map((projectData:any)=>{
-        if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district) {
-          if(!this.block.includes(projectData.block)){
-        // ✅ only runs if value not in array
-          this.block.push(projectData.block);}
-        }
-      })}
-    })
-  }
-
-  getVillage(event:any,index:any){
-    let newArray: any[]=[]
-    const control= this.beneficiary.get("beneficiary") as FormArray
-    this.village.splice(index,1)
-    console.log(this.beneficiary)
-    this.project.map((item:any)=>{
-      if(item.projectName===this.beneficiary.value.projectName){
-      item.projectDetails.map((projectData:any)=>{
-        if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district&&projectData.block===control.at(index).value.block) {
-          if(!newArray.includes(projectData.village)){
-            console.log('hello');
-  newArray.push(projectData.village);}
-  // console.log(newArray);
-
-        this.village.splice(index, 0, newArray);
-
-
-        }
-      })}
-    })
-    console.log(this.village);
-
-
-
-  }
-
-  onSubmit() {
-    // let date=this.beneficiary.value.data.toString()
-  console.log(this.beneficiary);
-  if(this.beneficiary.valid){
-    this.httpService.addBeneficiary({
-      projectName:this.beneficiary.value.projectName,
-      projectNumber:this.beneficiary.value.projectNumber,
-      date:this.beneficiary.value.date,
-      state:this.beneficiary.value.state,
-      district:this.beneficiary.value.district,
-      beneficiary:this.beneficiary.value.beneficiary ,
-
-    }).subscribe((data:any)=>{
-      this.toast.success(data?.message)
-      this.router.navigate(['/dashboard/beneficiariesList'])
-    },(err=>{
-      this.toast.error(err.error.message);
-    }))
-
-  }
-  else{
-    this.submitted=true
-    this.toast.error('Please Fill Required Field');
-  }
-
-
-  }
-
-  cancel() {
-    this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
-
-}
-}
+</div>

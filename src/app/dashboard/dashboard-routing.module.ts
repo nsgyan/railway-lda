@@ -26,6 +26,9 @@ loadChildren: () => import('./masters/masters.module').then(m => m.MastersModule
 { path: 'beneficiary',
 loadChildren: () => import('./beneficiary/beneficiary.module').then(m => m.BeneficiaryModule)
 },
+{ path: 'paymentDemandRequest',
+loadChildren: () => import('./payment-demand-request/payment-demand-request.module').then(m => m.PaymentDemandRequestModule)
+},
 
 
 ];
