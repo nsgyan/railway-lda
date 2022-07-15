@@ -35,10 +35,17 @@ village:any=[]
     console.log(this.state, 'dgfhgjh');
 
       this.beneficiary=this.fb.group({
-        partyName: ['', Validators.required],
+        beneficiaryName: ['', Validators.required],
+        fatherOrHusbandName:['',Validators.required],
+        adharNumber: ['', Validators.required],
+        panNumber:['',Validators.required],
+        dlNumber:['',Validators.required],
+        rationCard:['',Validators.required],
         address: ['', Validators.required],
         state:['',Validators.required],
         district:['',Validators.required],
+        block:['',Validators.required],
+        village:['',Validators.required],
         pincode: ['', Validators.required],
         email: ['', Validators.required],
         modile: ['', Validators.required],
@@ -59,9 +66,26 @@ village:any=[]
 
   }
 
+  getblock(state:any){
+    this.beneficiary.get('block')?.reset()
+    this.beneficiary.get('block')?.updateValueAndValidity()
 
+    this.httpService.getBlock(this.beneficiary.value.state,this.beneficiary.value.district).subscribe((data:any)=>{
+      this.block=data?.blocks
 
+            })
+  }
 
+  getVillage(state:any){
+    // console.log(state);
+    // console.log(this.village.value.state);
+    // const control =this.project.get("selectState") as FormArray
+    this.httpService.getVillageByBlock(this.beneficiary.value.block).subscribe((data:any)=>{
+
+      this.village=data?.village;
+
+            })
+  }
 
 
   getPriject(event:any){
@@ -142,7 +166,7 @@ this.project.map((item:any)=>{
   console.log(this.beneficiary);
   if(this.beneficiary.valid){
     this.httpService.addBeneficiary({
-      partyName: this.beneficiary.value.partyName,
+      beneficiaryName: this.beneficiary.value.beneficiaryName,
       address: this.beneficiary.value.address,
       state:this.beneficiary.value.state,
       district:this.beneficiary.value.district,
