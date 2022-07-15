@@ -99,6 +99,8 @@
                                 <label class="control-label font-weight-600">Document</label>
                                 <input type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
                                 (change)="changeListener($event,0,'outside')" />
+                                <a *ngIf="surveyData.documents" href="{{surveyData.documents}}"
+                                target="_blank">View Document</a>
                                 <p *ngIf="survey.get('document')?.hasError('required')&&(submitted||survey.get('document')?.dirty||survey.get('document')?.touched )"
                                     style="color: red;">
                                     Please Upload <strong>Doccumnet</strong>
@@ -137,7 +139,7 @@
                                       <th>Objection Type</th>
                                       <th>Amount</th>
                                       <th>Beneficiary Count</th>
-                                      <th>Documnet</th>
+                                      <th>Document</th>
                                       <!-- <th>Cheque Number</th>
                                   <th>Cheque Date</th>
                                   <th>Registration Amount</th>
@@ -274,11 +276,14 @@
 
                           </td>
                           <td>
-                            <input type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
+                            <input  type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
                             (change)="changeListener($event,i,'inside')" />
+                            <a *ngIf="surveyData.surveyDetails[i].document" href="{{this.surveyData.surveyDetails[i].document}}"
+                            target="_blank">View Document</a>
+
                             <p *ngIf="opt.get('document')?.hasError('required')&&(submitted||opt.get('document')?.dirty||opt.get('document')?.touched )"
                                 style="color: red;">
-                                Please Upload <strong>Doccumnet</strong>
+                                Please Upload <strong>Document</strong>
                             </p>
                         </td>
                                       <td>
