@@ -19,7 +19,7 @@
                               </legend>
                           </div>
 
-                          <div class="col-md-4">
+                          <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Project Name
                                   </label>
@@ -36,24 +36,64 @@
                                   </p>
                               </div>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Project Number</label>
                                   <input formControlName="projectNumber" type="text" class="form-control" name=""
                                       readonly />
                               </div>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label font-weight-600">Survey Number</label>
+                                <input type="text" formControlName="surveyNumber" class="form-control"
+                                name="" />
+                            <p *ngIf="survey.get('surveyNumber')?.hasError('required')&&(submitted||survey.get('surveyNumber')?.dirty||survey.get('surveyNumber')?.touched )"
+                                style="color: red;">
+                                Survey Number <strong>Required</strong>
+                            </p>
+                            </div>
+                        </div>
+                          <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Date</label>
-                                  <input type="text" formControlName="surveyNumber" class="form-control"
-                                  name="" />
-                              <p *ngIf="survey.get('surveyNumber')?.hasError('required')&&(submitted||survey.get('surveyNumber')?.dirty||survey.get('surveyNumber')?.touched )"
-                                  style="color: red;">
-                                  Survey Number <strong>Required</strong>
-                              </p>
+                                  <input formControlName="date" type="date" class="form-control" name="" />
+                                  <p *ngIf="survey.get('date')?.hasError('required')&&(submitted||survey.get('date')?.dirty||survey.get('date')?.touched )"
+                                      style="color: red;">
+                                      Date <strong>Required</strong>
+                                  </p>
                               </div>
                           </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="control-label font-weight-600">State</label>
+                                <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                                    <option hidden>Select State</option>
+                                    <option *ngFor="let item of state" value="{{ item }}">
+                                        {{ item }}
+                                    </option>
+                                </select>
+                                <p *ngIf="survey.get('state')?.hasError('required')&&(submitted||survey.get('state')?.dirty||survey.get('state')?.touched )"
+                                    style="color: red;">
+                                    state <strong>Required</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="control-label font-weight-600">District</label>
+                              <select class="form-control" formControlName="district" (change)="getBlock($event)">
+                                  <option hidden>Select District</option>
+                                  <option *ngFor="let item of district" value="{{ item }}">
+                                      {{ item }}
+                                  </option>
+                              </select>
+                              <p *ngIf="survey.get('district')?.hasError('required')&&(submitted||survey.get('district')?.dirty||survey.get('district')?.touched )"
+                                  style="color: red;">
+                                  District <strong>Required</strong>
+                              </p>
+                          </div>
+                      </div>
                           <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label font-weight-600">Document</label>
@@ -84,20 +124,19 @@
                           <table class="table" formArrayName="surveyDetail">
                               <thead>
                                   <tr>
-                                      <th>#</th>
+                                      <th>S.No</th>
 
-                                       <th>State</th>
-                                      <th>District</th>
                                       <th>Block</th>
                                       <th>Village</th>
-                                      <th>Area</th>
+                                      <th> Acquired Area</th>
                                       <th>Total Area</th>
-                                      <th>Survey Party</th>
                                       <th>Land Type</th>
                                       <th>Land Nature</th>
                                       <th>Land Category</th>
                                       <th>Objecton</th>
                                       <th>Objection Type</th>
+                                      <th>Amount</th>
+                                      <th>Beneficiary Count</th>
                                       <th>Documnet</th>
                                       <!-- <th>Cheque Number</th>
                                   <th>Cheque Date</th>
@@ -112,47 +151,14 @@
                                       <td>{{ i + 1 }}</td>
 
 
-                                      <td>
-                                        <div class="col-md-4">
-                                          <div class="form-group">
 
-                                              <select class="form-control" formControlName="state" (change)="getDistrict($event,i)">
-                                                  <option hidden>Select State</option>
-                                                  <option *ngFor="let item of state" value="{{ item }}">
-                                                      {{ item }}
-                                                  </option>
-                                              </select>
-                                              <p *ngIf="survey.get('state')?.hasError('required')&&(submitted||survey.get('state')?.dirty||survey.get('state')?.touched )"
-                                                  style="color: red;">
-                                                  state <strong>Required</strong>
-                                              </p>
-                                          </div>
-                                      </div>
-                                    </td>
-                                      <td>
-                                        <div class="">
-                                          <div class="form-group">
-
-                                              <select class="form-control" formControlName="district" (change)="getBlock($event,i)">
-                                                  <option hidden>Select District</option>
-                                                  <option *ngFor="let item of district[i]" value="{{ item }}">
-                                                      {{ item }}
-                                                  </option>
-                                              </select>
-                                              <p *ngIf="survey.get('district')?.hasError('required')&&(submitted||survey.get('district')?.dirty||survey.get('district')?.touched )"
-                                                  style="color: red;">
-                                                  District <strong>Required</strong>
-                                              </p>
-                                          </div>
-                                      </div>
-                                      </td>
                                       <td>
                                           <div class="">
                                               <div class="form-group">
                                                   <select class="form-control" formControlName="block"
                                                       (change)="getVillage($event, i)">
                                                       <option hidden>Select Block</option>
-                                                      <option *ngFor="let item of block[i]" value="{{ item }}">
+                                                      <option *ngFor="let item of block" value="{{ item }}">
                                                           {{ item }}
                                                       </option>
                                                   </select>
@@ -170,7 +176,7 @@
                                       <td>
                                           <div class="">
                                               <div class="form-group">
-                                                  <select class="form-control" formControlName="village">
+                                                  <select class="form-control" formControlName="village" (change)="getBeneficiaryCount($event, i)">
                                                       <option hidden>Select Village</option>
                                                       <option *ngFor="let item of village[i]" value="{{ item }}">
                                                           {{ item }}
@@ -202,14 +208,7 @@
                                               Total Area <strong>Required</strong>
                                           </p>
                                       </td>
-                                      <td>
-                                          <input type="text" formControlName="surveyParty" class="form-control"
-                                              name="" />
-                                          <p *ngIf="opt.get('surveyParty')?.hasError('required')&&(submitted||opt.get('surveyParty')?.dirty||opt.get('surveyParty')?.touched )"
-                                              style="color: red;">
-                                              Survey Party<strong>Required</strong>
-                                          </p>
-                                      </td>
+
                                       <td>
                                         <select  formControlName="landType"   class="form-control">
                                           <option  *ngFor="let lantitem of landType" value="{{lantitem?.landType}}">{{lantitem?.landType}}</option>
@@ -261,14 +260,27 @@
                                       Objection Type <strong>Required</strong>
                                   </p>
                               </td>
-                              <td>
-                                <input type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
-                                (change)="changeListener($event,i,'inside')" />
-                                <p *ngIf="opt.get('document')?.hasError('required')&&(submitted||opt.get('document')?.dirty||opt.get('document')?.touched )"
-                                    style="color: red;">
-                                    Please Upload <strong>Doccumnet</strong>
-                                </p>
-                            </td>
+
+                            <td>
+                              <input type="number" formControlName="amount" class="form-control"
+                                  name="" />
+                              <p *ngIf="opt.get('amount')?.hasError('required')&&(submitted||opt.get('amount')?.dirty||opt.get('amount')?.touched )"
+                                  style="color: red;">
+                                  Area <strong>Required</strong>
+                              </p>
+                          </td>
+                          <td>
+                              <input type="text" formControlName="beneficiaryCount" class="form-control" readonly />
+
+                          </td>
+                          <td>
+                            <input type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
+                            (change)="changeListener($event,i,'inside')" />
+                            <p *ngIf="opt.get('document')?.hasError('required')&&(submitted||opt.get('document')?.dirty||opt.get('document')?.touched )"
+                                style="color: red;">
+                                Please Upload <strong>Doccumnet</strong>
+                            </p>
+                        </td>
                                       <td>
                                           <a *ngIf="i !== 0" (click)="removesurvey(i)">
                                               <i class="fa fa-close"></i></a>

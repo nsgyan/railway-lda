@@ -30,6 +30,9 @@ export class HttpsService {
 
     return this.httpService.request(request);
   }
+  getCountBeneficiary(formData: any) {
+    return this.httpService.post(Globals.route.getCountBeneficiary, formData);
+  }
   getsurveyByProject(formData: any) {
     return this.httpService.post(Globals.route.getsurveyByProject, formData);
   }

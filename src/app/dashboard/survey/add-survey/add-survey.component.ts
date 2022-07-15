@@ -49,8 +49,11 @@ export class AddSurveyComponent implements OnInit {
           projectName:['',Validators.required],
           projectNumber:['',Validators.required],
           date:['',Validators.required],
+          surveyNumber:['',Validators.required],
           surveyDetail:this.fb.array([]) ,
-          document:['',Validators.required]
+          document:['',Validators.required],
+         state:['',Validators.required],
+         district:['',Validators.required],
 
         })
 
@@ -75,14 +78,13 @@ export class AddSurveyComponent implements OnInit {
 
     newsurvey(): FormGroup {
       return this.fb.group({
-        surveyNumber:['',Validators.required],
-         state:['',Validators.required],
-         district:['',Validators.required],
+
         block:['',Validators.required],
         village: ['',Validators.required],
         area:['',Validators.required],
         totalArea:['',Validators.required],
-        surveyParty:['',Validators.required],
+        amount:['',Validators.required],
+        beneficiaryCount:['',Validators.required],
         landType:['',Validators.required],
         landNature:['',Validators.required],
         landCategory:['',Validators.required],
@@ -105,7 +107,19 @@ export class AddSurveyComponent implements OnInit {
       this.surveys().removeAt(quesIndex);
       this.village.splice(quesIndex,1)
     }
+    getBeneficiaryCount(event:any,index:any){
+     const control= this.survey.get("surveyDetail") as FormArray
+this.httpService.getCountBeneficiary({state:this.survey.value.state,
+  district:this.survey.value.district,
+  block:control.at(index).value.block,
+  village:control.at(index).value.village
+}).subscribe((data:any)=>{
+  console.log(data);
+  control.at(index).get('beneficiaryCount')?.setValue(data.count)
+  control.at(index).get('beneficiaryCount')?.updateValueAndValidity()
 
+})
+    }
     changeListener($event: any, index: any,type:any) {
       let file = $event.target.files;
 
@@ -199,7 +213,7 @@ console.log(this.state);
     }
 
 
-    getDistrict(event:any,index:any){
+    getDistrict(event:any){
  let newdistrict:any =[]
 
       this.project.map((item:any)=>{
@@ -210,17 +224,16 @@ console.log(this.state);
 
 
             // ✅ only runs if value not in array
-            newdistrict.push(projectData.district);
+            this.district.push(projectData.district);
           }
         })}
       })
-      this.district.splice(index, 0, newdistrict);
-      console.log(this.district);
+
 
 
     }
 
-    getBlock(event:any,index:any){
+    getBlock(event:any){
      let newblock:any=[]
       this.project.map((item:any)=>{
         if(item.projectName===this.survey.value.projectName){
@@ -231,12 +244,11 @@ console.log(this.state);
           // ✅ only runs if value not in array
           console.log(item);
 
-          newblock.push(projectData.block);}
+          this.block.push(projectData.block);}
           }
         })}
       })
-      this.block.splice(index, 0, newblock);
-      console.log(this.block);
+
 
     }
 

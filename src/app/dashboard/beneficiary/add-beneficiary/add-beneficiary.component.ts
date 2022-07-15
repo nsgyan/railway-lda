@@ -167,16 +167,23 @@ this.project.map((item:any)=>{
   if(this.beneficiary.valid){
     this.httpService.addBeneficiary({
       beneficiaryName: this.beneficiary.value.beneficiaryName,
-      address: this.beneficiary.value.address,
-      state:this.beneficiary.value.state,
-      district:this.beneficiary.value.district,
-      pincode: this.beneficiary.value.pincode,
-      email: this.beneficiary.value.email,
-      modile: this.beneficiary.value.modile,
-      partyType: this.beneficiary.value.partyType,
-      bank: this.beneficiary.value.bank,
-      ifscCode: this.beneficiary.value.ifscCode,
-      accountNumber: this.beneficiary.value.accountNumber,
+        fatherOrHusbandName:this.beneficiary.value.fatherOrHusbandName,
+        adharNumber: this.beneficiary.value.adharNumber,
+        panNumber:this.beneficiary.value.panNumber,
+        dlNumber:this.beneficiary.value.dlNumber,
+        rationCard:this.beneficiary.value.rationCard,
+        address: this.beneficiary.value.address,
+        state:this.beneficiary.value.state,
+        district:this.beneficiary.value.district,
+        block:this.beneficiary.value.block,
+        village:this.beneficiary.value.village,
+        pincode: this.beneficiary.value.pincode,
+        email: this.beneficiary.value.email,
+        modile: this.beneficiary.value.modile,
+        partyType: this.beneficiary.value.partyType,
+        bank: this.beneficiary.value.bank,
+        ifscCode: this.beneficiary.value.ifscCode,
+        accountNumber: this.beneficiary.value.accountNumber,
 
     }).subscribe((data:any)=>{
       this.toast.success(data?.message)
