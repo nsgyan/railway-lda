@@ -286,7 +286,10 @@ console.log(this.state);
         projectName:this.survey.value.projectName,
         projectNumber:this.survey.value.projectNumber,
         date:this.survey.value.date,
+        surveyNumber:this.survey.value.surveyNumber,
         document:this.survey.value.document,
+       state:this.survey.value.state,
+       district:this.survey.value.district,
         surveyDetails:this.survey.value.surveyDetail ,
 
       }).subscribe((data:any)=>{
