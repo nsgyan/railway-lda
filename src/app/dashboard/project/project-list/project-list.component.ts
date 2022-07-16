@@ -12,12 +12,24 @@ import { HttpsService } from 'src/app/shared/https.service';
 })
 export class ProjectListComponent implements OnInit {
   Project: any
+  disrtict:any;
   constructor(   private router: Router,
     private data: DataService,
     private toast: ToastrService,
     private httpService:HttpsService,) {
       this.httpService.getProject().subscribe((data:any)=>{
         this.Project=data.projects
+        this.Project.map((item:any)=>{
+          this.disrtict=[]
+          item?.acquisitionDetails.map((acqItem:any)=>{
+            if(!this.disrtict.includes(acqItem.district)){
+              this.disrtict.push(acqItem.district)
+            }
+item.disrtictLength=this.disrtict.length
+          })
+        })
+        console.log(this.Project);
+
 
       })
     }

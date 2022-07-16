@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin(){
-    if(this.captcha){
+    // if(this.captcha){
 if(this.login.valid){
 this.httpService.login({email:this.login.value.email,password:this.login.value.password}).subscribe((data:any)=>{
   this.localStorage.set('token',data.refresh_token)
@@ -47,12 +47,12 @@ this.httpService.login({email:this.login.value.email,password:this.login.value.p
   this.submited = true;
   this.toast.error('Please Fill Required Field');
 }
-    }
-    else{
+//     }
+//     else{
 
-this.submited = true;
-  this.toast.error('Please verify that you are not a robot.');
-    }
+// this.submited = true;
+//   this.toast.error('Please verify that you are not a robot.');
+//     }
   }
 
 
