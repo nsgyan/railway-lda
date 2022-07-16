@@ -40,5 +40,15 @@ item.disrtictLength=this.disrtict.length
   addProject() {
     this.router.navigate(['/dashboard/project/add'])
   }
+  navigateTo(path: any, item: any) {
+
+    // if (item._id) {
+    path = path + '/' + item._id
+
+    console.log(path);
+
+    this.router.navigate([path])
+    // }
+  }
 
 }

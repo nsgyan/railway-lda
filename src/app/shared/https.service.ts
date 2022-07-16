@@ -42,6 +42,9 @@ export class HttpsService {
   getBeneficiaryByID(id:any){
     return this.httpService.get(`${Globals.route.getBeneficiary}/${id}`)
   }
+  getProjectByID(id:any){
+    return this.httpService.get(`${Globals.route.getProjectByID}/${id}`)
+  }
   getSurvey(){
     return this.httpService.get(Globals.route.getSurvey)
   }
