@@ -111,6 +111,53 @@ else{
       this.block.splice(i, 0, data?.blocks);
             })
   }
+  checkDecimal(type:any,i:any){
+    const control =this.project.get("selectState") as FormArray
+    let number
+    if(type==='sanctionedAmount'){
+    number= control.at(i).value.sanctionedAmount
+  }
+  else{
+    number= control.at(i).value.area
+  }
+if(!number.includes('.')){
+  number= number+'.00'
+  console.log(number);
+
+}
+control.at(i).get(type)?.setValue(number)
+control.at(i).get(type)?.updateValueAndValidity
+
+
+
+  }
+
+  keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+    // const charCode = (event.which) ? event.which : event.keyCode;
+  //  return (charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0) {
+      return true;}
+    // }else if((charCode < 48 || charCode > 57)){
+    //   event.preventDefault();
+    //   return false;
+    // }
+    else {
+      event.preventDefault();
+        return false;
+    }
+  }
+
+  keyPresschar(evt: any) {
+    evt = (evt) ? evt : event;
+    const charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
+      ((evt.which) ? evt.which : 0));
+    if (charCode > 31 && (charCode < 65 || charCode > 90) &&
+      (charCode < 97 || charCode > 122)) {
+      return false;
+    }
+    return true;
+  }
 
   removeselectState(quesIndex:number) {
     this.selectStates().removeAt(quesIndex);
