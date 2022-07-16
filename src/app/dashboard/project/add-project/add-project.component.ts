@@ -44,7 +44,7 @@ export class AddProjectComponent implements OnInit {
     this.addselectState()
   }
 
-  onSubmit() {console.log(this.project);
+  onSubmit(type:any) {console.log(this.project);
 if(this.project.valid){
   this.httpService.addProject({
     projectNumber:this.project.value.projectNumber,
@@ -52,8 +52,12 @@ if(this.project.valid){
     projectDescription:this.project.value.projectDescription,
     acquisitionDetails : this.project.value.selectState ,
   }).subscribe((data:any)=>{
+    if(type==='Save'){
     this.toast.success(data?.message)
-    this.router.navigate(['/dashboard/project/page'])
+    this.router.navigate(['/dashboard/project/page'])}
+    else{
+      this.project.reset()
+    }
   },(err=>{
     this.toast.error(err.error.message);
   }))

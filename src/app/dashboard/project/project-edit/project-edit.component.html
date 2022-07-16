@@ -34,7 +34,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label font-weight-600">Project Name*</label>
-                  <input type="text" formControlName="projectName" class="form-control">
+                  <input type="text" (keypress)="keyPresschar($event)" formControlName="projectName" class="form-control">
                   <p *ngIf="project.get('projectName')?.hasError('required')&&(submitted||project.get('projectName')?.dirty||project.get('projectName')?.touched )"
                     style="color: red;">
                     Project Name <strong>Required</strong>
@@ -44,7 +44,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label font-weight-600">Project Description/Remark *</label>
-                  <input formControlName="projectDescription" type="text" class="form-control" name="">
+                  <input formControlName="projectDescription"  type="text" class="form-control" name="">
                   <p *ngIf="project.get('projectDescription')?.hasError('required')&&(submitted||project.get('projectDescription')?.dirty||project.get('projectDescription')?.touched )"
                     style="color: red;">
                     Project Description <strong>Required</strong>
@@ -76,8 +76,8 @@
                       <th>District*</th>
                       <th>Block*</th>
                       <th>Village*</th>
-                      <th>Area</th>
-                      <th>Sanctioned Amount*</th>
+                      <th>Area(HA)*</th>
+                      <th>Sanctioned Amount (crore)*</th>
                       <th>Remark*</th>
                       <th> Remove</th>
 
@@ -161,20 +161,20 @@
                           </div>
                         </div>
                       </td>
-                      <td style="width:15%"><input type="text" formControlName="area" class="form-control" name="">
+                      <td style="width:15%"><input type="text"  step='0.01' formControlName="area" (keypress)="keyPressNumbers($event)" (focusout)="checkDecimal('area',i)" class="form-control" name="">
                         <p *ngIf="opt.get('area')?.hasError('required')&&(submitted||opt.get('area')?.dirty||opt.get('area')?.touched )"
                           style="color: red;">
                           Area <strong>Required</strong>
                         </p>
                       </td>
-                      <td style="width:15%"><input type="text" formControlName="sanctionedAmount" class="form-control"
+                      <td style="width:15%"><input type="text"  (keypress)="keyPressNumbers($event)"  (focusout)="checkDecimal('sanctionedAmount',i)" step='0.01'  formControlName="sanctionedAmount" class="form-control"
                           name="">
                         <p *ngIf="opt.get('sanctionedAmount')?.hasError('required')&&(submitted||opt.get('sanctionedAmount')?.dirty||opt.get('sanctionedAmount')?.touched )"
                           style="color: red;">
                           Sanctioned Amount <strong>Required</strong>
                         </p>
                       </td>
-                      <td style="width:10%"><textarea class="" type="text" formControlName="remark"
+                      <td style="width:10%"><textarea class="" style="padding: 8px;" type="text" formControlName="remark"
                           class="form-control text-remark" name=""></textarea>
                         <p *ngIf="opt.get('remark')?.hasError('required')&&(submitted||opt.get('remark')?.dirty||opt.get('remark')?.touched )"
                           style="color: red;">
