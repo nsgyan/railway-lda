@@ -12,19 +12,26 @@ import { HttpsService } from 'src/app/shared/https.service';
 })
 export class ProjectEditComponent implements OnInit {
   submitted=false
+  event: any = {
+    target: { value: '' }
+  }
   project!:FormGroup;
   state: any;
   district:any[]= [];
   block:any[]= [];
   village:any[]=[] ;
+  id: string | null;
+  projectData: any;
 
   constructor( private fb:FormBuilder,
     private router: Router,
     private data: DataService,
     private toast: ToastrService,
+    private route:ActivatedRoute,
     private httpService:HttpsService,){
+      this.id = this.route.snapshot.paramMap.get('id')
       this.httpService.getState().subscribe((data:any)=>{
-
+        // getProjectByID
         this.state=data?.state
 
               })
@@ -36,22 +43,59 @@ export class ProjectEditComponent implements OnInit {
 
 
       })
+      this.httpService.getProjectByID(this.id).subscribe((item:any)=>{
+     this.projectData=item.findProject
+     console.log(this.projectData);
+
+     this.project.get('projectNumber')?.setValue(this.projectData?.projectNumber)
+     this.project.get('projectNumber')?.updateValueAndValidity()
+     this.project.get('projectName')?.setValue(this.projectData?.projectName)
+     this.project.get('projectName')?.updateValueAndValidity()
+     this.project.get('projectDescription')?.setValue(this.projectData?.projectDescription)
+     this.project.get('projectDescription')?.updateValueAndValidity()
+   let control= this.project.get("selectState") as FormArray
+   let i=0
+     this.projectData.acquisitionDetails.map((projectItem:any)=>{
+      control.push(this.fb.group({
+        state: [projectItem?.state,Validators.required],
+        district: [projectItem?.district,Validators.required],
+        area:[projectItem?.area,Validators.required],
+        village: [projectItem?.village,Validators.required],
+        sanctionedAmount:[projectItem?.sanctionedAmount,Validators.required],
+        block: [projectItem?.block,Validators.required],
+        remark:[projectItem?.remark,Validators.required],
+      }))
+      this.event.target.value=projectItem.state
+      this.getDistrict(this.event,i)
+      this.event.target.value=projectItem.district
+      this.getblock(this.event,i)
+      this.event.target.value=projectItem.block
+      this.getVillage(this.event,i)
+i++;
+     })
+
+      })
     }
 
   ngOnInit(): void {
-    this.addselectState()
+
   }
 
-  onSubmit() {console.log(this.project);
+  onSubmit(type:any) {console.log(this.project);
 if(this.project.valid){
-  this.httpService.addProject({
+  this.httpService.updateProject({
+    projectCode:this.projectData?.projectCode,
     projectNumber:this.project.value.projectNumber,
     projectName:this.project.value.projectName,
     projectDescription:this.project.value.projectDescription,
     acquisitionDetails : this.project.value.selectState ,
-  }).subscribe((data:any)=>{
+  },this.id).subscribe((data:any)=>{
+    if(type==='Save'){
     this.toast.success(data?.message)
-    this.router.navigate(['/dashboard/project/page'])
+    this.router.navigate(['/dashboard/project/page'])}
+    else{
+      this.project.reset()
+    }
   },(err=>{
     this.toast.error(err.error.message);
   }))
@@ -185,7 +229,7 @@ control.at(i).get(type)?.updateValueAndValidity
 
 
   cancel() {
-    this.router.navigate(['/dashboard/project/beneficiariesList'])
+    this.router.navigate(['/dashboard/project/page'])
 
 }
 }

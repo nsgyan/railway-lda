@@ -50,5 +50,13 @@ item.disrtictLength=this.disrtict.length
     this.router.navigate([path])
     // }
   }
+  delete(id:any){
+    this.httpService.deletedProject(id).subscribe(item=>{
+      this.toast.success('Project Successfuly Deleted')
+      this.router.navigate(['/dashboard/project/add'])
+    },(err)=>{
+      this.toast.error('Plz try again')
+    })
+  }
 
 }

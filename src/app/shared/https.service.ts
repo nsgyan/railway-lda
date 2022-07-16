@@ -43,7 +43,7 @@ export class HttpsService {
     return this.httpService.get(`${Globals.route.getBeneficiary}/${id}`)
   }
   getProjectByID(id:any){
-    return this.httpService.get(`${Globals.route.getBeneficiary}/${id}`)
+    return this.httpService.get(`${Globals.route.getProjectByID}/${id}`)
   }
   getSurvey(){
     return this.httpService.get(Globals.route.getSurvey)
@@ -124,8 +124,14 @@ export class HttpsService {
   updatesurvey(formData: any,id:any) {
     return this.httpService.patch(`${Globals.route.updatesurvey}/${id}`, formData);
   }
+  updateProject(formData: any,id:any) {
+    return this.httpService.patch(`${Globals.route.updateProject}/${id}`, formData);
+  }
   delsurvey(id: any) {
     return this.httpService.delete(`${Globals.route.delsurvey}/${id}`);
+  }
+  deletedProject(id: any) {
+    return this.httpService.delete(`${Globals.route.deletedProject}/${id}`);
   }
   delBeneficiary(id: any) {
     return this.httpService.delete(`${Globals.route.delBeneficiary}/${id}`);
