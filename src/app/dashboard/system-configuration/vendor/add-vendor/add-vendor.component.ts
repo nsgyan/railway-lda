@@ -24,7 +24,7 @@ export class AddVendorComponent implements OnInit {
       vendorDob: [''],
       vendorPanNumber: [''],
       vendorGstNumber: [''],
-      vendorAadharNumber: [''],
+      vendorAaadhaarNumber: [''],
       vendorTanNumber: [''],
       vendorTinNumber: [''],
       vendorServiceTaxNumber: [''],

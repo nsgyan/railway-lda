@@ -127,11 +127,11 @@
 
                             <div class="col-md-4">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">Adhar Number
+                                  <label class="control-label font-weight-600">Aadhaar Number
                                   </label>
-                                  <input type="text" formControlName="adharNumber" class="form-control">
+                                  <input type="text" formControlName="aadhaarNumber" class="form-control">
 
-                                  <p *ngIf="beneficiary.get('adharNumber')?.hasError('required')&&(submitted||beneficiary.get('adharNumber')?.dirty||beneficiary.get('adharNumber')?.touched )"
+                                  <p *ngIf="beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )"
                                       style="color: red;">
                                      Adhar Number <strong>Required</strong>
                                   </p>

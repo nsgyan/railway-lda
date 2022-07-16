@@ -37,7 +37,7 @@ village:any=[]
       this.beneficiary=this.fb.group({
         beneficiaryName: ['', Validators.required],
         fatherOrHusbandName:['',Validators.required],
-        adharNumber: ['', Validators.required],
+        aadhaarNumber: ['', Validators.required],
         panNumber:['',Validators.required],
         dlNumber:['',Validators.required],
         rationCard:['',Validators.required],
@@ -168,7 +168,7 @@ this.project.map((item:any)=>{
     this.httpService.addBeneficiary({
       beneficiaryName: this.beneficiary.value.beneficiaryName,
         fatherOrHusbandName:this.beneficiary.value.fatherOrHusbandName,
-        adharNumber: this.beneficiary.value.adharNumber,
+        aadhaarNumber: this.beneficiary.value.aadhaarNumber,
         panNumber:this.beneficiary.value.panNumber,
         dlNumber:this.beneficiary.value.dlNumber,
         rationCard:this.beneficiary.value.rationCard,
