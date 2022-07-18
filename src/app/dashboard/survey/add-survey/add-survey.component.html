@@ -272,7 +272,7 @@
                               </p>
                           </td>
                           <td>
-                              <input type="text" formControlName="beneficiaryCount" class="form-control"  />
+                              <input type="text" formControlName="beneficiaryCount" (keypress)="keyPressNumbers($event)" class="form-control"  />
 
                           </td>
                           <td>
