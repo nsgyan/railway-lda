@@ -134,15 +134,20 @@
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Aadhaar Number
                                   </label>
-                                  <input type="text" maxlength="12" formControlName="aadhaarNumber" class="form-control">
+                                  <input type="text" maxlength="12" (focusout)="checkAadhaar($event)"  formControlName="aadhaarNumber" class="form-control">
 
                                   <p *ngIf="beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )"
                                       style="color: red;">
-                                     Adhar Number <strong>Required</strong>
+                                     Aadhaar Number <strong>Required</strong>
                                   </p>
-                                  <p *ngIf="!beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )&&this.beneficiary.get('aadhaarNumber')?.invalid"
+                                  <p style="color: red;" *ngIf="beneficiary.get('aadhaarNumber')?.hasError('isExist')
+                                  &&
+                                  !beneficiary.get('aadhaarNumber')?.hasError('required')">
+                                  Aadhaar Number already Exist
+                          </p>
+                                  <p *ngIf="!beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )&&this.beneficiary.get('aadhaarNumber')?.invalid && !beneficiary.get('aadhaarNumber')?.hasError('isExist')"
                                   style="color: red;">
-                                 Adhar Number <strong>Invalid</strong>
+                                 Aadhaar Number <strong>Invalid</strong>
                               </p>
                               </div>
                           </div>
@@ -150,7 +155,7 @@
                             <div class="form-group">
                                 <label class="control-label font-weight-600">PAN Number
                                 </label>
-                                <input type="text" appUpperCase formControlName="panNumber" class="form-control">
+                                <input type="text" appUpperCase (focusout)="checkpan($event)" formControlName="panNumber" class="form-control">
                                 <div *ngIf="beneficiary.controls['panNumber'].invalid
                                 &&
                                ( beneficiary.controls['panNumber']?.touched)">
@@ -176,16 +181,22 @@
                           <div class="form-group">
                               <label class="control-label font-weight-600">Driving Licence Number
                               </label>
-                              <input type="text" formControlName="dlNumber" class="form-control">
+                              <input type="text" formControlName="dlNumber" (focusout)="checkDl($event)" class="form-control">
 
                               <p *ngIf="beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )"
                                   style="color: red;">
                                   Driving Licence Number <strong>Required</strong>
                               </p>
+                              <p style="color: red;"
+                              *ngIf="beneficiary.get('dlNumber')?.hasError('isExist')
+                              &&
+                              !beneficiary.get('dlNumber')?.hasError('required') ">
+                              Driving Licence Number already exists
+                          </p>
 
-                              <p *ngIf="!beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )&&beneficiary.get('dlNumber')?.invalid"
+                              <p *ngIf="!beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )&&beneficiary.get('dlNumber')?.invalid&& !beneficiary.get('dlNumber')?.hasError('isExist')"
                                   style="color: red;">
-                              Please enter a Driving Licence Number
+                             Driving Licence Number Invalid
                           </p>
                           </div>
                       </div>
@@ -193,15 +204,21 @@
                         <div class="form-group">
                             <label class="control-label font-weight-600">Ration Card Number
                             </label>
-                            <input type="text" formControlName="rationCard" class="form-control">
+                            <input type="text" (focusout)="checkration($event)" formControlName="rationCard" class="form-control">
 
                             <p *ngIf="beneficiary.get('rationCard')?.hasError('required')&&(submitted||beneficiary.get('rationCard')?.dirty||beneficiary.get('rationCard')?.touched )"
                                 style="color: red;">
                                 Ration Card Number <strong>Required</strong>
                             </p>
+                            <p style="color: red;"
+                            *ngIf="beneficiary.get('rationCard')?.hasError('isExist')
+                            &&
+                            !beneficiary.get('rationCard')?.hasError('required') ">
+                            Ration Card Number already exists
+                        </p>
                             <p *ngIf="!beneficiary.get('rationCard')?.hasError('required')&&(submitted||beneficiary.get('rationCard')?.dirty||beneficiary.get('rationCard')?.touched )&&beneficiary.get('rationCard')?.invalid"
                             style="color: red;">
-                        Please enter a Driving Licence Number
+                            Ration Card Number Invalid
                     </p>
                         </div>
                     </div>

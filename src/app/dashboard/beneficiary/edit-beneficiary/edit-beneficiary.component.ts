@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CellNumValidation, panValidation } from 'src/app/shared/custom-validation.service';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
 
@@ -45,22 +46,23 @@ village:any=[]
       this.beneficiary=this.fb.group({
         beneficiaryName: ['', Validators.required],
         fatherOrHusbandName:['',Validators.required],
-        aadhaarNumber: ['', Validators.required],
-        panNumber:['',Validators.required],
-        dlNumber:['',Validators.required],
-        rationCard:['',Validators.required],
+        aadhaarNumber: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(12)]],
+        panNumber: ['', [Validators.required, panValidation]],
+        dlNumber: ['', [Validators.required, Validators.pattern('^[A-Za-z][0-9/\W/]{2,20}$')]],
+        rationCard: ['', [Validators.required, Validators.pattern('^([a-zA-Z0-9]){8,12}\s*$')]],
         address: ['', Validators.required],
         state:['',Validators.required],
         district:['',Validators.required],
         block:['',Validators.required],
         village:['',Validators.required],
-        pincode: ['', Validators.required],
-        email: ['', Validators.required],
-        modile: ['', Validators.required],
+        pincode: ['', [Validators.pattern('^[1-9][0-9]{5}$'), Validators.minLength(6), Validators.maxLength(6)]],
+        email: ['', [Validators.required, Validators.email]],
+        modile: ['', [Validators.required, Validators.maxLength(10), CellNumValidation]],
         partyType: ['', Validators.required],
         bank: ['', Validators.required],
         ifscCode: ['', Validators.required],
         accountNumber: ['', Validators.required],
+        conformAccountNumber: ['', Validators.required]
       })
 
       this.httpService.getBeneficiaryByID(this.id).subscribe((data: any) => {
@@ -114,6 +116,100 @@ this.beneficiaryData=data.data
     }
 
   ngOnInit(): void {
+
+  }
+
+  keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+    // const charCode = (event.which) ? event.which : event.keyCode;
+    //  return (charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode >= 48 && charCode <= 57) || charCode == 0) {
+      return true;
+    }
+    // }else if((charCode < 48 || charCode > 57)){
+    //   event.preventDefault();
+    //   return false;
+    // }
+    else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
+  keyPresschar(evt: any) {
+    evt = (evt) ? evt : event;
+    const charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
+      ((evt.which) ? evt.which : 0));
+    if (charCode < 31 && (charCode > 65 || charCode < 90) &&
+      (charCode > 97 || charCode < 122)) {
+      return false;
+
+    }
+    return true;
+  }
+
+  conformAccountNumber(event: any,) {
+    if (event.target.value !== this.beneficiary.value.accountNumber) {
+      this.beneficiary.get('conformAccountNumber')?.setErrors({ conformAccountNumber: true })
+    }
+    else {
+      // const email = event.target.value ? event.target.value.toLowerCase() : this.beneficiary.get('email')?.value
+      // if (email) {
+      //   this.httpService.checkEmail({ email: email })
+      //     .subscribe((data: any) => {
+      //       if (email === data?.email) {
+      //         this.beneficiary.get('email')?.setErrors({ isExist: true });
+      //       }
+
+      //     })
+
+      // }
+
+    }
+  }
+
+
+  checkAadhaar(event: any) {
+    this.httpService.checkAadhar({ aadhaarNumber: event.target.value }).subscribe(data => {
+      console.log(data);
+
+    }, err => {
+      this.beneficiary.get('aadhaarNumber')?.setErrors({ isExist: true })
+
+    })
+
+  }
+
+
+  checkpan(event: any) {
+    this.httpService.checkPan({ checkPan: event.target.value }).subscribe(data => {
+      console.log(data);
+
+    }, err => {
+      this.beneficiary.get('panNumber')?.setErrors({ isExist: true })
+
+    })
+
+  }
+
+  checkDl(event: any) {
+    this.httpService.dlcheck({ dlNumber: event.target.value }).subscribe(data => {
+      console.log(data);
+
+    }, err => {
+      this.beneficiary.get('dlNumber')?.setErrors({ isExist: true })
+
+    })
+
+  }
+  checkration(event: any) {
+    this.httpService.ration({ rationCard: event.target.value }).subscribe(data => {
+      console.log(data);
+
+    }, err => {
+      this.beneficiary.get('rationCard')?.setErrors({ isExist: true })
+
+    })
 
   }
 

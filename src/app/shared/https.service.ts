@@ -30,6 +30,23 @@ export class HttpsService {
 
     return this.httpService.request(request);
   }
+
+  checkAadhar(formData: any) {
+    return this.httpService.post(Globals.route.adharcheck, formData)
+  }
+
+  checkPan(formData: any) {
+    return this.httpService.post(Globals.route.pancheck, formData)
+  }
+
+  dlcheck(formData: any) {
+    return this.httpService.post(Globals.route.dlcheck, formData)
+  }
+
+  ration(formData: any) {
+    return this.httpService.post(Globals.route.ration, formData)
+  }
+
   getCountBeneficiary(formData: any) {
     return this.httpService.post(Globals.route.getCountBeneficiary, formData);
   }

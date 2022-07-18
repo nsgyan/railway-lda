@@ -179,6 +179,51 @@ this.project.map((item:any)=>{
 
   // }
 
+
+  checkAadhaar(event: any) {
+    this.httpService.checkAadhar({ aadhaarNumber: event.target.value }).subscribe(data => {
+      console.log(data);
+
+    }, err => {
+      this.beneficiary.get('aadhaarNumber')?.setErrors({ isExist: true })
+
+    })
+
+  }
+
+
+  checkpan(event: any) {
+    this.httpService.checkPan({ checkPan: event.target.value }).subscribe(data => {
+      console.log(data);
+
+    }, err => {
+      this.beneficiary.get('panNumber')?.setErrors({ isExist: true })
+
+    })
+
+  }
+
+  checkDl(event: any) {
+    this.httpService.dlcheck({ dlNumber: event.target.value }).subscribe(data => {
+      console.log(data);
+
+    }, err => {
+      this.beneficiary.get('dlNumber')?.setErrors({ isExist: true })
+
+    })
+
+  }
+  checkration(event: any) {
+    this.httpService.ration({ rationCard: event.target.value }).subscribe(data => {
+      console.log(data);
+
+    }, err => {
+      this.beneficiary.get('rationCard')?.setErrors({ isExist: true })
+
+    })
+
+  }
+
   onSubmit() {
     // let date=this.beneficiary.value.data.toString()
   console.log(this.beneficiary);
@@ -209,7 +254,7 @@ this.project.map((item:any)=>{
     },(err=>{
       this.toast.error(err.error.message);
     }))
-
+    this.beneficiary.get('conformAccountNumber')?.setErrors({ conformAccountNumber: true })
   }
   else{
     this.submitted=true

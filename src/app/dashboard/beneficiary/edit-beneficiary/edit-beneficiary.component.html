@@ -1,259 +1,380 @@
 <div id="content" class="app-content" role="main">
-  <div class="app-content-body">
-      <div class="bg-red lter b-b wrapper-md">
-          <div class="row">
-              <div class="col-sm-6 col-xs-12">
-                  <h3 class="m-n font-thin text-white">Beneficary</h3>
-              </div>
-          </div>
-      </div>
+    <div class="app-content-body">
+        <div class="bg-red lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h3 class="m-n font-thin text-white">Beneficary</h3>
+                </div>
+            </div>
+        </div>
 
-      <div class="wrapper-md">
-          <div class="panel b-a">
-              <div class="panel-body">
-                  <form role="form" [formGroup]="beneficiary" autocomplete="off">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <legend>
-                                  <span class="font-weight-600">Create New Beneficary</span>
-                              </legend>
-                          </div>
+        <div class="wrapper-md">
+            <div class="panel b-a">
+                <div class="panel-body">
+                    <form role="form" [formGroup]="beneficiary" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <legend>
+                                    <span class="font-weight-600">Create New Beneficary</span>
+                                </legend>
+                            </div>
 
-                          <div class="col-md-4">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">Beneficiary Name
+                                    </label>
+                                    <input type="text" (keypress)="keyPresschar($event)" formControlName="beneficiaryName" class="form-control">
+
+                                    <p *ngIf="beneficiary.get('beneficiaryName')?.hasError('required')&&(submitted||beneficiary.get('beneficiaryName')?.dirty||beneficiary.get('beneficiaryName')?.touched )"
+                                        style="color: red;">
+                                        Beneficiary Name <strong>Required</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">Beneficiary Name
+                                  <label class="control-label font-weight-600">Father/Husband Name
                                   </label>
-                                  <input type="text" formControlName="beneficiaryName" class="form-control">
+                                  <input type="text" formControlName="fatherOrHusbandName" class="form-control">
 
-                                  <p *ngIf="beneficiary.get('beneficiaryName')?.hasError('required')&&(submitted||beneficiary.get('beneficiaryName')?.dirty||beneficiary.get('beneficiaryName')?.touched )"
+                                  <p *ngIf="beneficiary.get('fatherOrHusbandName')?.hasError('required')&&(submitted||beneficiary.get('fatherOrHusbandName')?.dirty||beneficiary.get('fatherOrHusbandName')?.touched )"
                                       style="color: red;">
-                                      Party Name <strong>Required</strong>
+                                      Father/Husband Name <strong>Required</strong>
                                   </p>
                               </div>
                           </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">Address</label>
+                                    <input formControlName="address" type="text" class="form-control" name=""
+                                         />
+                                         <p *ngIf="beneficiary.get('address')?.hasError('required')&&(submitted||beneficiary.get('address')?.dirty||beneficiary.get('address')?.touched )"
+                                         style="color: red;">
+                                         Address <strong>Required</strong>
+                                     </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">State</label>
+                                    <select class="form-control" formControlName="state" (change)="getDistrict()">
+                                        <option hidden>Select State</option>
+                                        <option *ngFor="let item of state" value="{{ item }}">
+                                            {{ item }}
+                                        </option>
+                                    </select>
+                                    <p *ngIf="beneficiary.get('state')?.hasError('required')&&(submitted||beneficiary.get('state')?.dirty||beneficiary.get('state')?.touched )"
+                                        style="color: red;">
+                                        state <strong>Required</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">District</label>
+                                    <select   class="form-control" formControlName="district" (change)="getblock()">
+                                        <option hidden>Select District</option>
+                                        <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
+
+                                       </select>
+                                    <p *ngIf="beneficiary.get('district')?.hasError('required')&&(submitted||beneficiary.get('district')?.dirty||beneficiary.get('district')?.touched )"
+                                        style="color: red;">
+                                        District <strong>Required</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label class="control-label font-weight-600">Block*</label>
+
+                                  <select class="form-control"  formControlName="block"  (change)="getVillage()">
+                                    <option hidden>Select Block</option>
+                                    <option *ngFor="let item of block"  value="{{item.block}}" >{{item.block}}</option>
+
+                                   </select>
+                                   <p *ngIf="beneficiary.get('block')?.hasError('required')&&(submitted||beneficiary.get('block')?.dirty||beneficiary.get('block')?.touched )" style="color: red;">
+                                    block <strong>required</strong>
+                                  </p>
+
+                              </div>
+                          </div>
+
                           <div class="col-md-4">
                             <div class="form-group">
-                                <label class="control-label font-weight-600">Father/Husband Name
-                                </label>
-                                <input type="text" formControlName="fatherOrHusbandName" class="form-control">
+                                <label class="control-label font-weight-600">Village Name* </label>
+                                <select class="form-control" formControlName="village" >
+                                  <option hidden>Select Village</option>
+                                  <option *ngFor="let item of village" value="{{item.village}}">{{item.village}}</option>
 
-                                <p *ngIf="beneficiary.get('fatherOrHusbandName')?.hasError('required')&&(submitted||beneficiary.get('fatherOrHusbandName')?.dirty||beneficiary.get('fatherOrHusbandName')?.touched )"
+                                </select>
+                                <p *ngIf="beneficiary.get('village')?.hasError('required')&&(submitted||beneficiary.get('village')?.dirty||beneficiary.get('village')?.touched )" style="color: red;">
+                                  village Name <strong>required</strong>
+                                </p>
+                            </div>
+                        </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">Pin code</label>
+                                    <input formControlName="pincode" maxlength="6" type="text" class="form-control" name="" />
+                                    <p *ngIf="beneficiary.get('pincode')?.hasError('required')"
                                     style="color: red;">
-                                    Father/Husband Name <strong>Required</strong>
+                                    Pincode <strong>required</strong>
                                 </p>
-                            </div>
-                        </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">Address</label>
-                                  <input formControlName="address" type="text" class="form-control" name=""
-                                       />
-                                       <p *ngIf="beneficiary.get('address')?.hasError('required')&&(submitted||beneficiary.get('address')?.dirty||beneficiary.get('address')?.touched )"
-                                       style="color: red;">
-                                       Address <strong>Required</strong>
-                                   </p>
-                              </div>
-                          </div>
-
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">State</label>
-                                  <select class="form-control" formControlName="state" (change)="getDistrict()">
-                                      <option hidden>Select State</option>
-                                      <option *ngFor="let item of state" value="{{ item }}">
-                                          {{ item }}
-                                      </option>
-                                  </select>
-                                  <p *ngIf="beneficiary.get('state')?.hasError('required')&&(submitted||beneficiary.get('state')?.dirty||beneficiary.get('state')?.touched )"
-                                      style="color: red;">
-                                      state <strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">District</label>
-                                  <select   class="form-control" formControlName="district" (change)="getblock()">
-                                      <option hidden>Select District</option>
-                                      <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
-
-                                     </select>
-                                  <p *ngIf="beneficiary.get('district')?.hasError('required')&&(submitted||beneficiary.get('district')?.dirty||beneficiary.get('district')?.touched )"
-                                      style="color: red;">
-                                      District <strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label font-weight-600">Block*</label>
-
-                                <select class="form-control"  formControlName="block"  (change)="getVillage()">
-                                  <option hidden>Select Block</option>
-                                  <option *ngFor="let item of block"  value="{{item.block}}" >{{item.block}}</option>
-
-                                 </select>
-                                 <p *ngIf="beneficiary.get('block')?.hasError('required')&&(submitted||beneficiary.get('block')?.dirty||beneficiary.get('block')?.touched )" style="color: red;">
-                                  block <strong>required</strong>
+                                <p style="color: red;" *ngIf="beneficiary.get('pincode')?.invalid
+                                        &&
+                                        !beneficiary.get('pincode')?.hasError('required')">
+                                    Please enter a valid pincode
                                 </p>
-
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <label class="control-label font-weight-600">Village Name* </label>
-                              <select class="form-control" formControlName="village" >
-                                <option hidden>Select Village</option>
-                                <option *ngFor="let item of village" value="{{item.village}}">{{item.village}}</option>
 
-                              </select>
-                              <p *ngIf="beneficiary.get('village')?.hasError('required')&&(submitted||beneficiary.get('village')?.dirty||beneficiary.get('village')?.touched )" style="color: red;">
-                                village Name <strong>required</strong>
-                              </p>
-                          </div>
-                      </div>
-                          <div class="col-md-4">
+                            <div class="col-md-4">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">Pin code</label>
-                                  <input formControlName="pincode" type="text" class="form-control" name="" />
-                                  <p *ngIf="beneficiary.get('pincode')?.hasError('required')&&(submitted||beneficiary.get('pincode')?.dirty||beneficiary.get('pincode')?.touched )"
+                                  <label class="control-label font-weight-600">Aadhaar Number
+                                  </label>
+                                  <input type="text" maxlength="12" (focusout)="checkAadhaar($event)"  formControlName="aadhaarNumber" class="form-control">
+
+                                  <p *ngIf="beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )"
                                       style="color: red;">
-                                      Pin Code <strong>Required</strong>
+                                     Aadhaar Number <strong>Required</strong>
                                   </p>
-                              </div>
-                          </div>
-
-
-                          <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label font-weight-600">Aadhaar Number
-                                </label>
-                                <input type="text" formControlName="aadhaarNumber" class="form-control">
-
-                                <p *ngIf="beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )"
-                                    style="color: red;">
-                                   Adhar Number <strong>Required</strong>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <label class="control-label font-weight-600">PAN Number
-                              </label>
-                              <input type="text" formControlName="panNumber" class="form-control">
-
-                              <p *ngIf="beneficiary.get('panNumber')?.hasError('required')&&(submitted||beneficiary.get('panNumber')?.dirty||beneficiary.get('panNumber')?.touched )"
+                                  <p style="color: red;" *ngIf="beneficiary.get('aadhaarNumber')?.hasError('isExist')
+                                  &&
+                                  !beneficiary.get('aadhaarNumber')?.hasError('required')">
+                                  Aadhaar Number already Exist
+                          </p>
+                                  <p *ngIf="!beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )&&this.beneficiary.get('aadhaarNumber')?.invalid && !beneficiary.get('aadhaarNumber')?.hasError('isExist')"
                                   style="color: red;">
-                                  PAN Number <strong>Required</strong>
+                                 Aadhaar Number <strong>Invalid</strong>
                               </p>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label font-weight-600">PAN Number
+                                </label>
+                                <input type="text" appUpperCase (focusout)="checkpan($event)" formControlName="panNumber" class="form-control">
+                                <div *ngIf="beneficiary.controls['panNumber'].invalid
+                                &&
+                               ( beneficiary.controls['panNumber']?.touched)">
+                                <p *ngIf="beneficiary.get('panNumber')?.hasError('required')"
+                                    style="color: red;">
+                                    PAN number <strong>required</strong>
+                                </p>
+                                <p style="color: red;" *ngIf="beneficiary.get('panNumber')?.hasError('panValidation')
+                                    &&
+                                    !beneficiary.get('panNumber')?.hasError('required')">
+                                    Please enter a valid Pan number
+                                </p>
+                                <p style="color: red;"
+                                    *ngIf="beneficiary.get('panNumber')?.hasError('isExist')
+                                    &&
+                                    !beneficiary.get('panNumber')?.hasError('required') && ! beneficiary.get('panNumber')?.hasError('panValidation')">
+                                    Pan number already exists
+                                </p>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                              <label class="control-label font-weight-600">Driving Licence Number
+                              </label>
+                              <input type="text" formControlName="dlNumber" (focusout)="checkDl($event)" class="form-control">
+
+                              <p *ngIf="beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )"
+                                  style="color: red;">
+                                  Driving Licence Number <strong>Required</strong>
+                              </p>
+                              <p style="color: red;"
+                              *ngIf="beneficiary.get('dlNumber')?.hasError('isExist')
+                              &&
+                              !beneficiary.get('dlNumber')?.hasError('required') ">
+                              Driving Licence Number already exists
+                          </p>
+
+                              <p *ngIf="!beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )&&beneficiary.get('dlNumber')?.invalid&& !beneficiary.get('dlNumber')?.hasError('isExist')"
+                                  style="color: red;">
+                             Driving Licence Number Invalid
+                          </p>
                           </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
-                            <label class="control-label font-weight-600">Driving Licence Number
+                            <label class="control-label font-weight-600">Ration Card Number
                             </label>
-                            <input type="text" formControlName="dlNumber" class="form-control">
+                            <input type="text" (focusout)="checkration($event)" formControlName="rationCard" class="form-control">
 
-                            <p *ngIf="beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )"
+                            <p *ngIf="beneficiary.get('rationCard')?.hasError('required')&&(submitted||beneficiary.get('rationCard')?.dirty||beneficiary.get('rationCard')?.touched )"
                                 style="color: red;">
-                                Driving Licence Number <strong>Required</strong>
+                                Ration Card Number <strong>Required</strong>
                             </p>
+                            <p style="color: red;"
+                            *ngIf="beneficiary.get('rationCard')?.hasError('isExist')
+                            &&
+                            !beneficiary.get('rationCard')?.hasError('required') ">
+                            Ration Card Number already exists
+                        </p>
+                            <p *ngIf="!beneficiary.get('rationCard')?.hasError('required')&&(submitted||beneficiary.get('rationCard')?.dirty||beneficiary.get('rationCard')?.touched )&&beneficiary.get('rationCard')?.invalid"
+                            style="color: red;">
+                            Ration Card Number Invalid
+                    </p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                          <label class="control-label font-weight-600">Ration Card Number
-                          </label>
-                          <input type="text" formControlName="rationCard" class="form-control">
 
-                          <p *ngIf="beneficiary.get('rationCard')?.hasError('required')&&(submitted||beneficiary.get('rationCard')?.dirty||beneficiary.get('rationCard')?.touched )"
-                              style="color: red;">
-                              Ration Card Number <strong>Required</strong>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">Email</label>
+                                    <input appLowercase formControlName="email" type="text" class="form-control" name="" />
+                                    <div *ngIf="
+                                    beneficiary.controls['email'].invalid&& (
+                                    beneficiary.controls['email']?.touched)">
+                                    <p *ngIf="beneficiary.get('email')?.hasError('required')"
+                                        style="color: red;">
+                                        E-Mail Address <strong>required</strong>
+                                    </p>
+                                    <p style="color: red;" *ngIf="beneficiary.get('email')?.hasError('email')
+                                        &&
+                                        !beneficiary.get('email')?.hasError('required')">
+                                        Please enter a valid E-Mail Address
+                                    </p>
+
+                                </div>
+                                </div>
+                            </div>  <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">Modile Number</label>
+                                    <input formControlName="modile" type="text" maxlength="10" (keypress)="keyPressNumbers($event)" class="form-control" name="" />
+                                    <div *ngIf="beneficiary.controls['modile'].invalid
+                                    &&(
+                                    beneficiary.controls['modile']?.touched)">
+                                    <p *ngIf="beneficiary.get('modile')?.hasError('required')"
+                                        style="color: red;">
+                                        Mobile Number <strong>required</strong>
+                                    </p>
+                                    <p style="color: red;" *ngIf="beneficiary.get('modile')?.hasError('cellNumNotValid')
+                                        &&
+                                        !beneficiary.get('modile')?.hasError('required')">
+                                        Please enter a valid mobile number
+                                    </p>
+                                    <p style="color: red;"
+                                        *ngIf="beneficiary.get('modile')?.invalid
+                                        &&(
+                                        !beneficiary.get('modile')?.hasError('required') && !beneficiary.get('modile')?.hasError('cellNumNotValid')&&!beneficiary.get('modile')?.hasError('isExist'))">
+                                        Mobile Number should be 10 digit long
+                                    </p>
+                                    <p style="color: red;"
+                                        *ngIf="beneficiary.get('modile')?.hasError('isExist')
+                                        &&
+                                        !beneficiary.get('modile')?.hasError('required')&& !beneficiary.get('modile')?.hasError('cellNumNotValid')">
+                                        Mobile number already exists
+                                    </p>
+
+                                </div>
+                                </div>
+                            </div>  <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">Party Type</label>
+                                    <!-- <input formControlName="partyType" type="text" class="form-control" name="" /> -->
+
+                                    <div class="checkgroup ">
+                                      <div class="radioBox Apply-control
+                                          Apply-radio d-flex align-item-center">
+                                          <input formControlName="partyType" value="Owner" type="radio" id="ApplyRadio5"
+                                              name="partyType" class="Apply-control-input mt-2
+                                              mr-2">
+                                          <label class="Apply-control-label font" for="ApplyRadio5">
+                                              <h6 class="catBold">Owner</h6>
+
+                                          </label>
+                                      </div>
+                                      <div class="mr-0 radioBox Apply-control
+                                          Apply-radio d-flex align-item-center">
+                                          <input formControlName="partyType" value="Affected Party" type="radio" id="ApplyRadio6"
+                                              name="partyType" class="Apply-control-input mt-2
+                                              mr-2">
+                                          <label class="Apply-control-label font" for="ApplyRadio6">
+                                              <h6 class="catBold">Affected Party</h6>
+                                          </label>
+                                      </div>
+                                      <br>
+                                  </div>
+
+                                    <p *ngIf="beneficiary.get('partyType')?.hasError('required')&&(submitted||beneficiary.get('partyType')?.dirty||beneficiary.get('partyType')?.touched )"
+                                        style="color: red;">
+                                        Party Type <strong>Required</strong>
+                                    </p>
+                                </div>
+                            </div>  <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">Bank Name</label>
+                                    <input formControlName="bank" type="text" class="form-control" name="" />
+                                    <p *ngIf="beneficiary.get('pincobankde')?.hasError('required')&&(submitted||beneficiary.get('bank')?.dirty||beneficiary.get('bank')?.touched )"
+                                        style="color: red;">
+                                        Bank Name <strong>Required</strong>
+                                    </p>
+                                </div>
+                            </div>  <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600">IFSC Code</label>
+                                    <input formControlName="ifscCode" type="text" class="form-control" name="" />
+                                    <p *ngIf="beneficiary.get('ifscCode')?.hasError('required')&&(submitted||beneficiary.get('ifscCode')?.dirty||beneficiary.get('ifscCode')?.touched )"
+                                        style="color: red;">
+                                        IFSCCode <strong>Required</strong>
+                                    </p>
+                                </div>
+                            </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label font-weight-600"> Account Number </label>
+                                    <input formControlName="accountNumber" type="password" (keypress)="keyPressNumbers($event)" (keypress)="keyPressNumbers($event)" class="form-control" name="" />
+                                    <p *ngIf="beneficiary.get('accountNumber')?.hasError('required')&&(submitted||beneficiary.get('accountNumber')?.dirty||beneficiary.get('accountNumber')?.touched )"
+                                        style="color: red;">
+                                        Account Number <strong>Required</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label class="control-label font-weight-600"> Conform Account Number </label>
+                                  <input formControlName="conformAccountNumber"  (focusout)="conformAccountNumber($event)" (keypress)="keyPressNumbers($event)" type="text" (keypress)="keyPressNumbers($event)" class="form-control" name="" />
+                                  <p *ngIf="beneficiary.get('conformAccountNumber')?.hasError('required')&&(submitted||beneficiary.get('conformAccountNumber')?.dirty||beneficiary.get('conformAccountNumber')?.touched )"
+                                      style="color: red;">
+                                      Conform Account Number <strong>Required</strong>
+                                  </p>
+                                  <p style="color: red;" *ngIf="beneficiary.get('conformAccountNumber')?.hasError('conformAccountNumber')
+                                  &&
+                                  !beneficiary.get('conformAccountNumber')?.hasError('required')">
+                                  Conform Account Number mismatch
                           </p>
-                      </div>
-                  </div>
-
-
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">Email</label>
-                                  <input formControlName="email" type="text" class="form-control" name="" />
-                                  <p *ngIf="beneficiary.get('email')?.hasError('required')&&(submitted||beneficiary.get('email')?.dirty||beneficiary.get('email')?.touched )"
-                                      style="color: red;">
-                                      Email <strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>  <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">Modile Number</label>
-                                  <input formControlName="modile" type="text" class="form-control" name="" />
-                                  <p *ngIf="beneficiary.get('modile')?.hasError('required')&&(submitted||beneficiary.get('modile')?.dirty||beneficiary.get('pinmodilecode')?.touched )"
-                                      style="color: red;">
-                                      Modile  Number<strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>  <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">Party Type</label>
-                                  <input formControlName="partyType" type="text" class="form-control" name="" />
-                                  <p *ngIf="beneficiary.get('partyType')?.hasError('required')&&(submitted||beneficiary.get('partyType')?.dirty||beneficiary.get('partyType')?.touched )"
-                                      style="color: red;">
-                                      Party Type <strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>  <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">Bank Name</label>
-                                  <input formControlName="bank" type="text" class="form-control" name="" />
-                                  <p *ngIf="beneficiary.get('pincobankde')?.hasError('required')&&(submitted||beneficiary.get('bank')?.dirty||beneficiary.get('bank')?.touched )"
-                                      style="color: red;">
-                                      Bank Name <strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>  <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">IFSC Code</label>
-                                  <input formControlName="ifscCode" type="text" class="form-control" name="" />
-                                  <p *ngIf="beneficiary.get('ifscCode')?.hasError('required')&&(submitted||beneficiary.get('ifscCode')?.dirty||beneficiary.get('ifscCode')?.touched )"
-                                      style="color: red;">
-                                      IFSCCode <strong>Required</strong>
-                                  </p>
-                              </div>
-                          </div>  <div class="col-md-4">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600"> Account Number </label>
-                                  <input formControlName="accountNumber" type="text" class="form-control" name="" />
-                                  <p *ngIf="beneficiary.get('accountNumber')?.hasError('required')&&(submitted||beneficiary.get('accountNumber')?.dirty||beneficiary.get('accountNumber')?.touched )"
-                                      style="color: red;">
-                                      Account Number <strong>Required</strong>
-                                  </p>
                               </div>
                           </div>
-                      </div>
-                  </form>
+                        </div>
+                    </form>
 
-                  <div class="clearfix"></div>
+                    <div class="clearfix"></div>
 
-                  <div class="borderFormBox">
+                    <div class="borderFormBox">
 
-                      <div class="clearfix"></div>
+                        <div class="clearfix"></div>
 
-                      <div class="clearfix"></div>
+                        <div class="clearfix"></div>
 
-                      <div class="clearfix"></div>
-                      <hr />
-                      <div class="button-right">
-                          <div class="row">
-                              <div class="col-md-12">
-                                  <a class="btn m-b-xs btn-md btn-success" (click)="onSubmit()">Update</a>
-                                  <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
-                                  <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                        <div class="clearfix"></div>
+                        <hr />
+                        <div class="button-right">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="btn m-b-xs btn-md btn-success" (click)="onSubmit()">Save</a>
+                                    <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a>
+                                    <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
