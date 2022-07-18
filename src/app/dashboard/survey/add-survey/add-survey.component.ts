@@ -319,7 +319,7 @@ console.log(this.state);
 
     }
 
-    onSubmit() {
+    onSubmit(type:any) {
       // let date=this.survey.value.data.toString()
     // console.log(this.survey);
     if(this.survey.valid){
@@ -335,7 +335,11 @@ console.log(this.state);
 
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
-        this.router.navigate(['/dashboard/survey/surveyList'])
+        if(type==='save'){
+   this.router.navigate(['/dashboard/survey/surveyList'])}
+   else{
+    this.survey.reset()
+   }
       },(err=>{
         this.toast.error(err.error.message);
       }))

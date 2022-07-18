@@ -473,7 +473,7 @@ this.surveyData.surveyDetails[index].document=null
         surveyDetails:this.survey.value.surveyDetail ,
 
       }, this.id).subscribe((data: any) => {
-        this.toast.success(data?.message)
+        this.toast.success('Survey successfuly Updated')
         this.router.navigate(['/dashboard/survey/surveyList'])
       },(err=>{
         this.toast.error(err.error.message);
