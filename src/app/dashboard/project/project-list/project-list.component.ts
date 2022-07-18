@@ -53,7 +53,7 @@ item.disrtictLength=this.disrtict.length
   delete(id:any){
     this.httpService.deletedProject(id).subscribe(item=>{
       this.toast.success('Project Successfuly Deleted')
-      this.router.navigate(['/dashboard/project/add'])
+      this.router.navigate(['/dashboard/project/page'])
     },(err)=>{
       this.toast.error('Plz try again')
     })
