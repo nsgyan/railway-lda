@@ -45,6 +45,10 @@ export class BeneficiaryListViewComponent implements OnInit {
     let url = '/dashboard/beneficiary/edit/' + id
     this.router.navigate([url])
   }
+  view(id:any){
+    let url = '/dashboard/beneficiary/view/' + id
+    this.router.navigate([url])
+  }
 
 
 }
