@@ -23,11 +23,11 @@
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Beneficiary Name
                                     </label>
-                                    <input type="text" formControlName="beneficiaryName" class="form-control">
+                                    <input type="text" (keypress)="keyPresschar($event)" formControlName="beneficiaryName" class="form-control">
 
                                     <p *ngIf="beneficiary.get('beneficiaryName')?.hasError('required')&&(submitted||beneficiary.get('beneficiaryName')?.dirty||beneficiary.get('beneficiaryName')?.touched )"
                                         style="color: red;">
-                                        Party Name <strong>Required</strong>
+                                        Beneficiary Name <strong>Required</strong>
                                     </p>
                                 </div>
                             </div>
@@ -116,11 +116,16 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Pin code</label>
-                                    <input formControlName="pincode" type="text" class="form-control" name="" />
-                                    <p *ngIf="beneficiary.get('pincode')?.hasError('required')&&(submitted||beneficiary.get('pincode')?.dirty||beneficiary.get('pincode')?.touched )"
-                                        style="color: red;">
-                                        Pin Code <strong>Required</strong>
-                                    </p>
+                                    <input formControlName="pincode" maxlength="6" type="text" class="form-control" name="" />
+                                    <p *ngIf="beneficiary.get('pincode')?.hasError('required')"
+                                    style="color: red;">
+                                    Pincode <strong>required</strong>
+                                </p>
+                                <p style="color: red;" *ngIf="beneficiary.get('pincode')?.invalid
+                                        &&
+                                        !beneficiary.get('pincode')?.hasError('required')">
+                                    Please enter a valid pincode
+                                </p>
                                 </div>
                             </div>
 
@@ -129,24 +134,42 @@
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Aadhaar Number
                                   </label>
-                                  <input type="text" formControlName="aadhaarNumber" class="form-control">
+                                  <input type="text" maxlength="12" formControlName="aadhaarNumber" class="form-control">
 
                                   <p *ngIf="beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )"
                                       style="color: red;">
                                      Adhar Number <strong>Required</strong>
                                   </p>
+                                  <p *ngIf="!beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )&&this.beneficiary.get('aadhaarNumber')?.invalid"
+                                  style="color: red;">
+                                 Adhar Number <strong>Invalid</strong>
+                              </p>
                               </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label font-weight-600">PAN Number
                                 </label>
-                                <input type="text" formControlName="panNumber" class="form-control">
-
-                                <p *ngIf="beneficiary.get('panNumber')?.hasError('required')&&(submitted||beneficiary.get('panNumber')?.dirty||beneficiary.get('panNumber')?.touched )"
+                                <input type="text" appUpperCase formControlName="panNumber" class="form-control">
+                                <div *ngIf="beneficiary.controls['panNumber'].invalid
+                                &&
+                               ( beneficiary.controls['panNumber']?.touched)">
+                                <p *ngIf="beneficiary.get('panNumber')?.hasError('required')"
                                     style="color: red;">
-                                    PAN Number <strong>Required</strong>
+                                    PAN number <strong>required</strong>
                                 </p>
+                                <p style="color: red;" *ngIf="beneficiary.get('panNumber')?.hasError('panValidation')
+                                    &&
+                                    !beneficiary.get('panNumber')?.hasError('required')">
+                                    Please enter a valid Pan number
+                                </p>
+                                <p style="color: red;"
+                                    *ngIf="beneficiary.get('panNumber')?.hasError('isExist')
+                                    &&
+                                    !beneficiary.get('panNumber')?.hasError('required') && ! beneficiary.get('panNumber')?.hasError('panValidation')">
+                                    Pan number already exists
+                                </p>
+                            </div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -159,6 +182,11 @@
                                   style="color: red;">
                                   Driving Licence Number <strong>Required</strong>
                               </p>
+
+                              <p *ngIf="!beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )&&beneficiary.get('dlNumber')?.invalid"
+                                  style="color: red;">
+                              Please enter a Driving Licence Number
+                          </p>
                           </div>
                       </div>
                       <div class="col-md-4">
@@ -178,20 +206,52 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Email</label>
-                                    <input formControlName="email" type="text" class="form-control" name="" />
-                                    <p *ngIf="beneficiary.get('email')?.hasError('required')&&(submitted||beneficiary.get('email')?.dirty||beneficiary.get('email')?.touched )"
+                                    <input appLowercase formControlName="email" type="text" class="form-control" name="" />
+                                    <div *ngIf="
+                                    beneficiary.controls['email'].invalid&& (
+                                    beneficiary.controls['email']?.touched)">
+                                    <p *ngIf="beneficiary.get('email')?.hasError('required')"
                                         style="color: red;">
-                                        Email <strong>Required</strong>
+                                        E-Mail Address <strong>required</strong>
                                     </p>
+                                    <p style="color: red;" *ngIf="beneficiary.get('email')?.hasError('email')
+                                        &&
+                                        !beneficiary.get('email')?.hasError('required')">
+                                        Please enter a valid E-Mail Address
+                                    </p>
+
+                                </div>
                                 </div>
                             </div>  <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Modile Number</label>
-                                    <input formControlName="modile" type="text" class="form-control" name="" />
-                                    <p *ngIf="beneficiary.get('modile')?.hasError('required')&&(submitted||beneficiary.get('modile')?.dirty||beneficiary.get('pinmodilecode')?.touched )"
+                                    <input formControlName="modile" type="text" maxlength="10" (keypress)="keyPressNumbers($event)" class="form-control" name="" />
+                                    <div *ngIf="beneficiary.controls['modile'].invalid
+                                    &&(
+                                    beneficiary.controls['modile']?.touched)">
+                                    <p *ngIf="beneficiary.get('modile')?.hasError('required')"
                                         style="color: red;">
-                                        Modile  Number<strong>Required</strong>
+                                        Mobile Number <strong>required</strong>
                                     </p>
+                                    <p style="color: red;" *ngIf="beneficiary.get('modile')?.hasError('cellNumNotValid')
+                                        &&
+                                        !beneficiary.get('modile')?.hasError('required')">
+                                        Please enter a valid mobile number
+                                    </p>
+                                    <p style="color: red;"
+                                        *ngIf="beneficiary.get('modile')?.invalid
+                                        &&(
+                                        !beneficiary.get('modile')?.hasError('required') && !beneficiary.get('modile')?.hasError('cellNumNotValid')&&!beneficiary.get('modile')?.hasError('isExist'))">
+                                        Mobile Number should be 10 digit long
+                                    </p>
+                                    <p style="color: red;"
+                                        *ngIf="beneficiary.get('modile')?.hasError('isExist')
+                                        &&
+                                        !beneficiary.get('modile')?.hasError('required')&& !beneficiary.get('modile')?.hasError('cellNumNotValid')">
+                                        Mobile number already exists
+                                    </p>
+
+                                </div>
                                 </div>
                             </div>  <div class="col-md-4">
                                 <div class="form-group">
@@ -223,7 +283,7 @@
                             </div>  <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600"> Account Number </label>
-                                    <input formControlName="accountNumber" type="text" class="form-control" name="" />
+                                    <input formControlName="accountNumber" type="text" (keypress)="keyPressNumbers($event)" class="form-control" name="" />
                                     <p *ngIf="beneficiary.get('accountNumber')?.hasError('required')&&(submitted||beneficiary.get('accountNumber')?.dirty||beneficiary.get('accountNumber')?.touched )"
                                         style="color: red;">
                                         Account Number <strong>Required</strong>

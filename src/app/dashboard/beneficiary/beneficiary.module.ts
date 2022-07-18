@@ -6,6 +6,7 @@ import { BeneficiaryListViewComponent } from './beneficiary-list-view/beneficiar
 import { AddBeneficiaryComponent } from './add-beneficiary/add-beneficiary.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditBeneficiaryComponent } from './edit-beneficiary/edit-beneficiary.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EditBeneficiaryComponent } from './edit-beneficiary/edit-beneficiary.co
     CommonModule,
     BeneficiaryRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
   ]
 })
 export class BeneficiaryModule { }

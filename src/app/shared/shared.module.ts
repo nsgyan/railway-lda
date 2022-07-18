@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GlobalComponent } from './global/global.component';
+import { UpperCaseDirective } from './upper-case.directive';
+import { LowercaseDirective } from './lower-case.directive';
 
 
 
 @NgModule({
   declarations: [
-    GlobalComponent
+ UpperCaseDirective,
+ LowercaseDirective
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [UpperCaseDirective,LowercaseDirective]
 })
 export class SharedModule { }

@@ -11,39 +11,21 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./edit-beneficiary.component.css']
 })
 export class EditBeneficiaryComponent implements OnInit {
-  beneficiary!: FormGroup;
-  state: any = []
-  district: any = []
-  block: any = []
-  village: any = []
-  id: any
-  beneficiaryData: any
-  project: any
-  submitted: boolean = false
-  constructor(private fb: FormBuilder,
+  beneficiary:FormGroup;
+state:any=[]
+district:any=[]
+block:any=[]
+village:any=[]
+  project:any
+  submitted:boolean=false
+  id: string | null;
+  beneficiaryData: any;
+  constructor( private fb:FormBuilder,
     private router: Router,
     private data: DataService,
-    private httpService: HttpsService,
-    private route: ActivatedRoute,
-    private toast: ToastrService,) {
-    this.beneficiary = this.fb.group({
-      partyName: [, Validators.required],
-      address: ['', Validators.required],
-      state: ['', Validators.required],
-      district: ['', Validators.required],
-      pincode: ['', Validators.required],
-      email: ['', Validators.required],
-      modile: ['', Validators.required],
-      partyType: ['', Validators.required],
-      bank: ['', Validators.required],
-      ifscCode: ['', Validators.required],
-      accountNumber: ['', Validators.required],
-
-
-
-
-    })
-    this.id = this.route.snapshot.paramMap.get('id')
+    private httpService:HttpsService,
+    private toast: ToastrService,
+    private route:ActivatedRoute) {
     this.httpService.getState().subscribe((data: any) => {
       data?.state.map((item: any) => {
         this.state.push(item.stateName)
@@ -51,55 +33,136 @@ export class EditBeneficiaryComponent implements OnInit {
 
     })
 
-    this.httpService.getBeneficiaryByID(this.id).subscribe((data: any) => {
-      console.log(data);
-      this.beneficiaryData = data.data
-      this.beneficiary.get('partyName')?.setValue(this.beneficiaryData.partyName)
-      this.beneficiary.get('partyName')?.updateValueAndValidity
-
-
-
-    })
     console.log(this.state, 'dgfhgjh');
 
+      this.id = this.route.snapshot.paramMap.get('id')
+      this.httpService.getState().subscribe((data: any) => {
+        data?.state.map((item: any) => {
+          this.state.push(item.stateName)
+        })
+
+      })
+      this.beneficiary=this.fb.group({
+        beneficiaryName: ['', Validators.required],
+        fatherOrHusbandName:['',Validators.required],
+        aadhaarNumber: ['', Validators.required],
+        panNumber:['',Validators.required],
+        dlNumber:['',Validators.required],
+        rationCard:['',Validators.required],
+        address: ['', Validators.required],
+        state:['',Validators.required],
+        district:['',Validators.required],
+        block:['',Validators.required],
+        village:['',Validators.required],
+        pincode: ['', Validators.required],
+        email: ['', Validators.required],
+        modile: ['', Validators.required],
+        partyType: ['', Validators.required],
+        bank: ['', Validators.required],
+        ifscCode: ['', Validators.required],
+        accountNumber: ['', Validators.required],
+      })
+
+      this.httpService.getBeneficiaryByID(this.id).subscribe((data: any) => {
+this.beneficiaryData=data.data
+        this.beneficiary.get('beneficiaryName')?.setValue(this.beneficiaryData?.beneficiaryName)
+        this.beneficiary.get('beneficiaryName')?.updateValueAndValidity()
+        this.beneficiary.get('fatherOrHusbandName')?.setValue(this.beneficiaryData?.fatherOrHusbandName)
+        this.beneficiary.get('fatherOrHusbandName')?.updateValueAndValidity()
+        this.beneficiary.get('aadhaarNumber')?.setValue(this.beneficiaryData.aadhaarNumber)
+        this.beneficiary.get('aadhaarNumber')?.updateValueAndValidity()
+        this.beneficiary.get('panNumber')?.setValue(this.beneficiaryData.panNumber)
+        this.beneficiary.get('panNumber')?.updateValueAndValidity()
+        this.beneficiary.get('dlNumber')?.setValue(this.beneficiaryData.dlNumber)
+        this.beneficiary.get('dlNumber')?.updateValueAndValidity()
+        this.beneficiary.get('rationCard')?.setValue(this.beneficiaryData.rationCard)
+        this.beneficiary.get('rationCard')?.updateValueAndValidity()
+        this.beneficiary.get('address')?.setValue(this.beneficiaryData.address)
+        this.beneficiary.get('address')?.updateValueAndValidity()
+        this.beneficiary.get('state')?.setValue(this.beneficiaryData.state)
+        this.beneficiary.get('state')?.updateValueAndValidity()
+        this.getDistrict()
+        this.beneficiary.get('district')?.setValue(this.beneficiaryData.district)
+        this.beneficiary.get('district')?.updateValueAndValidity()
+        this.getblock()
+
+        this.beneficiary.get('block')?.setValue(this.beneficiaryData.block)
+        this.beneficiary.get('block')?.updateValueAndValidity()
+        this.getVillage()
+        this.beneficiary.get('village')?.setValue(this.beneficiaryData.village)
+        this.beneficiary.get('village')?.updateValueAndValidity()
+        this.beneficiary.get('pincode')?.setValue(this.beneficiaryData.pincode)
+        this.beneficiary.get('pincode')?.updateValueAndValidity()
+        this.beneficiary.get('email')?.setValue(this.beneficiaryData.email)
+        this.beneficiary.get('email')?.updateValueAndValidity()
+        this.beneficiary.get('modile')?.setValue(this.beneficiaryData.modile)
+        this.beneficiary.get('modile')?.updateValueAndValidity()
+        this.beneficiary.get('partyType')?.setValue(this.beneficiaryData.partyType)
+        this.beneficiary.get('partyType')?.updateValueAndValidity()
+        this.beneficiary.get('bank')?.setValue(this.beneficiaryData.bank)
+        this.beneficiary.get('bank')?.updateValueAndValidity()
+        this.beneficiary.get('ifscCode')?.setValue(this.beneficiaryData.ifscCode)
+        this.beneficiary.get('ifscCode')?.updateValueAndValidity()
+        this.beneficiary.get('accountNumber')?.setValue(this.beneficiaryData.accountNumber)
+        this.beneficiary.get('accountNumber')?.updateValueAndValidity()
 
 
-  }
+
+      })
+
+
+    }
 
   ngOnInit(): void {
 
   }
 
+  getblock(){
+    this.beneficiary.get('block')?.reset()
+    this.beneficiary.get('block')?.updateValueAndValidity()
+
+    this.httpService.getBlock(this.beneficiary.value.state,this.beneficiary.value.district).subscribe((data:any)=>{
+      this.block=data?.blocks
+
+            })
+  }
+
+  getVillage(){
+    // console.log(state);
+    // console.log(this.village.value.state);
+    // const control =this.project.get("selectState") as FormArray
+    this.httpService.getVillageByBlock(this.beneficiary.value.block).subscribe((data:any)=>{
+
+      this.village=data?.village;
+
+            })
+  }
+
+
+  getPriject(event:any){
+
+this.state=[]
+this.project.map((item:any)=>{
+  if(item.projectName===event.target.value){
+    this.beneficiary.get('projectNumber')?.setValue(item.projectNumber)
+    this.beneficiary.get('projectNumber')?.updateValueAndValidity
+  item.projectDetails.map((projectData:any)=>{
+    if (!this.state.includes(projectData.state)) {
+      // ✅ only runs if value not in array
+      this.state.push(projectData.state);
+    }
+  })}
+  this.beneficiary.get('state')?.reset()
+  this.beneficiary.get('state')?.updateValueAndValidity
 
 
 
-
-
-  getPriject(event: any) {
-
-    this.state = []
-    this.project.map((item: any) => {
-      if (item.projectName === event.target.value) {
-        this.beneficiary.get('projectNumber')?.setValue(item.projectNumber)
-        this.beneficiary.get('projectNumber')?.updateValueAndValidity
-        item.projectDetails.map((projectData: any) => {
-          if (!this.state.includes(projectData.state)) {
-            // ✅ only runs if value not in array
-            this.state.push(projectData.state);
-          }
-        })
-      }
-      this.beneficiary.get('state')?.reset()
-      this.beneficiary.get('state')?.updateValueAndValidity
-
-
-
-    })
+})
 
 
   }
 
-  getDistrict(state: any) {
+  getDistrict() {
     this.beneficiary.get('district')?.reset()
     this.beneficiary.get('district')?.updateValueAndValidity()
 
@@ -151,13 +214,20 @@ export class EditBeneficiaryComponent implements OnInit {
 
   onSubmit() {
     // let date=this.beneficiary.value.data.toString()
-    console.log(this.beneficiary);
-    if (this.beneficiary.valid) {
-      this.httpService.addBeneficiary({
-        partyName: this.beneficiary.value.partyName,
+  console.log(this.beneficiary);
+  if(this.beneficiary.valid){
+    this.httpService.updateBeneficiary({
+      beneficiaryName: this.beneficiary.value.beneficiaryName,
+        fatherOrHusbandName:this.beneficiary.value.fatherOrHusbandName,
+        aadhaarNumber: this.beneficiary.value.aadhaarNumber,
+        panNumber:this.beneficiary.value.panNumber,
+        dlNumber:this.beneficiary.value.dlNumber,
+        rationCard:this.beneficiary.value.rationCard,
         address: this.beneficiary.value.address,
-        state: this.beneficiary.value.state,
-        district: this.beneficiary.value.district,
+        state:this.beneficiary.value.state,
+        district:this.beneficiary.value.district,
+        block:this.beneficiary.value.block,
+        village:this.beneficiary.value.village,
         pincode: this.beneficiary.value.pincode,
         email: this.beneficiary.value.email,
         modile: this.beneficiary.value.modile,
@@ -166,18 +236,18 @@ export class EditBeneficiaryComponent implements OnInit {
         ifscCode: this.beneficiary.value.ifscCode,
         accountNumber: this.beneficiary.value.accountNumber,
 
-      }).subscribe((data: any) => {
-        this.toast.success(data?.message)
-        this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
-      }, (err => {
-        this.toast.error(err.error.message);
-      }))
+    },this.id).subscribe((data:any)=>{
+      this.toast.success(data?.message)
+      this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
+    },(err=>{
+      this.toast.error(err.error.message);
+    }))
 
-    }
-    else {
-      this.submitted = true
-      this.toast.error('Please Fill Required Field');
-    }
+  }
+  else{
+    this.submitted=true
+    this.toast.error('Please Fill Required Field');
+  }
 
 
   }
@@ -185,5 +255,5 @@ export class EditBeneficiaryComponent implements OnInit {
   cancel() {
     this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
 
-  }
+}
 }

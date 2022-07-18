@@ -39,6 +39,7 @@ export class Globals {
         'addBeneficiary': Globals.server + 'beneficiary/add',
         'getBeneficiary': Globals.server + 'beneficiary/get',
         'delBeneficiary': Globals.server + 'beneficiary/del',
+        'updateBeneficiary': Globals.server + 'beneficiary/update',
         'getCountBeneficiary': Globals.server + 'beneficiary/getCount',
         "login":Globals.server+'user/login',
         'upload': Globals.server + 'upload',

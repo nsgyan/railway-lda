@@ -121,6 +121,9 @@ export class HttpsService {
   updateVillage(formData: any) {
     return this.httpService.patch(Globals.route.updateVillage, formData);
   }
+  updateBeneficiary(formData: any,id:any) {
+    return this.httpService.patch(`${Globals.route.updateBeneficiary}/${id}`, formData);
+  }
   updatesurvey(formData: any,id:any) {
     return this.httpService.patch(`${Globals.route.updatesurvey}/${id}`, formData);
   }

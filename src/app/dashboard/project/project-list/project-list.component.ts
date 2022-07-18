@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +17,8 @@ export class ProjectListComponent implements OnInit {
   constructor(   private router: Router,
     private data: DataService,
     private toast: ToastrService,
-    private httpService:HttpsService,) {
+    private httpService:HttpsService,
+    private localtion:Location) {
       this.httpService.getProject().subscribe((data:any)=>{
         this.Project=data.projects
         this.Project.map((item:any)=>{
@@ -54,6 +56,7 @@ item.disrtictLength=this.disrtict.length
     this.httpService.deletedProject(id).subscribe(item=>{
       this.toast.success('Project Successfuly Deleted')
       this.router.navigate(['/dashboard/project/page'])
+      location.reload()
     },(err)=>{
       this.toast.error('Plz try again')
     })
