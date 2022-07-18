@@ -65,7 +65,7 @@ export class SurveyEditComponent implements OnInit {
       this.id = this.route.snapshot.paramMap.get('id')
       this.httpService.getSurveyByID(this.id).subscribe((data: any) => {
         this.surveyData = data.data
-        this.surveyData.documents= environment.download + this.surveyData.documents
+
 
 
         this.survey.get('projectName')?.setValue(this.surveyData?.projectName)
@@ -125,6 +125,7 @@ export class SurveyEditComponent implements OnInit {
 
           i++
         })
+        this.surveyData.documents= environment.download + this.surveyData.documents
 
       })
 

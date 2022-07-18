@@ -43,7 +43,9 @@ export class SurveyViewComponent implements OnInit {
         this.surveyData = data.data
         this.surveyData.documents= environment.download + this.surveyData.documents
 
-
+        this.surveyData.surveyDetails.map((item: any) => {
+            item.document=environment.download + item.document
+        })
 
 
 
