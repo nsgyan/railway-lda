@@ -40,8 +40,8 @@ village:any=[]
         fatherOrHusbandName:['',Validators.required],
         aadhaarNumber: ['', [Validators.required,Validators.maxLength(12),Validators.minLength(12)]],
         panNumber:['',[Validators.required,panValidation]],
-        dlNumber:['',[Validators.required,Validators.pattern('^[A-Z](?:\d[- ]*){14}$')]],
-        rationCard:['',Validators.required],
+        dlNumber:['',[Validators.required,Validators.pattern('^[A-Za-z][0-9/\W/]{2,20}$')]],
+        rationCard:['',[Validators.required,Validators.pattern('^([a-zA-Z0-9]){8,12}\s*$')]],
         address: ['', Validators.required],
         state:['',Validators.required],
         district:['',Validators.required],
@@ -54,10 +54,7 @@ village:any=[]
         bank: ['', Validators.required],
         ifscCode: ['', Validators.required],
         accountNumber: ['', Validators.required],
-
-
-
-
+        conformAccountNumber:['',Validators.required]
       })
 
 
@@ -65,6 +62,26 @@ village:any=[]
 
   ngOnInit(): void {
 
+  }
+
+  conformAccountNumber(event: any,) {
+    if (event.target.value !== this.beneficiary.value.accountNumber) {
+      this.beneficiary.get('conformAccountNumber')?.setErrors({ conformAccountNumber: true })
+    }
+    else {
+      // const email = event.target.value ? event.target.value.toLowerCase() : this.beneficiary.get('email')?.value
+      // if (email) {
+      //   this.httpService.checkEmail({ email: email })
+      //     .subscribe((data: any) => {
+      //       if (email === data?.email) {
+      //         this.beneficiary.get('email')?.setErrors({ isExist: true });
+      //       }
+
+      //     })
+
+      // }
+
+    }
   }
 
   getblock(state:any){

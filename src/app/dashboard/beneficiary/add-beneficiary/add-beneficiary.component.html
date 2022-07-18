@@ -199,6 +199,10 @@
                                 style="color: red;">
                                 Ration Card Number <strong>Required</strong>
                             </p>
+                            <p *ngIf="!beneficiary.get('rationCard')?.hasError('required')&&(submitted||beneficiary.get('rationCard')?.dirty||beneficiary.get('rationCard')?.touched )&&beneficiary.get('rationCard')?.invalid"
+                            style="color: red;">
+                        Please enter a Driving Licence Number
+                    </p>
                         </div>
                     </div>
 
@@ -256,7 +260,31 @@
                             </div>  <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Party Type</label>
-                                    <input formControlName="partyType" type="text" class="form-control" name="" />
+                                    <!-- <input formControlName="partyType" type="text" class="form-control" name="" /> -->
+
+                                    <div class="checkgroup ">
+                                      <div class="radioBox Apply-control
+                                          Apply-radio d-flex align-item-center">
+                                          <input formControlName="partyType" value="Owner" type="radio" id="ApplyRadio5"
+                                              name="partyType" class="Apply-control-input mt-2
+                                              mr-2">
+                                          <label class="Apply-control-label font" for="ApplyRadio5">
+                                              <h6 class="catBold">Owner</h6>
+
+                                          </label>
+                                      </div>
+                                      <div class="mr-0 radioBox Apply-control
+                                          Apply-radio d-flex align-item-center">
+                                          <input formControlName="partyType" value="Affected Party" type="radio" id="ApplyRadio6"
+                                              name="partyType" class="Apply-control-input mt-2
+                                              mr-2">
+                                          <label class="Apply-control-label font" for="ApplyRadio6">
+                                              <h6 class="catBold">Affected Party</h6>
+                                          </label>
+                                      </div>
+                                      <br>
+                                  </div>
+
                                     <p *ngIf="beneficiary.get('partyType')?.hasError('required')&&(submitted||beneficiary.get('partyType')?.dirty||beneficiary.get('partyType')?.touched )"
                                         style="color: red;">
                                         Party Type <strong>Required</strong>
@@ -280,16 +308,32 @@
                                         IFSCCode <strong>Required</strong>
                                     </p>
                                 </div>
-                            </div>  <div class="col-md-4">
+                            </div>
+                              <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600"> Account Number </label>
-                                    <input formControlName="accountNumber" type="text" (keypress)="keyPressNumbers($event)" class="form-control" name="" />
+                                    <input formControlName="accountNumber" type="password" (keypress)="keyPressNumbers($event)" (keypress)="keyPressNumbers($event)" class="form-control" name="" />
                                     <p *ngIf="beneficiary.get('accountNumber')?.hasError('required')&&(submitted||beneficiary.get('accountNumber')?.dirty||beneficiary.get('accountNumber')?.touched )"
                                         style="color: red;">
                                         Account Number <strong>Required</strong>
                                     </p>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label class="control-label font-weight-600"> Conform Account Number </label>
+                                  <input formControlName="conformAccountNumber"  (focusout)="conformAccountNumber($event)" (keypress)="keyPressNumbers($event)" type="text" (keypress)="keyPressNumbers($event)" class="form-control" name="" />
+                                  <p *ngIf="beneficiary.get('conformAccountNumber')?.hasError('required')&&(submitted||beneficiary.get('conformAccountNumber')?.dirty||beneficiary.get('conformAccountNumber')?.touched )"
+                                      style="color: red;">
+                                      Conform Account Number <strong>Required</strong>
+                                  </p>
+                                  <p style="color: red;" *ngIf="beneficiary.get('conformAccountNumber')?.hasError('conformAccountNumber')
+                                  &&
+                                  !beneficiary.get('conformAccountNumber')?.hasError('required')">
+                                  Conform Account Number mismatch
+                          </p>
+                              </div>
+                          </div>
                         </div>
                     </form>
 
