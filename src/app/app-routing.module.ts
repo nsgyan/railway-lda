@@ -34,11 +34,15 @@ const routes: Routes = [
     ]
 
   },
-  { path: 'list', component: ListviewComponent },
-  { path: 'form', component: FormviewComponent },
-  { path: 'list2', component: Listview2Component },
-  { path: 'form2', component: Formview2Component },
-  { path: 'users', component: UserComponent },
+  // { path: 'list', component: ListviewComponent },
+  // { path: 'form', component: FormviewComponent },
+  // { path: 'list2', component: Listview2Component },
+  // { path: 'form2', component: Formview2Component },
+  // { path: 'users', component: UserComponent },
+  {
+    path: '**',
+    redirectTo:''
+  },
 
 ];
 
