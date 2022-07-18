@@ -334,7 +334,7 @@ console.log(this.state);
         surveyDetails:this.survey.value.surveyDetail ,
 
       }).subscribe((data:any)=>{
-        this.toast.success(data?.message)
+        this.toast.success('Survey Successfuly Added')
         if(type==='save'){
    this.router.navigate(['/dashboard/survey/surveyList'])}
    else{
