@@ -3,24 +3,24 @@
     padding: 8px 4px;
     text-align: center;
   }
-  
+
   .borderFormBox .top-head {
     display: flex;
     justify-content: space-between;
     padding: 0 0 1rem 0;
     align-items: center;
   }
-  
+
   .top-head h5 {
     margin: 0%;
   }
-  
+
   .table>thead>tr>th {
     padding: 8px 4px;
     border-bottom: 1px solid #eaeff0;
     text-align: center;
   }
-  
+
   .borderFormBox {
     border: none;
   }
@@ -54,6 +54,12 @@
   }
   .table textarea{
     padding: 0rem;
-  
+
   }
-  
+
+  .fileSizetext {
+    font-size: 13px;
+      font-weight: 500;
+      font-style: italic;
+      color: #3b3b3b;
+  }

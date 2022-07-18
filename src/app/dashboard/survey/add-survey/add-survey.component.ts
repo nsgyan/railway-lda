@@ -212,6 +212,47 @@ console.log(this.state);
 
     }
 
+    checkDecimal(type:any,i:any){
+      const control =this.survey.get("surveyDetail") as FormArray
+      let number
+      if(type==='amount'){
+      number= control.at(i).value.amount
+      console.log(number);
+
+    }
+    else if(type==='area'){
+      number= control.at(i).value.area
+    }
+    else if(type==='totalArea'){
+      number= control.at(i).value.totalArea
+    }
+  if(!number.includes('.')){
+    number= number+'.00'
+    console.log(number);
+
+  }
+  control.at(i).get(type)?.setValue(number)
+  control.at(i).get(type)?.updateValueAndValidity
+
+
+
+    }
+
+    keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+      // const charCode = (event.which) ? event.which : event.keyCode;
+    //  return (charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0
+      const charCode = (event.which) ? event.which : event.keyCode;
+      if ((charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0) {
+        return true;}
+      // }else if((charCode < 48 || charCode > 57)){
+      //   event.preventDefault();
+      //   return false;
+      // }
+      else {
+        event.preventDefault();
+          return false;
+      }
+    }
 
     getDistrict(event:any){
  let newdistrict:any =[]

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +17,8 @@ export class SurveyListComponent implements OnInit {
   constructor(   private router: Router,
     private data: DataService,
     private toast: ToastrService,
-    private httpService:HttpsService,) {
+    private httpService:HttpsService,
+    private location: Location) {
       this.httpService.getSurvey().subscribe((data:any)=>{
 
       data.surveydata.map((item:any)=>{
@@ -47,8 +49,9 @@ this.survey=data.surveydata
   delete(id: any) {
     this.httpService.delsurvey(id).subscribe(res => {
       this.toast.success('deleted survey successfully')
+      location.reload()
     }, err => {
-      this.toast.success('Internal server error')
+      this.toast.error('Internal server error')
     })
   }
 

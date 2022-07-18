@@ -66,7 +66,7 @@ export class SurveyEditComponent implements OnInit {
       this.httpService.getSurveyByID(this.id).subscribe((data: any) => {
         this.surveyData = data.data
         this.surveyData.documents= environment.download + this.surveyData.documents
-        console.log(this.surveyData);
+
 
         this.survey.get('projectName')?.setValue(this.surveyData?.projectName)
         this.survey.get('projectName')?.updateValueAndValidity()
@@ -89,6 +89,7 @@ export class SurveyEditComponent implements OnInit {
         this.getDistrict(this.event)
         this.event.target.value =   this.surveyData.district
         this.getBlock(this.event)
+
         this.surveyData.surveyDetails.map((item: any) => {
           control.push(
             this.fb.group({
@@ -109,15 +110,18 @@ export class SurveyEditComponent implements OnInit {
             }))
             item.document=environment.download + item.document
 
-          // console.log();
+
 
           this.event.target.value = item.block
           this.getVillage(this.event, i)
-          console.log(this.block,'dfg');
 
-          this.event.target.value = item.objecton
-          this.getobjecton(this.event, i)
-          // console.log(this.objectionType, 'objen');
+
+
+          if(item.objecton==='Yes'){
+            this.event.target.value = item.objecton
+            this.getobjecton(this.event, i)
+          }
+
 
           i++
         })
@@ -135,8 +139,21 @@ export class SurveyEditComponent implements OnInit {
       this.state=[]
     }
 
-    delete(conttrolName: string) {
+    del(conttrolName: string) {
+      console.log(this.surveyData.documents);
 
+this.surveyData.documents=null
+this.survey.get('document')?.reset()
+this.survey.get('document')?.updateValueAndValidity()
+
+    }
+    delete(controlName: string,index:any) {
+    let control= this.survey.get("surveyDetail") as FormArray
+      console.log(this.surveyData.documents);
+      control.at(index).get('document')?.reset()
+      control.at(index).get('document')?.updateValueAndValidity
+
+this.surveyData.surveyDetails[index].document=null
 
     }
 
@@ -286,9 +303,52 @@ export class SurveyEditComponent implements OnInit {
 
 
     }
+    checkDecimal(type:any,i:any){
+      const control =this.survey.get("surveyDetail") as FormArray
+      let number
+      if(type==='amount'){
+      number= control.at(i).value.amount
+      console.log(number);
+
+    }
+    else if(type==='area'){
+      number= control.at(i).value.area
+    }
+    else if(type==='totalArea'){
+      number= control.at(i).value.totalArea
+    }
+  if(!number.includes('.')){
+    number= number+'.00'
+    console.log(number);
+
+  }
+  control.at(i).get(type)?.setValue(number)
+  control.at(i).get(type)?.updateValueAndValidity
+
+
+
+    }
+
+
+    keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+      // const charCode = (event.which) ? event.which : event.keyCode;
+    //  return (charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0
+      const charCode = (event.which) ? event.which : event.keyCode;
+      if ((charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0) {
+        return true;}
+      // }else if((charCode < 48 || charCode > 57)){
+      //   event.preventDefault();
+      //   return false;
+      // }
+      else {
+        event.preventDefault();
+          return false;
+      }
+    }
 
 
   getobjecton(event: any, index: any) {
+
 
     let newobjectionType: any = []
       const control= this.survey.get("surveyDetail") as FormArray
@@ -299,6 +359,7 @@ export class SurveyEditComponent implements OnInit {
             newobjectionType.push(item.objectionType);
           })
           this.objectionType.splice(index, 0, newobjectionType);
+
 
 
                 })
@@ -323,7 +384,7 @@ export class SurveyEditComponent implements OnInit {
    block:control.at(index).value.block,
    village:control.at(index).value.village
  }).subscribe((data:any)=>{
-   console.log(data);
+
    control.at(index).get('beneficiaryCount')?.setValue(data.count)
    control.at(index).get('beneficiaryCount')?.updateValueAndValidity()
 
@@ -332,7 +393,7 @@ export class SurveyEditComponent implements OnInit {
 
 
     getDistrict(event:any){
-      console.log(event.target.value);
+
 
  let newdistrict:any =[]
 

@@ -56,3 +56,10 @@
   padding: 0rem;
 
 }
+
+.fileSizetext {
+  font-size: 13px;
+    font-weight: 500;
+    font-style: italic;
+    color: #3b3b3b;
+}

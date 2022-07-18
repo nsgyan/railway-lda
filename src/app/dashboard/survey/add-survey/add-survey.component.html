@@ -21,7 +21,7 @@
 
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">Project Name
+                                  <label class="control-label font-weight-600">Project Name*
                                   </label>
                                   <select type="date" formControlName="projectName" class="form-control"
                                       (change)="getPriject($event)">
@@ -38,14 +38,14 @@
                           </div>
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">Project Number</label>
+                                  <label class="control-label font-weight-600">Project Number*</label>
                                   <input formControlName="projectNumber" type="text" class="form-control" name=""
                                       readonly />
                               </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label font-weight-600">Survey Number</label>
+                                <label class="control-label font-weight-600">Survey Number*</label>
                                 <input type="text" formControlName="surveyNumber" class="form-control"
                                 name="" />
                             <p *ngIf="survey.get('surveyNumber')?.hasError('required')&&(submitted||survey.get('surveyNumber')?.dirty||survey.get('surveyNumber')?.touched )"
@@ -56,7 +56,7 @@
                         </div>
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">Date</label>
+                                  <label class="control-label font-weight-600">Date*</label>
                                   <input formControlName="date" type="date" class="form-control" name="" />
                                   <p *ngIf="survey.get('date')?.hasError('required')&&(submitted||survey.get('date')?.dirty||survey.get('date')?.touched )"
                                       style="color: red;">
@@ -66,7 +66,7 @@
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label class="control-label font-weight-600">State</label>
+                              <label class="control-label font-weight-600">State*</label>
                                 <select class="form-control" formControlName="state" (change)="getDistrict($event)">
                                     <option hidden>Select State</option>
                                     <option *ngFor="let item of state" value="{{ item }}">
@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label class="control-label font-weight-600">District</label>
+                            <label class="control-label font-weight-600">District*</label>
                               <select class="form-control" formControlName="district" (change)="getBlock($event)">
                                   <option hidden>Select District</option>
                                   <option *ngFor="let item of district" value="{{ item }}">
@@ -96,9 +96,11 @@
                       </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                                <label class="control-label font-weight-600">Document</label>
+                                <label class="control-label font-weight-600">Document*</label>
                                 <input type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
                                 (change)="changeListener($event,0,'outside')" />
+                                <p class="fileSizetext">File should be in pdf, jpg, jpeg & png format. File size
+                                  should be less than 2MB</p>
                                 <p *ngIf="survey.get('document')?.hasError('required')&&(submitted||survey.get('document')?.dirty||survey.get('document')?.touched )"
                                     style="color: red;">
                                     Please Upload <strong>Document</strong>
@@ -126,18 +128,18 @@
                                   <tr>
                                       <th>S.No</th>
 
-                                      <th>Block</th>
-                                      <th>Village</th>
-                                      <th> Acquired Area</th>
-                                      <th>Total Area</th>
-                                      <th>Land Type</th>
-                                      <th>Land Nature</th>
-                                      <th>Land Category</th>
-                                      <th>Objecton</th>
-                                      <th>Objection Type</th>
-                                      <th>Amount</th>
-                                      <th>Beneficiary Count</th>
-                                      <th>Document</th>
+                                      <th>Block*</th>
+                                      <th>Village*</th>
+                                      <th> Acquired Area ( Ha )*</th>
+                                      <th>Total Area ( Ha )*</th>
+                                      <th>Land Type*</th>
+                                      <th>Land Nature*</th>
+                                      <th>Land Category*</th>
+                                      <th>Objecton*</th>
+                                      <th>Objection Type*</th>
+                                      <th>Amount ( In Cr )*</th>
+                                      <th>Beneficiary Count*</th>
+                                      <th>Document*</th>
                                       <!-- <th>Cheque Number</th>
                                   <th>Cheque Date</th>
                                   <th>Registration Amount</th>
@@ -194,7 +196,7 @@
                                           </div>
                                       </td>
                                       <td>
-                                          <input type="number" formControlName="area" class="form-control"
+                                          <input type="text" formControlName="area" (keypress)="keyPressNumbers($event)" (focusout)="checkDecimal('area',i)" class="form-control"
                                               name="" />
                                           <p *ngIf="opt.get('area')?.hasError('required')&&(submitted||opt.get('area')?.dirty||opt.get('area')?.touched )"
                                               style="color: red;">
@@ -202,7 +204,7 @@
                                           </p>
                                       </td>
                                       <td>
-                                          <input type="text" formControlName="totalArea" class="form-control" name="" />
+                                          <input type="text" formControlName="totalArea" (keypress)="keyPressNumbers($event)" (focusout)="checkDecimal('totalArea',i)" class="form-control" name="" />
                                           <p *ngIf="opt.get('totalArea')?.hasError('required')&&(submitted||opt.get('totalArea')?.dirty||opt.get('totalArea')?.touched )"
                                               style="color: red;">
                                               Total Area <strong>Required</strong>
@@ -262,7 +264,7 @@
                               </td>
 
                             <td>
-                              <input type="number" formControlName="amount" class="form-control"
+                              <input type="text"  (keypress)="keyPressNumbers($event)" (focusout)="checkDecimal('amount',i)" formControlName="amount" class="form-control"
                                   name="" />
                               <p *ngIf="opt.get('amount')?.hasError('required')&&(submitted||opt.get('amount')?.dirty||opt.get('amount')?.touched )"
                                   style="color: red;">
@@ -276,6 +278,8 @@
                           <td>
                             <input type="file" accept=".gif,.jpg,.jpeg,.png,.pdf" class="form-control"
                             (change)="changeListener($event,i,'inside')" />
+                            <p class="fileSizetext">File should be in pdf, jpg, jpeg & png format. File size
+                              should be less than 2MB</p>
 
                             <p *ngIf="opt.get('document')?.hasError('required')&&(submitted||opt.get('document')?.dirty||opt.get('document')?.touched )"
                                 style="color: red;">
