@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../shared/auth.guard';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { AgencyComponentComponent } from './system-configuration/agency-component/agency-component.component';
 import { BanksComponent } from './system-configuration/banks/banks.component';
@@ -13,21 +14,27 @@ import { VendorServiceComponent } from './system-configuration/vendor-service/ve
 import { VendorTypeComponent } from './system-configuration/vendor-type/vendor-type.component';
 
 const routes: Routes = [
-  { path: 'page', component: DashboardPageComponent },
+  { path: 'page', component: DashboardPageComponent ,
+  canActivate:[AuthGuard],},
   { path: 'survey',
-  loadChildren: () => import('./survey/survey.module').then(m =>m.SurveyModule)
+  loadChildren: () => import('./survey/survey.module').then(m =>m.SurveyModule),
+  canActivate:[AuthGuard],
 },
 { path: 'project',
-loadChildren: () => import('./project/project.module').then(m => m.ProjectModule)
+loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
+canActivate:[AuthGuard],
 },
 { path: 'masters',
-loadChildren: () => import('./masters/masters.module').then(m => m.MastersModule)
+loadChildren: () => import('./masters/masters.module').then(m => m.MastersModule),
+canActivate:[AuthGuard],
 },
 { path: 'beneficiary',
-loadChildren: () => import('./beneficiary/beneficiary.module').then(m => m.BeneficiaryModule)
+loadChildren: () => import('./beneficiary/beneficiary.module').then(m => m.BeneficiaryModule),
+canActivate:[AuthGuard],
 },
 { path: 'paymentDemandRequest',
-loadChildren: () => import('./payment-demand-request/payment-demand-request.module').then(m => m.PaymentDemandRequestModule)
+loadChildren: () => import('./payment-demand-request/payment-demand-request.module').then(m => m.PaymentDemandRequestModule),
+canActivate:[AuthGuard],
 },
 
 
