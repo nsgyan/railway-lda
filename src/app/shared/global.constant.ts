@@ -51,6 +51,7 @@ export class Globals {
         'getSurvey':Globals.server+ 'survey/getsurvey',
         'getSurveyByID': Globals.server + 'survey/getSurveyById',
         'updatesurvey': Globals.server + 'survey/updatesurvey',
-        'delsurvey': Globals.server + 'survey/delsurvey'
+        'delsurvey': Globals.server + 'survey/delsurvey',
+        'getBeneficiaryByStateDistrict':Globals.server+'paymentdemand/check'
     };
 }

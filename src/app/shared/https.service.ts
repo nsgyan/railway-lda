@@ -1,4 +1,5 @@
-import { HttpClient, HttpParams, HttpEvent, HttpRequest, HttpHeaders } from "@angular/common/http";
+
+import { HttpClient, HttpEvent, HttpRequest, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Globals } from "./global.constant";
@@ -74,6 +75,9 @@ export class HttpsService {
 
     AddState(formData: any) {
     return this.httpService.post(Globals.route.AddState, formData);
+  }
+  getBeneficiaryByStateDistrict(formData: any) {
+    return this.httpService.post(Globals.route.getBeneficiaryByStateDistrict, formData);
   }
   addBank(formData: any) {
     return this.httpService.post(Globals.route.bank, formData);
