@@ -67,6 +67,36 @@
                   />
                 </div>
               </div>
+
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label font-weight-600"
+                    >Survey Number
+                  </label>
+                  <select
+                    type="date"
+                    formControlName="surveyNumber"
+                    class="form-control"
+                  >
+                    <option hidden>Select Survey</option>
+                    <option *ngFor="let item of surveyData"value="{{ item.surveyNumber }}">
+                      {{ item.surveyNumber }}
+                    </option>
+                  </select>
+                  <!-- <p
+                    *ngIf="
+                      beneficiary.get('surveyNumber')?.hasError('required') &&
+                      (submitted ||
+                        beneficiary.get('surveyNumber')?.dirty ||
+                        beneficiary.get('surveyNumber')?.touched)
+                    "
+                    style="color: red"
+                  >
+                  Survey Number <strong>Required</strong>
+                  </p> -->
+                </div>
+              </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="control-label font-weight-600">Date</label>

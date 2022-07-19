@@ -15,6 +15,7 @@ export class AddPaymentDemandComponent implements OnInit {
   beneficiary:FormGroup;
   state:any=[]
   district:any=[]
+  surveyData:any=[]
   block:any=[]
   village:any=[]
     project:any
@@ -42,6 +43,7 @@ export class AddPaymentDemandComponent implements OnInit {
         this.beneficiary=this.fb.group({
           projectName:['',Validators.required],
           projectNumber:['',Validators.required],
+          surveyNumber:['',Validators.required],
           date:['',Validators.required],
           state:['',Validators.required],
           district:['',Validators.required],
@@ -113,12 +115,15 @@ export class AddPaymentDemandComponent implements OnInit {
 
 
 
+
   })
 
 
     }
     getSurvey(projectNumber:any){
-this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((Data: any)=>{
+this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((data: any)=>{
+  this.surveyData=data.findSurvey
+console.log(this.surveyData);
 
 })
     }
