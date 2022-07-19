@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment.prod';
   styleUrls: ['./survey-edit.component.css']
 })
 export class SurveyEditComponent implements OnInit {
-  survey!: FormGroup;
+  survey!: UntypedFormGroup;
   state:any=[]
   id: any
   district:any=[]
@@ -29,7 +29,7 @@ export class SurveyEditComponent implements OnInit {
     project:any
     submitted:boolean=false
   filename: any;
-    constructor( private fb:FormBuilder,
+    constructor( private fb:UntypedFormBuilder,
       private router: Router,
       private route: ActivatedRoute,
       private data: DataService,
@@ -83,7 +83,7 @@ export class SurveyEditComponent implements OnInit {
         this.survey.get('district')?.setValue(this.surveyData?.district)
         this.survey.get('district')?.updateValueAndValidity()
         this.getEditPriject(this.survey.value.projectName)
-        const control = this.survey.get("surveyDetail") as FormArray
+        const control = this.survey.get("surveyDetail") as UntypedFormArray
         let i = 0
         this.event.target.value =   this.surveyData.state
         this.getDistrict(this.event)
@@ -149,7 +149,7 @@ this.survey.get('document')?.updateValueAndValidity()
 
     }
     delete(controlName: string,index:any) {
-    let control= this.survey.get("surveyDetail") as FormArray
+    let control= this.survey.get("surveyDetail") as UntypedFormArray
       console.log(this.surveyData.documents);
       control.at(index).get('document')?.reset()
       control.at(index).get('document')?.updateValueAndValidity
@@ -158,17 +158,17 @@ this.surveyData.surveyDetails[index].document=null
 
     }
 
-    surveys(): FormArray {
-      return this.survey.get("surveyDetail") as FormArray
+    surveys(): UntypedFormArray {
+      return this.survey.get("surveyDetail") as UntypedFormArray
     }
-    inputType(): FormArray {
-      return this.survey.get("inputType") as FormArray
+    inputType(): UntypedFormArray {
+      return this.survey.get("inputType") as UntypedFormArray
     }
-   get surveyControl(): FormArray {
-      return this.survey.get("surveyDetail") as FormArray
+   get surveyControl(): UntypedFormArray {
+      return this.survey.get("surveyDetail") as UntypedFormArray
     }
 
-    newsurvey(): FormGroup {
+    newsurvey(): UntypedFormGroup {
       return this.fb.group({
         block:['',Validators.required],
         village: ['',Validators.required],
@@ -224,7 +224,7 @@ this.surveyData.surveyDetails[index].document=null
 
           this.filename=data?.body
           if(type==='inside'){
-          const control= this.survey.get("surveyDetail") as FormArray
+          const control= this.survey.get("surveyDetail") as UntypedFormArray
           control.at(index).get('document')?.setValue( data?.body)
           control.at(index).get('document')?.updateValueAndValidity}
           else{
@@ -305,7 +305,7 @@ this.surveyData.surveyDetails[index].document=null
 
     }
     checkDecimal(type:any,i:any){
-      const control =this.survey.get("surveyDetail") as FormArray
+      const control =this.survey.get("surveyDetail") as UntypedFormArray
       let number
       if(type==='amount'){
       number= control.at(i).value.amount
@@ -352,7 +352,7 @@ this.surveyData.surveyDetails[index].document=null
 
 
     let newobjectionType: any = []
-      const control= this.survey.get("surveyDetail") as FormArray
+      const control= this.survey.get("surveyDetail") as UntypedFormArray
       if(event.target.value==='Yes'){
         this.httpService.getobjectionType().subscribe((data:any)=>{
           data?.objectionType.map((item: any) => {
@@ -379,7 +379,7 @@ this.surveyData.surveyDetails[index].document=null
     }
 
     getBeneficiaryCount(event:any,index:any){
-      const control= this.survey.get("surveyDetail") as FormArray
+      const control= this.survey.get("surveyDetail") as UntypedFormArray
  this.httpService.getCountBeneficiary({state:this.survey.value.state,
    district:this.survey.value.district,
    block:control.at(index).value.block,
@@ -438,7 +438,7 @@ this.surveyData.surveyDetails[index].document=null
 
     getVillage(event:any,index:any){
       let newArray: any[]=[]
-      const control= this.survey.get("surveyDetail") as FormArray
+      const control= this.survey.get("surveyDetail") as UntypedFormArray
       this.village.splice(index,1)
 
       this.project.map((item:any)=>{

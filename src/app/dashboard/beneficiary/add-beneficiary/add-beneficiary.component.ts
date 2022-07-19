@@ -188,10 +188,10 @@ this.project.map((item:any)=>{
 
 
   checkAadhaar(event: any) {
-    this.httpService.checkAadhar({ aadhaarNumber: event.target.value }).subscribe(data => {
+    this.httpService.checkAadhar({ aadhaarNumber: event.target.value }).subscribe((data: any) => {
       console.log(data);
 
-    }, err => {
+    }, (err: any) => {
       this.beneficiary.get('aadhaarNumber')?.setErrors({ isExist: true })
 
     })
@@ -200,10 +200,10 @@ this.project.map((item:any)=>{
 
 
   checkpan(event: any) {
-    this.httpService.checkPan({ checkPan: event.target.value }).subscribe(data => {
+    this.httpService.checkPan({ checkPan: event.target.value }).subscribe((data: any) => {
       console.log(data);
 
-    }, err => {
+    }, (err: any) => {
       this.beneficiary.get('panNumber')?.setErrors({ isExist: true })
 
     })
@@ -211,20 +211,20 @@ this.project.map((item:any)=>{
   }
 
   checkDl(event: any) {
-    this.httpService.dlcheck({ dlNumber: event.target.value }).subscribe(data => {
+    this.httpService.dlcheck({ dlNumber: event.target.value }).subscribe((data: any) => {
       console.log(data);
 
-    }, err => {
+    }, (err: any) => {
       this.beneficiary.get('dlNumber')?.setErrors({ isExist: true })
 
     })
 
   }
   checkration(event: any) {
-    this.httpService.ration({ rationCard: event.target.value }).subscribe(data => {
+    this.httpService.ration({ rationCard: event.target.value }).subscribe((data: any) => {
       console.log(data);
 
-    }, err => {
+    }, (err: any) => {
       this.beneficiary.get('rationCard')?.setErrors({ isExist: true })
 
     })
@@ -258,7 +258,7 @@ this.project.map((item:any)=>{
     }).subscribe((data:any)=>{
       this.toast.success(data?.message)
       this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
-    },(err=>{
+    },((err: { error: { message: string | undefined; }; })=>{
       this.toast.error(err.error.message);
     }))
     this.beneficiary.get('conformAccountNumber')?.setErrors({ conformAccountNumber: true })

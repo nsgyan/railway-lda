@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
@@ -11,11 +11,11 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./distric-master-edit.component.css']
 })
 export class DistricMasterEditComponent implements OnInit {
-  district!:FormGroup;
+  district!:UntypedFormGroup;
   submitted=false
 state:any
   id: any;
-  constructor( private fb:FormBuilder,
+  constructor( private fb:UntypedFormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,

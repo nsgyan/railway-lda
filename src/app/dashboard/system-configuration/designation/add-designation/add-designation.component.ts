@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/shared/toaster.service';
 import { Designation } from 'src/app/shared/data.model';
@@ -11,9 +11,9 @@ import { DataService } from 'src/app/shared/data.service';
   styleUrls: ['./add-designation.component.css']
 })
 export class AddDesignationComponent implements OnInit {
-  designationForm:FormGroup;
+  designationForm:UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private data: DataService,
     private router: Router,
     private toster: ToasterService) { 

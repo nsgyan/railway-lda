@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
@@ -12,13 +12,13 @@ import { HttpsService } from 'src/app/shared/https.service';
 })
 export class LandTypeComponent implements OnInit {
 
-  landType!:FormGroup;
+  landType!:UntypedFormGroup;
   submitted=false
   isExist=false
   id:any
   stateData:any
   landTypeData: any;
-  constructor( private fb:FormBuilder,
+  constructor( private fb:UntypedFormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,

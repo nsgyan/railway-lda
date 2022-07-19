@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Bank } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
@@ -11,8 +11,8 @@ import { ToasterService } from 'src/app/shared/toaster.service';
   styleUrls: ['./add-bank.component.css']
 })
 export class AddBankComponent implements OnInit {
-  bankForm: FormGroup
-  constructor(private formBuilder: FormBuilder,
+  bankForm: UntypedFormGroup
+  constructor(private formBuilder: UntypedFormBuilder,
     private data: DataService,
     private router: Router,
     private toster: ToasterService) {

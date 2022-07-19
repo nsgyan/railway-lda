@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CellNumValidation, panValidation } from 'src/app/shared/custom-validation.service';
@@ -12,7 +12,7 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./edit-beneficiary.component.css']
 })
 export class EditBeneficiaryComponent implements OnInit {
-  beneficiary:FormGroup;
+  beneficiary:UntypedFormGroup;
 state:any=[]
 district:any=[]
 block:any=[]
@@ -21,7 +21,7 @@ village:any=[]
   submitted:boolean=false
   id: string | null;
   beneficiaryData: any;
-  constructor( private fb:FormBuilder,
+  constructor( private fb:UntypedFormBuilder,
     private router: Router,
     private data: DataService,
     private httpService:HttpsService,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Beneficiary, Project } from 'src/app/shared/data.model';
@@ -14,13 +14,13 @@ import { ToasterService } from 'src/app/shared/toaster.service';
 })
 export class AddProjectComponent implements OnInit {
   submitted=false
-  project!:FormGroup;
+  project!:UntypedFormGroup;
   state: any;
   district:any[]= [];
   block:any[]= [];
   village:any[]=[] ;
 
-  constructor( private fb:FormBuilder,
+  constructor( private fb:UntypedFormBuilder,
     private router: Router,
     private data: DataService,
     private toast: ToastrService,
@@ -79,17 +79,17 @@ else{
     //      this.router.navigate(['/dashboard/project'])
 
   }
-  selectStates(): FormArray {
-    return this.project.get("selectState") as FormArray
+  selectStates(): UntypedFormArray {
+    return this.project.get("selectState") as UntypedFormArray
   }
-  inputType(): FormArray {
-    return this.project.get("inputType") as FormArray
+  inputType(): UntypedFormArray {
+    return this.project.get("inputType") as UntypedFormArray
   }
- get selectState(): FormArray {
-    return this.project.get("selectState") as FormArray
+ get selectState(): UntypedFormArray {
+    return this.project.get("selectState") as UntypedFormArray
   }
 
-  newselectState(): FormGroup {
+  newselectState(): UntypedFormGroup {
     return this.fb.group({
       state: ['',Validators.required],
       district: ['',Validators.required],
@@ -109,14 +109,14 @@ else{
   getblock(state:any, i:any){
     // console.log(state);
     // console.log(this.village.value.state);
-    const control =this.project.get("selectState") as FormArray
+    const control =this.project.get("selectState") as UntypedFormArray
     this.httpService.getBlock(control.at(i).value.state,control.at(i).value.district).subscribe((data:any)=>{
 
       this.block.splice(i, 0, data?.blocks);
             })
   }
   checkDecimal(type:any,i:any){
-    const control =this.project.get("selectState") as FormArray
+    const control =this.project.get("selectState") as UntypedFormArray
     let number
     if(type==='sanctionedAmount'){
     number= control.at(i).value.sanctionedAmount
@@ -169,7 +169,7 @@ control.at(i).get(type)?.updateValueAndValidity
   }
 
   getDistrict(state:any,i:any){
-    const control =this.project.get("selectState") as FormArray
+    const control =this.project.get("selectState") as UntypedFormArray
     // console.log(state);
     console.log(control.at(i).value.state);
 
@@ -181,7 +181,7 @@ control.at(i).get(type)?.updateValueAndValidity
   getVillage(state:any, i:any){
     // console.log(state);
     // console.log(this.village.value.state);
-    const control =this.project.get("selectState") as FormArray
+    const control =this.project.get("selectState") as UntypedFormArray
     this.httpService.getVillageByBlock(control.at(i).value.block).subscribe((data:any)=>{
 
       this.village.splice(i, 0, data?.village);

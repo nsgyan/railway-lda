@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Designation } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
@@ -11,9 +11,9 @@ import { ToasterService } from 'src/app/shared/toaster.service';
   styleUrls: ['./add-scheme.component.css']
 })
 export class AddSchemeComponent implements OnInit {
-  schemeForm: FormGroup;
+  schemeForm: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private data: DataService,
     private router: Router,
     private toster: ToasterService) {

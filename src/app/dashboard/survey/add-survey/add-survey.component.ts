@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
@@ -11,7 +11,7 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./add-survey.component.css']
 })
 export class AddSurveyComponent implements OnInit {
-  survey:FormGroup;
+  survey:UntypedFormGroup;
   state:any=[]
   district:any=[]
   block:any=[]
@@ -23,7 +23,7 @@ export class AddSurveyComponent implements OnInit {
     project:any
     submitted:boolean=false
   filename: any;
-    constructor( private fb:FormBuilder,
+    constructor( private fb:UntypedFormBuilder,
       private router: Router,
       private data: DataService,
       private httpService:HttpsService,
@@ -66,17 +66,17 @@ export class AddSurveyComponent implements OnInit {
     }
 
 
-    surveys(): FormArray {
-      return this.survey.get("surveyDetail") as FormArray
+    surveys(): UntypedFormArray {
+      return this.survey.get("surveyDetail") as UntypedFormArray
     }
-    inputType(): FormArray {
-      return this.survey.get("inputType") as FormArray
+    inputType(): UntypedFormArray {
+      return this.survey.get("inputType") as UntypedFormArray
     }
-   get surveyControl(): FormArray {
-      return this.survey.get("surveyDetail") as FormArray
+   get surveyControl(): UntypedFormArray {
+      return this.survey.get("surveyDetail") as UntypedFormArray
     }
 
-    newsurvey(): FormGroup {
+    newsurvey(): UntypedFormGroup {
       return this.fb.group({
 
         block:['',Validators.required],
@@ -108,7 +108,7 @@ export class AddSurveyComponent implements OnInit {
       this.village.splice(quesIndex,1)
     }
     getBeneficiaryCount(event:any,index:any){
-     const control= this.survey.get("surveyDetail") as FormArray
+     const control= this.survey.get("surveyDetail") as UntypedFormArray
 this.httpService.getCountBeneficiary({state:this.survey.value.state,
   district:this.survey.value.district,
   block:control.at(index).value.block,
@@ -144,7 +144,7 @@ this.httpService.getCountBeneficiary({state:this.survey.value.state,
           // console.log(data?.body,'rtet');
           this.filename=data?.body
           if(type==='inside'){
-          const control= this.survey.get("surveyDetail") as FormArray
+          const control= this.survey.get("surveyDetail") as UntypedFormArray
           control.at(index).get('document')?.setValue( data?.body)
           control.at(index).get('document')?.updateValueAndValidity}
           else{
@@ -194,7 +194,7 @@ console.log(this.state);
 
     }
     getobjecton(event:any){
-      const control= this.survey.get("surveyDetail") as FormArray
+      const control= this.survey.get("surveyDetail") as UntypedFormArray
       if(event.target.value==='Yes'){
         this.httpService.getobjectionType().subscribe((data:any)=>{
           this.objectionType=data?.objectionType
@@ -213,7 +213,7 @@ console.log(this.state);
     }
 
     checkDecimal(type:any,i:any){
-      const control =this.survey.get("surveyDetail") as FormArray
+      const control =this.survey.get("surveyDetail") as UntypedFormArray
       let number
       if(type==='amount'){
       number= control.at(i).value.amount
@@ -295,7 +295,7 @@ console.log(this.state);
 
     getVillage(event:any,index:any){
       let newArray: any[]=[]
-      const control= this.survey.get("surveyDetail") as FormArray
+      const control= this.survey.get("surveyDetail") as UntypedFormArray
       this.village.splice(index,1)
       console.log(this.survey)
       this.project.map((item:any)=>{

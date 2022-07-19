@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SchemeLimitSetting } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
@@ -11,8 +11,8 @@ import { ToasterService } from 'src/app/shared/toaster.service';
   styleUrls: ['./add-limit.component.css']
 })
 export class AddLimitComponent implements OnInit {
-  schemeLimitForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,
+  schemeLimitForm: UntypedFormGroup;
+  constructor(private formBuilder: UntypedFormBuilder,
     private data: DataService,
     private router: Router,
     private toster: ToasterService) {

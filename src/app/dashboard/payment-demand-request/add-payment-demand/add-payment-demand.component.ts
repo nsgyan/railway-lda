@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -117,7 +118,7 @@ export class AddPaymentDemandComponent implements OnInit {
 
     }
     getSurvey(projectNumber:any){
-this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe(Data=>{
+this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((Data: any)=>{
 
 })
     }
@@ -196,7 +197,7 @@ this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe(Dat
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
         this.router.navigate(['/dashboard/beneficiariesList'])
-      },(err=>{
+      },((err: { error: { message: any; }; })=>{
         this.toast.error(err.error.message);
       }))
 

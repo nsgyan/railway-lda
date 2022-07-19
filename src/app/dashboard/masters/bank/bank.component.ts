@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
@@ -11,13 +11,13 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./bank.component.css']
 })
 export class BankComponent implements OnInit {
-  bank!:FormGroup;
+  bank!:UntypedFormGroup;
   isEdit=false
   submitted=false
   stateData:any
   id:any;
   bankData: any;
-  constructor( private fb:FormBuilder,
+  constructor( private fb:UntypedFormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,

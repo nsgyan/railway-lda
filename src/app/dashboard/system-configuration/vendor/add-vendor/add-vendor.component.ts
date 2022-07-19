@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Vendor } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
@@ -11,8 +11,8 @@ import { ToasterService } from 'src/app/shared/toaster.service';
   styleUrls: ['./add-vendor.component.css']
 })
 export class AddVendorComponent implements OnInit {
-  vendorForm: FormGroup
-  constructor(private formBuilder: FormBuilder,
+  vendorForm: UntypedFormGroup
+  constructor(private formBuilder: UntypedFormBuilder,
     private data: DataService,
     private router: Router,
     private toster: ToasterService) {

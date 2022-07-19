@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpsService } from '../shared/https.service';
@@ -11,9 +11,9 @@ import { LocalstorageService } from '../shared/localstorage.service';
 })
 export class LoginComponent implements OnInit {
   [x: string]: any;
- login:FormGroup
+ login:UntypedFormGroup
   constructor(private httpService:HttpsService,
-    private fb:FormBuilder,
+    private fb:UntypedFormBuilder,
     private toster:ToastrService,
     private localStorage:LocalstorageService,
     private routes: Router,) {

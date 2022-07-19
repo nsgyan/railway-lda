@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -13,12 +13,12 @@ import { ToasterService } from 'src/app/shared/toaster.service';
   styleUrls: ['./state-master.component.css']
 })
 export class StateMasterComponent implements OnInit {
-  state!:FormGroup;
+  state!:UntypedFormGroup;
   submitted=false
   isEdit= false
   stateData:any
   id: any;
-  constructor( private fb:FormBuilder,
+  constructor( private fb:UntypedFormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,

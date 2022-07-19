@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
@@ -13,14 +13,14 @@ import { ToasterService } from 'src/app/shared/toaster.service';
 })
 export class BlockMasterComponent implements OnInit {
 
-  block!:FormGroup;
+  block!:UntypedFormGroup;
   submitted=false
   isEdit=false
   state: any;
   district: any;
   blockData:any
   id: any;
-  constructor( private fb:FormBuilder,
+  constructor( private fb:UntypedFormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,

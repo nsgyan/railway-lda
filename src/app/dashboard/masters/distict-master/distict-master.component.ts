@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
@@ -11,13 +11,13 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./distict-master.component.css']
 })
 export class DistictMasterComponent implements OnInit {
-  district!:FormGroup;
+  district!:UntypedFormGroup;
   submitted=false
 state:any
   districtData: any;
   id: any;
   isEdit: boolean = false;
-  constructor( private fb:FormBuilder,
+  constructor( private fb:UntypedFormBuilder,
     private httpService:HttpsService,
     private router: Router,
     private data: DataService,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { panValidation, CellNumValidation } from 'src/app/shared/custom-validation.service';
@@ -15,7 +15,7 @@ export class BeneficiaryViewComponent implements OnInit {
 
     beneficiaryData: any;
   id: string | null;
-    constructor( private fb:FormBuilder,
+    constructor( private fb:UntypedFormBuilder,
       private router: Router,
       private httpService:HttpsService,
       private toast: ToastrService,
