@@ -54,10 +54,14 @@
                             </p>
                             </div>
                         </div>
+
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Date*</label>
-                                  <input formControlName="date" type="date" class="form-control" name="" />
+                                  <!-- <input type="date" id="start" name="trip-start"value="2022-07-22" min="{{todayDate}}"   > -->
+                                  <input class="form-control m-input pl-6  datepicker" type="date"
+                                  min="{{todayDate}}" formControlName="date">
+                                  <!-- <input formControlName="date" min="{new Date().toISOString().split('T')[0]}" type="date" class="form-control" name="" /> -->
                                   <p *ngIf="survey.get('date')?.hasError('required')&&(submitted||survey.get('date')?.dirty||survey.get('date')?.touched )"
                                       style="color: red;">
                                       Date <strong>Required</strong>

@@ -68,13 +68,13 @@
                     <tr role="row">
                       <th class="text-center">#</th>
                       <th> Date</th>
-                      <th>Project Name</th>
+                      <th>Survey Number</th>
                       <th>Project Number</th>
                       <!-- <th>Rakba</th>
                       <th>Pratifal Rate</th>
-                      <th>Total Pratifal</th>
-                      <th>Share of Survey</th>
-                      <th>Cheque</th> -->
+                      <th>Total Pratifal</th>-->
+                      <th>State</th>
+                      <th>District</th>
                       <th>Documents</th>
                       <th class="text-center">Actions</th>
                     </tr>
@@ -87,8 +87,12 @@
                       </td>
                       <td><span class="font-bold text-theme">{{item.date}}</span></td>
 
+                      <td><span class="font-bold text-theme">{{item.surveyNumber}}
+                      </span></td>
                       <td><span class="font-bold text-theme">{{item.projectName}}</span></td>
-                      <td><span class="font-bold text-theme">{{item.projectNumber}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.state}}
+                      </span></td>
+                      <td><span class="font-bold text-theme">{{item.district}}</span></td>
 
                       <td><a class="ml-2" href="{{item?.documents}}" target="blank" *ngIf='item?.documents'>View Document</a></td>
 

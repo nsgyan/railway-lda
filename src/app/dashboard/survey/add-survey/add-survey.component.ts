@@ -1,10 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-add-survey',
   templateUrl: './add-survey.component.html',
@@ -12,6 +13,7 @@ import { HttpsService } from 'src/app/shared/https.service';
 })
 export class AddSurveyComponent implements OnInit {
   survey:UntypedFormGroup;
+   day = new Date()
   state:any=[]
   district:any=[]
   block:any=[]
@@ -23,11 +25,14 @@ export class AddSurveyComponent implements OnInit {
     project:any
     submitted:boolean=false
   filename: any;
+  pipe = new DatePipe('en-US');
+  todayDate: any;
     constructor( private fb:UntypedFormBuilder,
       private router: Router,
       private data: DataService,
       private httpService:HttpsService,
-      private toast: ToastrService,) {
+      private toast: ToastrService,
+      ) {
         this.httpService.getlandNature().subscribe((data:any)=>{
           this.landNature=data?.landNature
 
@@ -63,6 +68,9 @@ export class AddSurveyComponent implements OnInit {
     ngOnInit(): void {
       this.addsurvey()
       this.state=[]
+      this.todayDate=this.pipe.transform(new Date(), 'yyyy-MM-dd');
+      console.log( this.todayDate);
+
     }
 
 
@@ -261,7 +269,7 @@ console.log(this.state);
         if(item.projectName===this.survey.value.projectName){
         item.acquisitionDetails?.map((projectData:any)=>{
           if (projectData.state===event.target.value) {
-            if(!newdistrict.includes(projectData.district))
+            if(!this.district.includes(projectData.district))
 
 
             // ✅ only runs if value not in array
@@ -275,13 +283,17 @@ console.log(this.state);
     }
 
     getBlock(event:any){
+      const control= this.survey.get("surveyDetail") as UntypedFormArray
+      control.reset()
+      control.updateValueAndValidity
      let newblock:any=[]
+     this.block=[]
       this.project.map((item:any)=>{
         if(item.projectName===this.survey.value.projectName){
         item.acquisitionDetails?.map((projectData:any)=>{
           if (projectData.district===event.target.value) {
 
-            if(!newblock.includes(projectData.block)){
+            if(!this.block.includes(projectData.block)){
           // ✅ only runs if value not in array
           console.log(item);
 

@@ -3,7 +3,7 @@
       <div class="bg-red lter b-b wrapper-md">
           <div class="row">
               <div class="col-sm-6 col-xs-12">
-                  <h3 class="m-n font-thin text-white"> ADD Survey</h3>
+                  <h3 class="m-n font-thin text-white"> View  Survey</h3>
               </div>
           </div>
       </div>
@@ -14,10 +14,15 @@
                 <div class="row">
                   <div class="col-md-12">
                       <legend>
-                          <span class="font-weight-600">Create New Survey</span>
+                          <span class="font-weight-600">  Survey Details</span>
                       </legend>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <p class="control-label font-weight-600"> Survey Number: <span>{{surveyData.surveyNumber}}</span>  </p>
 
+                    </div>
+                </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <p class="control-label font-weight-600"> Project Name: <span>{{surveyData.projectName}}</span>  </p>
@@ -30,12 +35,7 @@
                         <!-- <p>{{surveyData.projectNumber}}</p> -->
                     </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <p class="control-label font-weight-600"> Survey Number: <span>{{surveyData.surveyNumber}}</span>  </p>
 
-                  </div>
-              </div>
                   <div class="col-md-6">
                       <div class="form-group">
                         <p class="control-label font-weight-600"> Date: <span>{{surveyData.date}}</span>  </p>

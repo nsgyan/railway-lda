@@ -84,7 +84,7 @@ export class SurveyViewComponent implements OnInit {
 
 
     cancel() {
-      this.router.navigate(['/dashboard/survey/beneficiariesList'])
+      this.router.navigate(['/dashboard/survey/surveyList'])
 
   }
   }
