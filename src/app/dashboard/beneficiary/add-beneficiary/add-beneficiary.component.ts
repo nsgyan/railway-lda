@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
 import { CellNumValidation, panValidation } from 'src/app/shared/custom-validation.service';
 import { Beneficiary } from 'src/app/shared/data.model';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
 import { ToasterService } from 'src/app/shared/toaster.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-beneficiary',
@@ -19,10 +20,11 @@ state:any=[]
 district:any=[]
 block:any=[]
 village:any=[]
-  project:any
-  submitted:boolean=false
-  bankData: any;
-  constructor( private fb:FormBuilder,
+project:any
+   submitted:boolean=false
+  bankData: any
+
+ constructor( private fb:FormBuilder,
     private router: Router,
     private data: DataService,
     private httpService:HttpsService,
