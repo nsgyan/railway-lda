@@ -26,8 +26,8 @@ export class AddPaymentDemandComponent implements OnInit {
       private toast: ToastrService,) {
         this.httpService.getProject().subscribe((data:any)=>{
           this.project=data.projects
-          this.project.map((item:any)=>{
-            item.projectDetails.map((projectData:any)=>{
+          this.project?.map((item:any)=>{
+            item.acquisitionDetails.map((projectData:any)=>{
               if (!this.state.includes(projectData.state)) {
                 // ✅ only runs if value not in array
                 this.state.push(projectData.state);
@@ -102,7 +102,7 @@ export class AddPaymentDemandComponent implements OnInit {
       this.beneficiary.get('projectNumber')?.setValue(item.projectNumber)
       this.beneficiary.get('projectNumber')?.updateValueAndValidity
       this.getSurvey(item.projectNumber)
-    item.projectDetails.map((projectData:any)=>{
+    item.acquisitionDetails.map((projectData:any)=>{
       if (!this.state.includes(projectData.state)) {
         // ✅ only runs if value not in array
         this.state.push(projectData.state);
@@ -129,7 +129,7 @@ this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((Da
 
       this.project.map((item:any)=>{
         if(item.projectName===this.beneficiary.value.projectName){
-        item.projectDetails.map((projectData:any)=>{
+        item.acquisitionDetails.map((projectData:any)=>{
           if (projectData.state===event.target.value) {
             if(!this.district.includes(projectData.district))
 
@@ -146,13 +146,17 @@ this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((Da
       this.block=[]
       this.project.map((item:any)=>{
         if(item.projectName===this.beneficiary.value.projectName){
-        item.projectDetails.map((projectData:any)=>{
+        item.acquisitionDetails.map((projectData:any)=>{
           if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district) {
             if(!this.block.includes(projectData.block)){
           // ✅ only runs if value not in array
             this.block.push(projectData.block);}
           }
         })}
+      })
+      this.httpService.getBeneficiaryByStateDistrict({state:this.beneficiary.value.state,district:this.beneficiary.value.district}).subscribe((data:any)=>{
+        console.log(data);
+
       })
     }
 
@@ -163,7 +167,7 @@ this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((Da
       console.log(this.beneficiary)
       this.project.map((item:any)=>{
         if(item.projectName===this.beneficiary.value.projectName){
-        item.projectDetails.map((projectData:any)=>{
+        item.acquisitionDetails.map((projectData:any)=>{
           if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district&&projectData.block===control.at(index).value.block) {
             if(!newArray.includes(projectData.village)){
               console.log('hello');

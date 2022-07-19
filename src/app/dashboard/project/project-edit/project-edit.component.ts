@@ -149,8 +149,13 @@ else{
     // console.log(this.village.value.state);
     const control =this.project.get("selectState") as UntypedFormArray
     this.httpService.getBlock(control.at(i).value.state,control.at(i).value.district).subscribe((data:any)=>{
-
-      this.block.splice(i, 0, data?.blocks);
+      if(this.block.length=== i-1){
+        this.block.splice(i, 0, data?.blocks);
+      }
+        else{
+          this.block[i]=data?.blocks
+        }
+      // this.block.splice(i, 0, data?.blocks);
             })
   }
   checkDecimal(type:any,i:any){
@@ -211,7 +216,12 @@ control.at(i).get(type)?.updateValueAndValidity
     console.log(control.at(i).value.state);
 
     this.httpService.getDistrict(control.at(i).value.state).subscribe((data:any)=>{
-      this.district.splice(i, 0, data?.district);
+      // this.district.splice(i, 0, data?.district);
+      if(this.district.length=== i-1){
+        this.district.splice(i, 0, data?.district);}
+        else{
+          this.district[i]=data?.district
+        }
 
             })
   }
@@ -220,8 +230,13 @@ control.at(i).get(type)?.updateValueAndValidity
     // console.log(this.village.value.state);
     const control =this.project.get("selectState") as UntypedFormArray
     this.httpService.getVillageByBlock(control.at(i).value.block).subscribe((data:any)=>{
-
-      this.village.splice(i, 0, data?.village);
+      if(this.village.length=== i-1){
+        this.village.splice(i, 0, data?.village);
+      }
+        else{
+          this.village[i]=data?.village
+        }
+      // this.village.splice(i, 0, data?.village);
 
             })
   }
