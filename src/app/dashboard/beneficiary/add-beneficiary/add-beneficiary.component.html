@@ -116,7 +116,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Pin code</label>
-                                    <input formControlName="pincode" maxlength="6" type="text" class="form-control" name="" />
+                                    <input formControlName="pincode" (keypress)="keyPressNumbers($event)" maxlength="6" type="text" class="form-control" name="" />
                                     <p *ngIf="beneficiary.get('pincode')?.hasError('required')"
                                     style="color: red;">
                                     Pincode <strong>required</strong>
@@ -134,7 +134,7 @@
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Aadhaar Number
                                   </label>
-                                  <input type="text" maxlength="12" (focusout)="checkAadhaar($event)"  formControlName="aadhaarNumber" class="form-control">
+                                  <input type="text" maxlength="12" (focusout)="checkAadhaar($event)" (keypress)="keyPressNumbers($event)"  formControlName="aadhaarNumber" class="form-control">
 
                                   <p *ngIf="beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )"
                                       style="color: red;">
@@ -310,7 +310,11 @@
                             </div>  <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="control-label font-weight-600">Bank Name</label>
-                                    <input formControlName="bank" type="text" class="form-control" name="" />
+                                    <select class="form-control"   formControlName="bank" id="">
+                                      <option hidden>Select Bank</option>
+                                      <option *ngFor="let item of bankData" value="{{item.bankName}}">{{item.bankName}}</option>
+                                    </select>
+                                    <!-- <input formControlName="bank" type="text" class="form-control" name="" /> -->
                                     <p *ngIf="beneficiary.get('pincobankde')?.hasError('required')&&(submitted||beneficiary.get('bank')?.dirty||beneficiary.get('bank')?.touched )"
                                         style="color: red;">
                                         Bank Name <strong>Required</strong>

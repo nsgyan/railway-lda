@@ -21,11 +21,16 @@ block:any=[]
 village:any=[]
   project:any
   submitted:boolean=false
+  bankData: any;
   constructor( private fb:FormBuilder,
     private router: Router,
     private data: DataService,
     private httpService:HttpsService,
     private toast: ToastrService,) {
+      this.httpService.getBank().subscribe((data:any)=>{
+        this.bankData=data?.bank
+
+              })
     this.httpService.getState().subscribe((data: any) => {
       data?.state.map((item: any) => {
         this.state.push(item.stateName)
