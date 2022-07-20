@@ -19,6 +19,8 @@ export class AddBeneficiaryComponent implements OnInit {
 state:any=[]
 district:any=[]
 block:any=[]
+
+
 village:any=[]
 project:any
    submitted:boolean=false
@@ -72,6 +74,8 @@ project:any
   }
 
   conformAccountNumber(event: any,) {
+    this.beneficiary.get('conformAccountNumber')?.clearAsyncValidators()
+    this.beneficiary.get('conformAccountNumber')?.updateValueAndValidity
     if (event.target.value !== this.beneficiary.value.accountNumber) {
       this.beneficiary.get('conformAccountNumber')?.setErrors({ conformAccountNumber: true })
     }
@@ -233,6 +237,7 @@ this.project.map((item:any)=>{
 
   onSubmit() {
     // let date=this.beneficiary.value.data.toString()
+
   console.log(this.beneficiary);
   if(this.beneficiary.valid){
     this.httpService.addBeneficiary({

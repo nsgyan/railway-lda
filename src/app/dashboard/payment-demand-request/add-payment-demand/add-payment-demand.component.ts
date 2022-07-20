@@ -12,13 +12,15 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./add-payment-demand.component.css']
 })
 export class AddPaymentDemandComponent implements OnInit {
-  beneficiary:FormGroup;
+  paymendDemand:FormGroup;
   state:any=[]
   district:any=[]
   surveyData:any=[]
+  beneficiaryData:any=[]
   block:any=[]
   village:any=[]
     project:any
+
     submitted:boolean=false
     constructor( private fb:FormBuilder,
       private router: Router,
@@ -27,20 +29,8 @@ export class AddPaymentDemandComponent implements OnInit {
       private toast: ToastrService,) {
         this.httpService.getProject().subscribe((data:any)=>{
           this.project=data.projects
-          this.project?.map((item:any)=>{
-            item.acquisitionDetails.map((projectData:any)=>{
-              if (!this.state.includes(projectData.state)) {
-                // ✅ only runs if value not in array
-                this.state.push(projectData.state);
-              }
-            })
-
-
-
-          })
-
         })
-        this.beneficiary=this.fb.group({
+        this.paymendDemand=this.fb.group({
           projectName:['',Validators.required],
           projectNumber:['',Validators.required],
           surveyNumber:['',Validators.required],
@@ -60,13 +50,13 @@ export class AddPaymentDemandComponent implements OnInit {
 
 
     beneficiarys(): FormArray {
-      return this.beneficiary.get("beneficiary") as FormArray
+      return this.paymendDemand.get("beneficiary") as FormArray
     }
     inputType(): FormArray {
-      return this.beneficiary.get("inputType") as FormArray
+      return this.paymendDemand.get("inputType") as FormArray
     }
    get beneficiaryControl(): FormArray {
-      return this.beneficiary.get("beneficiary") as FormArray
+      return this.paymendDemand.get("beneficiary") as FormArray
     }
 
     newbeneficiary(): FormGroup {
@@ -98,20 +88,14 @@ export class AddPaymentDemandComponent implements OnInit {
 
     getPriject(event:any){
 
-  this.state=[]
+
   this.project.map((item:any)=>{
     if(item.projectName===event.target.value){
-      this.beneficiary.get('projectNumber')?.setValue(item.projectNumber)
-      this.beneficiary.get('projectNumber')?.updateValueAndValidity
+      this.paymendDemand.get('projectNumber')?.setValue(item.projectNumber)
+      this.paymendDemand.get('projectNumber')?.updateValueAndValidity
       this.getSurvey(item.projectNumber)
-    item.acquisitionDetails.map((projectData:any)=>{
-      if (!this.state.includes(projectData.state)) {
-        // ✅ only runs if value not in array
-        this.state.push(projectData.state);
-      }
-    })}
-    this.beneficiary.get('state')?.reset()
-    this.beneficiary.get('state')?.updateValueAndValidity
+   }
+
 
 
 
@@ -120,60 +104,86 @@ export class AddPaymentDemandComponent implements OnInit {
 
 
     }
+
     getSurvey(projectNumber:any){
+
 this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((data: any)=>{
   this.surveyData=data.findSurvey
-console.log(this.surveyData);
+
 
 })
     }
 
+    getstate(event:any){
+      this.state=[]
+      this.surveyData.map((item:any)=>{
+        if(item.projectName===this.paymendDemand.value.projectName){
+
+            if(!this.state.includes(item.state))
+   // ✅ only runs if value not in array
+            this.state.push(item.state);
+          }
+
+      })
+      this.paymendDemand.get('state')?.reset()
+      this.paymendDemand.get('state')?.updateValueAndValidity
+    }
 
     getDistrict(event:any){
   this.district=[]
 
-      this.project.map((item:any)=>{
-        if(item.projectName===this.beneficiary.value.projectName){
-        item.acquisitionDetails.map((projectData:any)=>{
-          if (projectData.state===event.target.value) {
-            if(!this.district.includes(projectData.district))
-
-
-            // ✅ only runs if value not in array
-            this.district.push(projectData.district);
+      this.surveyData.map((item:any)=>{
+        if(item.projectName===this.paymendDemand.value.projectName){
+          if (item.state===event.target.value) {
+            if(!this.district.includes(item.district))
+   // ✅ only runs if value not in array
+            this.district.push(item.district);
           }
-        })}
+       }
       })
 
 
     }
     getBlock(event:any){
       this.block=[]
-      this.project.map((item:any)=>{
-        if(item.projectName===this.beneficiary.value.projectName){
-        item.acquisitionDetails.map((projectData:any)=>{
-          if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district) {
-            if(!this.block.includes(projectData.block)){
-          // ✅ only runs if value not in array
-            this.block.push(projectData.block);}
+      this.surveyData.map((item:any)=>{
+        if(item.projectName===this.paymendDemand.value.projectName){
+
+          if (item.state===this.paymendDemand.value.state&&item.district===this.paymendDemand.value.district) {
+            item.surveyDetails.map((surveyData:any)=>{
+              if(!this.block.includes(surveyData.block)){
+                // ✅ only runs if value not in array
+                  this.block.push(surveyData.block);}
+            })
+
           }
-        })}
+      }
       })
-      this.httpService.getBeneficiaryByStateDistrict({state:this.beneficiary.value.state,district:this.beneficiary.value.district}).subscribe((data:any)=>{
-        console.log(data);
+      this.httpService.getBeneficiaryByStateDistrict({state:this.paymendDemand.value.state,district:this.paymendDemand.value.district}).subscribe((data:any)=>{
+        this.surveyData.map((item:any)=>{
+          item.surveyDetails.map((surveyData:any)=>{
+            data.getBeneFiciary.map((beneFiciData:any)=>{
+              if(beneFiciData.block===surveyData.block&& beneFiciData.village===surveyData.village){
+                this.beneficiaryData.push(beneFiciData)
+              }
+            })
+          })
+        })
+        console.log(this.beneficiaryData);
+
 
       })
     }
 
     getVillage(event:any,index:any){
       let newArray: any[]=[]
-      const control= this.beneficiary.get("beneficiary") as FormArray
+      const control= this.paymendDemand.get("beneficiary") as FormArray
       this.village.splice(index,1)
-      console.log(this.beneficiary)
+      console.log(this.paymendDemand)
       this.project.map((item:any)=>{
-        if(item.projectName===this.beneficiary.value.projectName){
+        if(item.projectName===this.paymendDemand.value.projectName){
         item.acquisitionDetails.map((projectData:any)=>{
-          if (projectData.state===this.beneficiary.value.state&&projectData.district===this.beneficiary.value.district&&projectData.block===control.at(index).value.block) {
+          if (projectData.state===this.paymendDemand.value.state&&projectData.district===this.paymendDemand.value.district&&projectData.block===control.at(index).value.block) {
             if(!newArray.includes(projectData.village)){
               console.log('hello');
     newArray.push(projectData.village);}
@@ -193,15 +203,15 @@ console.log(this.surveyData);
 
     onSubmit() {
       // let date=this.beneficiary.value.data.toString()
-    console.log(this.beneficiary);
-    if(this.beneficiary.valid){
+    console.log(this.paymendDemand);
+    if(this.paymendDemand.valid){
       this.httpService.addBeneficiary({
-        projectName:this.beneficiary.value.projectName,
-        projectNumber:this.beneficiary.value.projectNumber,
-        date:this.beneficiary.value.date,
-        state:this.beneficiary.value.state,
-        district:this.beneficiary.value.district,
-        beneficiary:this.beneficiary.value.beneficiary ,
+        projectName:this.paymendDemand.value.projectName,
+        projectNumber:this.paymendDemand.value.projectNumber,
+        date:this.paymendDemand.value.date,
+        state:this.paymendDemand.value.state,
+        district:this.paymendDemand.value.district,
+        beneficiary:this.paymendDemand.value.beneficiary ,
 
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
@@ -223,4 +233,25 @@ console.log(this.surveyData);
       this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
 
   }
+
+
+
+  // protected filterBanks() {
+  //   if (!this.state) {
+  //     return;
+  //   }
+  //   // get the search keyword
+  //   let search = this.bankFilterCtrl.value;
+  //   if (!search) {
+  //     this.filteredBanks.next(this.state.slice());
+  //     return;
+  //   } else {
+  //     search = search.toLowerCase();
+  //   }
+  //   // filter the state
+  //   this.filteredBanks.next(
+  //     this.state.filter((state:any) => state.toLowerCase().indexOf(search) > -1)
+  //   );
+  // }
+
   }

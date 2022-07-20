@@ -11,7 +11,7 @@
     <div class="wrapper-md">
       <div class="panel b-a">
         <div class="panel-body">
-          <form role="form" [formGroup]="beneficiary" autocomplete="off">
+          <form role="form" [formGroup]="paymendDemand" autocomplete="off">
             <div class="row">
               <div class="col-md-12">
                 <legend>
@@ -42,10 +42,10 @@
                   </select>
                   <p
                     *ngIf="
-                      beneficiary.get('projectName')?.hasError('required') &&
+                      paymendDemand.get('projectName')?.hasError('required') &&
                       (submitted ||
-                        beneficiary.get('projectName')?.dirty ||
-                        beneficiary.get('projectName')?.touched)
+                        paymendDemand.get('projectName')?.dirty ||
+                        paymendDemand.get('projectName')?.touched)
                     "
                     style="color: red"
                   >
@@ -78,6 +78,7 @@
                     type="date"
                     formControlName="surveyNumber"
                     class="form-control"
+                    (change)="getstate($event)"
                   >
                     <option hidden>Select Survey</option>
                     <option *ngFor="let item of surveyData"value="{{ item.surveyNumber }}">
@@ -86,10 +87,10 @@
                   </select>
                   <!-- <p
                     *ngIf="
-                      beneficiary.get('surveyNumber')?.hasError('required') &&
+                      paymendDemand.get('surveyNumber')?.hasError('required') &&
                       (submitted ||
-                        beneficiary.get('surveyNumber')?.dirty ||
-                        beneficiary.get('surveyNumber')?.touched)
+                        paymendDemand.get('surveyNumber')?.dirty ||
+                        paymendDemand.get('surveyNumber')?.touched)
                     "
                     style="color: red"
                   >
@@ -108,10 +109,10 @@
                   />
                   <p
                     *ngIf="
-                      beneficiary.get('date')?.hasError('required') &&
+                      paymendDemand.get('date')?.hasError('required') &&
                       (submitted ||
-                        beneficiary.get('date')?.dirty ||
-                        beneficiary.get('date')?.touched)
+                        paymendDemand.get('date')?.dirty ||
+                        paymendDemand.get('date')?.touched)
                     "
                     style="color: red"
                   >
@@ -134,10 +135,10 @@
                   </select>
                   <p
                     *ngIf="
-                      beneficiary.get('state')?.hasError('required') &&
+                      paymendDemand.get('state')?.hasError('required') &&
                       (submitted ||
-                        beneficiary.get('state')?.dirty ||
-                        beneficiary.get('state')?.touched)
+                        paymendDemand.get('state')?.dirty ||
+                        paymendDemand.get('state')?.touched)
                     "
                     style="color: red"
                   >
@@ -160,10 +161,10 @@
                   </select>
                   <p
                     *ngIf="
-                      beneficiary.get('district')?.hasError('required') &&
+                      paymendDemand.get('district')?.hasError('required') &&
                       (submitted ||
-                        beneficiary.get('district')?.dirty ||
-                        beneficiary.get('district')?.touched)
+                        paymendDemand.get('district')?.dirty ||
+                        paymendDemand.get('district')?.touched)
                     "
                     style="color: red"
                   >
@@ -180,16 +181,19 @@
             </div>
             <div class="pull-right" style="width: 97%">
               <div class="form-group">
-                <!-- <mat-form-field>
-                  <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
+                <mat-form-field>
+                  <mat-select  placeholder="Bank" #singleSelect>
                     <mat-option>
-                      <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+                      <ngx-mat-select-search ></ngx-mat-select-search>
                     </mat-option>
-                    <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
-                      {{bank.name}}
-                    </mat-option>
+                    <!-- <option *ngFor="let item of state" value="{{ item }}">
+                      {{ item }}
+                    </option> -->
+                    <!-- <mat-option *ngFor="let bank of state | async" [value]="bank">
+                      {{bank}}
+                    </mat-option> -->
                   </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
               </div>
             </div>
             <a class="adBtnInputField">Add New Beneficiary</a>
