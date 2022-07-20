@@ -97,18 +97,18 @@ export class AddPaymentDemandComponent implements OnInit {
 
       console.log(this.cities);
 
-      this.addbeneficiary()
+      // this.addbeneficiary()
     }
 
 
     beneficiarys(): FormArray {
-      return this.paymendDemand.get("beneficiary") as FormArray
+      return this.paymendDemand.get("beneficiaryDetails") as FormArray
     }
     inputType(): FormArray {
-      return this.paymendDemand.get("inputType") as FormArray
+      return this.paymendDemand.get("beneficiaryDetails") as FormArray
     }
    get beneficiaryControl(): FormArray {
-      return this.paymendDemand.get("beneficiary") as FormArray
+      return this.paymendDemand.get("beneficiaryDetails") as FormArray
     }
 
     newbeneficiary(): FormGroup {
@@ -315,11 +315,48 @@ console.log(this.beneficiarylist,'beneficiaryList');
 
 
 
-  onItemSelect(item: any) {
-    console.log('onItemSelect', item);
+  onItemSelect(selectData: any) {
+
+  const control=  this.paymendDemand.get("beneficiaryDetails") as FormArray
+
+  this.beneficiaryData.map((item:any)=>{
+if(item._id===selectData.id){
+  control.push( this.fb.group({
+    block:[item.block,Validators.required],
+    village: [item.village,Validators.required],
+    beneficiaryName:[item.beneficiaryName,Validators.required],
+    fatherOrHusbandName:[item.fatherOrHusbandName,Validators.required],
+    gataNumber:['',Validators.required],
+    rakba:['',Validators.required],
+    pratifalRate:['',Validators.required],
+    beneficaryShare:['',Validators.required],
+    // chequeNumber:[''],
+    // chequeDate:[''],
+    // registrationAmount:[''],
+    // remark:['']
+  }))
+
+}
+  })
+
   }
-  onItemDeSelect(item: any) {
-    console.log('onItem DeSelect', item);
+  onItemDeSelect(selectData: any) {
+    const control=  this.paymendDemand.get("beneficiaryDetails") as FormArray
+
+    this.beneficiaryData.map((item:any)=>{
+      let i=0;
+  if(item._id===selectData.id){
+    while(control.length!==i){
+      if(item.block===control.at(i).value.block && item.village === control.at(i).value.village&&item.fatherOrHusbandName===control.at(i).value.fatherOrHusbandName && item.fatherOrHusbandName === control.at(i).value.fatherOrHusbandName){
+        this.removebeneficiary(i)
+      }
+      i++;
+
+    }
+
+
+  }
+    })
   }
 
   onSelectAll(items: any) {
