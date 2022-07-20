@@ -5,6 +5,18 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
 import { HttpsService } from 'src/app/shared/https.service';
+import { IDropdownSettings } from "ng-multiselect-dropdown";
+import { MatDialog } from '@angular/material/dialog';
+import { CustomModelComponent } from 'src/app/shared/custom-model/custom-model.component';
+
+interface Beneficiary{
+  id: string;
+  name: string;
+}
+interface ICity{
+  item_id: number;
+  item_text: string;
+}
 
 @Component({
   selector: 'app-add-payment-demand',
@@ -21,12 +33,20 @@ export class AddPaymentDemandComponent implements OnInit {
   village:any=[]
     project:any
 
+    name = "Angular";
+    beneficiarylist: Array<Beneficiary> = [];
+    cities: Array<ICity> = [];
+    selectedItems: Array<Beneficiary> = [];
+    dropdownSettings: IDropdownSettings = {};
+
     submitted:boolean=false
     constructor( private fb:FormBuilder,
       private router: Router,
       private data: DataService,
       private httpService:HttpsService,
-      private toast: ToastrService,) {
+      private toast: ToastrService,
+      public dialog: MatDialog) {
+
         this.httpService.getProject().subscribe((data:any)=>{
           this.project=data.projects
         })
@@ -37,14 +57,46 @@ export class AddPaymentDemandComponent implements OnInit {
           date:['',Validators.required],
           state:['',Validators.required],
           district:['',Validators.required],
-          beneficiary:this.fb.array([]) ,
+          beneficiaryDetails:this.fb.array([]) ,
 
         })
+
 
 
       }
 
     ngOnInit(): void {
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: 'id',
+        textField: 'name',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true
+      };
+      // this.httpService.getBeneficiary().subscribe((data: any) => {
+      //   this.beneficiaryData = data.getBeneFiciary
+      //   this.beneficiaryData.map((item:any)=>{
+      //     this.beneficiarylist.push({
+      //       _id: item._id,
+      //       name: item.beneficiaryName
+      //     })
+      //   })
+
+      // })
+      // this.beneficiarylist = [
+      //   { _id: "1", name: "New Delhi" },
+      //   { _id: "2", name: "Mumbai" },
+      //   { _id: "3", name: "Bangalore"},
+      //   { _id: "4", name: "Pune" },
+      //   { _id: "5", name: "Chennai" },
+      //   { _id: "6", name: "Navsari" }
+      // ];
+
+
+      console.log(this.cities);
+
       this.addbeneficiary()
     }
 
@@ -169,8 +221,15 @@ this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((da
             })
           })
         })
-        console.log(this.beneficiaryData);
 
+this.beneficiaryData.map((item:any)=>{
+  this.beneficiarylist.push({
+    id: item._id,
+    name: item.beneficiaryName
+  })
+})
+
+console.log(this.beneficiarylist,'beneficiaryList');
 
       })
     }
@@ -253,5 +312,32 @@ this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((da
   //     this.state.filter((state:any) => state.toLowerCase().indexOf(search) > -1)
   //   );
   // }
+
+
+
+  onItemSelect(item: any) {
+    console.log('onItemSelect', item);
+  }
+  onItemDeSelect(item: any) {
+    console.log('onItem DeSelect', item);
+  }
+
+  onSelectAll(items: any) {
+    console.log('onSelectAll', items);
+  }
+
+  onDropDownClose() {
+    console.log('dropdown closed');
+  }
+
+
+
+  openDialog() {
+    const dialogRef = this.dialog.open(CustomModelComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   }

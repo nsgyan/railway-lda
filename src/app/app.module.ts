@@ -20,6 +20,7 @@ import { UserComponent } from './user/user.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { ApiHandlerInterceptor } from './shared/api-handler.interceptor';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ApiHandlerInterceptor } from './shared/api-handler.interceptor';
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    RecaptchaModule
+    RecaptchaModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

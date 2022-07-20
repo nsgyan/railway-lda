@@ -1,0 +1,218 @@
+
+  <div class="panel-body">
+    <form role="form" [formGroup]="beneficiary" autocomplete="off">
+        <div class="row">
+            <div class="col-md-12">
+                <legend>
+                    <span class="font-weight-600">Create New Beneficary</span>
+                </legend>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label font-weight-600">Beneficiary Name
+                    </label>
+                    <input type="text" (keypress)="keyPresschar($event)" formControlName="beneficiaryName" class="form-control">
+
+                    <p *ngIf="beneficiary.get('beneficiaryName')?.hasError('required')&&(submitted||beneficiary.get('beneficiaryName')?.dirty||beneficiary.get('beneficiaryName')?.touched )"
+                        style="color: red;">
+                        Beneficiary Name <strong>Required</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label class="control-label font-weight-600">Father/Husband Name
+                  </label>
+                  <input type="text" formControlName="fatherOrHusbandName" class="form-control">
+
+                  <p *ngIf="beneficiary.get('fatherOrHusbandName')?.hasError('required')&&(submitted||beneficiary.get('fatherOrHusbandName')?.dirty||beneficiary.get('fatherOrHusbandName')?.touched )"
+                      style="color: red;">
+                      Father/Husband Name <strong>Required</strong>
+                  </p>
+              </div>
+          </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label font-weight-600">State</label>
+                    <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                        <option hidden>Select State</option>
+                        <option *ngFor="let item of state" value="{{ item }}">
+                            {{ item }}
+                        </option>
+                    </select>
+                    <p *ngIf="beneficiary.get('state')?.hasError('required')&&(submitted||beneficiary.get('state')?.dirty||beneficiary.get('state')?.touched )"
+                        style="color: red;">
+                        state <strong>Required</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label font-weight-600">District</label>
+                    <select   class="form-control" formControlName="district" (change)="getblock($event)">
+                        <option hidden>Select District</option>
+                        <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
+
+                       </select>
+                    <p *ngIf="beneficiary.get('district')?.hasError('required')&&(submitted||beneficiary.get('district')?.dirty||beneficiary.get('district')?.touched )"
+                        style="color: red;">
+                        District <strong>Required</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label class="control-label font-weight-600">Block*</label>
+
+                  <select class="form-control"  formControlName="block"  (change)="getVillage($event)">
+                    <option hidden>Select Block</option>
+                    <option *ngFor="let item of block"  value="{{item.block}}" >{{item.block}}</option>
+
+                   </select>
+                   <p *ngIf="beneficiary.get('block')?.hasError('required')&&(submitted||beneficiary.get('block')?.dirty||beneficiary.get('block')?.touched )" style="color: red;">
+                    block <strong>required</strong>
+                  </p>
+
+              </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label font-weight-600">Village Name* </label>
+                <select class="form-control" formControlName="village" >
+                  <option hidden>Select Village</option>
+                  <option *ngFor="let item of village" value="{{item.village}}">{{item.village}}</option>
+
+                </select>
+                <p *ngIf="beneficiary.get('village')?.hasError('required')&&(submitted||beneficiary.get('village')?.dirty||beneficiary.get('village')?.touched )" style="color: red;">
+                  village Name <strong>required</strong>
+                </p>
+            </div>
+        </div>
+
+
+
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label class="control-label font-weight-600">Aadhaar Number
+                  </label>
+                  <input type="text" maxlength="12" (focusout)="checkAadhaar($event)" (keypress)="keyPressNumbers($event)"  formControlName="aadhaarNumber" class="form-control">
+
+                  <p *ngIf="beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )"
+                      style="color: red;">
+                     Aadhaar Number <strong>Required</strong>
+                  </p>
+                  <p style="color: red;" *ngIf="beneficiary.get('aadhaarNumber')?.hasError('isExist')
+                  &&
+                  !beneficiary.get('aadhaarNumber')?.hasError('required')">
+                  Aadhaar Number already Exist
+          </p>
+                  <p *ngIf="!beneficiary.get('aadhaarNumber')?.hasError('required')&&(submitted||beneficiary.get('aadhaarNumber')?.dirty||beneficiary.get('aadhaarNumber')?.touched )&&this.beneficiary.get('aadhaarNumber')?.invalid && !beneficiary.get('aadhaarNumber')?.hasError('isExist')"
+                  style="color: red;">
+                 Aadhaar Number <strong>Invalid</strong>
+              </p>
+              </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label font-weight-600">PAN Number
+                </label>
+                <input type="text" appUpperCase (focusout)="checkpan($event)" formControlName="panNumber" class="form-control">
+                <div *ngIf="beneficiary.controls['panNumber'].invalid
+                &&
+               ( beneficiary.controls['panNumber']?.touched)">
+                <p *ngIf="beneficiary.get('panNumber')?.hasError('required')"
+                    style="color: red;">
+                    PAN number <strong>required</strong>
+                </p>
+                <p style="color: red;" *ngIf="beneficiary.get('panNumber')?.hasError('panValidation')
+                    &&
+                    !beneficiary.get('panNumber')?.hasError('required')">
+                    Please enter a valid Pan number
+                </p>
+                <p style="color: red;"
+                    *ngIf="beneficiary.get('panNumber')?.hasError('isExist')
+                    &&
+                    !beneficiary.get('panNumber')?.hasError('required') && ! beneficiary.get('panNumber')?.hasError('panValidation')">
+                    Pan number already exists
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+              <label class="control-label font-weight-600">Driving Licence Number
+              </label>
+              <input type="text" formControlName="dlNumber" (focusout)="checkDl($event)" class="form-control">
+
+              <p *ngIf="beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )"
+                  style="color: red;">
+                  Driving Licence Number <strong>Required</strong>
+              </p>
+              <p style="color: red;"
+              *ngIf="beneficiary.get('dlNumber')?.hasError('isExist')
+              &&
+              !beneficiary.get('dlNumber')?.hasError('required') ">
+              Driving Licence Number already exists
+          </p>
+
+              <p *ngIf="!beneficiary.get('dlNumber')?.hasError('required')&&(submitted||beneficiary.get('dlNumber')?.dirty||beneficiary.get('dlNumber')?.touched )&&beneficiary.get('dlNumber')?.invalid&& !beneficiary.get('dlNumber')?.hasError('isExist')"
+                  style="color: red;">
+             Driving Licence Number Invalid
+          </p>
+          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label font-weight-600">Ration Card Number
+            </label>
+            <input type="text" (focusout)="checkration($event)" formControlName="rationCard" class="form-control">
+
+            <p *ngIf="beneficiary.get('rationCard')?.hasError('required')&&(submitted||beneficiary.get('rationCard')?.dirty||beneficiary.get('rationCard')?.touched )"
+                style="color: red;">
+                Ration Card Number <strong>Required</strong>
+            </p>
+            <p style="color: red;"
+            *ngIf="beneficiary.get('rationCard')?.hasError('isExist')
+            &&
+            !beneficiary.get('rationCard')?.hasError('required') ">
+            Ration Card Number already exists
+        </p>
+            <p *ngIf="!beneficiary.get('rationCard')?.hasError('required')&&(submitted||beneficiary.get('rationCard')?.dirty||beneficiary.get('rationCard')?.touched )&&beneficiary.get('rationCard')?.invalid"
+            style="color: red;">
+            Ration Card Number Invalid
+    </p>
+        </div>
+    </div>
+
+
+
+
+
+        </div>
+    </form>
+
+    <div class="clearfix"></div>
+
+    <div class="borderFormBox">
+
+        <div class="clearfix"></div>
+
+        <div class="clearfix"></div>
+
+        <div class="clearfix"></div>
+        <hr />
+        <div class="button-right">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="btn m-b-xs btn-md btn-success" (click)="onSubmit()">Save</a>
+                    <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
+                    <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

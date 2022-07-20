@@ -8,6 +8,8 @@ import { HttpsService } from 'src/app/shared/https.service';
 import { ToasterService } from 'src/app/shared/toaster.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomModelComponent } from 'src/app/shared/custom-model/custom-model.component';
 
 @Component({
   selector: 'app-add-beneficiary',
@@ -30,7 +32,8 @@ project:any
     private router: Router,
     private data: DataService,
     private httpService:HttpsService,
-    private toast: ToastrService,) {
+    private toast: ToastrService,
+    public dialog: MatDialog) {
       this.httpService.getBank().subscribe((data:any)=>{
         this.bankData=data?.bank
 
@@ -309,4 +312,7 @@ this.project.map((item:any)=>{
     this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
 
 }
+
+
+
 }

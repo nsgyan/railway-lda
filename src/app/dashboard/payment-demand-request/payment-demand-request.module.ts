@@ -7,8 +7,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatSelectModule} from '@angular/material/select';
-
-
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     PaymentDemandListComponent,
@@ -21,7 +21,9 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    NgMultiSelectDropDownModule,
+    MatDialogModule
 
   ]
 })
