@@ -237,7 +237,7 @@ console.log(this.beneficiarylist,'beneficiaryList');
 
     getVillage(event:any,index:any){
       let newArray: any[]=[]
-      const control= this.paymendDemand.get("beneficiary") as FormArray
+      const control= this.paymendDemand.get("beneficiaryDetails") as FormArray
       this.village.splice(index,1)
       console.log(this.paymendDemand)
       this.project.map((item:any)=>{
@@ -265,17 +265,18 @@ console.log(this.beneficiarylist,'beneficiaryList');
       // let date=this.beneficiary.value.data.toString()
     console.log(this.paymendDemand);
     if(this.paymendDemand.valid){
-      this.httpService.addBeneficiary({
+      this.httpService.addPaymentdemand({
         projectName:this.paymendDemand.value.projectName,
         projectNumber:this.paymendDemand.value.projectNumber,
         date:this.paymendDemand.value.date,
+        surveyNumber:this.paymendDemand.value.surveyNumber,
         state:this.paymendDemand.value.state,
         district:this.paymendDemand.value.district,
-        beneficiary:this.paymendDemand.value.beneficiary ,
+        beneficiaryDetails:this.paymendDemand.value.beneficiaryDetails ,
 
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
-        this.router.navigate(['/dashboard/beneficiariesList'])
+        this.router.navigate(['/dashboard/paymentDemandRequest/list'])
       },((err: { error: { message: any; }; })=>{
         this.toast.error(err.error.message);
       }))

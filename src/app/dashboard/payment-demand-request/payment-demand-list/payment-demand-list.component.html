@@ -4,10 +4,10 @@
     <div class="bg-blue lter b-b wrapper-md">
       <div class="row">
         <div class="col-sm-6 col-xs-12">
-          <h3 class="m-n font-thin text-white"> Beneficiary  List View</h3>
+          <h3 class="m-n font-thin text-white"> Payment Demand  List View</h3>
         </div>
         <div class="col-sm-6 text-right poppins hidden-xs">
-          <button class="btn btn-sm text-10 btn-addNew m-r-xs report_csv_triger" (click)="addbeneficiary()"><i class="fa fa-plus"></i> Create New  Beneficiary </button>
+          <button class="btn btn-sm text-10 btn-addNew m-r-xs report_csv_triger" (click)="addbeneficiary()"><i class="fa fa-plus"></i> Create New Payment Demand </button>
         </div>
       </div>
     </div>
@@ -68,31 +68,34 @@
                     <tr role="row">
                       <th class="text-center">#</th>
 
-                      <th>Beneficiary Name</th>
-                      <th>Beneficiary  Address</th>
+                      <th>Project Number</th>
+                      <th>Project Name</th>
+                      <th>Survey Number</th>
+
+                      <th>Date</th>
                       <th>State</th>
                       <th>District</th>
-                      <th>Mobile Number</th>
-                      <th>Email</th>
-                      <th>partyType</th>
+
 
                       <th class="text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody >
-                    <tr *ngFor="let item of beneficiary ;let i=
+                    <tr *ngFor="let item of paymentDemandData ;let i=
                     index">
                       <td class="text-center">
                       {{i+1}}
                       </td>
-                      <td><span class="font-bold text-theme">{{item.partyName}}</span></td>
-                      <td><span class="font-bold text-theme">{{item.address}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.projectNumber}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.projectName}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.surveyNumber}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.date}}</span></td>
                       <td><span class="font-bold text-theme">{{item.state}}</span></td>
                       <td><span class="font-bold text-theme">{{item.district}}</span></td>
-                      <td><span class="font-bold text-theme">{{item.modile}}</span></td>
 
-                      <td><span class="font-bold text-theme">{{item.email}}</span></td>
-                      <td><span class="font-bold text-theme">{{item.partyType}}</span></td>
+
+                      <!-- <td><span class="font-bold text-theme">{{item.surveyNumber}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.partyType}}</span></td> -->
 
 
 

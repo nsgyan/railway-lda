@@ -47,6 +47,9 @@ export class HttpsService {
   ration(formData: any) {
     return this.httpService.post(Globals.route.ration, formData)
   }
+  addPaymentdemand(formData: any) {
+    return this.httpService.post(Globals.route.addPaymentdemand, formData)
+  }
 
   getCountBeneficiary(formData: any) {
     return this.httpService.post(Globals.route.getCountBeneficiary, formData);
@@ -56,6 +59,9 @@ export class HttpsService {
   }
   getBeneficiary(){
     return this.httpService.get(Globals.route.getBeneficiary)
+  }
+  getPaymentdemand(){
+    return this.httpService.get(Globals.route.getPaymentdemand)
   }
   getBeneficiaryByID(id:any){
     return this.httpService.get(`${Globals.route.getBeneficiary}/${id}`)

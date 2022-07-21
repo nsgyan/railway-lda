@@ -23,7 +23,7 @@
                               <div class="form-group">
                                   <label class="control-label font-weight-600">Project Name*
                                   </label>
-                                  <select type="date" formControlName="projectName" class="form-control"
+                                  <select type="select" formControlName="projectName" class="form-control"
                                       (change)="getPriject($event)">
                                       <option hidden>Select Project</option>
                                       <option *ngFor="let item of project" value="{{ item.projectName }}">
