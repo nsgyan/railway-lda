@@ -439,11 +439,21 @@ if(item._id===selectData.id){
         })
 
 this.beneficiaryData.map((item:any)=>{
-  this.beneficiarylist.push({
-    id: item._id,
-    name: item.beneficiaryName
+  this.beneficiarylist.map(listData=>{
+    if(item._id!==listData.id){
+      this.beneficiarylist.concat({
+        id: item._id,
+        name: item.beneficiaryName
+      })
+    }
   })
+
 })
+
+console.log(this.beneficiaryData);
+console.log(this.beneficiarylist)
+
+
 
 // console.log(this.beneficiarylist,'beneficiaryList');
 

@@ -216,7 +216,7 @@ export class CustomModelComponent implements OnInit {
 
 
     checkpan(event: any) {
-      this.httpService.checkPan({ checkPan: event.target.value }).subscribe((data: any) => {
+      this.httpService.checkPan({ panNumber: event.target.value }).subscribe((data: any) => {
         console.log(data);
 
       }, (err: any) => {
