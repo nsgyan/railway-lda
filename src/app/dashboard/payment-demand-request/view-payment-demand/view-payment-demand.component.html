@@ -1,1 +1,168 @@
-<p>view-payment-demand works!</p>
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body">
+    <div class="bg-red lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h3 class="m-n font-thin text-white"> Payment Demand Request</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper-md">
+      <div class="panel b-a">
+        <div class="panel-body">
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <legend>
+                <span class="font-weight-600"
+                  >View Payment Demand Request</span
+                >
+              </legend>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label font-weight-600"
+                  >Project Name : {{paymentDemandData.projectName}}
+                </label>
+
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label font-weight-600"
+                  >Project Number : {{paymentDemandData.projectNumber}}</label
+                >
+
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label font-weight-600"
+                  >Survey Number:{{paymentDemandData.surveyNumber}}
+                </label>
+
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label font-weight-600">Date  : {{paymentDemandData.date}}</label>
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label font-weight-600">State : {{paymentDemandData.state}}</label>
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label font-weight-600">District : {{paymentDemandData.district}}</label>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="clearfix"></div>
+
+          <div class="borderFormBox">
+            <div class="top-head">
+              <h4 style="padding: 0px 20px">Beneficiary Details</h4>
+
+            </div>
+            <div style="overflow-x: auto">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Beneficiary Name</th>
+                    <th>Father / Husband Name</th>
+                    <th>Block</th>
+                    <th>Village</th>
+                    <th>Gata Number</th>
+                    <th>Rakba</th>
+                    <th>Pratifal Rate</th>
+                    <th>Beneficary Share</th>
+
+
+                  </tr>
+                </thead>
+                <tbody
+                  *ngFor="
+                    let item of paymentDemandData.beneficiaryDetails;
+                    let i = index
+                  "
+                >
+                  <tr >
+                    <td>{{ i + 1 }}</td>
+                    <td>{{item.beneficiaryName}}
+
+
+                    </td>
+                    <td>
+
+                      {{item.fatherOrHusbandName}}
+                    </td>
+                    <td>
+                      {{item.block}}
+                    </td>
+                    <td>
+                      {{item.village}}
+                    </td>
+                    <td>
+                      {{item.gataNumber}}
+                    </td>
+                    <td>
+                      {{item.rakba}}
+                    </td>
+                    <td>
+                      {{item.pratifalRate}}
+
+
+                    </td>
+                    <td>
+                      {{item.beneficaryShare}}
+
+
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="clearfix"></div>
+            <hr />
+            <div class="button-right">
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- <a
+                    class="btn m-b-xs btn-md btn-success"
+                    (click)="onSubmit()"
+                    >Update</a
+                  > -->
+                  <!-- <a
+                    class="btn m-b-xs btn-md btn-primary"
+                    (click)="onSubmit()"
+                    >Save and New</a
+                  > -->
+                  <a class="btn m-b-xs btn-md btn-default" (click)="cancel()"
+                    >Back</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
