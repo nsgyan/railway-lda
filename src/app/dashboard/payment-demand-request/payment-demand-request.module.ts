@@ -9,10 +9,14 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatSelectModule} from '@angular/material/select';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import {MatDialogModule} from '@angular/material/dialog';
+import { EditPaymentDemandComponent } from './edit-payment-demand/edit-payment-demand.component';
+import { ViewPaymentDemandComponent } from './view-payment-demand/view-payment-demand.component';
 @NgModule({
   declarations: [
     PaymentDemandListComponent,
-    AddPaymentDemandComponent
+    AddPaymentDemandComponent,
+    EditPaymentDemandComponent,
+    ViewPaymentDemandComponent
   ],
   imports: [
     CommonModule,

@@ -63,6 +63,9 @@ export class HttpsService {
   getPaymentdemand(){
     return this.httpService.get(Globals.route.getPaymentdemand)
   }
+  getPaymentdemandByID(id:any){
+    return this.httpService.get(`${Globals.route.getPaymentdemand}/${id}`)
+  }
   getBeneficiaryByID(id:any){
     return this.httpService.get(`${Globals.route.getBeneficiary}/${id}`)
   }
@@ -148,6 +151,9 @@ export class HttpsService {
   updateVillage(formData: any) {
     return this.httpService.patch(Globals.route.updateVillage, formData);
   }
+  updatePaymentdemand(formData: any,id:any) {
+    return this.httpService.patch(`${Globals.route.updatePaymentdemand}/${id}`, formData);
+  }
   updateBeneficiary(formData: any,id:any) {
     return this.httpService.patch(`${Globals.route.updateBeneficiary}/${id}`, formData);
   }
@@ -157,8 +163,11 @@ export class HttpsService {
   updateProject(formData: any,id:any) {
     return this.httpService.patch(`${Globals.route.updateProject}/${id}`, formData);
   }
-  delsurvey(id: any) {
-    return this.httpService.delete(`${Globals.route.delsurvey}/${id}`);
+  delPaymentdemand(id: any) {
+    return this.httpService.delete(`${Globals.route.delPaymentdemand}/${id}`);
+  }
+  delsurvey(_id: any) {
+    return this.httpService.delete(`${Globals.route.delsurvey}/${_id}`);
   }
   deletedProject(id: any) {
     return this.httpService.delete(`${Globals.route.deletedProject}/${id}`);
