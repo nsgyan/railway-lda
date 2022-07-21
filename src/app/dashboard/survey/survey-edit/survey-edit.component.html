@@ -56,7 +56,7 @@
                         </div>
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label class="control-label font-weight-600">Date*</label>
+                                  <label class="control-label font-weight-600">Survey Date*</label>
                                   <input formControlName="date" type="date" class="form-control" name="" />
                                   <p *ngIf="survey.get('date')?.hasError('required')&&(submitted||survey.get('date')?.dirty||survey.get('date')?.touched )"
                                       style="color: red;">
