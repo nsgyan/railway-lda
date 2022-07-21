@@ -37,12 +37,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label font-weight-600">State</label>
-                    <select class="form-control" formControlName="state" (change)="getDistrict($event)">
+                    <input type="text" class="form-control" formControlName="state" readonly>
+
+                    <!-- <select class="form-control" formControlName="state" (change)="getDistrict($event)">
                         <option hidden>Select State</option>
                         <option *ngFor="let item of state" value="{{ item }}">
                             {{ item }}
                         </option>
-                    </select>
+                    </select> -->
                     <p *ngIf="beneficiary.get('state')?.hasError('required')&&(submitted||beneficiary.get('state')?.dirty||beneficiary.get('state')?.touched )"
                         style="color: red;">
                         state <strong>Required</strong>
@@ -52,11 +54,8 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label font-weight-600">District</label>
-                    <select   class="form-control" formControlName="district" (change)="getblock($event)">
-                        <option hidden>Select District</option>
-                        <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
+                    <input type="text" class="form-control" formControlName="district" readonly>
 
-                       </select>
                     <p *ngIf="beneficiary.get('district')?.hasError('required')&&(submitted||beneficiary.get('district')?.dirty||beneficiary.get('district')?.touched )"
                         style="color: red;">
                         District <strong>Required</strong>
@@ -69,7 +68,7 @@
 
                   <select class="form-control"  formControlName="block"  (change)="getVillage($event)">
                     <option hidden>Select Block</option>
-                    <option *ngFor="let item of block"  value="{{item.block}}" >{{item.block}}</option>
+                    <option *ngFor="let item of block"  value="{{item}}" >{{item}}</option>
 
                    </select>
                    <p *ngIf="beneficiary.get('block')?.hasError('required')&&(submitted||beneficiary.get('block')?.dirty||beneficiary.get('block')?.touched )" style="color: red;">
@@ -84,7 +83,7 @@
                 <label class="control-label font-weight-600">Village Name* </label>
                 <select class="form-control" formControlName="village" >
                   <option hidden>Select Village</option>
-                  <option *ngFor="let item of village" value="{{item.village}}">{{item.village}}</option>
+                  <option *ngFor="let item of village" value="{{item}}">{{item}}</option>
 
                 </select>
                 <p *ngIf="beneficiary.get('village')?.hasError('required')&&(submitted||beneficiary.get('village')?.dirty||beneficiary.get('village')?.touched )" style="color: red;">

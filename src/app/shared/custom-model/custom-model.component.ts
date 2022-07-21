@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { panValidation, CellNumValidation } from '../custom-validation.service';
@@ -25,20 +25,34 @@ export class CustomModelComponent implements OnInit {
     bankData: any
 
    constructor( private fb:FormBuilder,
+    public dialogRef: MatDialogRef<CustomModelComponent>,
       private router: Router,
       private httpService:HttpsService,
       private toast: ToastrService,
       @Inject(MAT_DIALOG_DATA) public data: any) {
-        this.httpService.getBank().subscribe((data:any)=>{
-          this.bankData=data?.bank
 
-                })
-      this.httpService.getState().subscribe((data: any) => {
-        data?.state.map((item: any) => {
-          this.state.push(item.stateName)
+        // console.log(data,'dffff');
+        data.surveyDetails.map((item:any)=>{
+          // console.log(item.block);
+
+          if(!this.block.includes(item.block)){
+          this.block.push(item?.block)
+          }
         })
 
-      })
+        // data.map((item:any)=>{
+
+        // })
+      //   this.httpService.getBank().subscribe((data:any)=>{
+      //     this.bankData=data?.bank
+
+      //           })
+      // this.httpService.getState().subscribe((data: any) => {
+      //   data?.state.map((item: any) => {
+      //     this.state.push(item.stateName)
+      //   })
+
+      // })
 
       console.log(this.state, 'dgfhgjh');
 
@@ -49,8 +63,8 @@ export class CustomModelComponent implements OnInit {
           panNumber:['',[Validators.required,panValidation]],
           dlNumber:['',[Validators.required,Validators.pattern('^[A-Za-z][0-9/\W/]{2,20}$')]],
           rationCard:['',[Validators.required,Validators.pattern('^([a-zA-Z0-9]){8,12}\s*$')]],
-          state:['',Validators.required],
-          district:['',Validators.required],
+          state:[data.state,Validators.required],
+          district:[data.district,Validators.required],
           block:['',Validators.required],
           village:['',Validators.required],
 
@@ -85,25 +99,33 @@ export class CustomModelComponent implements OnInit {
       }
     }
 
-    getblock(state:any){
-      this.beneficiary.get('block')?.reset()
-      this.beneficiary.get('block')?.updateValueAndValidity()
+    // getblock(state:any){
+    //   this.beneficiary.get('block')?.reset()
+    //   this.beneficiary.get('block')?.updateValueAndValidity()
 
-      this.httpService.getBlock(this.beneficiary.value.state,this.beneficiary.value.district).subscribe((data:any)=>{
-        this.block=data?.blocks
+    //   this.httpService.getBlock(this.beneficiary.value.state,this.beneficiary.value.district).subscribe((data:any)=>{
+    //     this.block=data?.blocks
 
-              })
-    }
+    //           })
+    // }
 
     getVillage(state:any){
       // console.log(state);
       // console.log(this.village.value.state);
       // const control =this.project.get("selectState") as FormArray
-      this.httpService.getVillageByBlock(this.beneficiary.value.block).subscribe((data:any)=>{
+      // this.httpService.getVillageByBlock(this.beneficiary.value.block).subscribe((data:any)=>{
 
-        this.village=data?.village;
+      //   this.village=data?.village;
 
-              })
+      //         })
+
+      this.data.surveyDetails.map((item:any)=>{
+        console.log(item.block);
+
+        if( this.beneficiary.value.block ===item.block&& !this.village.includes(item.village)){
+        this.village.push(item?.village)
+        }
+      })
     }
 
 
@@ -252,7 +274,8 @@ export class CustomModelComponent implements OnInit {
 
       }).subscribe((data:any)=>{
         this.toast.success(data?.message)
-        this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
+        this.dialogRef.close();
+        // this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
       },((err: { error: { message: string | undefined; }; })=>{
         this.toast.error(err.error.message);
       }))
@@ -296,7 +319,8 @@ export class CustomModelComponent implements OnInit {
 
 
     cancel() {
-      this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
+      this.dialogRef.close();
+      // this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
 
   }
   }

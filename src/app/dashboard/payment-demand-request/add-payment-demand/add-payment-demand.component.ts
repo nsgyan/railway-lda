@@ -26,6 +26,7 @@ interface ICity{
 export class AddPaymentDemandComponent implements OnInit {
   paymendDemand:FormGroup;
   state:any=[]
+  selectedSurvey:any;
   district:any=[]
   surveyData:any=[]
   beneficiaryData:any=[]
@@ -170,7 +171,7 @@ this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((da
       this.state=[]
       this.surveyData.map((item:any)=>{
         if(item.projectName===this.paymendDemand.value.projectName){
-
+          this.selectedSurvey=item
             if(!this.state.includes(item.state))
    // ✅ only runs if value not in array
             this.state.push(item.state);
@@ -293,6 +294,50 @@ console.log(this.beneficiarylist,'beneficiaryList');
 
   }
 
+  keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+    // const charCode = (event.which) ? event.which : event.keyCode;
+  //  return (charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode >= 48 && charCode <= 57) ||charCode == 46 || charCode == 0) {
+      return true;}
+    // }else if((charCode < 48 || charCode > 57)){
+    //   event.preventDefault();
+    //   return false;
+    // }
+    else {
+      event.preventDefault();
+        return false;
+    }
+  }
+
+  checkDecimal(type:any,i:any){
+    const control =this.paymendDemand.get("beneficiaryDetails") as FormArray
+    let number
+    if(type==='beneficaryShare'){
+    number= control.at(i).value.beneficaryShare
+    console.log(number);
+
+  }
+  else if(type==='pratifalRate'){
+    number= control.at(i).value.pratifalRate
+  }
+  else if(type==='rakba'){
+    number= control.at(i).value.rakba
+  }
+  else if(type==='gataNumber'){
+    number= control.at(i).value.gataNumber
+  }
+if(!number.includes('.')){
+  number= number+'.00'
+  console.log(number);
+
+}
+control.at(i).get(type)?.setValue(number)
+control.at(i).get(type)?.updateValueAndValidity
+
+
+
+  }
 
 
   // protected filterBanks() {
@@ -344,13 +389,19 @@ if(item._id===selectData.id){
     const control=  this.paymendDemand.get("beneficiaryDetails") as FormArray
 
     this.beneficiaryData.map((item:any)=>{
-      let i=0;
+
+
   if(item._id===selectData.id){
-    while(control.length!==i){
+    let i=0;
+    console.log(item._id,selectData.id,'removed beneficiary');
+
+    while(control.length>i){
       if(item.block===control.at(i).value.block && item.village === control.at(i).value.village&&item.fatherOrHusbandName===control.at(i).value.fatherOrHusbandName && item.fatherOrHusbandName === control.at(i).value.fatherOrHusbandName){
         this.removebeneficiary(i)
+
       }
       i++;
+
 
     }
 
@@ -370,10 +421,32 @@ if(item._id===selectData.id){
 
 
   openDialog() {
-    const dialogRef = this.dialog.open(CustomModelComponent);
+    const dialogRef = this.dialog.open(CustomModelComponent,{
+      data:this.selectedSurvey
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.httpService.getBeneficiaryByStateDistrict({state:this.paymendDemand.value.state,district:this.paymendDemand.value.district}).subscribe((data:any)=>{
+        this.surveyData.map((item:any)=>{
+          item.surveyDetails.map((surveyData:any)=>{
+            data.getBeneFiciary.map((beneFiciData:any)=>{
+              if(beneFiciData.block===surveyData.block&& beneFiciData.village===surveyData.village){
+                this.beneficiaryData.push(beneFiciData)
+              }
+            })
+          })
+        })
+
+this.beneficiaryData.map((item:any)=>{
+  this.beneficiarylist.push({
+    id: item._id,
+    name: item.beneficiaryName
+  })
+})
+
+// console.log(this.beneficiarylist,'beneficiaryList');
+
+      })
     });
   }
 

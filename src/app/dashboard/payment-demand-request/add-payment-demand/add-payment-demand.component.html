@@ -227,12 +227,12 @@
             </div>
 
             <div class="clearfix"></div>
-            <div class="grayFormBox wrapper-md">
+            <div  class="grayFormBox wrapper-md">
               <div class="pull-left">
                 <i class="fa fa-user fa-3x"></i>
               </div>
-              <div class="pull-right" style="width: 97%">
-                <div *ngIf="beneficiarylist[0]" class="form-group">
+              <div *ngIf="beneficiarylist[0]" class="pull-right" style="width: 97%">
+                <div  class="form-group">
                   <ng-multiselect-dropdown
                     name="Beneficiary"
                     [placeholder]="'Select Beneficiary'"
@@ -258,14 +258,7 @@
             <div class="borderFormBox">
               <div class="top-head">
                 <h4 style="padding: 0px 20px">Beneficiary</h4>
-                <button
-                  class="save-btn mt-3 mb-3 d-flex justify-content-end"
-                  (click)="addbeneficiary()"
-                  type="button"
-                >
-                  <i class="fa fa-plus" aria-hidden="true"></i>Add New
-                  Beneficiary
-                </button>
+
               </div>
               <div style="overflow-x: auto">
                 <table class="table" formArrayName="beneficiaryDetails">
@@ -408,10 +401,12 @@
                       </td>
                       <td>
                         <input
-                          type="number"
+                          type="text"
                           formControlName="gataNumber"
                           class="form-control"
                           name=""
+                          (keypress)="keyPressNumbers($event)"
+                          (focusout)="checkDecimal('gataNumber',i)"
                         />
                         <p
                           *ngIf="
@@ -431,6 +426,8 @@
                           formControlName="rakba"
                           class="form-control"
                           name=""
+                          (keypress)="keyPressNumbers($event)"
+                          (focusout)="checkDecimal('rakba',i)"
                         />
                         <p
                           *ngIf="
@@ -450,6 +447,8 @@
                           formControlName="pratifalRate"
                           class="form-control"
                           name=""
+                          (keypress)="keyPressNumbers($event)"
+                          (focusout)="checkDecimal('pratifalRate',i)"
                         />
                         <p
                           *ngIf="
@@ -469,6 +468,8 @@
                           formControlName="beneficaryShare"
                           class="form-control"
                           name=""
+                          (keypress)="keyPressNumbers($event)"
+                          (focusout)="checkDecimal('beneficaryShare',i)"
                         />
                         <p
                           *ngIf="
