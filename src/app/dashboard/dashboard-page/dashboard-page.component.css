@@ -1,0 +1,168 @@
+.banner {
+  background: url(../../../assets/img/railway-LA/Group1618.png)bottom right no-repeat;
+  width: 100%;
+  /* height: 23rem; */
+}
+
+.box {
+  border-radius: 10px;
+  border: 1px solid #c5c2c2;
+  box-shadow: 1px 1px 4px #adabab;
+}
+
+.bannerContent {
+  width: 74%;
+  padding: 5.6rem 0 5.6rem 1rem;
+}
+
+.banner .bannerContent h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: inline-block;
+  border-radius: 8px 8px 8px 0;
+  padding: 7px;
+  color: #fff;
+  background: #c45a11;
+  margin: 0 0 1rem 0;
+}
+
+.banner .bannerContent p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #272727;
+  line-height: 25px;
+  text-transform: uppercase;
+}
+
+.banner .bannerContent h6 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #272727;
+  line-height: 25px;
+  text-transform: uppercase;
+  margin: -7px 0 0 0;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+  border-radius: 15px;
+}
+
+#customers td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #FFF7E0;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: #282828;
+  font-size: 15px;
+}
+.fontStyle {
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #444;
+}
+.balanceBox {
+  background: #c45a11;
+  padding: 4.4rem 0px;
+}
+.balanceBox img {
+  width: 50px;
+}
+.balanceBox h5 {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.balanceBox h3 {
+  font-size: 24px;
+  color: #fff;
+  margin: 0 0 14px;
+}
+.balanceBox a {
+  background: #fff;
+  padding: 6px;
+  color: #c45a11;
+}
+.Boxes-5 {
+  display: flex;
+}
+.boxesCon {
+  padding: 0 1.2rem;
+}
+.boxesCon h4 {
+  font-size: 18px;
+  color: #242424;
+  line-height: 21px;
+}
+.boxesCon h3 {
+  font-size: 2.5rem;
+  color: #c45a11;
+}
+.box1 {
+  width: 20%;
+  text-align: center;
+  background: #fff;
+  margin: 5rem 1rem 0 0;
+}
+.box1 .boxesCon img {
+  width: 60px;
+  position: relative;
+  top: -26px;
+  margin-bottom: -17px;
+}
+.pieChartBox {
+  background: #fff;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.chartBoxTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pieChartBox .chartBoxTop h4 {
+  color: #282828;
+  font-size: 18px;
+}
+.pieChartBox select {
+  width: 12rem;
+  height: 3rem;
+  border-radius: 5px;
+  border: 1px solid #bfbfbf;
+}
+.map-img {
+  width: 100%;
+  margin-top: 1rem;
+}
+.pieChartImg {
+  margin: 2rem 0;
+}
+.pieChartImg img {
+  width: 297px;
+}
+@media only screen and (max-width: 768px) {
+  .Boxes-5 {
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  .box1 {
+      width: 100%;
+      margin-top: 5rem !important;
+  }
+  .box {
+      margin-top: 1rem;
+  }
+}

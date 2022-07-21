@@ -175,6 +175,34 @@ export class HttpsService {
   delBeneficiary(id: any) {
     return this.httpService.delete(`${Globals.route.delBeneficiary}/${id}`);
   }
+  districtdelete(id: any) {
+    return this.httpService.delete(`${Globals.route.districtdelete}/${id}`);
+  }
+  statedelete(_id: any) {
+    return this.httpService.delete(`${Globals.route.statedelete}/${_id}`);
+  }
+  landdelete(id: any) {
+    return this.httpService.delete(`${Globals.route.landdelete}/${id}`);
+  }
+  landnaturedelete(id: any) {
+    return this.httpService.delete(`${Globals.route.landnaturedelete}/${id}`);
+  }
+  bankdelete(_id: any) {
+    return this.httpService.delete(`${Globals.route.bankdelete}/${_id}`);
+  }
+  objectiontypedelete(id: any) {
+    return this.httpService.delete(`${Globals.route.objectiontypedelete}/${id}`);
+  }
+  landtypedelete(id: any) {
+    return this.httpService.delete(`${Globals.route.landtypedelete}/${id}`);
+  }
+  blockdelete(id: any) {
+    return this.httpService.delete(`${Globals.route.blockdelete}/${id}`);
+  }
+  villagedelete(id: any) {
+    return this.httpService.delete(`${Globals.route.villagedelete}/${id}`);
+  }
+
 
 
 

@@ -1,19 +1,213 @@
 <div id="content" class="app-content" role="main">
-    <div class="app-content-body ">
-        <div class="bg-red lter b-b wrapper-md">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <h3 class="m-n font-thin text-white">Dashboard</h3>
-                </div>
-            </div>
-        </div>
+  <div class="app-content-body ">
+      <div class="bg-red lter b-b wrapper-md">
+          <div class="row">
+              <div class="col-sm-6 col-xs-12">
+                  <h3 class="m-n font-thin text-white">DM Dashboard - Kanpur Land Acquisition</h3>
+              </div>
+          </div>
+      </div>
 
-        <div class="wrapper-md">
-            <div class="panel b-a">
-                <div class="panel-body">
-                  <div> <img src="./assets/img/LDA.png" alt="." style="width: 100%;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+      <div class="wrapper-md">
+          <div class="row">
+              <div class="col-lg-5">
+                  <div class="banner box">
+                      <div class="bannerContent">
+                          <h3>welcome to</h3>
+                          <p>kanpur land Acquisition management system</p>
+                          <h6>कानपुर भूमि अधिग्रहण प्रबंधन प्रणाली</h6>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                  <div class="box">
+                      <table id="customers">
+                          <thead>
+                              <tr>
+                                  <th colspan="3"><img src="../../../assets/img/railway-LA/Group1626.png" alt="">
+                                      Company</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>1</td>
+                                  <td>Account </td>
+                                  <td class="fontStyle">Vishesh Bhoomi</td>
+                              </tr>
+                              <tr>
+                                  <td>2</td>
+                                  <td>Bank</td>
+                                  <td class="fontStyle">icici</td>
+                              </tr>
+                              <tr>
+                                  <td>3</td>
+                                  <td>Branch / IFSC</td>
+                                  <td class="fontStyle">icic0564</td>
+                              </tr>
+                              <tr>
+                                  <td>4</td>
+                                  <td>Account Currency </td>
+                                  <td class="fontStyle">inr</td>
+                              </tr>
+                              <tr>
+                                  <td>5</td>
+                                  <td>Account Number </td>
+                                  <td class="fontStyle">0564 7547 7665</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="balanceBox box text-center">
+                      <img src="../../../assets/img/railway-LA/Group1625.png" alt="">
+                      <h5>available balance</h5>
+                      <h3><i class="fa fa-rupee"></i> 16,87,500.00</h3>
+                      <a href="javascript:void(0)"><i class="fa fa-refresh"></i> Refreash</a>
+                  </div>
+              </div>
+          </div>
+          <div class="Boxes-5">
+              <div class="box box1">
+                  <div class="boxesCon">
+                      <img src="../../../assets/img/railway-LA/Group1620.png" alt="">
+                      <h4>Total Land Acquisition Projects</h4>
+                      <h3>15</h3>
+                  </div>
+              </div>
+              <div class="box box1">
+                  <div class="boxesCon">
+                      <img src="../../../assets/img/railway-LA/Group1621.png" alt="">
+                      <h4>Ongoing <br> Projects</h4>
+                      <h3>2</h3>
+                  </div>
+              </div>
+              <div class="box box1">
+                  <div class="boxesCon">
+                      <img src="../../../assets/img/railway-LA/Group1622.png" alt="">
+                      <h4>Total<br> Beneficiaries</h4>
+                      <h3>11,327</h3>
+                  </div>
+              </div>
+              <div class="box box1">
+                  <div class="boxesCon">
+                      <img src="../../../assets/img/railway-LA/Group1623.png" alt="">
+                      <h4>Beneficiaries to be paid</h4>
+                      <h3>540</h3>
+                  </div>
+              </div>
+              <div class="box box1">
+                  <div class="boxesCon">
+                      <img src="../../../assets/img/railway-LA/Group1624.png" alt="">
+                      <h4>Amount<br> to be paid</h4>
+                      <h3><i class="fa fa-rupee"></i> 45,87,000</h3>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-4">
+                  <div class="pieChartBox box">
+                      <div class="chartBoxTop">
+                          <h4>Acquisition</h4>
+                          <div>
+                              <select name="project" id="projects">
+                                  <option value="Project">Select Project</option>
+                                  <option value="Project1">Project 1</option>
+                                  <option value="Project2">Project 2</option>
+                                  <option value="Project3">Project 3</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <!-- <canvas baseChart
+                              [data]="pieChartData"
+                              [labels]="pieChartLabels"
+                              [chartType]="pieChartType"
+                              [options]="pieChartOptions"
+                              [plugins]="pieChartPlugins"
+                              [legend]="pieChartLegend">
+                        </canvas> -->
+                      </div>
+                      <div class="text-center pieChartImg">
+                          <img src="../../../assets/img/railway-LA/pie-1.png" alt="">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                  <div class="pieChartBox box">
+                      <div class="chartBoxTop">
+                          <h4>Beneficiaries</h4>
+                          <div>
+                              <select name="project" id="projects">
+                                  <option value="Project">Select Project</option>
+                                  <option value="Project1">Project 1</option>
+                                  <option value="Project2">Project 2</option>
+                                  <option value="Project3">Project 3</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <!-- <canvas baseChart
+                              [data]="pieChartData"
+                              [labels]="pieChartLabels"
+                              [chartType]="pieChartType"
+                              [options]="pieChartOptions"
+                              [plugins]="pieChartPlugins"
+                              [legend]="pieChartLegend">
+                        </canvas> -->
+                      </div>
+                      <div class="text-center pieChartImg">
+                          <img src="../../../assets/img/railway-LA/pie-2.png" alt="">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                  <div class="pieChartBox box">
+                      <div class="chartBoxTop">
+                          <h4>Payments</h4>
+                          <div>
+                              <select name="project" id="projects">
+                                  <option value="Project">Select Project</option>
+                                  <option value="Project1">Project 1</option>
+                                  <option value="Project2">Project 2</option>
+                                  <option value="Project3">Project 3</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="chart-wrapper">
+                          <!-- <canvas baseChart
+                              [data]="pieChartData"
+                              [labels]="pieChartLabels"
+                              [chartType]="pieChartType"
+                              [options]="pieChartOptions"
+                              [plugins]="pieChartPlugins"
+                              [legend]="pieChartLegend">
+                        </canvas> -->
+                      </div>
+                      <div class="text-center pieChartImg">
+                          <img src="../../../assets/img/railway-LA/pie-3.png" alt="">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="pieChartBox box">
+                      <div class="chartBoxTop">
+                          <h4>Map</h4>
+                          <div>
+                              <select name="project" id="projects">
+                                  <option value="Project">Select Project</option>
+                                  <option value="Project1">Project 1</option>
+                                  <option value="Project2">Project 2</option>
+                                  <option value="Project3">Project 3</option>
+                              </select>
+                          </div>
+                      </div>
+                      <img src="../../../assets/img/railway-LA/map.jpeg" alt="" class="map-img">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
