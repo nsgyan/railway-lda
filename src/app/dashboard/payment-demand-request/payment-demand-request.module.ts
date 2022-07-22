@@ -9,8 +9,10 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatSelectModule} from '@angular/material/select';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { EditPaymentDemandComponent } from './edit-payment-demand/edit-payment-demand.component';
 import { ViewPaymentDemandComponent } from './view-payment-demand/view-payment-demand.component';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     PaymentDemandListComponent,
@@ -27,7 +29,10 @@ import { ViewPaymentDemandComponent } from './view-payment-demand/view-payment-d
     MatSelectModule,
     NgxMatSelectSearchModule,
     NgMultiSelectDropDownModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
 
   ]
 })

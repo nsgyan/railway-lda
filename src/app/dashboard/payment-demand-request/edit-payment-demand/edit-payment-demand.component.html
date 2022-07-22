@@ -183,21 +183,22 @@
               <div class="pull-left">
                 <i class="fa fa-user fa-3x"></i>
               </div>
-              <div *ngIf="beneficiarylist[0] &&selectedItems[0]" class="pull-right" style="width: 97%">
+              <div *ngIf="beneficiarylist[0] " class="pull-right" style="width: 97%">
                 <div  class="form-group">
-                  <ng-multiselect-dropdown
-                    name="Beneficiary"
-                    [placeholder]="'Select Beneficiary'"
-                    [settings]="dropdownSettings"
-                    [data]="beneficiarylist"
+                  <mat-form-field class="example-full-width" appearance="fill">
 
-                    (onDropDownClose)="onDropDownClose()"
-                    (onDeSelect)="onItemDeSelect($event)"
-                    (onSelect)="onItemSelect($event)"
-                    (onSelectAll)="onSelectAll($event)"
-                  >
-                    >
-                  </ng-multiselect-dropdown>
+                    <input matInput
+
+                           [matAutocomplete]="auto"
+                           [formControl]="stateCtrl">
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let beneficiarylist of filteredStates | async" [value]="beneficiarylist.id"    (click)="onItemSelect(beneficiarylist.id)">
+
+                        <span>{{beneficiarylist.name}}</span>
+
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
                 </div>
               </div>
               <a (click)="openDialog()" class="adBtnInputField"

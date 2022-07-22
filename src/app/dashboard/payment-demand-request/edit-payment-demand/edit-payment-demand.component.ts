@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -8,7 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CustomModelComponent } from 'src/app/shared/custom-model/custom-model.component';
 import { DataService } from 'src/app/shared/data.service';
 import  { HttpsService } from 'src/app/shared/https.service';
-
+import { Observable } from 'rxjs';
+import { map,startWith } from 'rxjs/operators';
 interface Beneficiary{
   id: string;
   name: string;
@@ -21,6 +22,11 @@ interface Beneficiary{
 })
 export class EditPaymentDemandComponent implements OnInit {
   [x: string]: any;
+
+  stateCtrl = new FormControl('');
+  filteredStates: Observable<Beneficiary[]> | undefined;
+
+
   paymentDemand:FormGroup;
   state:any=[]
   pipe = new DatePipe('en-US');
@@ -36,7 +42,7 @@ export class EditPaymentDemandComponent implements OnInit {
     project:any
 
     name = "Angular";
-    beneficiarylist: Array<Beneficiary> = [];
+    beneficiarylist: Beneficiary[] = [];
 
     selectedItems: Array<Beneficiary> = [];
     dropdownSettings: IDropdownSettings = {};
@@ -119,6 +125,10 @@ this.httpService.getPaymentdemandByID(this.id).subscribe((data:any)=>{
       }
 
     ngOnInit(): void {
+      this.filteredStates = this.stateCtrl.valueChanges.pipe(
+        startWith(''),
+        map(beneficiarylist => (beneficiarylist ? this._filterStates(beneficiarylist) : this.beneficiarylist.slice())),
+      );
       this.dropdownSettings = {
         singleSelection: false,
         idField: 'id',
@@ -189,6 +199,13 @@ this.httpService.getPaymentdemandByID(this.id).subscribe((data:any)=>{
     removebeneficiary(quesIndex:number) {
       this.beneficiarys().removeAt(quesIndex);
       this.village.splice(quesIndex,1)
+    }
+
+
+    private _filterStates(value: string): Beneficiary[] {
+      const filterValue = value.toLowerCase();
+
+      return this.beneficiarylist.filter(beneficiarylist => beneficiarylist.name.toLowerCase().includes(filterValue));
     }
 
 
@@ -439,37 +456,43 @@ control.at(i).get(type)?.updateValueAndValidity
   // }
 
 
-
   onItemSelect(selectData: any) {
+    console.log(selectData,'sdsd');
+this.stateCtrl.reset()
+    this.selectedItems=[]
+  const control=  this.paymendDemand.get("beneficiaryDetails") as FormArray
 
-  const control=  this.paymentDemand.get("beneficiaryDetails") as FormArray
-let i=0
   this.beneficiaryData.map((item:any)=>{
-if(item._id===selectData.id){
-
+if(item._id===selectData){
+  let i=0
+  let add:boolean=true
   while(control.length>i){
-    if(item.block!==control.at(i).value.block && item.village !== control.at(i).value.village&&item.fatherOrHusbandName!==control.at(i).value.fatherOrHusbandName && item.fatherOrHusbandName !== control.at(i).value.fatherOrHusbandName){
-      control.push( this.fb.group({
-        block:[item.block,Validators.required],
-        village: [item.village,Validators.required],
-        beneficiaryName:[item.beneficiaryName,Validators.required],
-        fatherOrHusbandName:[item.fatherOrHusbandName,Validators.required],
-        gataNumber:['',Validators.required],
-        rakba:['',Validators.required],
-        pratifalRate:['',Validators.required],
-        beneficaryShare:['',Validators.required],
-        // chequeNumber:[''],
-        // chequeDate:[''],
-        // registrationAmount:[''],
-        // remark:['']
-      }))
+    if(item.block===control.at(i).value.block && item.village === control.at(i).value.village&&item.fatherOrHusbandName===control.at(i).value.fatherOrHusbandName && item.fatherOrHusbandName === control.at(i).value.fatherOrHusbandName){
+      add=false
 
     }
     i++;
 
 
   }
+  console.log(add);
 
+  if(add||control.length===0){
+
+  control.push( this.fb.group({
+    block:[item.block,Validators.required],
+    village: [item.village,Validators.required],
+    beneficiaryName:[item.beneficiaryName,Validators.required],
+    fatherOrHusbandName:[item.fatherOrHusbandName,Validators.required],
+    gataNumber:['',Validators.required],
+    rakba:['',Validators.required],
+    pratifalRate:['',Validators.required],
+    beneficaryShare:['',Validators.required],
+    // chequeNumber:[''],
+    // chequeDate:[''],
+    // registrationAmount:[''],
+    // remark:['']
+  }))}
 
 }
   })
@@ -511,12 +534,13 @@ if(item._id===selectData.id){
 
 
   openDialog() {
+
     const dialogRef = this.dialog.open(CustomModelComponent,{
       data:this.selectedSurvey
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.httpService.getBeneficiaryByStateDistrict({state:this.paymentDemand.value.state,district:this.paymentDemand.value.district}).subscribe((data:any)=>{
+      this.httpService.getBeneficiaryByStateDistrict({state:this.paymendDemand.value.state,district:this.paymendDemand.value.district}).subscribe((data:any)=>{
         this.surveyData.map((item:any)=>{
           item.surveyDetails.map((surveyData:any)=>{
             data.getBeneFiciary.map((beneFiciData:any)=>{
@@ -528,12 +552,26 @@ if(item._id===selectData.id){
         })
 
 this.beneficiaryData.map((item:any)=>{
-  this.beneficiarylist.push({
-    id: item._id,
-    name: item.beneficiaryName
+this.beneficiarylist.map(listData=>{
+    if(item._id!==listData.id){
+
+      this.beneficiarylist.concat({
+        id: item._id,
+        name: item.beneficiaryName
+      })
+    }
   })
+
 })
 
+console.log(this.beneficiaryData);
+console.log(this.beneficiarylist)
+
+
+this.filteredStates = this.stateCtrl.valueChanges.pipe(
+  startWith(''),
+  map(beneficiarylist => (beneficiarylist ? this._filterStates(beneficiarylist) : this.beneficiarylist.slice())),
+);
 // console.log(this.beneficiarylist,'beneficiaryList');
 
       })

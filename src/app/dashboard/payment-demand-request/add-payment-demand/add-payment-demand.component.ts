@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/data.service';
@@ -8,6 +8,8 @@ import { HttpsService } from 'src/app/shared/https.service';
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { MatDialog } from '@angular/material/dialog';
 import { CustomModelComponent } from 'src/app/shared/custom-model/custom-model.component';
+import { Observable } from 'rxjs';
+import { map,startWith } from 'rxjs/operators';
 
 interface Beneficiary{
   id: string;
@@ -24,6 +26,12 @@ interface ICity{
   styleUrls: ['./add-payment-demand.component.css']
 })
 export class AddPaymentDemandComponent implements OnInit {
+
+  stateCtrl = new FormControl('');
+  filteredStates: Observable<Beneficiary[]> | undefined;
+
+
+
   paymendDemand:FormGroup;
   state:any=[]
   selectedSurvey:any;
@@ -35,7 +43,7 @@ export class AddPaymentDemandComponent implements OnInit {
     project:any
 
     name = "Angular";
-    beneficiarylist: Array<Beneficiary> = [];
+    beneficiarylist: Beneficiary[] = [];
     cities: Array<ICity> = [];
     selectedItems: Array<Beneficiary> = [];
     dropdownSettings: IDropdownSettings = {};
@@ -67,6 +75,10 @@ export class AddPaymentDemandComponent implements OnInit {
       }
 
     ngOnInit(): void {
+      this.filteredStates = this.stateCtrl.valueChanges.pipe(
+        startWith(''),
+        map(beneficiarylist => (beneficiarylist ? this._filterStates(beneficiarylist) : this.beneficiarylist.slice())),
+      );
       this.dropdownSettings = {
         singleSelection: false,
         idField: 'id',
@@ -108,6 +120,13 @@ export class AddPaymentDemandComponent implements OnInit {
     inputType(): FormArray {
       return this.paymendDemand.get("beneficiaryDetails") as FormArray
     }
+    private _filterStates(value: string): Beneficiary[] {
+      const filterValue = value.toLowerCase();
+
+      return this.beneficiarylist.filter(beneficiarylist => beneficiarylist.name.toLowerCase().includes(filterValue));
+    }
+
+
    get beneficiaryControl(): FormArray {
       return this.paymendDemand.get("beneficiaryDetails") as FormArray
     }
@@ -361,12 +380,30 @@ control.at(i).get(type)?.updateValueAndValidity
 
 
 
-  onItemSelect(selectData: any) {
 
+  onItemSelect(selectData: any) {
+    console.log(selectData,'sdsd');
+this.stateCtrl.reset()
+    this.selectedItems=[]
   const control=  this.paymendDemand.get("beneficiaryDetails") as FormArray
 
   this.beneficiaryData.map((item:any)=>{
-if(item._id===selectData.id){
+if(item._id===selectData){
+  let i=0
+  let add:boolean=true
+  while(control.length>i){
+    if(item.block===control.at(i).value.block && item.village === control.at(i).value.village&&item.fatherOrHusbandName===control.at(i).value.fatherOrHusbandName && item.fatherOrHusbandName === control.at(i).value.fatherOrHusbandName){
+      add=false
+
+    }
+    i++;
+
+
+  }
+  console.log(add);
+
+  if(add||control.length===0){
+
   control.push( this.fb.group({
     block:[item.block,Validators.required],
     village: [item.village,Validators.required],
@@ -380,7 +417,7 @@ if(item._id===selectData.id){
     // chequeDate:[''],
     // registrationAmount:[''],
     // remark:['']
-  }))
+  }))}
 
 }
   })
@@ -440,12 +477,9 @@ if(item._id===selectData.id){
         })
 
 this.beneficiaryData.map((item:any)=>{
-  this.beneficiarylist.map(listData=>{
+this.beneficiarylist.map(listData=>{
     if(item._id!==listData.id){
-      this.selectedItems.push({
-        id: item._id,
-        name: item.beneficiaryName
-      })
+
       this.beneficiarylist.concat({
         id: item._id,
         name: item.beneficiaryName
@@ -459,7 +493,10 @@ console.log(this.beneficiaryData);
 console.log(this.beneficiarylist)
 
 
-
+this.filteredStates = this.stateCtrl.valueChanges.pipe(
+  startWith(''),
+  map(beneficiarylist => (beneficiarylist ? this._filterStates(beneficiarylist) : this.beneficiarylist.slice())),
+);
 // console.log(this.beneficiarylist,'beneficiaryList');
 
       })
