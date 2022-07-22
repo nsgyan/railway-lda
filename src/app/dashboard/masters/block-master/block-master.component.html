@@ -183,13 +183,14 @@
 
                       <td><span class="font-bold text-theme">{{item.blockType==='Tribal'?'Yes':'No'}}</span></td>
 
-                      <td class="text-center">
-                        <div class="btn-group dropdown">
-                          <button class="btn btn-default w-xxs btn-sm r-2x" data-toggle="dropdown"
-                            aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
-                                class="fa fa-caret-down"></i></span></button>
-                          <ul class="dropdown-menu">
-                            <li><a (click)="edit(item)"><i class="fa fa-edit"></i> Edit </a></li>
+                        <td class="text-center">
+                          <div class="btn-group dropdown">
+                            <button class="btn btn-default w-xxs btn-sm r-2x" data-toggle="dropdown"
+                              aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
+                                  class="fa fa-caret-down"></i></span></button>
+                            <ul class="dropdown-menu">
+                              <li><a (click)="delete(item._id)"><i class="fa fa-trash-o"></i> Delete </a></li>
+                              <li><a  (click)="edit(item)"><i class="fa fa-edit"></i> Edit </a></li>
 
                           </ul>
                         </div>

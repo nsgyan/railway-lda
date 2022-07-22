@@ -246,7 +246,7 @@
                                       </p>
                                   </td>
                                   <td>
-                                    <select  formControlName="objecton"   class="form-control"    (change)="getobjecton($event)">
+                                    <select  formControlName="objecton"   class="form-control"    (change)="getobjecton($event,i)">
                                       <option   value="Yes">Yes</option>
                                       <option   value="No">No</option>
                                     </select>
@@ -258,7 +258,7 @@
                                 </td>
                                 <td>
                                   <select  formControlName="objectionType"   class="form-control"   >
-                                    <option *ngFor="let item of objectionType"   value="{{item.objectionType}}">{{item.objectionType}}</option>
+                                    <option *ngFor="let item of objectionType[i]"   value="{{item.objectionType}}">{{item.objectionType}}</option>
                                   </select>
 
                                   <p *ngIf="opt.get('objectionType')?.hasError('required')&&(submitted||opt.get('objectionType')?.dirty||opt.get('objectionType')?.touched )"

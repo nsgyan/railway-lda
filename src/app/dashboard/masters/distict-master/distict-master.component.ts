@@ -120,6 +120,14 @@ else{
   // let url: string = "/dashboard/masters/stateEdit/" + id
   // this.router.navigateByUrl(url);
 }
+delete(id: any) {
+  this.httpService.districtdelete(id).subscribe(res => {
+    this.toast.success('deleted District successfully')
+    location.reload()
+  }, err => {
+    this.toast.error('Internal server error')
+  })
+}
 
 
 }

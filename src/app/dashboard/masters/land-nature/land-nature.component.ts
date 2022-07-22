@@ -99,7 +99,14 @@ else{
 
 
 
-
+  delete(id: any) {
+    this.httpService.landnaturedelete(id).subscribe(res => {
+      this.toast.success('Deleted Land Nature successfully')
+      location.reload()
+    }, err => {
+      this.toast.error('Internal server error')
+    })
+  }
 
 
   cancel() {

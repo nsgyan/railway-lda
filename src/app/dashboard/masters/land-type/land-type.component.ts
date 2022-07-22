@@ -96,7 +96,14 @@ else{
 
 
 
-
+  delete(id: any) {
+    this.httpService.landtypedelete(id).subscribe(res => {
+      this.toast.success('Deleted Land Type successfully')
+      location.reload()
+    }, err => {
+      this.toast.error('Internal server error')
+    })
+  }
 
 
   cancel() {

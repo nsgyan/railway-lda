@@ -113,7 +113,14 @@ else{
   }
 
 
-
+  delete(id: any) {
+    this.httpService.statedelete(id).subscribe(res => {
+      this.toast.success(' State deleted successfully')
+      location.reload()
+    }, err => {
+      this.toast.error('Internal server error')
+    })
+  }
 
 
 

@@ -126,7 +126,14 @@ this.block.get('district')?.updateValueAndValidity()
     // let url: string = "/dashboard/masters/blockEdit/" + id
     // this.router.navigateByUrl(url);
   }
-
+  delete(id: any) {
+    this.httpService.blockdelete(id).subscribe(res => {
+      this.toast.success('Block deleted  successfully')
+      location.reload()
+    }, err => {
+      this.toast.error('Internal server error')
+    })
+  }
 
   cancel() {
     this.block.reset()

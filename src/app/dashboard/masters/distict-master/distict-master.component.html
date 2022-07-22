@@ -152,6 +152,7 @@
                                   class="fa fa-caret-down"></i></span></button>
                             <ul class="dropdown-menu">
                               <li>
+                                <a (click)="delete(item._id)"><i class="fa fa-trash-o"></i> Delete </a>
                                 <a  (click)="edit(item)"><i class="fa fa-edit"></i> Edit </a>
                               </li>
                             </ul>
