@@ -201,20 +201,21 @@ console.log(this.state);
 
 
     }
-    getobjecton(event:any){
+    getobjecton(event:any,index:any){
+
       const control= this.survey.get("surveyDetail") as UntypedFormArray
       if(event.target.value==='Yes'){
         this.httpService.getobjectionType().subscribe((data:any)=>{
-          this.objectionType=data?.objectionType
+          this.objectionType.push(data?.objectionType)
 
                 })
-                control.get('objectionType')?.setValidators(Validators.required)
-                control.get('objectionType')?.updateValueAndValidity
+                control.at(index).get('objectionType')?.setValidators(Validators.required)
+                control.at(index).get('objectionType')?.updateValueAndValidity
       }
       else{
-        control.get('objectionType')?.clearValidators
-                control.get('objectionType')?.updateValueAndValidity
-        this.objectionType=[]
+        control.at(index).get('objectionType')?.clearValidators
+                control.at(index).get('objectionType')?.updateValueAndValidity
+                this.objectionType[index]=[]
       }
 
 

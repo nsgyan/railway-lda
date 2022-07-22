@@ -111,7 +111,14 @@ this.bank.get('bankName')?.updateValueAndValidity()
 
 
 
-
+  delete(id: any) {
+    this.httpService.bankdelete(id).subscribe(res => {
+      this.toast.success('Deleted Bank successfully')
+      location.reload()
+    }, err => {
+      this.toast.error('Internal server error')
+    })
+  }
 
 
   cancel() {

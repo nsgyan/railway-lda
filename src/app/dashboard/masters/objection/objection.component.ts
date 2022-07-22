@@ -97,7 +97,14 @@ else{
 
 
 
-
+  delete(id: any) {
+    this.httpService.objectiontypedelete(id).subscribe(res => {
+      this.toast.success('Deleted Objection Type successfully')
+      location.reload()
+    }, err => {
+      this.toast.error('Internal server error')
+    })
+  }
 
   cancel() {
     window.location.reload()

@@ -56,6 +56,16 @@ export class Globals {
         'addPaymentdemand':Globals.server+'paymentdemand/add',
         'getPaymentdemand':Globals.server+'paymentdemand/get',
         'delPaymentdemand':Globals.server+'paymentdemand/del',
-        'updatePaymentdemand':Globals.server+'paymentdemand/update'
+        'updatePaymentdemand':Globals.server+'paymentdemand/update',
+        'districtdelete':Globals.server+'master/districtdelete',
+        'statedelete':Globals.server+'master/statedelete',
+        'landdelete':Globals.server+'master/landdelete',
+        'landnaturedelete':Globals.server+'master/landnaturedelete',
+        'landtypedelete':Globals.server+'master/landtypedelete',
+        'objectiontypedelete':Globals.server+'master/objectiontypedelete',
+        'bankdelete':Globals.server+'master/bankdelete',
+        'blockdelete':Globals.server+'master/blockdelete',
+        'villagedelete':Globals.server+'master/villagedelete',
+
     };
 }

@@ -130,6 +130,14 @@ else{
 // addvillage(){
 //   this.router.navigate(['/dashboard/masters/village'])
 // }
+delete(id: any) {
+  this.httpService.villagedelete(id).subscribe(res => {
+    this.toast.success('Village deleted  successfully')
+    location.reload()
+  }, err => {
+    this.toast.error('Internal server error')
+  })
+}
 
 
   edit(villageData: any) {

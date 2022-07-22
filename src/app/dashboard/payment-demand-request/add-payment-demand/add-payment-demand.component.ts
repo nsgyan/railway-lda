@@ -422,6 +422,7 @@ if(item._id===selectData.id){
 
 
   openDialog() {
+
     const dialogRef = this.dialog.open(CustomModelComponent,{
       data:this.selectedSurvey
     });
@@ -441,6 +442,10 @@ if(item._id===selectData.id){
 this.beneficiaryData.map((item:any)=>{
   this.beneficiarylist.map(listData=>{
     if(item._id!==listData.id){
+      this.selectedItems.push({
+        id: item._id,
+        name: item.beneficiaryName
+      })
       this.beneficiarylist.concat({
         id: item._id,
         name: item.beneficiaryName

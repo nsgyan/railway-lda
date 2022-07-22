@@ -97,7 +97,14 @@ else{
 
 
 
-
+    delete(id: any) {
+      this.httpService.delsurvey(id).subscribe(res => {
+        this.toast.success('deleted survey successfully')
+        location.reload()
+      }, err => {
+        this.toast.error('Internal server error')
+      })
+    }
 
 
   cancel() {
