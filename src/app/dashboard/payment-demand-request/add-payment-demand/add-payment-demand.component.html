@@ -190,6 +190,8 @@
                     [placeholder]="'Select Beneficiary'"
                     [settings]="dropdownSettings"
                     [data]="beneficiarylist"
+                    [(ngModel)]="selectedItems"
+                    
                     (onDropDownClose)="onDropDownClose()"
                     (onDeSelect)="onItemDeSelect($event)"
                     (onSelect)="onItemSelect($event)"
