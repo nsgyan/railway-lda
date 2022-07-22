@@ -1,0 +1,25 @@
+.btn-primary {
+    color: #ffffff !important;
+    background-color: #c45a11;
+    border-color: #c45a11;
+}
+
+.btn-primary:hover {
+    color: #ffffff !important;
+    background-color: #b2500f;
+    border-color: #b2500f;
+}
+
+.btn-primary:active {
+    color: #ffffff !important;
+    background-color: #8a3e0b;
+    border-color: #8a3e0b;
+}
+
+.button-right {
+    text-align: right;
+
+}
+.button-right a {
+    margin: 8px;
+}

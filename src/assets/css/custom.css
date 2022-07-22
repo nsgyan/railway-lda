@@ -33,7 +33,7 @@ body {
     border-color: #e6d800;
 }
 .borderFormBox {
-    border: 1px solid #cdcdcd;
+    /* border: 1px solid #cdcdcd; */
     margin: 1rem 0rem;
 }
 .borderFormBox p {
