@@ -1,107 +1,113 @@
 <div id="content" class="app-content" role="main">
   <div class="app-content-body ">
-      <div class="bg-red lter b-b wrapper-md">
-          <div class="row">
-              <div class="col-sm-6 col-xs-12">
-                  <h3 class="m-n font-thin text-white">Block Master</h3>
-              </div>
-          </div>
-      </div>
-
-      <div class="wrapper-md">
-          <div class="panel b-a">
-              <div class="panel-body">
-                  <form role="form" [formGroup]="block" autocomplete="off">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <legend>
-                                  <span class="font-weight-600">Create New Block</span>
-                              </legend>
-                          </div>
-
-
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">State*</label>
-                                  <input *ngIf="isEdit"  class="form-control" type="text" formControlName="state"  name="" id="" readonly>
-                                  <select  *ngIf="!isEdit" class="form-control" formControlName="state" (change)="getDistrict($event)">
-                                    <option hidden>Select State</option>
-                                    <option *ngFor="let item of state"  value="{{item.stateName}}"  >{{item.stateName}}</option>
-
-                                   </select>
-                                 <p *ngIf="block.get('state')?.hasError('required')&&(submitted||block.get('state')?.dirty||block.get('state')?.touched )" style="color: red;">
-                                  State <strong>required</strong>
-                                </p>
-
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label font-weight-600">District*</label>
-                                <input class="form-control" *ngIf="isEdit" type="text"  formControlName="district" readonly>
-                                <select  *ngIf="!isEdit" class="form-control" formControlName="district">
-                                  <option hidden>Select District</option>
-                                  <option *ngFor="let item of district"  value="{{item.district}}" >{{item.district}}</option>
-
-                                 </select>
-                               <p *ngIf="block.get('district')?.hasError('required')&&(submitted||block.get('district')?.dirty||block.get('district')?.touched )" style="color: red;">
-                                District <strong>required</strong>
-                              </p>
-
-                            </div>
-                        </div>
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">Block  Type*</label>
-                                  <select class="form-control" formControlName="blockType">
-                                    <option  value="Desert">Desert</option>
-                                    <option  value="Tribal">Tribal</option>
-                                   </select>
-                                   <p *ngIf="block.get('blocktype')?.hasError('required')&&(submitted||block.get('blocktype')?.dirty||block.get('blocktype')?.touched )" style="color: red;">
-                                    Block  Type <strong>required</strong>
-                                  </p>
-
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label font-weight-600">Block Name*</label>
-                                <input type="text" formControlName="blockName" class="form-control">
-                                <p *ngIf="block.get('blockName')?.hasError('required')&&(submitted||block.get('blockName')?.dirty||block.get('blockName')?.touched )" style="color: red;">
-                                  Block Name <strong>required</strong>
-                                </p>
-                            </div>
-                        </div>
-
-
-
-                      </div>
-
-                      <div class="clearfix"></div>
-
-
-
-                      <div class="clearfix"></div>
-                      <hr/>
-                      <div class="row">
-                          <div class="col-md-12">
-                              <a class="btn m-b-xs btn-md btn-success" *ngIf="!isEdit"  (click)="onSubmit()">Save</a>
-                              <a class="btn m-b-xs btn-md btn-success" *ngIf="isEdit"  (click)="onUpdate()">Update</a>
-                              <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
-                              <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
+    <div class="bg-red lter b-b wrapper-md">
       <div class="row">
-        <div class="col-md-12">
-          <div class="card no-shadow">
-            <div class="tab-content bg-seashell">
-              <div role="tabpanel" class="tab-pane active g-py-0">
-                <div class="row row-xs">
-                  <!-- <div class="row" style="margin-top: 1rem; margin-bottom: .5rem;">
+        <div class="col-sm-6 col-xs-12">
+          <h3 class="m-n font-thin text-white">Block Master</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper-md">
+      <div class="panel b-a">
+        <div class="panel-body">
+          <form role="form" [formGroup]="block" autocomplete="off">
+            <div class="row">
+              <div class="col-md-12">
+                <legend>
+                  <span class="font-weight-600">Create New Block</span>
+                </legend>
+              </div>
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label font-weight-600">State*</label>
+                  <input *ngIf="isEdit" class="form-control" type="text" formControlName="state" name="" id="" readonly>
+                  <select *ngIf="!isEdit" class="form-control" formControlName="state" (change)="getDistrict($event)">
+                    <option hidden>Select State</option>
+                    <option *ngFor="let item of state" value="{{item.stateName}}">{{item.stateName}}</option>
+
+                  </select>
+                  <p *ngIf="block.get('state')?.hasError('required')&&(submitted||block.get('state')?.dirty||block.get('state')?.touched )"
+                    style="color: red;">
+                    State <strong>required</strong>
+                  </p>
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label font-weight-600">District*</label>
+                  <input class="form-control" *ngIf="isEdit" type="text" formControlName="district" readonly>
+                  <select *ngIf="!isEdit" class="form-control" formControlName="district">
+                    <option hidden>Select District</option>
+                    <option *ngFor="let item of district" value="{{item.district}}">{{item.district}}</option>
+
+                  </select>
+                  <p *ngIf="block.get('district')?.hasError('required')&&(submitted||block.get('district')?.dirty||block.get('district')?.touched )"
+                    style="color: red;">
+                    District <strong>required</strong>
+                  </p>
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label font-weight-600">Block Type*</label>
+                  <select class="form-control" formControlName="blockType">
+                    <option value="Desert">Desert</option>
+                    <option value="Tribal">Tribal</option>
+                  </select>
+                  <p *ngIf="block.get('blocktype')?.hasError('required')&&(submitted||block.get('blocktype')?.dirty||block.get('blocktype')?.touched )"
+                    style="color: red;">
+                    Block Type <strong>required</strong>
+                  </p>
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label font-weight-600">Block Name*</label>
+                  <input type="text" formControlName="blockName" class="form-control">
+                  <p *ngIf="block.get('blockName')?.hasError('required')&&(submitted||block.get('blockName')?.dirty||block.get('blockName')?.touched )"
+                    style="color: red;">
+                    Block Name <strong>required</strong>
+                  </p>
+                </div>
+              </div>
+
+
+
+            </div>
+
+            <div class="clearfix"></div>
+
+
+
+            <div class="clearfix"></div>
+            <hr />
+            <div class="button-right">
+              <div class="row">
+                <div class="col-md-12">
+                  <a class="btn m-b-xs btn-md btn-success" *ngIf="!isEdit" (click)="onSubmit()">Save</a>
+                  <a class="btn m-b-xs btn-md btn-success" *ngIf="isEdit" (click)="onUpdate()">Update</a>
+                  <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
+                  <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card no-shadow">
+          <div class="tab-content bg-seashell">
+            <div role="tabpanel" class="tab-pane active g-py-0">
+              <div class="row row-xs">
+                <!-- <div class="row" style="margin-top: 1rem; margin-bottom: .5rem;">
                     <div>
                       <div class="col-md-3">
                         <label class="font-bold"><span>0</span> Selected: </label>
@@ -146,56 +152,56 @@
                       </div>
                     </div>
                   </div> -->
-                  <table class="table bg-white">
-                    <thead>
-                      <tr role="row">
-                        <th class="text-center">#</th>
+                <table class="table bg-white">
+                  <thead>
+                    <tr role="row">
+                      <th class="text-center">#</th>
 
-                        <th>Block</th>
-                        <th>District </th>
-                        <th>State </th>
-                        <th>Is Desert</th>
-                        <th>Is Trible</th>
+                      <th>Block</th>
+                      <th>District </th>
+                      <th>State </th>
+                      <th>Is Desert</th>
+                      <th>Is Trible</th>
 
-                        <th class="text-center">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody >
-                      <tr *ngFor="let item of blockData ;let i=
+                      <th class="text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of blockData ;let i=
                       index">
-                        <td class="text-center">
+                      <td class="text-center">
                         {{i+1}}
-                        </td>
+                      </td>
 
-                        <td><span class="font-bold text-theme">{{item.block}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.block}}</span></td>
 
-                        <td><span class="font-bold text-theme">{{item.district}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.district}}</span></td>
 
-                        <td><span class="font-bold text-theme">{{item.state}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.state}}</span></td>
 
-                        <td><span class="font-bold text-theme">{{item.blockType==='Desert'?'Yes':'No'}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.blockType==='Desert'?'Yes':'No'}}</span></td>
 
-                        <td><span class="font-bold text-theme">{{item.blockType==='Tribal'?'Yes':'No'}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.blockType==='Tribal'?'Yes':'No'}}</span></td>
 
-                        <td class="text-center">
-                          <div class="btn-group dropdown">
-                            <button class="btn btn-default w-xxs btn-sm r-2x" data-toggle="dropdown"
-                              aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
-                                  class="fa fa-caret-down"></i></span></button>
-                            <ul class="dropdown-menu">
-                              <li><a  (click)="edit(item)"><i class="fa fa-edit"></i> Edit </a></li>
+                      <td class="text-center">
+                        <div class="btn-group dropdown">
+                          <button class="btn btn-default w-xxs btn-sm r-2x" data-toggle="dropdown"
+                            aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
+                                class="fa fa-caret-down"></i></span></button>
+                          <ul class="dropdown-menu">
+                            <li><a (click)="edit(item)"><i class="fa fa-edit"></i> Edit </a></li>
 
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </div>

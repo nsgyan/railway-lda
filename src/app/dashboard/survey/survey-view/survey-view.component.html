@@ -1,172 +1,168 @@
 <div id="content" class="app-content" role="main">
   <div class="app-content-body">
-      <div class="bg-red lter b-b wrapper-md">
-          <div class="row">
-              <div class="col-sm-6 col-xs-12">
-                  <h3 class="m-n font-thin text-white"> View  Survey</h3>
-              </div>
-          </div>
+    <div class="bg-red lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h3 class="m-n font-thin text-white"> View Survey</h3>
+        </div>
       </div>
+    </div>
 
-      <div class="wrapper-md">
-          <div class="panel b-a">
-              <div class="panel-body">
-                <div class="row">
-                  <div class="col-md-12">
-                      <legend>
-                          <span class="font-weight-600">  Survey Details</span>
-                      </legend>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <p class="control-label font-weight-600"> Survey Number: <span>{{surveyData.surveyNumber}}</span>  </p>
+    <div class="wrapper-md">
+      <div class="panel b-a">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <legend>
+                <h4 class="font-weight-600"> Survey Details</h4>
 
-                    </div>
-                </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <p class="control-label font-weight-600"> Project Name: <span>{{surveyData.projectName}}</span>  </p>
+                <!-- <a class="btn m-b-xs btn-md btn-success" (click)="onSubmit()">Update</a> -->
+                <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
+                <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Back</a>
 
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <p class="control-label font-weight-600"> Project Number: <span>{{surveyData.projectNumber}}</span>  </p>
-                        <!-- <p>{{surveyData.projectNumber}}</p> -->
-                    </div>
-                </div>
-
-                  <div class="col-md-6">
-                      <div class="form-group">
-                        <p class="control-label font-weight-600">Survey  Date: <span>{{surveyData.date}}</span>  </p>
-
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <p class="control-label font-weight-600"> State: <span>{{surveyData.state}}</span>  </p>
-
-                    </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <p class="control-label font-weight-600"> District: <span>{{surveyData.district}}</span>  </p>
-                  </div>
-              </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label font-weight-600">Document:</label>
-
-
-                        <a *ngIf="surveyData?.documents" href="{{surveyData?.documents}}"
-                        target="_blank"> View Document</a>
-
-
-                    </div>
-                </div>
-
+              </legend>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <p class="control-label font-weight-600"> Survey Number: <span>{{surveyData.surveyNumber}}</span> </p>
 
               </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <p class="control-label font-weight-600"> Project Name: <span>{{surveyData.projectName}}</span> </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <p class="control-label font-weight-600"> Project Number: <span>{{surveyData.projectNumber}}</span> </p>
+                <!-- <p>{{surveyData.projectNumber}}</p> -->
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <p class="control-label font-weight-600">Survey Date: <span>{{surveyData.date}}</span> </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <p class="control-label font-weight-600"> State: <span>{{surveyData.state}}</span> </p>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <p class="control-label font-weight-600"> District: <span>{{surveyData.district}}</span> </p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label font-weight-600">Document:</label>
+
+
+                <a *ngIf="surveyData?.documents" href="{{surveyData?.documents}}" target="_blank"> View Document</a>
+
+
+              </div>
+            </div>
+
+
+          </div>
 
 
           <div class="clearfix"></div>
 
           <div class="borderFormBox">
-              <div class="top-head">
-                  <h4 style="padding: 0px 20px">Survey Details</h4>
+            <div class="top-head">
+              <h4 style="padding: 0px 20px">Survey Details</h4>
 
-              </div>
-              <div style="overflow-x:auto;">
-                  <table class="table" formArrayName="surveyDetail">
-                      <thead>
-                          <tr>
-                              <th>S.No</th>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="table" formArrayName="surveyDetail">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
 
-                              <th>Block</th>
-                              <th>Village</th>
-                              <th> Acquired Area</th>
-                              <th>Total Area</th>
-                              <th>Land Type</th>
-                              <th>Land Nature</th>
-                              <th>Land Category</th>
-                              <th>Objecton</th>
-                              <th>Objection Type</th>
-                              <th>Amount ( In Cr )</th>
-                              <th>Beneficiary Count</th>
-                              <th>Document</th>
-                              <!-- <th>Cheque Number</th>
+                    <th>Block</th>
+                    <th>Village</th>
+                    <th> Acquired Area</th>
+                    <th>Total Area</th>
+                    <th>Land Type</th>
+                    <th>Land Nature</th>
+                    <th>Land Category</th>
+                    <th>Objecton</th>
+                    <th>Objection Type</th>
+                    <th>Amount ( In Cr )</th>
+                    <th>Beneficiary Count</th>
+                    <th>Document</th>
+                    <!-- <th>Cheque Number</th>
                           <th>Cheque Date</th>
                           <th>Registration Amount</th>
                           <th>Doc Upload</th> -->
-                              <!-- <th><i class="fa fa-upload"></i></th> -->
+                    <!-- <th><i class="fa fa-upload"></i></th> -->
 
-                          </tr>
-                      </thead>
-                      <tbody *ngFor="let item of surveyData.surveyDetails; let i = index">
-                          <tr >
-                              <td>{{ i + 1 }}</td>
-                               <td>
-                                {{item.block}}
-                              </td>
-                              <td>
-                                {{item.village}}
-                              </td>
-                              <td>
-                                {{item.area}}
-                              </td>
-                              <td>
-                                {{item.totalArea}}
-                              </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of surveyData.surveyDetails; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>
+                      {{item.block}}
+                    </td>
+                    <td>
+                      {{item.village}}
+                    </td>
+                    <td>
+                      {{item.area}}
+                    </td>
+                    <td>
+                      {{item.totalArea}}
+                    </td>
 
-                              <td>
-                                {{item.landType}}
-                              </td>
-                              <td>
-                                {{item.landNature}}
-                            </td>
-                            <td>
-                              {{item.landCategory}}
-                          </td>
-                          <td>
-                            {{item.objecton}}
-                        </td>
-                        <td>
-                          {{item.objectionType}}
-                      </td>
+                    <td>
+                      {{item.landType}}
+                    </td>
+                    <td>
+                      {{item.landNature}}
+                    </td>
+                    <td>
+                      {{item.landCategory}}
+                    </td>
+                    <td>
+                      {{item.objecton}}
+                    </td>
+                    <td>
+                      {{item.objectionType}}
+                    </td>
 
                     <td>
                       {{item.amount }}
-                  </td>
-                  <td>
-                    {{item.beneficiaryCount}}
-                  </td>
-                  <td>
+                    </td>
+                    <td>
+                      {{item.beneficiaryCount}}
+                    </td>
+                    <td>
 
-                    <a *ngIf="surveyData?.surveyDetails[i]?.document" href="{{this.surveyData?.surveyDetails[i]?.document}}"
-                    target="_blank">View Document</a>
+                      <a *ngIf="surveyData?.surveyDetails[i]?.document"
+                        href="{{this.surveyData?.surveyDetails[i]?.document}}" target="_blank">View Document</a>
 
-                </td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-              <div class="clearfix"></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="clearfix"></div>
 
-              <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-              <div class="clearfix"></div>
-              <hr />
-              <div class="button-right">
-                  <div class="row">
-                      <div class="col-md-12">
-                          <!-- <a class="btn m-b-xs btn-md btn-success" (click)="onSubmit()">Update</a> -->
-                          <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
-                          <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
-                      </div>
-                  </div>
-              </div>
+            <div class="clearfix"></div>
+
+
           </div>
-              </div>
-          </div>
+        </div>
       </div>
+    </div>
   </div>

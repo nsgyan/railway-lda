@@ -1,3 +1,16 @@
 .button-right {
     text-align: right;
 }
+.table tbody+tbody tr:nth-of-type(even) {
+    background-color: #c45a111c;
+}
+legend {
+    font-size: 18px;
+    display: flex ;
+    margin-top: 0.2em;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    position: relative;
+    padding-bottom: 1rem;
+    color: #696969;
+}

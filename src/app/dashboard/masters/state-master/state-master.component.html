@@ -1,99 +1,105 @@
 <div id="content" class="app-content" role="main">
   <div class="app-content-body ">
-      <div class="bg-red lter b-b wrapper-md">
-          <div class="row">
-              <div class="col-sm-6 col-xs-12">
-                  <h3 class="m-n font-thin text-white">State Master</h3>
-              </div>
-          </div>
-      </div>
-
-      <div class="wrapper-md">
-          <div class="panel b-a">
-              <div class="panel-body">
-                  <form role="form" [formGroup]="state" autocomplete="off">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <legend>
-                                  <span class="font-weight-600">Create New state</span>
-                              </legend>
-                          </div>
-
-
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">State/UT*</label>
-                                 <select class="form-control" formControlName="stateUT">
-                                  <option  value="STATE">STATE</option>
-                                  <option  value="UT">UT</option>
-                                 </select>
-                                 <p *ngIf="state.get('stateUT')?.hasError('required')&&(submitted||state.get('stateUT')?.dirty||state.get('stateUT')?.touched )" style="color: red;">
-                                  State/UT <strong>required</strong>
-                                </p>
-
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label class="control-label font-weight-600">State  Type*</label>
-                                  <select class="form-control" formControlName="statetype">
-                                    <option  value="Regular">Regular</option>
-                                    <option  value="Hilly">Hilly</option>
-                                    <option  value="dessert">Dessert</option>
-                                   </select>
-                                   <p *ngIf="state.get('statetype')?.hasError('required')&&(submitted||state.get('statetype')?.dirty||state.get('statetype')?.touched )" style="color: red;">
-                                    State  Type <strong>required</strong>
-                                  </p>
-
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label font-weight-600">State Name* </label>
-                                <input type="text" formControlName="stateName" class="form-control">
-                                <p *ngIf="state.get('stateName')?.hasError('required')&&(submitted||state.get('stateName')?.dirty||state.get('stateName')?.touched )" style="color: red;">
-                                  State Name <strong>required</strong>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <label class="control-label font-weight-600">Census Code*</label>
-                              <input formControlName="censusCode" type="text" class="form-control" name="">
-                              <p *ngIf="state.get('censusCode')?.hasError('required')&&(submitted||state.get('censusCode')?.dirty||state.get('censusCode')?.touched )" style="color: red;">
-                                Census Code <strong>required</strong>
-                              </p>
-                          </div>
-                      </div>
-
-
-                      </div>
-
-                      <div class="clearfix"></div>
-
-
-
-                      <div class="clearfix"></div>
-                      <hr/>
-                      <div class="row">
-                          <div class="col-md-12">
-                              <a class="btn m-b-xs btn-md btn-success"  *ngIf="!isEdit" (click)="onSubmit()">Save</a>
-                              <a class="btn m-b-xs btn-md btn-success"  *ngIf="isEdit" (click)="onUpdate()">Update</a>
-                              <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
-                              <a class="btn m-b-xs btn-md btn-default"  (click)="cancel()">Cancel</a>
-                          </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
+    <div class="bg-red lter b-b wrapper-md">
       <div class="row">
-        <div class="col-md-12">
-          <div class="card no-shadow">
-            <div class="tab-content bg-seashell">
-              <div role="tabpanel" class="tab-pane active g-py-0">
-                <div class="row row-xs">
-                  <!-- <div class="row" style="margin-top: 1rem; margin-bottom: .5rem;">
+        <div class="col-sm-6 col-xs-12">
+          <h3 class="m-n font-thin text-white">State Master</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper-md">
+      <div class="panel b-a">
+        <div class="panel-body">
+          <form role="form" [formGroup]="state" autocomplete="off">
+            <div class="row">
+              <div class="col-md-12">
+                <legend>
+                  <span class="font-weight-600">Create New state</span>
+                </legend>
+              </div>
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label font-weight-600">State/UT*</label>
+                  <select class="form-control" formControlName="stateUT">
+                    <option value="STATE">STATE</option>
+                    <option value="UT">UT</option>
+                  </select>
+                  <p *ngIf="state.get('stateUT')?.hasError('required')&&(submitted||state.get('stateUT')?.dirty||state.get('stateUT')?.touched )"
+                    style="color: red;">
+                    State/UT <strong>required</strong>
+                  </p>
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label font-weight-600">State Type*</label>
+                  <select class="form-control" formControlName="statetype">
+                    <option value="Regular">Regular</option>
+                    <option value="Hilly">Hilly</option>
+                    <option value="dessert">Dessert</option>
+                  </select>
+                  <p *ngIf="state.get('statetype')?.hasError('required')&&(submitted||state.get('statetype')?.dirty||state.get('statetype')?.touched )"
+                    style="color: red;">
+                    State Type <strong>required</strong>
+                  </p>
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label font-weight-600">State Name* </label>
+                  <input type="text" formControlName="stateName" class="form-control">
+                  <p *ngIf="state.get('stateName')?.hasError('required')&&(submitted||state.get('stateName')?.dirty||state.get('stateName')?.touched )"
+                    style="color: red;">
+                    State Name <strong>required</strong>
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label font-weight-600">Census Code*</label>
+                  <input formControlName="censusCode" type="text" class="form-control" name="">
+                  <p *ngIf="state.get('censusCode')?.hasError('required')&&(submitted||state.get('censusCode')?.dirty||state.get('censusCode')?.touched )"
+                    style="color: red;">
+                    Census Code <strong>required</strong>
+                  </p>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="clearfix"></div>
+
+
+
+            <div class="clearfix"></div>
+            <hr />
+            <div class="button-right">
+              <div class="row">
+                <div class="col-md-12">
+                  <a class="btn m-b-xs btn-md btn-success" *ngIf="!isEdit" (click)="onSubmit()">Save</a>
+                  <a class="btn m-b-xs btn-md btn-success" *ngIf="isEdit" (click)="onUpdate()">Update</a>
+                  <!-- <a class="btn m-b-xs btn-md btn-primary" (click)="onSubmit()">Save and New</a> -->
+                  <a class="btn m-b-xs btn-md btn-default" (click)="cancel()">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card no-shadow">
+          <div class="tab-content bg-seashell">
+            <div role="tabpanel" class="tab-pane active g-py-0">
+              <div class="row row-xs">
+                <!-- <div class="row" style="margin-top: 1rem; margin-bottom: .5rem;">
                     <div>
                       <div class="col-md-3">
                         <label class="font-bold"><span>0</span> Selected: </label>
@@ -138,57 +144,57 @@
                       </div>
                     </div>
                   </div> -->
-                  <table class="table bg-white">
-                    <thead>
-                      <tr role="row">
-                        <th class="text-center">#</th>
-                        <th>State </th>
-                        <th>State/UT </th>
-                        <th>State  Type</th>
-                        <th>Census  Code</th>
+                <table class="table bg-white">
+                  <thead>
+                    <tr role="row">
+                      <th class="text-center">#</th>
+                      <th>State </th>
+                      <th>State/UT </th>
+                      <th>State Type</th>
+                      <th>Census Code</th>
 
-                        <th class="text-center">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody >
-                      <tr *ngFor="let item of stateData ;let i=
+                      <th class="text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of stateData ;let i=
                       index">
-                        <td class="text-center">
+                      <td class="text-center">
                         {{i+1}}
-                        </td>
+                      </td>
 
 
 
-                        <td><span class="font-bold text-theme">{{item.stateName}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.stateName}}</span></td>
 
-                        <td><span class="font-bold text-theme">{{item.stateUT}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.stateUT}}</span></td>
 
-                        <td><span class="font-bold text-theme">{{item.statetype}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.statetype}}</span></td>
 
-                        <td><span class="font-bold text-theme">{{item.censusCode}}</span></td>
+                      <td><span class="font-bold text-theme">{{item.censusCode}}</span></td>
 
 
-                        <td class="text-center">
-                          <div class="btn-group dropdown">
-                            <button class="btn btn-default w-xxs btn-sm r-2x" data-toggle="dropdown"
-                              aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
-                                  class="fa fa-caret-down"></i></span></button>
-                            <ul class="dropdown-menu">
-                              <li>
-                                <a  (click)="edit(item)"><i class="fa fa-edit"></i> Edit </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                      <td class="text-center">
+                        <div class="btn-group dropdown">
+                          <button class="btn btn-default w-xxs btn-sm r-2x" data-toggle="dropdown"
+                            aria-expanded="false"><i class="fa fa-cog g-px-5  text-info text-sm"></i> <span class=""><i
+                                class="fa fa-caret-down"></i></span></button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a (click)="edit(item)"><i class="fa fa-edit"></i> Edit </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
 
   </div>
