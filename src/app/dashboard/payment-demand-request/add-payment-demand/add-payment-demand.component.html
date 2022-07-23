@@ -156,7 +156,7 @@
                   <select
                     class="form-control"
                     formControlName="district"
-                    (change)="getBlock($event)"
+                    (change)="getBlock()"
                   >
                     <option hidden>Select District</option>
                     <option *ngFor="let item of district" value="{{ item }}">

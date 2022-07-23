@@ -216,7 +216,7 @@ this.httpService.getsurveyByProject({projectNumber:projectNumber}).subscribe((da
 
 
     }
-    getBlock(event:any){
+    getBlock(){
       this.block=[]
       this.surveyData.map((item:any)=>{
         if(item.projectName===this.paymendDemand.value.projectName){
@@ -479,18 +479,18 @@ if(item._id===selectData){
 this.beneficiaryData.map((item:any)=>{
 this.beneficiarylist.map(listData=>{
     if(item._id!==listData.id){
+console.log('hello');
 
       this.beneficiarylist.concat({
         id: item._id,
         name: item.beneficiaryName
       })
+      console.log(this.beneficiarylist);
     }
   })
 
 })
 
-console.log(this.beneficiaryData);
-console.log(this.beneficiarylist)
 
 
 this.filteredStates = this.stateCtrl.valueChanges.pipe(
