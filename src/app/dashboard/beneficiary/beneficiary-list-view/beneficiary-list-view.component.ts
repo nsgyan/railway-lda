@@ -36,6 +36,7 @@ export class BeneficiaryListViewComponent implements OnInit {
   }
   delete(id: any) {
     this.httpService.delBeneficiary(id).subscribe(res => {
+      this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
       this.toast.success('Deleted Beneficiary successfully')
     }, err => {
       this.toast.error('Internal server error')

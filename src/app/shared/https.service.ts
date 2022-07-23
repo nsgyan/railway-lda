@@ -36,6 +36,11 @@ export class HttpsService {
     return this.httpService.post(Globals.route.adharcheck, formData)
   }
 
+  forgotPassword(formData: any) {
+    return this.httpService.post(Globals.route.forgotPassword, formData)
+  }
+
+
   checkPan(formData: any) {
     return this.httpService.post(Globals.route.pancheck, formData)
   }
@@ -150,6 +155,9 @@ export class HttpsService {
   }
   updateVillage(formData: any) {
     return this.httpService.patch(Globals.route.updateVillage, formData);
+  }
+  changePassword(formData: any,token:any) {
+    return this.httpService.patch(`${Globals.route.changePassword}/${token}`, formData);
   }
   updatePaymentdemand(formData: any,id:any) {
     return this.httpService.patch(`${Globals.route.updatePaymentdemand}/${id}`, formData);

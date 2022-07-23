@@ -477,27 +477,15 @@ if(item._id===selectData){
         })
 
 this.beneficiaryData.map((item:any)=>{
-this.beneficiarylist.map(listData=>{
-    if(item._id!==listData.id){
-console.log('hello');
-
-      this.beneficiarylist.concat({
-        id: item._id,
-        name: item.beneficiaryName
-      })
-      console.log(this.beneficiarylist);
-    }
+  this.beneficiarylist.push({
+    id: item._id,
+    name: item.beneficiaryName
   })
+  console.log(item);
 
 })
 
-
-
-this.filteredStates = this.stateCtrl.valueChanges.pipe(
-  startWith(''),
-  map(beneficiarylist => (beneficiarylist ? this._filterStates(beneficiarylist) : this.beneficiarylist.slice())),
-);
-// console.log(this.beneficiarylist,'beneficiaryList');
+console.log(this.beneficiarylist,'beneficiaryList');
 
       })
     });

@@ -21,6 +21,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { ApiHandlerInterceptor } from './shared/api-handler.interceptor';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     Listview2Component,
     Formview2Component,
     UserComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,10 +18,14 @@ import { VendorTypeComponent } from './dashboard/system-configuration/vendor-typ
 import { BanksComponent } from './dashboard/system-configuration/banks/banks.component';
 import { LimitSettingComponent } from './dashboard/system-configuration/limit-setting/limit-setting.component';
 import { AuthGuard } from './shared/auth.guard';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
-  { path: 'signUp', component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
   { path: '', component: LoginComponent },
+  { path: 'forgetPassword', component: ForgetPasswordComponent },
+  { path: 'changePassword/:id', component: ChangePasswordComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
