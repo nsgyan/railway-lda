@@ -23,7 +23,7 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label font-weight-600">Project ID*</label>
+                  <label class="control-label font-weight-600">Project Number*</label>
                   <input formControlName="projectNumber" type="text" class="form-control" name="">
                   <p *ngIf="project.get('projectNumber')?.hasError('required')&&(submitted||project.get('projectNumber')?.dirty||project.get('projectNumber')?.touched )"
                     style="color: red;">

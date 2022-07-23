@@ -23,3 +23,25 @@
 .button-right a {
     margin: 8px;
 }
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-infix{
+
+  padding: 3px 8px;
+  background-color: #eee;
+  /* border: 1px solid rgb(188, 187, 187); */
+
+}
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex{
+  padding: 0% !important;
+  background-color: #eee;
+  border-radius: 0%;
+  border: 1px solid rgb(188, 187, 187);
+}
+::ng-deep.mat-form-field-underline{
+  position: absolute;
+    width: 0% !important;
+    pointer-events: none;
+    transform: scale3d(1, 1.0001, 1);
+}
+.pull-left i{
+  font-size: 3.4rem;
+}
