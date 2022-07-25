@@ -459,7 +459,7 @@ if(item._id===selectData){
 
 
   openDialog() {
-
+    this.beneficiaryData=[]
     const dialogRef = this.dialog.open(CustomModelComponent,{
       data:this.selectedSurvey
     });
@@ -470,12 +470,15 @@ if(item._id===selectData){
           item.surveyDetails.map((surveyData:any)=>{
             data.getBeneFiciary.map((beneFiciData:any)=>{
               if(beneFiciData.block===surveyData.block&& beneFiciData.village===surveyData.village){
+
+
+
                 this.beneficiaryData.push(beneFiciData)
               }
             })
           })
         })
-
+this.beneficiarylist=[ ]
 this.beneficiaryData.map((item:any)=>{
   this.beneficiarylist.push({
     id: item._id,

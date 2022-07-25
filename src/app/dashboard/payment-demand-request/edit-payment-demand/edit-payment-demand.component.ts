@@ -534,7 +534,7 @@ if(item._id===selectData){
 
 
   openDialog() {
-
+    this.beneficiaryData=[]
     const dialogRef = this.dialog.open(CustomModelComponent,{
       data:this.selectedSurvey
     });
@@ -545,34 +545,25 @@ if(item._id===selectData){
           item.surveyDetails.map((surveyData:any)=>{
             data.getBeneFiciary.map((beneFiciData:any)=>{
               if(beneFiciData.block===surveyData.block&& beneFiciData.village===surveyData.village){
+
+
+
                 this.beneficiaryData.push(beneFiciData)
               }
             })
           })
         })
-
+this.beneficiarylist=[ ]
 this.beneficiaryData.map((item:any)=>{
-this.beneficiarylist.map(listData=>{
-    if(item._id!==listData.id){
-
-      this.beneficiarylist.concat({
-        id: item._id,
-        name: item.beneficiaryName
-      })
-    }
+  this.beneficiarylist.push({
+    id: item._id,
+    name: item.beneficiaryName
   })
+  console.log(item);
 
 })
 
-console.log(this.beneficiaryData);
-console.log(this.beneficiarylist)
-
-
-this.filteredStates = this.stateCtrl.valueChanges.pipe(
-  startWith(''),
-  map(beneficiarylist => (beneficiarylist ? this._filterStates(beneficiarylist) : this.beneficiarylist.slice())),
-);
-// console.log(this.beneficiarylist,'beneficiaryList');
+console.log(this.beneficiarylist,'beneficiaryList');
 
       })
     });

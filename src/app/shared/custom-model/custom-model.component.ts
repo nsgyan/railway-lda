@@ -273,7 +273,7 @@ export class CustomModelComponent implements OnInit {
           accountNumber: this.beneficiary.value.accountNumber,
 
       }).subscribe((data:any)=>{
-        this.toast.success(data?.message)
+        this.toast.success('Beneficiary Add Successfuly')
         this.dialogRef.close();
         // this.router.navigate(['/dashboard/beneficiary/beneficiariesList'])
       },((err: { error: { message: string | undefined; }; })=>{
