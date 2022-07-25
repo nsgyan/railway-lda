@@ -141,6 +141,9 @@ export class HttpsService {
   AddBlock(formData: any) {
     return this.httpService.post(Globals.route.AddBlock, formData);
   }
+  checkEmail(formData: any) {
+    return this.httpService.post(Globals.route.checkEmail, formData);
+  }
   addVillage(formData: any) {
     return this.httpService.post(Globals.route.addVillage, formData);
   }

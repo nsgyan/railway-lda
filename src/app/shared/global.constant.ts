@@ -48,6 +48,7 @@ export class Globals {
         "login":Globals.server+'user/login',
         "forgotPassword":Globals.server+'user/forgot',
         "changePassword":Globals.server+'user/reset',
+        "checkEmail":Globals.server+'user/email',
         'upload': Globals.server + 'upload',
         'survey':Globals.server+ 'survey/addsurvey',
         'getSurvey':Globals.server+ 'survey/getsurvey',

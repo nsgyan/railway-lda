@@ -11,11 +11,13 @@ import { LocalstorageService } from '../shared/localstorage.service';
   styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
-  [x: string]: any;
+
   login:UntypedFormGroup
+  captcha: any;
+  submited: boolean=false;
    constructor(private httpService:HttpsService,
      private fb:UntypedFormBuilder,
-     private toster:ToastrService,
+     private toast:ToastrService,
      private localStorage:LocalstorageService,
      private routes: Router,) {
        this.localStorage.clearLocalStorage()
@@ -29,6 +31,17 @@ export class ForgetPasswordComponent implements OnInit {
    ngOnInit(): void {
 
    }
+   checkEmail(event: any) {
+    this.httpService.checkEmail({ email: event.target.value }).subscribe((data: any) => {
+      console.log(data);
+
+    }, (err: any) => {
+      this.login.get('email')?.setErrors({ isExist: true })
+
+    })
+
+  }
+
    resolved(recaptchaResponse:any){
      this.captcha=recaptchaResponse
    }
@@ -38,7 +51,7 @@ export class ForgetPasswordComponent implements OnInit {
  if(this.login.valid){
  this.httpService.forgotPassword({email:this.login.value.email}).subscribe((data:any)=>{
   //  this.localStorage.set('token',data.refresh_token)
-  this.toster.success('Email to send to your email id');
+  this.toast.success('Email to send to your email id');
    this.routes.navigate(['/login/sdafds'])
 
  },err=>{
@@ -46,7 +59,7 @@ export class ForgetPasswordComponent implements OnInit {
  })
  }else{
    this.submited = true;
-   this.toster.error('Please Fill Required Field');
+   this.toast.error('Please Fill Required Field');
  }
  //     }
  //     else{
