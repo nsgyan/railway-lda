@@ -1,7 +1,12 @@
 .table tbody tr td {
   border: none;
-  padding: 8px 4px;
+  /* padding: 8px 4px; */
   text-align: center;
+}
+
+.table tbody tr td textarea {
+  padding: 6px 12px;
+  height: 34px;
 }
 
 .borderFormBox .top-head {
@@ -42,14 +47,16 @@
 .button-right{
   text-align: right;
 }
-.button-right a{
+.button-right a {
   margin: 8px;
 }
-.table .form-control{
+
+.table .form-control {
   width: 170px;
-  height: 43px;
+  /* height: 43px; */
 }
-.text-remark{
+
+.text-remark {
   width: 305px !important;
 }
 .table textarea{
