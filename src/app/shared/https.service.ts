@@ -160,7 +160,7 @@ export class HttpsService {
     return this.httpService.patch(Globals.route.updateVillage, formData);
   }
   changePassword(formData: any,token:any) {
-    return this.httpService.patch(`${Globals.route.changePassword}/${token}`, formData);
+    return this.httpService.post(`${Globals.route.changePassword}/${token}`, formData);
   }
   updatePaymentdemand(formData: any,id:any) {
     return this.httpService.patch(`${Globals.route.updatePaymentdemand}/${id}`, formData);
