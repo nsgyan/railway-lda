@@ -59,7 +59,7 @@ export class ForgetPasswordComponent implements OnInit {
  })
  }else{
    this.submited = true;
-   this.toast.error('Please Fill Required Field');
+   this.toast.error('Please Enter Valid Email');
  }
  //     }
  //     else{
