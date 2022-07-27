@@ -39,13 +39,14 @@ if(this.login.valid){
 this.httpService.login({email:this.login.value.email,password:this.login.value.password}).subscribe((data:any)=>{
   this.localStorage.set('token',data.refresh_token)
   this.routes.navigate(['dashboard/page'])
+  this.toster.error('User Login Successfuly');
 
 },err=>{
-  this.toast.error('User Not Found');
+  this.toster.error('User Not Found');
 })
 }else{
   this.submited = true;
-  this.toast.error('Please Fill Required Field');
+  this.toster.error('Please Fill Required Field');
 }
 //     }
 //     else{
