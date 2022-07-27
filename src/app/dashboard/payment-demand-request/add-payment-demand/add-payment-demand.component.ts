@@ -470,7 +470,7 @@ if(item._id===selectData){
   openDialog() {
     this.beneficiaryData=[]
     const dialogRef = this.dialog.open(CustomModelComponent,{
-      data:this.selectedSurvey
+      data:this.selectedSurvey,
     });
 
     dialogRef.afterClosed().subscribe(result => {

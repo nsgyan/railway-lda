@@ -23,6 +23,10 @@ import { ApiHandlerInterceptor } from './shared/api-handler.interceptor';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     NgxSpinnerModule,
     BrowserAnimationsModule,
     RecaptchaModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

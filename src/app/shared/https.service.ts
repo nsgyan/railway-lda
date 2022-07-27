@@ -156,6 +156,9 @@ export class HttpsService {
   updateblock(formData: any) {
     return this.httpService.patch(Globals.route.updateblock, formData);
   }
+  changePass(formData: any) {
+    return this.httpService.post(Globals.route.changePass, formData);
+  }
   updateVillage(formData: any) {
     return this.httpService.patch(Globals.route.updateVillage, formData);
   }

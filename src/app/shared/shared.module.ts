@@ -5,13 +5,15 @@ import { LowercaseDirective } from './lower-case.directive';
 import { CustomModelComponent } from './custom-model/custom-model.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
  UpperCaseDirective,
  LowercaseDirective,
- CustomModelComponent
+ CustomModelComponent,
+ ChangePasswordComponent
   ],
   imports: [
     CommonModule,

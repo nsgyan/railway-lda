@@ -138,7 +138,7 @@
                             <a ui-sref="app.page.profile" class="user-update-profile">Profile</a>
                         </li>
                         <li>
-                            <a ui-sref="app.page.profile" class="user-change-password">Change Password</a>
+                            <a ui-sref="app.page.profile" (click)="openDialog()" class="user-change-password">Change Password</a>
                         </li>
                         <li>
                             <a ui-sref="app.docs">

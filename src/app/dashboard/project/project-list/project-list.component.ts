@@ -54,7 +54,7 @@ item.disrtictLength=this.disrtict.length
   }
   delete(id:any){
     this.httpService.deletedProject(id).subscribe(item=>{
-      this.toast.success('Project Successfuly Deleted')
+      this.toast.success('Project successfully  Deleted')
       this.router.navigate(['/dashboard/project/page'])
       location.reload()
     },(err)=>{
