@@ -65,6 +65,27 @@ export class ChangePasswordComponent implements OnInit {
 
 
 
+    conformPassword(event: any,) {
+      this.changePassword.get('confirmPassword')?.clearAsyncValidators()
+      this.changePassword.get('confirmPassword')?.updateValueAndValidity
+      if (event.target.value !== this.changePassword.value.password) {
+        this.changePassword.get('confirmPassword')?.setErrors({ NotMatch: true })
+      }
+      else {
+        // const email = event.target.value ? event.target.value.toLowerCase() : this.beneficiary.get('email')?.value
+        // if (email) {
+        //   this.httpService.checkEmail({ email: email })
+        //     .subscribe((data: any) => {
+        //       if (email === data?.email) {
+        //         this.beneficiary.get('email')?.setErrors({ isExist: true });
+        //       }
+
+        //     })
+
+        // }
+
+      }
+    }
 
 
 
