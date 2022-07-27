@@ -53,7 +53,7 @@ if(this.project.valid){
     acquisitionDetails : this.project.value.selectState ,
   }).subscribe((data:any)=>{
     if(type==='Save'){
-    this.toast.success(data?.message)
+    this.toast.success('Project successfully  added')
     this.router.navigate(['/dashboard/project/page'])}
     else{
       this.project.reset()

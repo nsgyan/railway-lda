@@ -136,7 +136,7 @@ else{
       village: ['',Validators.required],
       sanctionedAmount:['',Validators.required],
       block: ['',Validators.required],
-      remark:['',Validators.required],
+      remark:[''],
     })
   }
 
