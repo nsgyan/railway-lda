@@ -7,8 +7,9 @@ import { HttpsService } from 'src/app/shared/https.service';
   styleUrls: ['./dashboard-page.component.css']
 })
 export class DashboardPageComponent implements OnInit {
-totalProject:any
-totalBeneficiary:any
+totalProject:any=0
+totalBeneficiary:any=0
+ongoingProject:any=0
   constructor(private httpService:HttpsService) {
     this.httpService.totalProject().subscribe((item:any)=>{
       console.log(item);
@@ -17,6 +18,10 @@ this.totalProject=item.count
     this.httpService.countBeneficiary().subscribe((item:any)=>{
       console.log(item);
 this.totalBeneficiary=item.count
+    })
+    this.httpService.ongoingProject().subscribe((item:any)=>{
+      console.log(item);
+this.ongoingProject=item.count
     })
    }
 

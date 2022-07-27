@@ -224,6 +224,9 @@ export class HttpsService {
   totalProject() {
     return this.httpService.get(Globals.route.totalProject);
   }
+  ongoingProject() {
+    return this.httpService.get(Globals.route.ongoingProject);
+  }
   blocksList() {
     return this.httpService.get(Globals.route.blocksList);
   }
