@@ -283,6 +283,13 @@ console.log(this.beneficiarylist,'beneficiaryList');
     onSubmit() {
       // let date=this.beneficiary.value.data.toString()
     console.log(this.paymendDemand);
+    let i=0;
+    let amoutTobePaid=0;
+  const control=  this.paymendDemand.get("beneficiaryDetails") as FormArray
+  while(control.length!==i){
+    amoutTobePaid+=Number( control.at(i).value.beneficaryShare)
+    i++;
+  }
     if(this.paymendDemand.valid){
       this.httpService.addPaymentdemand({
         projectName:this.paymendDemand.value.projectName,
@@ -291,6 +298,8 @@ console.log(this.beneficiarylist,'beneficiaryList');
         surveyNumber:this.paymendDemand.value.surveyNumber,
         state:this.paymendDemand.value.state,
         district:this.paymendDemand.value.district,
+        paidAmout:0,
+        amoutTobePaid:amoutTobePaid,
         beneficiaryDetails:this.paymendDemand.value.beneficiaryDetails ,
 
       }).subscribe((data:any)=>{

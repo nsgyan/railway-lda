@@ -214,9 +214,13 @@ export class HttpsService {
     return this.httpService.delete(`${Globals.route.villagedelete}/${id}`);
   }
 
+  countBeneficiary() {
+    return this.httpService.get(Globals.route.countBeneficiary);
+  }
 
-
-
+  totalProject() {
+    return this.httpService.get(Globals.route.totalProject);
+  }
   blocksList() {
     return this.httpService.get(Globals.route.blocksList);
   }
